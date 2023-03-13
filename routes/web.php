@@ -15,8 +15,11 @@ use App\Http\Controllers\UsuarioController;
 |
 */
 
+// Route::get('/', function () {
+//     return view('menu');
+// });
 Route::get('/', function () {
-    return view('menu');
+    return view('welcome');
 });
 
 Route::get('/login', [UsuarioController::class, 'showLogin'])->name('login');
@@ -24,8 +27,8 @@ Route::post('/login', [UsuarioController::class, 'login']);
 Route::post('/logout', [UsuarioController::class, 'logout']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', function () {
+    Route::get('/menu', function () {
         $user = Auth::user();
-        return view('home', compact('user'));
+        return view('menu', compact('user'));
     });
 });
