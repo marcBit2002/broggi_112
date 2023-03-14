@@ -1,5 +1,14 @@
 @import "variables";
 
+h1 {
+    margin-left: 16px;
+
+    &::before {
+        content: url("/resources/icons/title_arrow.svg");
+        margin: 8px;
+    }
+}
+
 #container-items {
     width: 500px;
     aspect-ratio: 1 / 0.85;
@@ -17,7 +26,7 @@
         height: 100%;
 
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
         flex-direction: column;
 
@@ -33,14 +42,16 @@
             border-color: $danger;
             transform: translateY(-3px);
             box-shadow: 0px 3px 0px $danger;
+            color: $primary;
         }
-
         img {
-            margin-top: 15px;
+            margin-top: 20px;
+            user-select: none;
         }
 
         p {
             margin-top: 10px;
+            margin-bottom: 25px;
             font-size: 1.75rem;
         }
     }

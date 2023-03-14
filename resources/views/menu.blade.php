@@ -13,22 +13,22 @@
     @include('layouts.navbar')
 
     <div class="container d-flex flex-column">
-        <h1 class="text-center mt-5 text-primary fw-light"><span class="text-danger fw-bold">></span> Menú</h1>
+        <h1 class="text-center mt-5 text-primary fw-light">Menú</h1>
         <div id="container-items">
             <a href="">
-                <img src="https://picsum.photos/120">
+                <img src="{{ Vite::asset('resources/icons/note.svg') }}">
                 <p>crear carta</p>
             </a>
             <a href="">
-                <img src="https://picsum.photos/120">
+                <img src="{{ Vite::asset('resources/icons/gears.svg') }}">
                 <p>administrar</p>
             </a>
             <a href="">
-                <img src="https://picsum.photos/120">
+                <img src="{{ Vite::asset('resources/icons/stats.svg') }}">
                 <p>estadístiques</p>
             </a>
             <a href="">
-                <img src="https://picsum.photos/120">
+                <img src="{{ Vite::asset('resources/icons/videos.svg') }}">
                 <p>tutorials</p>
             </a>
         </div>
