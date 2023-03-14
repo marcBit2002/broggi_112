@@ -17,8 +17,10 @@
         carta</button>
     <button type="button" class="btn btn-outline-primary m-3">Anterior</button>
     <button type="button" class="btn btn-danger m-3">Següent</button>
-    <!DOCTYPE html>
-    <html lang="en">
+    <div id="pepe">
+
+    </div>
+
 </body>
 
 
