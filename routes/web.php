@@ -19,7 +19,7 @@ use App\Http\Controllers\UsuarioController;
 //     return view('menu');
 // });
 Route::get('/', function () {
-    return view('welcome');
+    return view('menu');
 });
 
 Route::get('/login', [UsuarioController::class, 'showLogin'])->name('login');
