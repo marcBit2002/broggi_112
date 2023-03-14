@@ -32,3 +32,7 @@ Route::middleware(['auth'])->group(function () {
         return view('menu', compact('user'));
     });
 });
+
+Route::get('/admin', function () {
+    return view('admin');
+});

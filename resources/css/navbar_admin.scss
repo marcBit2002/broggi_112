@@ -1,0 +1,14 @@
+@import "variables";
+
+.v-line {
+    border-left: thick solid $primary;
+    height: 100%;
+    left: 50%;
+    position: 30vw;
+}
+
+.nav {
+    position: fixed;
+    height: 100%;
+    border-right: solid $primary;
+}

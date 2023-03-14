@@ -6,13 +6,11 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-
-            </ul>
-            <form class="d-flex" role="search">
-                {{-- Poner elementos derecha del nav AQUI --}}
-            </form>
+            <ul class="navbar-nav me-auto mb-lg-0"></ul>
+            <div class="d-flex align-items-center text-primary">
+                <p class="m-1 me-3">username</p>
+                <h3 class="m-1"><i class="bi bi-box-arrow-right"></i></h3>
+            </div>
         </div>
     </div>
 </nav>
