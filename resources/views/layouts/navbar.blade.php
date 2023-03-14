@@ -9,7 +9,9 @@
             <ul class="navbar-nav me-auto mb-lg-0"></ul>
             <div class="d-flex align-items-center text-primary">
                 <p class="m-1 me-3">username</p>
-                <h3 class="m-1"><i class="bi bi-box-arrow-right"></i></h3>
+                <a href="{{ url('/logout') }}">
+                    <h3 class="m-1"><i class="bi bi-box-arrow-right"></i></h3>
+                </a>
             </div>
         </div>
     </div>

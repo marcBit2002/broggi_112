@@ -11,7 +11,7 @@ class UsuarioController extends Controller
 {
     public function showLogin()
     {
-        return view('auth.login');
+        return view('login');
     }
 
     public function login(Request $request)
@@ -21,7 +21,8 @@ class UsuarioController extends Controller
 
         $user = Usuario::where('username', $username)->first();
 
-        if ($user != null && Hash::check($contrasenya, $user->$contrasenya)) {
+        // if ($user != null && Hash::check($contrasenya, $user->$contrasenya)) {
+        if ($contrasenya == $user->$contrasenya) {
             Auth::login($user);
             $response = redirect('/menu');
         } else {

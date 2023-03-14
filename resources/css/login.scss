@@ -1,0 +1,89 @@
+ /* Estilos para el formulario de inicio de sesión */
+ .container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: solid #087CA7;
+    padding: 30px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.login-form h4 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #087CA7;
+}
+
+.login-form p {
+    text-align: center;
+    color: #767676;
+    font-size: 14px;
+    margin-bottom: 50px;
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+label {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: block;
+    color: #087CA7;
+}
+
+.form-control {
+    border: none;
+    border-bottom: 1px solid #087CA7;
+    padding: 10px 15px;
+    font-size: 16px;
+    background: none;
+    width: 100%;
+    transition: border-color 0.4s ease-out;
+    border-radius: 5px;
+}
+
+.form-control:focus {
+    border-color: #FFB300;
+}
+
+.login-form button[type="submit"] {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 30px;
+    width: 100%
+}
+
+.login-form button[type="submit"]:hover {
+    cursor: pointer;
+}
+
+/* Estilos para los iconos de los inputs */
+.input-group-addon {
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10;
+}
+
+.input-group-addon i {
+    color: #FFB300;
+}
