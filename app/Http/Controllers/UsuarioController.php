@@ -11,6 +11,13 @@ class UsuarioController extends Controller
 {
     public function showLogin()
     {
+        // $usuario = new Usuario();
+        // $usuario->username = 'operador';
+        // $usuario->nom = 'Operador';
+        // $usuario->cognoms = '112';
+        // $usuario->contrasenya = \bcrypt('123');
+        // $usuario->tipus_usuaris_id = 1;
+        // $usuario->save();
         return view('login');
     }
 
@@ -21,8 +28,7 @@ class UsuarioController extends Controller
 
         $user = Usuario::where('username', $username)->first();
 
-        // if ($user != null && Hash::check($contrasenya, $user->$contrasenya)) {
-        if ($contrasenya == $user->$contrasenya) {
+        if ($user != null && Hash::check($contrasenya, $user->contrasenya)) {
             Auth::login($user);
             $response = redirect('/menu');
         } else {
@@ -35,6 +41,6 @@ class UsuarioController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect('/');
+        return redirect('/login');
     }
 }

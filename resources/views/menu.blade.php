@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Menu</title>
+    <title>Menú</title>
     @vite(['resources/css/app.scss', 'resources/css/menu.scss', 'resources/js/app.js'])
 </head>
 
@@ -15,22 +15,55 @@
     <div class="container d-flex flex-column">
         <h1 class="text-center mt-5 text-primary fw-light">Menú</h1>
         <div id="container-items">
-            <a href="">
-                <img src="{{ Vite::asset('resources/icons/note.svg') }}">
-                <p>crear carta</p>
-            </a>
-            <a href="">
-                <img src="{{ Vite::asset('resources/icons/gears.svg') }}">
-                <p>administrar</p>
-            </a>
-            <a href="">
-                <img src="{{ Vite::asset('resources/icons/stats.svg') }}">
-                <p>estadístiques</p>
-            </a>
-            <a href="">
-                <img src="{{ Vite::asset('resources/icons/videos.svg') }}">
-                <p>tutorials</p>
-            </a>
+            @if (Auth::check() && Auth::user()->roles->nom === 'Administrador Sistema')
+                <a href="">
+                    <img src="{{ Vite::asset('resources/icons/note.svg') }}">
+                    <p>crear carta</p>
+                </a>
+                <a href="{{ url('/admin') }}">
+                    <img src="{{ Vite::asset('resources/icons/gears.svg') }}">
+                    <p>administrar</p>
+                </a>
+                <a href="">
+                    <img src="{{ Vite::asset('resources/icons/stats.svg') }}">
+                    <p>estadístiques</p>
+                </a>
+                <a href="">
+                    <img src="{{ Vite::asset('resources/icons/videos.svg') }}">
+                    <p>tutorials</p>
+                </a>
+            @elseif (Auth::check() && Auth::user()->roles->nom === 'Supervisor 112')
+                <a href="">
+                    <img src="{{ Vite::asset('resources/icons/note.svg') }}">
+                    <p>crear carta</p>
+                </a>
+                <a href="">
+                    <img src="{{ Vite::asset('resources/icons/gears.svg') }}">
+                    <p>expedients</p>
+                </a>
+                <a href="">
+                    <img src="{{ Vite::asset('resources/icons/stats.svg') }}">
+                    <p>estadístiques</p>
+                </a>
+                <a href="">
+                    <img src="{{ Vite::asset('resources/icons/videos.svg') }}">
+                    <p>tutorials</p>
+                </a>
+            @else
+                <a href="">
+                    <img src="{{ Vite::asset('resources/icons/note.svg') }}">
+                    <p>crear carta</p>
+                </a>
+                <a href="">
+                    <img src="{{ Vite::asset('resources/icons/stats.svg') }}">
+                    <p>estadístiques</p>
+                </a>
+                <a href="">
+                    <img src="{{ Vite::asset('resources/icons/videos.svg') }}">
+                    <p>tutorials</p>
+                </a>
+            @endif
+
         </div>
     </div>
 

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\TiposUsuario;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,6 +19,6 @@ class Usuario extends Authenticatable
 
     public function roles(): BelongsTo
     {
-        return $this->belongsTo(TipusUsuario::class, 'tipus_usuaris_id');
+        return $this->belongsTo(TiposUsuario::class, 'tipus_usuaris_id');
     }
 }

@@ -5,23 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Laravel</title>
-    @vite(['resources/css/app.scss', 'resources/css/app.css', 'resources/js/app.js'])
+    <title>BROGGI-112</title>
+    @vite(['resources/css/app.scss', 'resources/css/app.css', 'resources/js/app.js', 'resources/css/splash.scss'])
 
 </head>
 
 <body>
-    @include('layouts.navbar')
-
-    <button type="button" class="btn btn-outline-secondary m-3"><i class="bi bi-airplane-fill"></i>Descartar
-        carta</button>
-    <button type="button" class="btn btn-outline-primary m-3">Anterior</button>
-    <button type="button" class="btn btn-danger m-3">Següent</button>
-    <div id="pepe">
-
+    <div class="splash">
+        <div class="spinner-border text-primary" role="status">
+            {{-- <span class="sr-only"></span> --}}
+        </div>
     </div>
 
 </body>
+<script>
+    setTimeout(function() {
+        window.location.href = "{{ route('login') }}";
+    }, 5000); // Redirigir después de 5 segundos
+</script>
 
 
 </html>

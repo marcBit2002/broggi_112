@@ -15,13 +15,13 @@
             <form class="login-form " action="{{ action([App\Http\Controllers\UsuarioController::class, 'login']) }}"
                 method="post">
                 @csrf
-                <h4 class="text-center mb-4">Benvingut a BROGGI-112</h4>
+                <h4 class="text-center mb-4">Benvingut a <strong>BROGGI-112</strong></h4>
                 <p>Introdueix les dades per accedir</p>
 
                 <div class="form-group">
                     <label for="username">usuari</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="username" name="username"
+                        <input type="text" maxlength="37" class="form-control" id="username" name="username"
                             value="{{ old('username') }}" autofocus>
                         <span class="input-group-addon"><i class="bi bi-person"></i></span>
                     </div>
@@ -29,7 +29,7 @@
                 <div class="form-group mb-5">
                     <label for="contrasenya">constrasenya</label>
                     <div class="input-group">
-                        <input type="password" class="form-control" id="contrasenya" name="contrasenya"
+                        <input type="password" maxlength="37" class="form-control" id="contrasenya" name="contrasenya"
                             value="{{ old('contrasenya') }}">
                         <span class="input-group-addon"><i class="bi bi-lock"></i></span>
                     </div>
