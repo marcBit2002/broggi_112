@@ -30,7 +30,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/menu', function () {
         return view('menu');
     });
+});
+
+Route::middleware(['auth', 'authAdmin'])->group(function () {
     Route::get('/admin', function () {
         return view('admin');
     });
+});
+
+
+Route::fallback(function () {
+    return redirect('/menu');
 });
