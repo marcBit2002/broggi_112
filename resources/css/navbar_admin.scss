@@ -1,4 +1,69 @@
 @import "variables";
+
+$side_nav_width: 250px;
+
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#nav_container {
+    width: $side_nav_width;
+
+    border-right: 2px solid $primary;
+}
+
+.title_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    padding: 12px 0;
+
+    border-bottom: 2px solid $primary;
+
+    img {
+        margin-right: 10px;
+    }
+
+    p {
+        margin: 0;
+        color: $primary;
+        font-size: 1.4rem;
+    }
+}
+
+#items_contaienr {
+    margin-left: 15px;
+
+    a {
+        padding: 8px 0;
+        padding-left: 15px;
+        border-radius: 10px;
+        margin-right: 10px;
+
+        color: $primary;
+
+        &:hover {
+            background-color: rgba($color: $primary, $alpha: 0.25);
+            color: $primary;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+    }
+}
+
+[selected] {
+    background-color: $danger !important;
+    color: #fff !important;
+    margin-left: -40px;
+    font-weight: bold;
+    i {
+        margin-left: 60px;
+    }
+}
+
 #back_arrow {
     img {
         transition: transform 0.08s ease-in-out;
@@ -9,33 +74,11 @@
     }
 }
 
-.nav {
-    position: fixed;
-    height: 100%;
-    border-right: 2px solid $primary;
-}
+#content {
+    margin-top: 20px;
+    padding: 0 20px;
 
-#elements_container {
-    a {
-        margin-right: 25px;
-    }
-    a:hover {
-        background-color: rgba($color: $primary, $alpha: 0.25);
-        color: $primary;
-        margin-right: 25px;
-        font-weight: bold;
-    }
-}
-
-[selected] {
-    background-color: $danger !important;
-    color: #fff !important;
-    margin-right: 25px;
-    margin-left: -20px;
-    font-weight: bold;
-    i {
-        margin-left: 50px;
-    }
+    width: calc(100% - $side_nav_width);
 }
 
 .table th {
@@ -48,13 +91,13 @@
 }
 
 .search {
-  width: 100%;
-  display: flex;
-  justify-content: end;
+    width: 100%;
+    display: flex;
+    justify-content: end;
 }
 
 .input-group {
-  width: 200px;
+    width: 200px;
 }
 
 .input-group input {
@@ -66,7 +109,7 @@
 }
 
 .add-button {
-  width: 100%;
-  display: flex;
-  justify-content: end;
+    width: 100%;
+    display: flex;
+    justify-content: end;
 }
