@@ -5,6 +5,7 @@
     <h2 class="text-primary">USUARIS</h2>
 </div>
 
+<div class='crud-content'>
     <div class='search'>
         <div class="input-group">
             <span class="input-group-text border border-primary border-3 border-end-0 text-warning">
@@ -55,7 +56,7 @@
             <tr class="border border-3 border-primary">
                 <td>ffernandez</td>
                 <td>Francisco</td>
-                <td>Fernandez</td>
+                <td>Fernandez Fernandez</td>
                 <td>Supervisor</td>
                 <td><i class="bi bi-trash3 text-danger me-3"></i><i class="bi bi-pen text-danger"></i></td>
             </tr>
@@ -66,4 +67,5 @@
     <div class='add-button'>
         <button class="btn btn-danger text-white"><i class="bi bi-plus-lg me-2"></i>Afegir usuari</button>
     </div>
+</div>
 @endsection

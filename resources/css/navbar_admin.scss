@@ -81,8 +81,17 @@ $side_nav_width: 250px;
     width: calc(100% - $side_nav_width);
 }
 
+.crud-content {
+    display: flex;
+    flex-direction: column;
+}
+
 .table th {
     background-color: $primary;
+}
+
+.table {
+    background-color: white;
 }
 
 .bdr {
