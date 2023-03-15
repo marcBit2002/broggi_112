@@ -32,7 +32,7 @@
                 </a>
 
                 <a href="" style="--delay: .1s";>
-                    <img src="{{ Vite::asset('resources/icons/gears.svg') }}">
+                    <img src="{{ Vite::asset('resources/icons/expedients.svg') }}">
                     <p>expedients</p>
                 </a>
             @else
