@@ -16,10 +16,15 @@ class UsuarioController extends Controller
     public function index()
     {
 
-        $usuaris = Usuario::orderBy('nom', 'ASC')->paginate(6)->get();
-        $roles = TiposUsuario::orderBy('nom', 'ASC')->paginate(6)->get();
+        $usuaris = Usuario::orderBy('nom', 'ASC')->paginate(6);
+        $roles = TiposUsuario::orderBy('id', 'ASC')->get();
 
-        return view('usuarios.admin', compact('usuaris', 'roles'));
+        return view('admin', compact('usuaris', 'roles'));
+    }
+
+    public function create()
+    {
+        // return redirect('partials.modalAdd');
     }
 
     public function store(Request $request)
@@ -42,31 +47,31 @@ class UsuarioController extends Controller
         }
         return $response;
     }
-    public function update(Request $request, Usuario $usuario)
+    public function update(Request $request, Usuario $usuari)
     {
 
-        $usuario->username = $request->input('username');
-        $usuario->nom = $request->input('nom');
-        $usuario->cognoms = $request->input('cognoms');
-        $usuario->contrasenya = \bcrypt($request->input('contrasenya'));
-        $usuario->tipus_usuaris_id = $request->input('tipus_usuaris_id');
+        $usuari->username = $request->input('username');
+        $usuari->nom = $request->input('nom');
+        $usuari->cognoms = $request->input('cognoms');
+        $usuari->contrasenya = \bcrypt($request->input('contrasenya'));
+        $usuari->tipus_usuaris_id = $request->input('tipus_usuaris_id');
 
         try {
-            $usuario->save();
+            $usuari->save();
             $response =  redirect()->action([UsuarioController::class, 'index']);
             session()->flash('mensaje', 'Registre actualitzat correctament');
         } catch (QueryException $exception) {
             $mensaje = Utilitat::errorMessage($exception);
             session()->flash('error', $mensaje);
-            $response =  redirect()->action([UsuarioController::class, 'edit'], ['usuario' => $usuario->id])->withInput(); //Enlloc de edit(vista) que sigui un modal
+            $response =  redirect()->action([UsuarioController::class, 'edit'], ['usuario' => $usuari->id])->withInput(); //Enlloc de edit(vista) que sigui un modal
         }
         return $response;
     }
 
-    public function destroy(Usuario $usuario)
+    public function destroy(Usuario $usuari)
     {
         try {
-            $usuario->delete();
+            $usuari->delete();
             session()->flash('mensaje', 'Registre esborrat correctament');
         } catch (QueryException $exception) {
             $mensaje = Utilitat::errorMessage($exception);

@@ -21,7 +21,7 @@
                     <p>crear carta</p>
                 </a>
 
-                <a href="{{ url('/admin') }}" style="--delay: .1s";>
+                <a href="{{ url('usuari') }}" style="--delay: .1s";>
                     <img src="{{ Vite::asset('resources/icons/gears.svg') }}">
                     <p>administrar</p>
                 </a>

@@ -26,6 +26,9 @@ Route::get('/login', [UsuarioController::class, 'showLogin'])->name('login');
 Route::post('/login', [UsuarioController::class, 'login']);
 Route::get('/logout', [UsuarioController::class, 'logout']);
 
+Route::resource('usuari', UsuarioController::class);
+
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/menu', function () {
         return view('menu');
