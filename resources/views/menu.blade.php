@@ -20,50 +20,36 @@
                     <img src="{{ Vite::asset('resources/icons/note.svg') }}">
                     <p>crear carta</p>
                 </a>
+
                 <a href="{{ url('/admin') }}">
                     <img src="{{ Vite::asset('resources/icons/gears.svg') }}">
                     <p>administrar</p>
-                </a>
-                <a href="">
-                    <img src="{{ Vite::asset('resources/icons/stats.svg') }}">
-                    <p>estadístiques</p>
-                </a>
-                <a href="">
-                    <img src="{{ Vite::asset('resources/icons/videos.svg') }}">
-                    <p>tutorials</p>
                 </a>
             @elseif (Auth::check() && Auth::user()->roles->nom === 'Supervisor 112')
                 <a href="">
                     <img src="{{ Vite::asset('resources/icons/note.svg') }}">
                     <p>crear carta</p>
                 </a>
+
                 <a href="">
                     <img src="{{ Vite::asset('resources/icons/gears.svg') }}">
                     <p>expedients</p>
                 </a>
-                <a href="">
-                    <img src="{{ Vite::asset('resources/icons/stats.svg') }}">
-                    <p>estadístiques</p>
-                </a>
-                <a href="">
-                    <img src="{{ Vite::asset('resources/icons/videos.svg') }}">
-                    <p>tutorials</p>
-                </a>
             @else
-                <a href="">
+                <a href="" style="grid-area: 1 / 1 / 2 / 3;">
                     <img src="{{ Vite::asset('resources/icons/note.svg') }}">
                     <p>crear carta</p>
                 </a>
-                <a href="">
-                    <img src="{{ Vite::asset('resources/icons/stats.svg') }}">
-                    <p>estadístiques</p>
-                </a>
-                <a href="">
-                    <img src="{{ Vite::asset('resources/icons/videos.svg') }}">
-                    <p>tutorials</p>
-                </a>
             @endif
 
+            <a href="">
+                <img src="{{ Vite::asset('resources/icons/stats.svg') }}">
+                <p>estadístiques</p>
+            </a>
+            <a href="">
+                <img src="{{ Vite::asset('resources/icons/videos.svg') }}">
+                <p>tutorials</p>
+            </a>
         </div>
     </div>
 

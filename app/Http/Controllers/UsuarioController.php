@@ -12,11 +12,11 @@ class UsuarioController extends Controller
     public function showLogin()
     {
         // $usuario = new Usuario();
-        // $usuario->username = 'operador';
-        // $usuario->nom = 'Operador';
-        // $usuario->cognoms = '112';
-        // $usuario->contrasenya = \bcrypt('123');
-        // $usuario->tipus_usuaris_id = 1;
+        // $usuario->username = 'admin';
+        // $usuario->nom = 'Administrador';
+        // $usuario->cognoms = 'Sistema';
+        // $usuario->contrasenya = \bcrypt('12345');
+        // $usuario->tipus_usuaris_id = 3;
         // $usuario->save();
         return view('login');
     }
