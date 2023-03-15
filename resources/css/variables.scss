@@ -11,21 +11,22 @@ $custom-colors: (
     "light-blue": $light-blue,
 );
 
+body {
+    font-family: "Figtree", sans-serif !important;
+}
+
 $body-bg: $light-blue;
 
 // buttons
 $btn-border-radius: 6px;
 
 $btn-border-width: 3px;
-$btn-font-size: 1.4rem;
 $btn-font-weight: 600;
 
 $btn-padding-x: 1.5rem;
 
+//sombra navbar
 $box-shadow-sm: 0 0 0.5rem rgba($primary, 0.25);
 
-body {
-    font-family: "Figtree", sans-serif !important;
-}
-
+//bootstrap accepta margins negatius 
 $enable-negative-margins: true;

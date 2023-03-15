@@ -25,9 +25,9 @@
                 <div id="elements_container" class="nav-pills flex-column ">
                     <a class="nav-link mt-3 mb-3" href="#">
                         <i class="bi bi-bar-chart-fill me-2"></i>Estadístiques</a>
-                    <a class="nav-link mt-3 mb-3" href="#">
-                        <i class="bi bi-people-fill me-2"></i>Usuaris</a>
                     <a class="nav-link mt-3 mb-3" href="#" selected>
+                        <i class="bi bi-people-fill me-2"></i>Usuaris</a>
+                    <a class="nav-link mt-3 mb-3" href="#">
                         <i class="bi bi-file-earmark-text-fill me-2"></i>Gestió d'expedients</a>
                     <a class="nav-link mt-3 mb-3" href="#">
                         <i class="bi bi-fire me-2"></i>Incidents</a>

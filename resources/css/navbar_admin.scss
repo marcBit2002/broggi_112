@@ -1,5 +1,4 @@
 @import "variables";
-
 #back_arrow {
     img {
         transition: transform 0.08s ease-in-out;
@@ -37,4 +36,37 @@
     i {
         margin-left: 50px;
     }
+}
+
+.table th {
+    background-color: $primary;
+}
+
+.bdr {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.search {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+.input-group {
+  width: 200px;
+}
+
+.input-group input {
+    background-color: white;
+}
+
+.input-group-text {
+    background-color: white;
+}
+
+.add-button {
+  width: 100%;
+  display: flex;
+  justify-content: end;
 }
