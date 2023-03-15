@@ -21,7 +21,7 @@
                     <p>crear carta</p>
                 </a>
 
-                <a href="{{ url('/admin') }}">
+                <a href="{{ url('/admin') }}" style="--delay: .1s";>
                     <img src="{{ Vite::asset('resources/icons/gears.svg') }}">
                     <p>administrar</p>
                 </a>
@@ -31,7 +31,7 @@
                     <p>crear carta</p>
                 </a>
 
-                <a href="">
+                <a href="" style="--delay: .1s";>
                     <img src="{{ Vite::asset('resources/icons/gears.svg') }}">
                     <p>expedients</p>
                 </a>
@@ -42,11 +42,11 @@
                 </a>
             @endif
 
-            <a href="">
+            <a href="" style="--delay: .2s";>
                 <img src="{{ Vite::asset('resources/icons/stats.svg') }}">
                 <p>estadístiques</p>
             </a>
-            <a href="">
+            <a href="" style="--delay: .3s";>
                 <img src="{{ Vite::asset('resources/icons/videos.svg') }}">
                 <p>tutorials</p>
             </a>
