@@ -1,10 +1,10 @@
 @extends('layouts.admin_template')
 
-@section('contenido')
-    <div class='title'>
-        <h2 class="text-primary">USUARIS</h2>
-    </div>
+@section('titulo')
+    USUARIS
+@endsection
 
+@section('contenido')
     <div class='crud-content'>
         <div class='search'>
             <div class="input-group">
@@ -17,8 +17,8 @@
         </div>
         <div class='table-content'>
             @if (count($usuaris) > 0)
-                <table class="table table-hover bdr mt-4">
-                    <thead class="table border border-3 border-primary text-white">
+                <table class="table table-striped bdr mt-4 align-middle">
+                    <thead class="text-white">
                         <th>Username</th>
                         <th>Nom</th>
                         <th>Cognoms</th>
@@ -27,7 +27,7 @@
                     </thead>
                     <tbody>
                         @foreach ($usuaris as $usuari)
-                            <tr class="border border-3 border-primary">
+                            <tr>
                                 <td>{{ $usuari->username }}</td>
                                 <td>{{ $usuari->nom }}</td>
                                 <td>{{ $usuari->cognoms }}</td>
@@ -50,7 +50,6 @@
                                         </button>
                                     </div>
                                 </td>
-                                {{-- <td><i class="bi bi-trash3 text-danger me-3"></i><i class="bi bi-pen text-danger"></i></td> --}}
                             </tr>
                         @endforeach
                     </tbody>
@@ -61,16 +60,18 @@
 
         </div>
 
-
-        {{ $usuaris->links() }}
         @include('partials.modal')
         @include('partials.modalAdd')
 
+
         <div class='add-button'>
-            <button type="button" class="btn btn-danger text-white" data-bs-toggle="modal" data-bs-target="#afegirModal">
-                <i class="bi bi-plus-lg me-2"></i>Afegir usuari
-            </button>
-            {{-- <button class="btn btn-danger text-white"><i class="bi bi-plus-lg me-2"></i>Afegir usuari</button> --}}
+            {{ $usuaris->links() }}
+            <div>
+                <button type="button" class="btn btn-danger text-white" data-bs-toggle="modal"
+                    data-bs-target="#afegirModal">
+                    <i class="bi bi-plus-lg me-2"></i>Afegir usuari
+                </button>
+            </div>
         </div>
 
     </div>

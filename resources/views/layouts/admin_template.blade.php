@@ -35,6 +35,7 @@
                     <i class="bi bi-briefcase-fill me-2"></i>Agències</a>
             </div>
         </div>
+        <h2>@yield('titulo')</h2>
         <div id="content">
             @yield('contenido')
         </div>

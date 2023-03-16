@@ -1,10 +1,10 @@
 $light-blue: #f4f9f9;
 $dark: #16181c;
 
-$primary: #087ca7;
+$primary: #087ca6;
 $secondary: #767676;
 $warning: #ffb300;
-$danger: #e0127a;
+$danger: #de1278;
 
 // Create your own map
 $custom-colors: (
@@ -28,5 +28,10 @@ $btn-padding-x: 1.5rem;
 //sombra navbar
 $box-shadow-sm: 0 0 0.5rem rgba($primary, 0.25);
 
-//bootstrap accepta margins negatius 
+//bootstrap accepta margins negatius
 $enable-negative-margins: true;
+
+// table CRUD colors
+$table-striped-bg: rgba($primary, 0.15);
+
+$pagination-active-bg: $danger;
