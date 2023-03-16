@@ -13,9 +13,9 @@
                 <form method="post">
                     @csrf
                     @method('DELETE')
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
-                            class="bi bi-x"></i>Cancel·lar</button>
-                    <button type="submit" class="btn btn-danger delete"><i class="bi bi-trash"></i>Eliminar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"></i>Cancel·lar</button>
+                    <button type="submit" class="btn btn-danger delete">Eliminar<i
+                            class="bi bi-trash3 ps-2"></i></button>
                     </button>
                 </form>
             </div>
