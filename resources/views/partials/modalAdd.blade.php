@@ -1,10 +1,13 @@
+@vite(['resources/css/modal.scss'])
 <!-- Modal Add User -->
-<div class="modal fade" id="afegirModal" tabindex="-1" aria-labelledby="lblAfegirModal" aria-hidden="true">
+<div class="modal fade" id="afegirModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="lblAfegirModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Afegir usuari</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="bi bi-person-fill-add pe-2"></i>Afegir
+                    usuari</h1>
+                {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
             </div>
             <div class="modal-body">
                 <form id="form-add-user" action="{{ action([App\Http\Controllers\UsuarioController::class, 'store']) }}"
@@ -26,18 +29,19 @@
                             value="{{ old('cognoms') }}" required>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="contrasenya">Contraseña:</label>
+                        <label for="contrasenya">Contrasenya:</label>
                         <input type="password" class="form-control" id="contrasenya" name="contrasenya"
                             value="{{ old('contrasenya') }}" required>
                     </div>
                     <div class="form-group  mb-3">
                         <label for="tipus_usuaris_id">Tipus:</label>
-                        <select class="form-control" id="tipus_usuaris_id" name="tipus_usuaris_id">
+                        <select class="form-select" id="tipus_usuaris_id" name="tipus_usuaris_id">
                             @foreach ($roles as $rol)
                                 <option id="tipus_usuaris_id" name="tipus_usuaris_id" value="{{ $rol->id }}">
                                     {{ $rol->nom }}</option>
                             @endforeach
                         </select>
+
                     </div>
                     <div class="modal-body d-flex justify-content-end">
                         <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Cancel·lar</button>
