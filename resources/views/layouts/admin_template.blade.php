@@ -40,7 +40,16 @@
             @yield('contenido')
         </div>
     </div>
+    <script type="module">
+        import {
+            playAnimation
+        } from "{{ Vite::asset('resources/js/functions.js') }}";
 
+        const animation = "fade-in-up 500ms ease forwards";
+        const items = document.querySelectorAll("#items_contaienr a");
+
+        playAnimation(animation,80,items,0,1);
+    </script>
 </body>
 
 </html>

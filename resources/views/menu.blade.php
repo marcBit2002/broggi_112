@@ -21,7 +21,7 @@
                     <p>crear carta</p>
                 </a>
 
-                <a href="{{ url('usuari') }}" style="--delay: .1s";>
+                <a href="{{ url('usuari') }}">
                     <img src="{{ Vite::asset('resources/icons/gears.svg') }}">
                     <p>administrar</p>
                 </a>
@@ -31,7 +31,7 @@
                     <p>crear carta</p>
                 </a>
 
-                <a href="" style="--delay: .1s";>
+                <a href="">
                     <img src="{{ Vite::asset('resources/icons/expedients.svg') }}">
                     <p>expedients</p>
                 </a>
@@ -42,17 +42,26 @@
                 </a>
             @endif
 
-            <a href="" style="--delay: .2s";>
+            <a href="">
                 <img src="{{ Vite::asset('resources/icons/stats.svg') }}">
                 <p>estadístiques</p>
             </a>
-            <a href="" style="--delay: .3s";>
+            <a href="">
                 <img src="{{ Vite::asset('resources/icons/videos.svg') }}">
                 <p>tutorials</p>
             </a>
         </div>
     </div>
+    <script type="module">
+        import {
+            playAnimation
+        } from "{{ Vite::asset('resources/js/functions.js') }}";
 
+        const animation = "fade-in-up 500ms ease forwards";
+        const items = document.querySelectorAll("#container-items a");
+
+        playAnimation(animation,80,items,0,1);
+    </script>
 </body>
 
 </html>
