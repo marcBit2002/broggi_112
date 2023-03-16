@@ -47,6 +47,11 @@ class UsuarioController extends Controller
         }
         return $response;
     }
+    public function edit()
+    {
+        // return redirect('partials.modalAdd');
+    }
+
     public function update(Request $request, Usuario $usuari)
     {
 
@@ -83,13 +88,6 @@ class UsuarioController extends Controller
     /* ---------- Methods LOGIN ---------- */
     public function showLogin()
     {
-        // $usuario = new Usuario();
-        // $usuario->username = 'admin';
-        // $usuario->nom = 'Administrador';
-        // $usuario->cognoms = 'Sistema';
-        // $usuario->contrasenya = \bcrypt('12345');
-        // $usuario->tipus_usuaris_id = 3;
-        // $usuario->save();
         return view('login');
     }
 

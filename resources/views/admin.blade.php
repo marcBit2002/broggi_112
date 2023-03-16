@@ -35,11 +35,11 @@
                                 <td>
                                     <div class="d-flex justify-content-end">
                                         {{-- BOTON EDITAR --}}
-                                        <form action="">
-                                            <button type="submit" class="btn btn-danger btn-sm me-2">
-                                                <i class="bi bi-pen "></i>
-                                            </button>
-                                        </form>
+                                        <button type="button" class="btn btn-danger btn-sm me-2" data-bs-toggle="modal"
+                                            data-bs-target="#editarModal">
+                                            <i class="bi bi-pen "></i>
+                                        </button>
+
                                         {{-- BOTON ELIMINAR --}}
                                         <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                             data-bs-target="#eliminaModal" data-bs-id="{{ $usuari->id }}"
@@ -62,6 +62,8 @@
 
         @include('partials.modal')
         @include('partials.modalAdd')
+        @include('partials.modalEdit')
+
 
 
         <div class='add-button'>

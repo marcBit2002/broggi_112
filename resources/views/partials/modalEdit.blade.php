@@ -1,20 +1,23 @@
 @extends('layouts.modal_template')
 
 @section('idModal')
-    afegirModal
+    editarModal
 @endsection
 
 @section('iconClass')
-    bi bi-person-fill-add
+    bi bi-trash
 @endsection
 
 @section('titolModal')
-    Afegir usuari
+    Editar usuari
 @endsection
 
 @section('form-modal')
-    <form id="form-add-user" action="{{ action([App\Http\Controllers\UsuarioController::class, 'store']) }}" method="POST">
+    {{-- <form id=""
+        action="{{ action([App\Http\Controllers\UsuarioController::class, 'update'], ['usuari' => $usuari->id]) }}"
+        method="POST">
         @csrf
+        @method('PUT')
         <div class="form-group mb-3">
             <label for="username">Username:</label>
             <input type="text" class="form-control" id="username" name="username" value="{{ old('username') }}" required>
@@ -44,8 +47,8 @@
         </div>
         <div class="modal-body d-flex justify-content-end">
             <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Cancel·lar</button>
-            <button type="submit" class="btn btn-danger delete mx-2"></i>Afegir</button>
+            <button type="submit" class="btn btn-danger delete mx-2"></i>Modificar</button>
             </button>
         </div>
-    </form>
+    </form> --}}
 @endsection
