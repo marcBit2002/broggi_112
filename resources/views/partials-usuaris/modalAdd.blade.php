@@ -49,3 +49,10 @@
         </div>
     </form>
 @endsection
+
+{{-- @if (Session::has('show'))
+    <script>
+        const myModal = document.getElementById("afegirModal");
+        myModal.show();
+    </script>
+@endif --}}

@@ -11,43 +11,29 @@
                     @method('PUT')
                     <div class="form-group mb-3">
                         <label for="username">Username:</label>
-                        <input type="text" class="form-control" id="username" name="username" required>
+                        <input type="text" class="form-control" id="username_edit" name="username" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="nom">Nom:</label>
-                        <input type="text" class="form-control" id="nom" class="nom" name="nom"
+                        <input type="text" class="form-control" id="nom_edit" class="nom" name="nom"
                             required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="cognoms">Cognoms:</label>
-                        <input type="text" class="form-control" id="cognoms" name="cognoms" required>
+                        <input type="text" class="form-control" id="cognoms_edit" name="cognoms" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="contrasenya">Contrasenya:</label>
-                        <input type="text" class="form-control" id="contrasenya" name="contrasenya" required>
+                        <input type="text" class="form-control" id="contrasenya_edit" name="contrasenya" required>
                     </div>
                     <div class="form-group  mb-3">
                         <label for="tipus_usuaris_id">Tipus:</label>
-                        {{-- <select class="form-select" id="tipus_usuaris_id" name="tipus_usuaris_id">
-                            @foreach ($roles as $rol)
-                                @if ($rol->id == $usuari->tipus_usuaris_id)
-                                    <option id="tipus_usuaris_id" name="tipus_usuaris_id" selected
-                                        value="{{ $rol->id }}">
-                                        {{ $rol->nom }}</option>
-                                @else
-                                    <option id="tipus_usuaris_id" name="tipus_usuaris_id" value="{{ $rol->id }}">
-                                        {{ $rol->nom }}</option>
-                                @endif
-                            @endforeach
-                        </select> --}}
-                        <select class="form-select" id="tipus_usuaris_id" name="tipus_usuaris_id">
+                        <select class="form-select" id="tipus_usuaris_id_edit" name="tipus_usuaris_id">
                             @foreach ($roles as $rol)
                                 <option name="tipus_usuaris_id" value="{{ $rol->id }}">
                                     {{ $rol->nom }}</option>
                             @endforeach
                         </select>
-
-
                     </div>
                     <div class="modal-body d-flex justify-content-end">
                         <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Cancel·lar</button>
@@ -77,14 +63,22 @@
 
             editarModal.querySelector('.modal-body .edit').value = id;
             editarModal.querySelector('.modal-body form').action = action;
-            editarModal.querySelector('#username ').value = username;
-            editarModal.querySelector('#nom ').value = nom;
-            editarModal.querySelector('#cognoms ').value = cognoms;
-            editarModal.querySelector('#contrasenya ').value = contrasenya;
+            editarModal.querySelector('#username_edit ').value = username;
+            editarModal.querySelector('#nom_edit ').value = nom;
+            editarModal.querySelector('#cognoms_edit ').value = cognoms;
+            editarModal.querySelector('#contrasenya_edit ').value = contrasenya;
 
             // Actualizar el valor y etiqueta del input select
-            let select = editarModal.querySelector('#tipus_usuaris_id');
+            let select = editarModal.querySelector('#tipus_usuaris_id_edit');
             select.value = tipusUsuariId;
         })
     });
 </script>
+{{-- 
+@if (Session::has('show'))
+    <script>
+        // const myModal = document.getElementById("editarModal");
+        // myModal.show();
+        
+    </script>
+@endif --}}

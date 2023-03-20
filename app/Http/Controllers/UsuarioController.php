@@ -19,12 +19,12 @@ class UsuarioController extends Controller
         $usuaris = Usuario::orderBy('nom', 'ASC')->paginate(6);
         $roles = TiposUsuario::orderBy('id', 'ASC')->get();
 
-        return view('admin', compact('usuaris', 'roles'));
+        return view('usuaris', compact('usuaris', 'roles'));
     }
 
     public function create()
     {
-        // return redirect('partials.modalAdd');
+        return back()->withInput()->with('show', true);
     }
 
     public function store(Request $request)
@@ -49,7 +49,7 @@ class UsuarioController extends Controller
     }
     public function edit()
     {
-        // return redirect('partials.modalAdd');
+        return back()->withInput()->with('show', true);
     }
 
     public function update(Request $request, Usuario $usuari)
@@ -68,7 +68,7 @@ class UsuarioController extends Controller
         } catch (QueryException $exception) {
             $mensaje = Utilitat::errorMessage($exception);
             session()->flash('error', $mensaje);
-            $response =  redirect()->action([UsuarioController::class, 'edit'], ['usuario' => $usuari->id])->withInput(); //Enlloc de edit(vista) que sigui un modal
+            $response =  redirect()->action([UsuarioController::class, 'edit'], ['usuari' => $usuari->id])->withInput(); //Enlloc de edit(vista) que sigui un modal
         }
         return $response;
     }

@@ -23,7 +23,7 @@
             <div id="items_contaienr">
                 <a class="nav-link my-3" href="#">
                     <i class="bi bi-bar-chart-fill me-2"></i>Estadístiques</a>
-                <a class="nav-link my-3" href="#">
+                <a class="nav-link my-3" href='{{ url('admin/usuari') }}'>
                     <i class="bi bi-people-fill me-2"></i>Usuaris</a>
                 <a class="nav-link my-3" href="#" selected>
                     <i class="bi bi-file-earmark-text-fill me-2"></i>Gestió d'expedients</a>
@@ -31,8 +31,8 @@
                     <i class="bi bi-fire me-2"></i>Incidents</a>
                 <a class="nav-link my-3" href="#">
                     <i class="bi bi-grid-fill me-2"></i>Tipus d'incidents</a>
-                <a class="nav-link my-3" href="#">
-                    <i class="bi bi-briefcase-fill me-2"></i>Agències</a>
+                <a class="nav-link my-3" href='{{ url('admin/agencies') }}'>
+                    <i class="bi bi-building-fill me-2"></i>Agències</a>
             </div>
         </div>
         <h2>@yield('titulo')</h2>
