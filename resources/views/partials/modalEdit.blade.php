@@ -42,13 +42,8 @@
                         </select> --}}
                         <select class="form-select" id="tipus_usuaris_id" name="tipus_usuaris_id">
                             @foreach ($roles as $rol)
-                                @if ($rol->id == '<span id="tipusUsuariId"></span>')
-                                    <option name="tipus_usuaris_id" selected value="{{ $rol->id }}">
-                                        {{ $rol->nom }}</option>
-                                @else
-                                    <option name="tipus_usuaris_id" value="{{ $rol->id }}">
-                                        {{ $rol->nom }}</option>
-                                @endif
+                                <option name="tipus_usuaris_id" value="{{ $rol->id }}">
+                                    {{ $rol->nom }}</option>
                             @endforeach
                         </select>
 
@@ -66,37 +61,30 @@
 </div>
 
 <script>
-    let editarModal = document.getElementById("editarModal");
+    let edit_buttons = document.querySelectorAll(".btn-edit")
 
-    editarModal.addEventListener('shown.bs.modal', event => {
-        let button = event.relatedTarget;
-        let id = button.getAttribute("data-bs-id");
-        let username = button.getAttribute("data-bs-username");
-        let nom = button.getAttribute("data-bs-nom");
-        let cognoms = button.getAttribute("data-bs-cognoms");
-        let contrasenya = button.getAttribute("data-bs-contrasenya");
-        let tipusUsuariId = button.getAttribute("data-bs-tipus-id");
-        let tipusUsuariNom = button.getAttribute("data-bs-tipus-nom");
-        let action = button.getAttribute("data-bs-action");
+    edit_buttons.forEach(btn => {
+        btn.addEventListener('click', event => {
+            // let btn = event.relatedTarget;
+            let id = btn.getAttribute("data-bs-id");
+            let username = btn.getAttribute("data-bs-username");
+            let nom = btn.getAttribute("data-bs-nom");
+            let cognoms = btn.getAttribute("data-bs-cognoms");
+            let contrasenya = btn.getAttribute("data-bs-contrasenya");
+            let tipusUsuariId = btn.getAttribute("data-bs-tipus-id");
+            let tipusUsuariNom = btn.getAttribute("data-bs-tipus-nom");
+            let action = btn.getAttribute("data-bs-action");
 
-        editarModal.querySelector('.modal-body .edit').value = id;
-        editarModal.querySelector('.modal-body form').action = action;
-        editarModal.querySelector('.modal-body #username ').value = username;
-        editarModal.querySelector('.modal-body #nom ').value = nom;
-        editarModal.querySelector('.modal-body #cognoms ').value = cognoms;
-        editarModal.querySelector('.modal-body #contrasenya ').value = contrasenya;
+            editarModal.querySelector('.modal-body .edit').value = id;
+            editarModal.querySelector('.modal-body form').action = action;
+            editarModal.querySelector('#username ').value = username;
+            editarModal.querySelector('#nom ').value = nom;
+            editarModal.querySelector('#cognoms ').value = cognoms;
+            editarModal.querySelector('#contrasenya ').value = contrasenya;
 
-
-        // Actualizar el valor y etiqueta del select
-        let select = editarModal.querySelector('.modal-body #tipus_usuaris_id');
-        select.value = tipusUsuariId;
-        let selectedOption = select.options[select.selectedIndex];
-        selectedOption.innerHTML = tipusUsuariNom;
-
-        // Actualizar el valor de la variable en la condición del if
-        let selectIdSpan = editarModal.querySelector('#tipusUsuariId');
-        selectIdSpan.innerHTML = tipusUsuariId;
-
-
+            // Actualizar el valor y etiqueta del input select
+            let select = editarModal.querySelector('#tipus_usuaris_id');
+            select.value = tipusUsuariId;
+        })
     });
 </script>

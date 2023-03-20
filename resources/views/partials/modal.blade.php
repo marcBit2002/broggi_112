@@ -24,36 +24,39 @@
 </div>
 
 <script>
-    let eliminaModal = document.getElementById("eliminaModal");
+    let delete_button = document.querySelectorAll(".btn-delete")
 
-    eliminaModal.addEventListener('shown.bs.modal', event => {
-        let button = event.relatedTarget;
-        let id = button.getAttribute("data-bs-id");
-        let username = button.getAttribute("data-bs-username");
-        let nom = button.getAttribute("data-bs-nomCognoms")
-        let action = button.getAttribute("data-bs-action");
-        eliminaModal.querySelector('.modal-footer .delete').value = id;
-        eliminaModal.querySelector('.modal-footer form').action = action;
-        eliminaModal.querySelector('.modal-header h1 ').innerHTML = "Anem a eliminar a <span id='estilTitol'>" +
-            username +
-            "</span>";
-        eliminaModal.querySelector('.modal-body p ').innerHTML = "Eliminar a l'usuari <span id='estil'>" +
-            nom +
-            "</span>" + " comporta que no podràs recuperar-ho un cop eliminat";
+    delete_button.forEach(btn => {
+        btn.addEventListener('click', event => {
+            let id = btn.getAttribute("data-bs-id");
+            let username = btn.getAttribute("data-bs-username");
+            let nom = btn.getAttribute("data-bs-nomCognoms")
+            let action = btn.getAttribute("data-bs-action");
+            eliminaModal.querySelector('.modal-footer .delete').value = id;
+            eliminaModal.querySelector('.modal-footer form').action = action;
+            eliminaModal.querySelector('.modal-header h1 ').innerHTML =
+                "Anem a eliminar a <span id='estilTitol'>" +
+                username +
+                "</span>";
+            eliminaModal.querySelector('.modal-body p ').innerHTML =
+                "Eliminar a l'usuari <span id='estil'>" +
+                nom +
+                "</span>" + " comporta que no podràs recuperar-ho un cop eliminat";
 
-        //Estils pel modal
-        let nombre = eliminaModal.querySelector('#estil');
-        nombre.style.fontStyle = "italic";
-        nombre.style.fontWeight = "bold";
+            //Estils pel modal
+            let nombre = eliminaModal.querySelector('#estil');
+            nombre.style.fontStyle = "italic";
+            nombre.style.fontWeight = "bold";
 
-        let usuari = eliminaModal.querySelector('#estilTitol');
-        usuari.style.fontStyle = "italic";
-        usuari.style.fontWeight = "bold";
+            let usuari = eliminaModal.querySelector('#estilTitol');
+            usuari.style.fontStyle = "italic";
+            usuari.style.fontWeight = "bold";
 
-        let text = eliminaModal.querySelector('p');
-        text.style.color = "#767676";
+            let text = eliminaModal.querySelector('p');
+            text.style.color = "#767676";
 
-        let titol = eliminaModal.querySelector('h1');
-        titol.style.color = "#087ca7";
+            let titol = eliminaModal.querySelector('h1');
+            titol.style.color = "#087ca7";
+        })
     });
 </script>

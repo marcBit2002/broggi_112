@@ -35,10 +35,10 @@
                                 <td>
                                     <div class="d-flex justify-content-end">
                                         {{-- BOTON EDITAR --}}
-                                        <button type="button" class="btn btn-danger btn-sm me-2" data-bs-toggle="modal"
-                                            data-bs-target="#editarModal" data-bs-id="{{ $usuari->id }}"
-                                            data-bs-username="{{ $usuari->username }}" data-bs-nom="{{ $usuari->nom }}"
-                                            data-bs-cognoms="{{ $usuari->cognoms }}"
+                                        <button type="button" class="btn btn-danger btn-sm me-2 btn-edit"
+                                            data-bs-toggle="modal" data-bs-target="#editarModal"
+                                            data-bs-id="{{ $usuari->id }}" data-bs-username="{{ $usuari->username }}"
+                                            data-bs-nom="{{ $usuari->nom }}" data-bs-cognoms="{{ $usuari->cognoms }}"
                                             data-bs-contrasenya="{{ $usuari->contrasenya }}"
                                             data-bs-tipus-id="{{ $usuari->tipus_usuaris_id }}"
                                             data-bs-tipus-nom="{{ $usuari->roles->nom }}"
@@ -47,9 +47,9 @@
                                         </button>
 
                                         {{-- BOTON ELIMINAR --}}
-                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#eliminaModal" data-bs-id="{{ $usuari->id }}"
-                                            data-bs-username="{{ $usuari->username }}"
+                                        <button type="button" class="btn btn-danger btn-sm btn-delete"
+                                            data-bs-toggle="modal" data-bs-target="#eliminaModal"
+                                            data-bs-id="{{ $usuari->id }}" data-bs-username="{{ $usuari->username }}"
                                             data-bs-nomCognoms="{{ $usuari->nom }} {{ $usuari->cognoms }}"
                                             data-bs-action="{{ action([App\Http\Controllers\UsuarioController::class, 'destroy'], ['usuari' => $usuari->id]) }}">
                                             <i class="bi bi-trash3"></i>
