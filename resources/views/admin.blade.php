@@ -36,8 +36,14 @@
                                     <div class="d-flex justify-content-end">
                                         {{-- BOTON EDITAR --}}
                                         <button type="button" class="btn btn-danger btn-sm me-2" data-bs-toggle="modal"
-                                            data-bs-target="#editarModal">
-                                            <i class="bi bi-pen "></i>
+                                            data-bs-target="#editarModal" data-bs-id="{{ $usuari->id }}"
+                                            data-bs-username="{{ $usuari->username }}" data-bs-nom="{{ $usuari->nom }}"
+                                            data-bs-cognoms="{{ $usuari->cognoms }}"
+                                            data-bs-contrasenya="{{ $usuari->contrasenya }}"
+                                            data-bs-tipus-id="{{ $usuari->tipus_usuaris_id }}"
+                                            data-bs-tipus-nom="{{ $usuari->roles->nom }}"
+                                            data-bs-action="{{ action([App\Http\Controllers\UsuarioController::class, 'update'], ['usuari' => $usuari->id]) }}">
+                                            <i class="bi bi-pen"></i>
                                         </button>
 
                                         {{-- BOTON ELIMINAR --}}

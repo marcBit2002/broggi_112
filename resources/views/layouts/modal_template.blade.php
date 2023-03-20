@@ -1,4 +1,3 @@
-<!-- Modal Add User -->
 <div class="modal fade" id=@yield('idModal') data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="lblModal" aria-hidden="true">
     <div class="modal-dialog">
