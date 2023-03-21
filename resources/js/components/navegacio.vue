@@ -1,18 +1,27 @@
 <template>
     <div id="navegacio">
-        <div style="z-index: 40">
+        <div @click="activeTab = 1" class="selected" style="z-index: 40">
             <p>IDENTIFICACIÓ</p>
         </div>
-        <img src="../../icons/arrowHead.svg" style="z-index: 35" />
-        <div class="selected" style="z-index: 30">
+        <img
+            src="/broggi_112/public/assets/icons/arrowHeadFill.svg"
+            style="z-index: 35"
+        />
+        <div @click="activeTab = 2" style="z-index: 30">
             <p>LOCALITZACIÓ</p>
         </div>
-        <img src="../../icons/arrowHeadFill.svg" style="z-index: 25" />
-        <div style="z-index: 20">
+        <img
+            src="/broggi_112/public/assets/icons/arrowHead.svg"
+            style="z-index: 25"
+        />
+        <div @click="activeTab = 3" style="z-index: 20">
             <p>TIPIFICACIÓ</p>
         </div>
-        <img src="../../icons/arrowHead.svg" style="z-index: 15" />
-        <div style="z-index: 10">
+        <img
+            src="/broggi_112/public/assets/icons/arrowHead.svg"
+            style="z-index: 15"
+        />
+        <div @click="activeTab = 4" style="z-index: 10">
             <p>DESPATX</p>
         </div>
     </div>
@@ -20,6 +29,60 @@
 <script>
 export default {
     name: "navegacio",
+    data: function () {
+        return {
+            activeTab: 1,
+        };
+    },
+    methods: {},
+    watch: {
+        // Cuando cambia el activaTab, se ejecuta ⬇️
+        activeTab: function () {
+            const tabs = document.querySelectorAll("#navegacio div");
+            const arrows = document.querySelectorAll("#navegacio img");
+
+            // Elimina la clase selected de tots els tabs
+            tabs.forEach((tab) => {
+                tab.classList.remove("selected");
+            });
+
+            // Cambia les arrows dels tabs a no actives
+            arrows.forEach((arrow) => {
+                arrow.setAttribute(
+                    "src",
+                    "/broggi_112/public/assets/icons/arrowHead.svg"
+                );
+            });
+
+            // Seteja la clase activa i cambia la arrow activa
+            switch (this.activeTab) {
+                case 1:
+                    tabs[0].classList.add("selected");
+                    arrows[0].setAttribute(
+                        "src",
+                        "/broggi_112/public/assets/icons/arrowHeadFill.svg"
+                    );
+                    break;
+                case 2:
+                    tabs[1].classList.add("selected");
+                    arrows[1].setAttribute(
+                        "src",
+                        "/broggi_112/public/assets/icons/arrowHeadFill.svg"
+                    );
+                    break;
+                case 3:
+                    tabs[2].classList.add("selected");
+                    arrows[2].setAttribute(
+                        "src",
+                        "/broggi_112/public/assets/icons/arrowHeadFill.svg"
+                    );
+                    break;
+                case 4:
+                    tabs[3].classList.add("selected");
+                    break;
+            }
+        },
+    },
 };
 </script>
 <style lang="scss" scoped>
@@ -33,10 +96,8 @@ export default {
 
     display: grid;
     place-items: center;
-    grid-template-columns: 1fr 0.15fr 1fr 0.15fr 1fr 0.15fr 1fr;
+    grid-template-columns: repeat(3, 1fr 0.12fr) 1fr;
     grid-template-rows: 100%;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
 
     overflow: hidden;
 
@@ -64,6 +125,19 @@ export default {
             margin-bottom: 0;
             font-weight: 400;
             font-size: 1.1rem;
+            position: relative;
+            line-height: 100%;
+
+            &::after {
+                content: "";
+                position: absolute;
+                width: 6px;
+                height: 6px;
+                right: -10px;
+                bottom: 0;
+                border-radius: 50%;
+                background-color: red;
+            }
         }
     }
 }
@@ -87,6 +161,12 @@ export default {
         color: #fff;
         font-weight: 500 !important;
         font-size: 1.4rem !important;
+
+        &::after {
+            right: -15px !important;
+            width: 10px !important;
+            height: 10px !important;
+        }
     }
 }
 
