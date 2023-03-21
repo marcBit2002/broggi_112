@@ -1,0 +1,87 @@
+@import "variables";
+
+div.content {
+    margin: 20px auto 0;
+    padding: 0 40px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    max-width: 1250px;
+}
+
+.selection {
+    margin: 20px 0;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.button {
+    width: 111px;
+}
+
+.btn_content{
+    display:flex;
+    align-items: center;
+}
+
+.expedient {
+    margin: 5px 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 3px solid $primary;
+    border-radius: 8px;
+
+    height: 20%;
+}
+
+.top-expedient {
+    margin: 20px;
+
+    width: 45%;
+    height: 15%;
+}
+
+.bottom-expedient {
+    margin: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+    width: 45%;
+    height: 15%;
+}
+
+.estat {
+    display: flex;
+}
+
+.dot {
+    height: 20px;
+    width: 20px;
+    margin: 0 0 0 4px;
+
+    background-color: red;
+
+    border-radius: 50%;
+
+    display: inline-block;
+}
+
+.arrow {
+    border-bottom: 2px solid $warning;
+    border-right: 2px solid $warning;
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg) translateY(-50%);
+    transform-origin: right;
+}

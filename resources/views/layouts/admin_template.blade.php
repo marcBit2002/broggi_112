@@ -23,9 +23,9 @@
             <div id="items_contaienr">
                 <a class="nav-link my-3" href="#">
                     <i class="bi bi-bar-chart-fill me-2"></i>Estadístiques</a>
-                <a class="nav-link my-3" href='{{ url('admin/usuari') }}'>
+                <a class="nav-link my-3" href='{{ url('admin/usuari') }}' selected>
                     <i class="bi bi-people-fill me-2"></i>Usuaris</a>
-                <a class="nav-link my-3" href="#" selected>
+                <a class="nav-link my-3" href="{{ url('/admin/expedients') }}">
                     <i class="bi bi-file-earmark-text-fill me-2"></i>Gestió d'expedients</a>
                 <a class="nav-link my-3" href="#">
                     <i class="bi bi-fire me-2"></i>Incidents</a>
