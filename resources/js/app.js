@@ -2,6 +2,6 @@ import "./bootstrap";
 import * as bootstrap from "bootstrap";
 import { createApp } from "vue";
 
-import pepe from "./componentes/pepe.vue";
+import cartaApp from "./components/cartaApp.vue";
 
-createApp(pepe).mount("#pepe");
+createApp(cartaApp).mount("#cartaApp");

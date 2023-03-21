@@ -16,7 +16,7 @@
         <h1 class="text-center mt-5 text-primary fw-light">Menú</h1>
         <div id="container-items">
             @if (Auth::check() && Auth::user()->roles->nom === 'Administrador Sistema')
-                <a href="">
+                <a href="{{ url('carta') }}">
                     <img src="{{ Vite::asset('resources/icons/note.svg') }}">
                     <p>crear carta</p>
                 </a>
@@ -26,7 +26,7 @@
                     <p>administrar</p>
                 </a>
             @elseif (Auth::check() && Auth::user()->roles->nom === 'Supervisor 112')
-                <a href="">
+                <a href="{{ url('carta') }}">
                     <img src="{{ Vite::asset('resources/icons/note.svg') }}">
                     <p>crear carta</p>
                 </a>
@@ -36,7 +36,7 @@
                     <p>expedients</p>
                 </a>
             @else
-                <a href="" style="grid-area: 1 / 1 / 2 / 3;">
+                <a href="{{ url('carta') }}" style="grid-area: 1 / 1 / 2 / 3;">
                     <img src="{{ Vite::asset('resources/icons/note.svg') }}">
                     <p>crear carta</p>
                 </a>

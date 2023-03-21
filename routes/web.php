@@ -28,6 +28,9 @@ Route::post('/login', [UsuarioController::class, 'login']);
 Route::get('/logout', [UsuarioController::class, 'logout']);
 
 
+Route::get('carta', function () {
+    return view('carta');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/menu', function () {
