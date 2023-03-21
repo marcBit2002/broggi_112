@@ -1,13 +1,18 @@
 <template>
-    <div id="dades">Les dades</div>
+    <div id="dades"></div>
 </template>
 <script>
 export default {
     name: "dades",
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
+@import "../../css/variables.scss";
+
 #dades {
-    border: 1px solid green;
+    background-color: #fff;
+
+    border: $components-border-width solid $primary;
+    border-radius: $components-border-radius;
 }
 </style>

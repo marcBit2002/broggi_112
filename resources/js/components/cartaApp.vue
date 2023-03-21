@@ -4,8 +4,11 @@
         <dades></dades>
         <pagina></pagina>
 
-        <div>
+        <div id="right_container">
             <notaComuna></notaComuna>
+            <div id="resizer">
+                <div id="pill"></div>
+            </div>
             <expedients></expedients>
         </div>
     </div>
@@ -43,5 +46,36 @@ body {
     grid-template-rows: clamp(55px, 12.5%, 100px) 1fr;
     grid-column-gap: $components-gap;
     grid-row-gap: $components-gap;
+}
+
+#right_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+#resizer {
+    height: $components-gap;
+    width: 100%;
+    position: relative;
+
+    &:hover {
+        cursor: n-resize;
+        // cursor: row-resize;
+    }
+
+    #pill {
+        width: 75px;
+        height: 3px;
+        border-radius: 5px;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        background-color: $warning;
+    }
 }
 </style>

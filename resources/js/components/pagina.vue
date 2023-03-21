@@ -6,8 +6,13 @@ export default {
     name: "pagina",
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
+@import "../../css/variables.scss";
+
 #pagina {
-    border: 1px solid green;
+    background-color: #fff;
+
+    border: $components-border-width solid $primary;
+    border-radius: $components-border-radius;
 }
 </style>
