@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Expedient;
 use Illuminate\Http\Request;
-use App\Models\TipusIncident;
 use App\Models\EstatExpedient;
 use App\Http\Controllers\Controller;
 
-class ExpedientController extends Controller
+class InfoExpedientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +16,7 @@ class ExpedientController extends Controller
      */
     public function index()
     {
-        $tipusIncidents = TipusIncident::all();
-        $estats = EstatExpedient::all();
-        $expedients = Expedient::orderBy('codi', 'ASC')->paginate(3);
-        return view('expedients', compact('estats', 'expedients', 'tipusIncidents'));
+        return view('infoExpedient');
     }
 
     /**

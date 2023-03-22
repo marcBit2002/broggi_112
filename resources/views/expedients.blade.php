@@ -22,7 +22,8 @@
                 </button>
                 <ul class="dropdown-menu">
                     @foreach ($estats as $estat)
-                        <li><a class="dropdown-item" href="#" value="$estat->id">{{ $estat->estat }}</a></li>
+                        <li><a class="dropdown-item" href="#" value="{{ $estat->id }}">{{ $estat->estat }}</a>
+                        </li>
                     @endforeach
                 </ul>
             </div>
@@ -32,9 +33,10 @@
                     <div class='btn_content'>Tipus<span class="arrow"></span></div>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">INCENDI</a></li>
-                    <li><a class="dropdown-item" href="#">Robatori</a></li>
-                    <li><a class="dropdown-item" href="#"></a></li>
+                    @foreach ($tipusIncidents as $tipusIncident)
+                        <li><a class="dropdown-item" href="#"
+                                value="{{ $tipusIncident->id }}">{{ $tipusIncident->nom }}</a></li>
+                    @endforeach
                 </ul>
             </div>
             <div class='search'>
@@ -48,53 +50,25 @@
             </div>
         </div>
         <div class='expedients'>
-            <div class='expedient'>
-                <a class="nav-link" href="{{ url('/infoExpedient') }}">
-                    <div class='top-expedient'>
-                        <div class='data'>29/12/2025</div>
-                        <div class='tipus'>INCENDI</div>
-                    </div>
+            @foreach ($expedients as $expedient)
+                <div class='expedient'>
+                    <a class="nav-link" href="{{ url('expedients/infoExpedients') }}">
+                        <div class='top-expedient'>
+                            <div class='data'>29/12/2025</div>
+                            <div class='tipus'>INCENDI</div>
+                        </div>
+                        <div class='bottom-expedient'>
+                            <div class='codi'>Codi: <b>{{ $expedient->codi }}</b></div>
+                            <div class='estat' value="{{ $expedient->estat_expedients_id }}">
+                                {{ $expedient->estatExpedient->estat }}<span class="dot"></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
 
-                    <div class='bottom-expedient'>
-                        <div class='codi'>Codi: <b>839</b></div>
-                        <div class='estat'>tancat<span class="dot"></span></div>
-                    </div>
-                </a>
-            </div>
-            <div class='expedient'>
-                <div class='top-expedient'>
-                    <div class='data'>29/12/2025</div>
-                    <div class='tipus'>INCENDI</div>
-                </div>
-
-                <div class='bottom-expedient'>
-                    <div class='codi'>Codi: <b>839</b></div>
-                    <div class='estat'>tancat<span class="dot"></span></div>
-                </div>
-            </div>
-            <div class='expedient'>
-                <div class='top-expedient'>
-                    <div class='data'>29/12/2025</div>
-                    <div class='tipus'>INCENDI</div>
-                </div>
-
-                <div class='bottom-expedient'>
-                    <div class='codi'>Codi: <b>839</b></div>
-                    <div class='estat'>tancat<span class="dot"></span></div>
-                </div>
-            </div>
-            <div class='expedient'>
-                <div class='top-expedient'>
-                    <div class='data'>29/12/2025</div>
-                    <div class='tipus'>INCENDI</div>
-                </div>
-
-                <div class='bottom-expedient'>
-                    <div class='codi'>Codi: <b>839</b></div>
-                    <div class='estat'>tancat<span class="dot"></span></div>
-                </div>
-            </div>
         </div>
+        {{ $expedients->links() }}
     </div>
 </body>
 

@@ -17,8 +17,8 @@ class Expedient extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function EstatExpedient()
+    public function estatExpedient()
     {
-        return $this->belongsTo(EstatExpedient::class, 'estat_expedient_id');
+        return $this->belongsTo(EstatExpedient::class, 'estat_expedients_id');
     }
 }
