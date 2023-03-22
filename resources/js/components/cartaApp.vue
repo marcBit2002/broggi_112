@@ -42,7 +42,7 @@ body {
     padding: $components-gap;
 
     display: grid;
-    grid-template-columns: 60% 1fr;
+    grid-template-columns: 1fr clamp(300px, 40%, 450px);
     grid-template-rows: clamp(55px, 12.5%, 100px) 1fr;
     grid-column-gap: $components-gap;
     grid-row-gap: $components-gap;
