@@ -3,7 +3,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Esborrar Agència</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Esborrar tipus incident</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -30,7 +30,6 @@
         btn.addEventListener('click', event => {
             let id = btn.getAttribute("data-bs-id");
             let nom = btn.getAttribute("data-bs-nom");
-            let carrer = btn.getAttribute("data-bs-carrer");
             let action = btn.getAttribute("data-bs-action");
             eliminaModal.querySelector('.modal-footer .delete').value = id;
             eliminaModal.querySelector('.modal-footer form').action = action;
@@ -39,18 +38,18 @@
                 nom +
                 "</span>";
             eliminaModal.querySelector('.modal-body p ').innerHTML =
-                "Eliminar a l'agència amb el carrer <span id='estil'>" +
-                carrer +
+                "Eliminar el tipus d'incident <span id='estil'>" +
+                nom +
                 "</span>" + " comporta que no podràs recuperar-ho un cop eliminat";
 
             //Estils pel modal
-            let calle = eliminaModal.querySelector('#estil');
-            calle.style.fontStyle = "italic";
-            calle.style.fontWeight = "bold";
-
-            let nombre = eliminaModal.querySelector('#estilTitol');
+            let nombre = eliminaModal.querySelector('#estil');
             nombre.style.fontStyle = "italic";
             nombre.style.fontWeight = "bold";
+
+            let codigo = eliminaModal.querySelector('#estilTitol');
+            codigo.style.fontStyle = "italic";
+            codigo.style.fontWeight = "bold";
 
             let text = eliminaModal.querySelector('p');
             text.style.color = "#767676";

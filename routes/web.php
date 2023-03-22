@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AgenciaController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\IncidentController;
 use App\Http\Controllers\ExpedientController;
+use App\Http\Controllers\TipusIncidentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +42,8 @@ Route::middleware(['auth', 'authAdmin'])->group(function () {
     Route::resource('admin/usuari', UsuarioController::class);
     Route::resource('admin/agencies', AgenciaController::class);
     Route::resource('/admin/expedients', ExpedientController::class);
+    Route::resource('/admin/incidents', IncidentController::class);
+    Route::resource('/admin/tipusIncidents', TipusIncidentController::class);
 });
 
 
