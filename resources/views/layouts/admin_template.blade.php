@@ -35,8 +35,8 @@
                     <i class="bi bi-building-fill me-2"></i>Agències</a>
             </div>
         </div>
-        <h2>@yield('titulo')</h2>
         <div id="content">
+            <h2>@yield('titulo')</h2>
             @yield('contenido')
         </div>
     </div>
