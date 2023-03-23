@@ -21,7 +21,7 @@
                     <p>crear carta</p>
                 </a>
 
-                <a href="{{ url('admin/usuari') }}">
+                <a id="administrar" href="{{ url('admin/usuari') }}">
                     <img src="{{ Vite::asset('resources/icons/gears.svg') }}">
                     <p>administrar</p>
                 </a>
@@ -61,6 +61,12 @@
         const items = document.querySelectorAll("#container-items a");
 
         playAnimation(animation,80,items,0,1);
+
+        const admin_btn = document.querySelector("#administrar");
+        admin_btn.addEventListener('click', () => {
+            sessionStorage.setItem('admin_nav_animation', true);
+        });
+
     </script>
 </body>
 

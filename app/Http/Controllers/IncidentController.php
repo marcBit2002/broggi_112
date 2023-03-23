@@ -20,7 +20,10 @@ class IncidentController extends Controller
         $incidents = Incident::orderBy('nom', 'ASC')->paginate(8);
         $tipusIncidents = TipusIncident::orderBy('nom', 'ASC')->get();
         $navLateral = 'incidents';
-        return view('incidents', compact('incidents', 'tipusIncidents', 'incidents'));
+
+        $activeNav = "incidents";
+
+        return view('incidents', compact('incidents', 'tipusIncidents', 'incidents', 'activeNav'));
     }
 
     /**

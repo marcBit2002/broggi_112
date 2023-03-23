@@ -22,7 +22,9 @@ class UsuarioController extends Controller
 
         // $view1 = view('layouts/admin_template', compact('navLateral'));
 
-        return view('usuaris', compact('usuaris', 'roles'));
+        $activeNav = "usuaris";
+
+        return view('usuaris', compact('usuaris', 'roles', 'activeNav'));
     }
 
     public function miMetodo()

@@ -1,4 +1,4 @@
-@extends('layouts.admin_template')
+@extends('layouts.admin_template', ['activeNav' => $activeNav])
 
 @section('titulo')
     USUARIS

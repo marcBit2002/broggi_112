@@ -18,8 +18,8 @@ class TipusIncidentController extends Controller
     public function index()
     {
         $tipusIncidents = TipusIncident::orderBy('nom', 'ASC')->paginate(8);
-        $navLateral = 'tipusIncidents';
-        return view('tipusIncidents', compact('tipusIncidents', 'navLateral'));
+        $activeNav = "tipos";
+        return view('tipusIncidents', compact('tipusIncidents', 'activeNav'));
     }
 
     /**

@@ -21,17 +21,17 @@
                 <p>ADMINISTRACIÓ</p>
             </div>
             <div id="items_contaienr">
-                <a class="nav-link my-3" href="#">
+                <a class="nav-link my-3" href="#" @selected($activeNav === 'stats')>
                     <i class="bi bi-bar-chart-fill me-2"></i>Estadístiques</a>
-                <a class="nav-link my-3" href='{{ url('admin/usuari') }}'>
+                <a class="nav-link my-3" href='{{ url('admin/usuari') }}'@selected($activeNav === 'usuaris')>
                     <i class="bi bi-people-fill me-2"></i>Usuaris</a>
-                <a class="nav-link my-3" href="{{ url('/admin/expedients') }}">
+                <a class="nav-link my-3" href="{{ url('/admin/expedients') }}"@selected($activeNav === 'expedients')>
                     <i class="bi bi-file-earmark-text-fill me-2"></i>Gestió d'expedients</a>
-                <a class="nav-link my-3" href="{{ url('/admin/incidents') }}">
+                <a class="nav-link my-3" href="{{ url('/admin/incidents') }}"@selected($activeNav === 'incidents')>
                     <i class="bi bi-fire me-2"></i>Incidents</a>
-                <a class="nav-link my-3" href="{{ url('/admin/tipusIncidents') }}">
+                <a class="nav-link my-3" href="{{ url('/admin/tipusIncidents') }}"@selected($activeNav === 'tipos')>
                     <i class="bi bi-grid-fill me-2"></i>Tipus d'incidents</a>
-                <a class="nav-link my-3" href='{{ url('admin/agencies') }}'>
+                <a class="nav-link my-3" href='{{ url('admin/agencies') }}'@selected($activeNav === 'agencies')>
                     <i class="bi bi-building-fill me-2"></i>Agències</a>
             </div>
         </div>
@@ -48,7 +48,13 @@
         const animation = "fade-in-up 500ms ease forwards";
         const items = document.querySelectorAll("#items_contaienr a");
 
-        playAnimation(animation,80,items,0,1);
+        let play_animation = sessionStorage.getItem('admin_nav_animation');
+        
+        if (play_animation) {
+            playAnimation(animation,80,items,0,1);
+        } 
+        sessionStorage.removeItem('admin_nav_animation');
+
     </script>
 </body>
 
