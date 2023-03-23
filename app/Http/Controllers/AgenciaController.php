@@ -15,7 +15,8 @@ class AgenciaController extends Controller
     {
         $agencies = Agencia::orderBy('nom', 'ASC')->paginate(8);
         $municipis = Municipi::orderBy('nom', 'ASC')->get();
-        return view('agencies', compact('agencies', 'municipis'));
+        $navLateral = 'agencies';
+        return view('agencies', compact('agencies', 'municipis', 'navLateral'));
     }
 
     public function create()

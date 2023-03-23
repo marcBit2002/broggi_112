@@ -18,8 +18,17 @@ class UsuarioController extends Controller
 
         $usuaris = Usuario::orderBy('nom', 'ASC')->paginate(6);
         $roles = TiposUsuario::orderBy('id', 'ASC')->get();
+        // $navLateral = 'usuaris';
+
+        // $view1 = view('layouts/admin_template', compact('navLateral'));
 
         return view('usuaris', compact('usuaris', 'roles'));
+    }
+
+    public function miMetodo()
+    {
+        $seleccionActual = 'usuaris';
+        return view('layouts/admin_template', compact('seleccionActual'));
     }
 
     public function create()

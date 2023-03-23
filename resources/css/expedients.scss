@@ -38,6 +38,11 @@ div.content {
     border-radius: 8px;
 
     height: 20%;
+    background-color: white;
+}
+.expedient a:hover{
+    background-color: rgba($primary,0.10);
+    
 }
 
 .top-expedient {
