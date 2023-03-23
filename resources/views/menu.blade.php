@@ -31,7 +31,7 @@
                     <p>crear carta</p>
                 </a>
 
-                <a href="">
+                <a href="admin/expedients">
                     <img src="{{ Vite::asset('resources/icons/expedients.svg') }}">
                     <p>expedients</p>
                 </a>
@@ -63,9 +63,11 @@
         playAnimation(animation,80,items,0,1);
 
         const admin_btn = document.querySelector("#administrar");
+      if (admin_btn != null) {
         admin_btn.addEventListener('click', () => {
             sessionStorage.setItem('admin_nav_animation', true);
         });
+      }
 
     </script>
 </body>
