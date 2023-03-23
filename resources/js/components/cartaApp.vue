@@ -50,7 +50,7 @@ body {
 
 #right_container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
 }
@@ -61,8 +61,7 @@ body {
     position: relative;
 
     &:hover {
-        cursor: n-resize;
-        // cursor: row-resize;
+        // cursor: n-resize;
     }
 
     #pill {
@@ -75,7 +74,7 @@ body {
         left: 50%;
         transform: translate(-50%, -50%);
 
-        background-color: $warning;
+        // background-color: $warning;
     }
 }
 </style>
