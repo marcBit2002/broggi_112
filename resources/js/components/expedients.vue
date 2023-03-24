@@ -4,7 +4,16 @@
             <p>Expedients</p>
             <img src="/broggi_112/public/assets/icons/arrowDownWhite.svg" />
         </div>
-        <div class="content"></div>
+        <div class="content">
+            <div class="expedient" v-for="expedient in expedients">
+                <p>
+                    {{ expedient.codi }}
+                </p>
+                <p>
+                    {{ expedient.estat_expedients_id }}
+                </p>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -13,9 +22,27 @@ export default {
     data: function () {
         return {
             isExpedientsOpen: true,
+            expedients: [],
         };
     },
-    methods: {},
+    methods: {
+        getExpedients: function () {
+            const me = this;
+            axios
+                .get("expedient")
+                .then((response) => {
+                    if (response.status === 500) {
+                        this.expedients =
+                            "Error 500, no es pot accedir a la base de dades.";
+                    } else {
+                        me.expedients = response.data;
+                    }
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        },
+    },
     watch: {
         isExpedientsOpen: function () {
             let arrow = this.$el.children[0].children[1];
@@ -38,6 +65,9 @@ export default {
             }
         },
     },
+    beforeMount() {
+        this.getExpedients();
+    },
 };
 </script>
 <style lang="scss" scoped>
@@ -47,7 +77,7 @@ export default {
     width: 100%;
     height: calc(50% - $components-gap / 2);
 
-    flex: 1;
+    // flex: 1;
 
     display: flex;
     align-items: center;
@@ -90,7 +120,14 @@ export default {
     }
 
     .content {
-        flex: 1;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+
+        overflow-y: scroll;
+
+        height: 100%;
         width: calc(100% - $components-border-width * 2);
         border: none;
         border-radius: calc(
@@ -99,6 +136,16 @@ export default {
         transform: translateY(-$components-border-width);
 
         background-color: #fff;
+    }
+
+    .expedient {
+        width: 80%;
+
+        height: 90px;
+        color: black;
+
+        border: 3px solid $primary;
+        margin: 5px 0;
     }
 }
 </style>
