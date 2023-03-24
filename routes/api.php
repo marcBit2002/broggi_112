@@ -2,7 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\CartaController;
+use App\Http\Controllers\Api\AgenciaController;
+use App\Http\Controllers\Api\ComarcaController;
+use App\Http\Controllers\Api\MunicipiController;
 use App\Http\Controllers\Api\ExpedientController;
+use App\Http\Controllers\Api\ProvinciaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('expedient', ExpedientController::class);
+Route::apiResource('comarca', ComarcaController::class);
+Route::apiResource('provincia', ProvinciaController::class);
+Route::apiResource('municpi', MunicipiController::class);
+Route::apiResource('carta', CartaController::class);
+Route::apiResource('agencia', AgenciaController::class);
