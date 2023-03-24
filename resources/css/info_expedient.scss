@@ -1,49 +1,242 @@
 @import "variables";
 
 div.content {
-    margin: 20px auto 0;
-    padding: 0 40px;
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
+    margin: 20px auto 0;
+    padding: 0 40px;
     max-width: 1250px;
+
+    > a {
+        margin: 20px 0;
+    }
 }
 
 .selection {
-    margin: 20px 0;
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 0px;
 
-    display: flex;
-    flex-direction: row;
+    margin: 20px 0;
+    height: calc(100% - 250px);
 }
 
 .expedient {
-    width: 75%;
-    height: 90vh;
+    grid-area: 1 / 1 / 6 / 5;
 
-    border: 2px solid $primary;
-    border-radius: 8px;
-}
-
-.dades {
-    width: 25%;
-    height: 10vh;
-
-    border: 2px solid $primary;
+    border: 4px solid $primary;
     border-radius: 8px;
 
-    color: $primary;
+    background-color: white;
+
+    .title {
+        padding: 10px 0 0 20px;
+        font-size: larger;
+    }
 }
 
-.cartesTrucada{
+.carta a {
+    display: grid;
+    grid-template-columns: 20px 0.5fr repeat(3, 1fr) 30px;
+    grid-template-rows: 20px repeat(2, 1fr) 20px;
+    grid-column-gap: 10px;
+    grid-row-gap: 1px;
 
-}
-
-.carta, .dades {
     height: 20vh;
     margin: 15px;
 
-    border: 2px solid $primary;
+    border: 3px solid $primary;
     border-radius: 8px;
+
+    background-color: white;
+
+    img {
+        grid-area: 2 / 2 / 5 / 3;
+    }
+
+    .carta_type {
+        grid-area: 2 / 3 / 3 / 5;
+
+        display: flex;
+        align-self: end;
+        flex-direction: column;
+
+        margin-bottom: -10px;
+
+        font-size: xx-large;
+        color: $primary;
+
+        p {
+            margin: 0 0px -10px 2px;
+
+            font-size: x-small;
+        }
+    }
+
+    .carta_place {
+        grid-area: 3 / 3 / 4 / 5;
+
+        i {
+            color: $danger;
+            margin-right: 2px;
+        }
+    }
+
+    .carta_agencies {
+        align-self: center;
+
+        grid-area: 2 / 5 / 4 / 6;
+
+        .agencia {
+            display: flex;
+            justify-content: end;
+        }
+
+        .dot {
+            display: flex;
+            align-self: center;
+
+            height: 15px;
+            width: 15px;
+            margin: 0 0 0 4px;
+
+            background-color: red;
+
+            border-radius: 50%;
+        }
+    }
+}
+
+.dades {
+    grid-area: 1 / 5 / 3 / 6;
+
+    height: 70px;
+}
+
+.state {
+    grid-area: 5 / 5 / 6 / 6;
+
+    height: 70px;
+}
+
+.date,
+.type,
+.state {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 10px;
+
+    border: 4px solid $primary;
+    border-radius: 8px;
+
+    color: $primary;
+    background-color: white;
+
+    img {
+        height: 68px;
+        position: relative;
+        justify-self: flex-start;
+    }
+}
+
+.date-title,
+.state-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    max-width: 70px;
+    width: 63px;
+    height: 100%;
+
+    padding: 7px;
+
+    background-color: $primary;
+    color: white;
+
+    img {
+        height: 30px;
+        width: 30px;
+    }
+}
+
+.state-content,
+.date-content {
+    margin: auto;
+}
+
+.type {
+    display: flex;
+    align-items: center;
+
+    height: auto;
+
+    img {
+        height: 100px;
+        position: relative;
+        justify-self: flex-start;
+    }
+}
+
+.type-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100px;
+    height: 100px;
+
+    background-color: $primary;
+    color: white;
+
+    img {
+        height: 30px;
+        width: 30px;
+    }
+}
+
+.type-content {
+    margin: 0 0 0 18px;
+}
+
+@media screen and (max-width: 858px) {
+    .carta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+
+        width: 90%;
+        height: auto;
+
+        img {
+            margin: 5px;
+            height: 5vh;
+        }
+
+        .carta_type {
+            margin: 5px;
+            align-items: start;
+        }
+
+        .carta_place {
+            width: 90%;
+            margin: 5px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carta_agencies {
+            margin: 5px;
+        }
+    }
 }

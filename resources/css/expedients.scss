@@ -9,6 +9,10 @@ div.content {
     justify-content: space-between;
 
     max-width: 1250px;
+
+    >a {
+        margin: 20px 0;
+    }
 }
 
 .selection {

@@ -1,0 +1,268 @@
+@import "variables";
+
+div.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    margin: 20px auto 0;
+    padding: 0 40px;
+    max-width: 1250px;
+
+    > a {
+        margin: 20px 0;
+    }
+}
+
+.selection {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 0px;
+
+    margin: 20px 0;
+    height: calc(100% - 250px);
+}
+
+.info-carta {
+    grid-area: 1 / 1 / 6 / 5;
+
+    border: 4px solid $primary;
+    border-radius: 8px;
+
+    background-color: white;
+}
+
+.dades {
+    grid-area: 1 / 5 / 3 / 6;
+}
+
+.state {
+    grid-area: 5 / 5 / 6 / 6;
+
+    height: 70px;
+}
+
+.date,
+.type,
+.state {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 10px;
+
+    border: 4px solid $primary;
+    border-radius: 8px;
+
+    color: $primary;
+    background-color: white;
+
+    img {
+        height: 68px;
+        position: relative;
+        justify-self: flex-start;
+    }
+}
+
+.date-title,
+.state-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    max-width: 70px;
+    width: 63px;
+    height: 100%;
+
+    padding: 7px;
+
+    background-color: $primary;
+    color: white;
+
+    img {
+        height: 30px;
+        width: 30px;
+    }
+}
+
+.state-content,
+.date-content {
+    margin: auto;
+}
+
+.type {
+    display: flex;
+    align-items: center;
+
+    height: auto;
+
+    img {
+        height: 100px;
+        position: relative;
+        justify-self: flex-start;
+    }
+}
+
+.type-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100px;
+    height: 100px;
+
+    background-color: $primary;
+    color: white;
+
+    img {
+        height: 30px;
+        width: 30px;
+    }
+}
+
+.info-carta {
+    grid-area: 1 / 1 / 6 / 5;
+
+    border: 4px solid $primary;
+    border-radius: 8px;
+
+    background-color: white;
+
+    .cartaTrucada {
+        display: grid;
+        grid-template-columns: 20px repeat(2, 2fr) 20px;
+        grid-template-rows: repeat(8, 0.2fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 5px;
+
+        padding-top: 30px;
+
+        .title {
+            grid-area: 1 / 2 / 2 / 3;
+
+            display: flex;
+            align-items: end;
+
+            margin-bottom: 20px;
+
+            font-size: xx-large;
+            span {
+                color: $danger;
+                font-weight: bold;
+            }
+            color: $primary;
+        }
+
+        .time {
+            grid-area: 1 / 3 / 2 / 4;
+
+            width: 70%;
+            margin-bottom: 20px;
+            padding: 10px;
+
+            border: 2px solid $primary;
+            border-radius: 8px;
+
+            color: $primary;
+
+            .timer {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+
+                font-weight: bold;
+            }
+
+            .totalTime {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        .phoneNumber {
+            grid-area: 2 / 2 / 3 / 3;
+
+            display: flex;
+            align-content: space-around;
+
+            margin-top: auto;
+            height: 40px;
+            width: 70%;
+
+            label {
+                margin-right: 10px;
+            }
+            input {
+                width: auto;
+            }
+        }
+
+        .user {
+            grid-area: 2 / 3 / 3 / 4;
+
+            display: flex;
+
+            margin-top: auto;
+            height: 40px;
+
+            width: 80%;
+
+            label {
+                margin-right: 10px;
+            }
+            input {
+                width: auto;
+            }
+        }
+
+        .personName {
+            grid-area: 3 / 2 / 4 / 4;
+        }
+
+        .personAntecedents {
+            grid-area: 4 / 2 / 5 / 4;
+        }
+
+        .agencies {
+            grid-area: 5 / 2 / 6 / 4;
+
+            .agencia {
+                display: flex;
+
+                margin-bottom: 10px;
+
+                input {
+                    margin-right: 10px;
+                }
+            }
+        }
+
+        .location {
+            grid-area: 6 / 2 / 7 / 4;
+        }
+
+        .incidentType {
+            grid-area: 7 / 2 / 8 / 4;
+        }
+
+        .notaComuna {
+            grid-area: 8 / 2 / 9 / 4;
+
+            margin-bottom: 30px;
+
+            textarea { resize: none; }
+        }
+    }
+
+    .btn-guardar {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+
+        margin: 0 30px 20px 0;
+    }
+}

@@ -36,6 +36,19 @@ $table-striped-bg: rgba($primary, 0.15);
 
 $pagination-active-bg: $danger;
 
+//form-select
+$form-select-bg: white;
+$form-select-color: rgba($primary, 0.8);
+
+$form-select-indicator: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{$warning}' stroke-linecap='square' stroke-linejoin='square' stroke-width='4' d='m2 5 6 6 6-6'/></svg>");
+
+$form-select-border-width: 2px;
+$form-select-border-color: $primary;
+
+//disabled
+$input-disabled-color: $secondary;
+
+
 // #Region CARTA
 
 $components-gap: 10px;
