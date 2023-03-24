@@ -22,8 +22,8 @@ div.content {
     width: 111px;
 }
 
-.btn_content{
-    display:flex;
+.btn_content {
+    display: flex;
     align-items: center;
 }
 
@@ -40,9 +40,8 @@ div.content {
     height: 20%;
     background-color: white;
 }
-.expedient a:hover{
-    background-color: rgba($primary,0.10);
-    
+.expedient a:hover {
+    background-color: rgba($primary, 0.1);
 }
 
 .top-expedient {

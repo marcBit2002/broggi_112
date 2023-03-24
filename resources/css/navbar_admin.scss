@@ -158,3 +158,9 @@ thead th {
     display: flex;
     justify-content: space-between;
 }
+
+@media (max-width: 1150px) {
+    #content {
+        width: calc(100% - 50px);
+    }
+}

@@ -14,6 +14,9 @@
     @include('layouts.navbar')
 
     <div id="container">
+
+
+
         @if (Auth::check() && Auth::user()->roles->nom === 'Administrador Sistema')
             <div id="nav_container">
                 <div class="title_container">
@@ -36,6 +39,9 @@
                         <i class="bi bi-building-fill me-2"></i>Agències</a>
                 </div>
             </div>
+        @else
+            <a href='{{ url('/menu') }}' id="back_arrow" style="position:fixed;padding:10px;margin:10px;"><img
+                    src="{{ Vite::asset('resources/icons/back_arrow.svg') }}"></a>
         @endif
         <div id="content">
             <h2>@yield('titulo')</h2>
