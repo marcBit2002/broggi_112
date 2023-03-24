@@ -48,6 +48,11 @@ Route::middleware(['auth', 'authAdmin'])->group(function () {
     Route::resource('/expedients/infoExpedients', InfoExpedientController::class);
 });
 
+Route::middleware('auth', 'authSupervisor')->group(function () {
+    Route::resource('/expedients', ExpedientController::class);
+    Route::resource('/expedients/infoExpedients', InfoExpedientController::class);
+});
+
 
 Route::fallback(function () {
     return redirect('/menu');

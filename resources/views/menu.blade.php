@@ -31,7 +31,7 @@
                     <p>crear carta</p>
                 </a>
 
-                <a href="admin/expedients">
+                <a href="{{ url('/expedients') }}">
                     <img src="{{ Vite::asset('resources/icons/expedients.svg') }}">
                     <p>expedients</p>
                 </a>

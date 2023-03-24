@@ -1,7 +1,4 @@
-@if (Auth::check() && Auth::user()->roles->nom === 'Administrador Sistema')
-    @extends('layouts.admin_template', ['activeNav' => $activeNav])
-@endif
-
+@extends('layouts.admin_template', ['activeNav' => $activeNav])
 @section('titulo')
     EXPEDIENTS
 @endsection

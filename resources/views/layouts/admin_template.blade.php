@@ -6,14 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Laravel</title>
-    @vite(['resources/css/app.scss', 'resources/js/app.js', 'resources/css/navbar_admin.scss', 'resources/css/modal.scss'])
+    @vite(['resources/css/app.scss', 'resources/js/app.js', 'resources/css/navbar_admin.scss', 'resources/css/modal.scss', 'resources/css/expedients.scss'])
 
 </head>
 
 <body>
     @include('layouts.navbar')
-
-    <div id="container">
+    @if (Auth::check() && Auth::user()->roles->nom === 'Administrador Sistema')
         <div id="nav_container">
             <div class="title_container">
                 <a href='{{ url('/menu') }}' id="back_arrow"><img
@@ -35,6 +34,9 @@
                     <i class="bi bi-building-fill me-2"></i>Agències</a>
             </div>
         </div>
+    @endif
+    <div id="container">
+
         <div id="content">
             <h2>@yield('titulo')</h2>
             @yield('contenido')

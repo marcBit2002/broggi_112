@@ -20,7 +20,6 @@ class ExpedientController extends Controller
         $tipusIncidents = TipusIncident::all();
         $estats = EstatExpedient::all();
         $expedients = Expedient::orderBy('codi', 'ASC')->paginate(3);
-        $navLateral = 'expedients';
 
         $activeNav = "expedients";
         return view('expedients', compact('estats', 'expedients', 'tipusIncidents', 'activeNav'));
