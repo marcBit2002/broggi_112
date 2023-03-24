@@ -21,7 +21,7 @@
                 <div class='title'>Trucades</div>
                 <div class='cartesTrucada'>
                     <div class='carta'>
-                        <a class="nav-link" href="{{ url('expedient/infoCarta') }}">
+                        <a class="nav-link" href="{{ url('expedients/infoExpedients/infoCarta') }}">
                             <img src="{{ Vite::asset('resources/icons/carta.svg') }}">
                             <div class='carta_type'>
                                 <p>INCIDÈNCIA</p>INCENDI
