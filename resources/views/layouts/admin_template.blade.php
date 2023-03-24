@@ -12,31 +12,31 @@
 
 <body>
     @include('layouts.navbar')
-    @if (Auth::check() && Auth::user()->roles->nom === 'Administrador Sistema')
-        <div id="nav_container">
-            <div class="title_container">
-                <a href='{{ url('/menu') }}' id="back_arrow"><img
-                        src="{{ Vite::asset('resources/icons/back_arrow.svg') }}"></a>
-                <p>ADMINISTRACIÓ</p>
-            </div>
-            <div id="items_contaienr">
-                <a class="nav-link my-3" href="#" @selected($activeNav === 'stats')>
-                    <i class="bi bi-bar-chart-fill me-2"></i>Estadístiques</a>
-                <a class="nav-link my-3" href='{{ url('admin/usuari') }}'@selected($activeNav === 'usuaris')>
-                    <i class="bi bi-people-fill me-2"></i>Usuaris</a>
-                <a class="nav-link my-3" href="{{ url('/admin/expedients') }}"@selected($activeNav === 'expedients')>
-                    <i class="bi bi-file-earmark-text-fill me-2"></i>Gestió d'expedients</a>
-                <a class="nav-link my-3" href="{{ url('/admin/incidents') }}"@selected($activeNav === 'incidents')>
-                    <i class="bi bi-fire me-2"></i>Incidents</a>
-                <a class="nav-link my-3" href="{{ url('/admin/tipusIncidents') }}"@selected($activeNav === 'tipos')>
-                    <i class="bi bi-grid-fill me-2"></i>Tipus d'incidents</a>
-                <a class="nav-link my-3" href='{{ url('admin/agencies') }}'@selected($activeNav === 'agencies')>
-                    <i class="bi bi-building-fill me-2"></i>Agències</a>
-            </div>
-        </div>
-    @endif
-    <div id="container">
 
+    <div id="container">
+        @if (Auth::check() && Auth::user()->roles->nom === 'Administrador Sistema')
+            <div id="nav_container">
+                <div class="title_container">
+                    <a href='{{ url('/menu') }}' id="back_arrow"><img
+                            src="{{ Vite::asset('resources/icons/back_arrow.svg') }}"></a>
+                    <p>ADMINISTRACIÓ</p>
+                </div>
+                <div id="items_contaienr">
+                    <a class="nav-link my-3" href="#" @selected($activeNav === 'stats')>
+                        <i class="bi bi-bar-chart-fill me-2"></i>Estadístiques</a>
+                    <a class="nav-link my-3" href='{{ url('admin/usuari') }}'@selected($activeNav === 'usuaris')>
+                        <i class="bi bi-people-fill me-2"></i>Usuaris</a>
+                    <a class="nav-link my-3" href="{{ url('/admin/expedients') }}"@selected($activeNav === 'expedients')>
+                        <i class="bi bi-file-earmark-text-fill me-2"></i>Gestió d'expedients</a>
+                    <a class="nav-link my-3" href="{{ url('/admin/incidents') }}"@selected($activeNav === 'incidents')>
+                        <i class="bi bi-fire me-2"></i>Incidents</a>
+                    <a class="nav-link my-3" href="{{ url('/admin/tipusIncidents') }}"@selected($activeNav === 'tipos')>
+                        <i class="bi bi-grid-fill me-2"></i>Tipus d'incidents</a>
+                    <a class="nav-link my-3" href='{{ url('admin/agencies') }}'@selected($activeNav === 'agencies')>
+                        <i class="bi bi-building-fill me-2"></i>Agències</a>
+                </div>
+            </div>
+        @endif
         <div id="content">
             <h2>@yield('titulo')</h2>
             @yield('contenido')
