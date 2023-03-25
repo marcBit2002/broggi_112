@@ -7,6 +7,7 @@
                     incident</h1>
             </div>
             <div class="modal-body">
+                @include('layouts.mensajes')
                 <form id="form-add-incident"
                     action="{{ action([App\Http\Controllers\IncidentController::class, 'store']) }}" method="POST">
                     @csrf

@@ -15,6 +15,7 @@
                     placeholder="Buscar" />
             </div>
         </div>
+        @include('layouts.mensajes')
         <div class='table-content'>
             <table class="table table-striped bdr mt-4 align-middle">
                 <thead class="text-white">
@@ -78,4 +79,18 @@
         </div>
 
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @if (Session::has('mostrarModalAdd'))
+        <script>
+            $(document).ready(function() {
+                $('#afegirModal').modal('show');
+            });
+        </script>
+    @elseif(Session::has('mostrarModalEdit'))
+        <script>
+            $(document).ready(function() {
+                $('#editarModal').modal('show');
+            });
+        </script>
+    @endif
 @endsection

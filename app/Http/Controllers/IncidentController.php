@@ -33,7 +33,8 @@ class IncidentController extends Controller
      */
     public function create()
     {
-        //
+        $incidents = Incident::all();
+        return back()->with(['mostrarModalAdd' => true, 'incidents' => $incidents]);
     }
 
     /**

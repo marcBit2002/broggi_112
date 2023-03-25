@@ -74,11 +74,3 @@
         })
     });
 </script>
-{{-- 
-@if (Session::has('show'))
-    <script>
-        // const myModal = document.getElementById("editarModal");
-        // myModal.show();
-        
-    </script>
-@endif --}}

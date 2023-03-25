@@ -26,7 +26,9 @@ class UsuarioController extends Controller
 
     public function create()
     {
-        return back()->withInput()->with('show', true);
+        $usuaris = Usuario::all();
+        return back()->with(['mostrarModalAdd' => true, 'usuaris' => $usuaris]);
+        // return back()->withInput()->with('mostrarModalAdd', true);
     }
 
     public function store(Request $request)
@@ -49,9 +51,12 @@ class UsuarioController extends Controller
         }
         return $response;
     }
-    public function edit()
+    public function edit(Usuario $usuari)
     {
-        return back()->withInput()->with('show', true);
+        $usuaris = Usuario::orderBy('nom', 'ASC')->get();
+        return back()->with(['mostrarModalEdit' => true, 'usuaris' => $usuaris]);
+        // return back()->with('mostrarModalEdit', true);
+
     }
 
     public function update(Request $request, Usuario $usuari)

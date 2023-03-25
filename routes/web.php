@@ -45,13 +45,28 @@ Route::middleware(['auth', 'authAdmin'])->group(function () {
     Route::resource('admin/expedients', ExpedientController::class);
     Route::resource('/admin/incidents', IncidentController::class);
     Route::resource('/admin/tipusIncidents', TipusIncidentController::class);
-    Route::resource('/expedients/infoExpedients', InfoExpedientController::class);
+    // Route::resource('/expedients/infoExpedients', InfoExpedientController::class);
+    // Route::get('/expedients/infoExpedients/infoCarta', function () {
+    //     return view('infoCarta');
+    // });
+    // Route::resource('/expedients/infoExpedient/infoCarta', CartaController::class);
+
+    Route::resource('/expedients/infoExpedient', InfoExpedientController::class);
+    Route::get('infoExpedient/infoCarta', function () {
+        return view('infoCarta');
+    });
 });
 
 Route::middleware('auth', 'authSupervisor')->group(function () {
     Route::resource('/expedients', ExpedientController::class);
-    Route::resource('/expedients/infoExpedients', InfoExpedientController::class);
+    // Route::resource('expedients/infoExpedients', InfoExpedientController::class);
+
+    // Route::resource('/expedients/infoExpedients', InfoExpedientController::class);
+    // Route::get('/expedients/infoExpedients', [InfoExpedientController::class, 'index']);
 });
+
+
+
 
 
 Route::fallback(function () {

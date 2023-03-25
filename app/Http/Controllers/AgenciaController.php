@@ -22,7 +22,8 @@ class AgenciaController extends Controller
 
     public function create()
     {
-        // return back()->withInput()->with('show', true);
+        $agencies = Agencia::all();
+        return back()->with(['mostrarModalAdd' => true, 'agencies' => $agencies]);
     }
 
     public function store(Request $request)
