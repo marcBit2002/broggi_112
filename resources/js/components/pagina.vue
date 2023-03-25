@@ -14,5 +14,7 @@ export default {
 
     border: $components-border-width solid $primary;
     border-radius: $components-border-radius;
+
+    grid-area: 2 / 1 / 4 / 2;
 }
 </style>
