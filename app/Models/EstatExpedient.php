@@ -12,13 +12,9 @@ class EstatExpedient extends Model
     protected $table = 'estat_expedients';
     public $timestamps = false;
 
-    /**
-     * Get all of the expedient for the EstatExpedient
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function expedient()
+    //expedients
+    public function expedients()
     {
-        return $this->hasMany(Expedient::class, 'estat_expedient_id');
+        return $this->hasMany(Expedient::class, 'estat_expedients_id');
     }
 }

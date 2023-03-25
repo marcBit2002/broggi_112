@@ -21,7 +21,7 @@
                 <form action=''>
                     <div class='cartaTrucada'>
                         <div class='title'>
-                            <p>Carta <span>#</span> 467</p>
+                            <p>Carta <span>#</span> 435</p>
                         </div>
                         <div class='time'>
                             <div class='timer'>
@@ -29,21 +29,21 @@
                                 <img src="{{ Vite::asset('resources/icons/time.svg') }}">
                                 <div class='endTime'>9:41</div>
                             </div>
-                            <div class='totalTime'>11:33 minuts</div>
+                            <div class='totalTime'>120 segons</div>
                         </div>
                         <div class="phoneNumber">
                             <label for="phone" class="col-form-label">Telèfon</label>
-                            <input type="text" id="phone" class="form-control" placeholder="+34 723920837"
+                            <input type="text" id="phone" class="form-control" placeholder="+34 289302833"
                                 disabled>
                         </div>
                         <div class="user">
                             <label for="user" class="col-form-label">Operador</label>
-                            <input type="text" id="user" class="form-control" placeholder="Paula Mur" disabled>
+                            <input type="text" id="user" class="form-control" placeholder="Paula" disabled>
                         </div>
 
                         <div class="personName">
                             <label for="name" class="col-form-label">Nom i Cognoms</label>
-                            <input type="text" id="name" class="form-control" placeholder="Mariano Pepero"
+                            <input type="text" id="name" class="form-control" placeholder="Maria Garriga"
                                 disabled>
                         </div>
 
@@ -98,7 +98,7 @@
 
                         <div class="notaComuna">
                             <label for="notaComuna" class="col-form-label">Nota Comuna:</label>
-                            <textarea id="notaComuna" class="form-control" rows="5" disabled>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc molestie felis in facilisis maximus. Phasellus elementum arcu sed sem tristique, ut congue massa pharetra. Proin imperdiet dolor nulla, vitae fringilla ex placerat a. Praesent pretium viverra magna, id euismod dui imperdiet non. Praesent tristique dolor vitae enim tempus, nec sagittis neque maximus. Aenean in tempor elit. Etiam suscipit felis nec leo ullamcorper, semper sollicitudin nisi ornare. Donec gravida massa nibh, pharetra pulvinar tellus egestas vel.</textarea>
+                            <textarea id="notaComuna" class="form-control" disabled>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc molestie felis in facilisis maximus. Phasellus elementum arcu sed sem tristique, ut congue massa pharetra. Proin imperdiet dolor nulla, vitae fringilla ex placerat a. Praesent pretium viverra magna, id euismod dui imperdiet non. Praesent tristique dolor vitae enim tempus, nec sagittis neque maximus. Aenean in tempor elit. Etiam suscipit felis nec leo ullamcorper, semper sollicitudin nisi ornare. Donec gravida massa nibh, pharetra pulvinar tellus egestas vel.</textarea>
                         </div>
                     </div>
                     <div class='btn-guardar'>

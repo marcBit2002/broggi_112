@@ -17,4 +17,10 @@ class Municipi extends Model
     {
         return $this->hasMany(Agencia::class, 'municipis_id');
     }
+
+    //carta trucada
+    public function cartesTrucades()
+    {
+        return $this->hasMany(CartaTrucada::class, 'municipis_id');
+    }
 }

@@ -18,4 +18,10 @@ class Agencia extends Model
     {
         return $this->belongsTo(Municipi::class, 'municipis_id');
     }
+
+    //ternaria - carta trucada
+    public function cartesTrucades()
+    {
+        return $this->hasMany(CartaTrucada::class, 'agencies_id');
+    }
 }

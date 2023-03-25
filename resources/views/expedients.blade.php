@@ -40,7 +40,7 @@
     <div class='expedients'>
         @foreach ($expedients as $expedient)
             <div class='expedient'>
-                <a class="nav-link" href="{{ url('/expedients/infoExpedients') }}">
+                <a class="nav-link" href="{{ url('expedients/infoExpedient') }}">
                     <div class='top-expedient'>
                         <div class='data'>29/12/2025</div>
                         <div class='tipus'>INCENDI</div>

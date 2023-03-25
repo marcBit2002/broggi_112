@@ -16,4 +16,10 @@ class Provincia extends Model
     {
         return $this->hasMany(Comarca::class, 'provincies_id');
     }
+
+    //carta trucada
+    public function cartesTrucades()
+    {
+        return $this->hasMany(CartaTrucada::class, 'provincies_id');
+    }
 }

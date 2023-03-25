@@ -21,4 +21,10 @@ class Usuario extends Authenticatable
     {
         return $this->belongsTo(TiposUsuario::class, 'tipus_usuaris_id');
     }
+
+    //carta trucada
+    public function cartesTrucades()
+    {
+        return $this->hasMany(CartaTrucada::class, 'usuaris_id');
+    }
 }

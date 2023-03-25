@@ -12,13 +12,14 @@ class Expedient extends Model
     protected $table = 'expedients';
     public $timestamps = false;
 
-    /**
-     * Get the estatExpedient that owns the Expedient
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function estatExpedient()
     {
         return $this->belongsTo(EstatExpedient::class, 'estat_expedients_id');
+    }
+
+    //carta trucada
+    public function cartesTrucades()
+    {
+        return $this->hasMany(CartaTrucada::class, 'expedients_id');
     }
 }
