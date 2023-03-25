@@ -109,7 +109,7 @@ class UsuarioController extends Controller
             Auth::login($user);
             $response = redirect('/menu');
         } else {
-            $request->flash('error', 'Usuari o contrasenya incorrectes');
+            session()->flash('error', 'Usuari o contrasenya incorrectes');
             $response = redirect('/login')->withInput();
         }
         return $response;

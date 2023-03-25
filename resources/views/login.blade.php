@@ -10,8 +10,10 @@
 </head>
 
 <body>
+
     <div class="container">
         <div class="col-md-6 col-sm-10">
+            @include('layouts.mensajes')
             <form class="login-form " action="{{ action([App\Http\Controllers\UsuarioController::class, 'login']) }}"
                 method="post">
                 @csrf
