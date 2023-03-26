@@ -4,7 +4,11 @@
             <p>Nota comuna</p>
             <!-- <img src="/broggi_112/public/assets/icons/arrowDownWhite.svg" /> -->
         </div>
-        <textarea></textarea>
+        <!-- <img
+            id="notaArrow"
+            src="/broggi_112/public/assets/icons/notaArrow.svg"
+        /> -->
+        <textarea placeholder="Introduïr text..."></textarea>
     </div>
 </template>
 <script>
@@ -28,6 +32,8 @@ export default {
     border-radius: $components-border-radius;
 
     background-color: $danger;
+
+    position: relative;
 
     div {
         width: 100%;
@@ -60,6 +66,11 @@ export default {
         );
         padding: 20px;
 
+        // text-indent: 1.5rem;
+        line-height: 1.4rem;
+        font-weight: 400;
+        font-size: 1.15rem;
+
         border: none;
         overflow: auto;
         outline: none;
@@ -70,5 +81,12 @@ export default {
 
         resize: none; /*remove the resize handle on the bottom right*/
     }
+}
+
+#notaArrow {
+    position: absolute;
+    top: 70px;
+    left: 30px;
+    z-index: 1;
 }
 </style>

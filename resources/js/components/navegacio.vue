@@ -1,27 +1,48 @@
 <template>
     <div id="navegacio">
-        <div @click="activeTab = 1" class="selected" style="z-index: 40">
+        <div
+            @click="activeTab = 1"
+            @mouseover="menuHoverIn(1)"
+            @mouseleave="menuHoverOut(1)"
+            class="selected"
+            style="z-index: 40"
+        >
             <p>IDENTIFICACIÓ</p>
         </div>
         <img
             src="/broggi_112/public/assets/icons/arrowHeadFill.svg"
             style="z-index: 35"
         />
-        <div @click="activeTab = 2" style="z-index: 30">
+        <div
+            @click="activeTab = 2"
+            @mouseover="menuHoverIn(2)"
+            @mouseleave="menuHoverOut(2)"
+            style="z-index: 30"
+        >
             <p>LOCALITZACIÓ</p>
         </div>
         <img
             src="/broggi_112/public/assets/icons/arrowHead.svg"
             style="z-index: 25"
         />
-        <div @click="activeTab = 3" style="z-index: 20">
+        <div
+            @click="activeTab = 3"
+            @mouseover="menuHoverIn(3)"
+            @mouseleave="menuHoverOut(3)"
+            style="z-index: 20"
+        >
             <p>TIPIFICACIÓ</p>
         </div>
         <img
             src="/broggi_112/public/assets/icons/arrowHead.svg"
             style="z-index: 15"
         />
-        <div @click="activeTab = 4" style="z-index: 10">
+        <div
+            @click="activeTab = 4"
+            @mouseover="menuHoverIn(4)"
+            @mouseleave="menuHoverOut(4)"
+            style="z-index: 10"
+        >
             <p>DESPATX</p>
         </div>
     </div>
@@ -34,7 +55,86 @@ export default {
             activeTab: 1,
         };
     },
-    methods: {},
+    methods: {
+        menuHoverIn: function (tabIndex) {
+            const tabs = document.querySelectorAll("#navegacio div");
+            const arrows = document.querySelectorAll("#navegacio img");
+
+            if (tabIndex != this.activeTab) {
+                switch (tabIndex) {
+                    case 1:
+                        arrows[0].setAttribute(
+                            "src",
+                            "/broggi_112/public/assets/icons/arrowHeadHover.svg"
+                        );
+                        tabs[0].classList.add("hovered");
+
+                        break;
+                    case 2:
+                        arrows[1].setAttribute(
+                            "src",
+                            "/broggi_112/public/assets/icons/arrowHeadHover.svg"
+                        );
+                        tabs[1].classList.add("hovered");
+
+                        break;
+                    case 3:
+                        arrows[2].setAttribute(
+                            "src",
+                            "/broggi_112/public/assets/icons/arrowHeadHover.svg"
+                        );
+                        tabs[2].classList.add("hovered");
+                        // arrows[2].setAttribute(
+                        //     "src",
+                        //     "/broggi_112/public/assets/icons/arrowHeadFill.svg"
+                        // );
+                        break;
+                    case 4:
+                        tabs[3].classList.add("hovered");
+                        break;
+                }
+            }
+        },
+        menuHoverOut: function (tabIndex) {
+            const tabs = document.querySelectorAll("#navegacio div");
+            const arrows = document.querySelectorAll("#navegacio img");
+
+            if (tabIndex != this.activeTab) {
+                switch (tabIndex) {
+                    case 1:
+                        arrows[0].setAttribute(
+                            "src",
+                            "/broggi_112/public/assets/icons/arrowHead.svg"
+                        );
+                        tabs[0].classList.remove("hovered");
+
+                        break;
+                    case 2:
+                        arrows[1].setAttribute(
+                            "src",
+                            "/broggi_112/public/assets/icons/arrowHead.svg"
+                        );
+                        tabs[1].classList.remove("hovered");
+
+                        break;
+                    case 3:
+                        arrows[2].setAttribute(
+                            "src",
+                            "/broggi_112/public/assets/icons/arrowHead.svg"
+                        );
+                        tabs[2].classList.remove("hovered");
+                        // arrows[2].setAttribute(
+                        //     "src",
+                        //     "/broggi_112/public/assets/icons/arrowHeadFill.svg"
+                        // );
+                        break;
+                    case 4:
+                        tabs[3].classList.remove("hovered");
+                        break;
+                }
+            }
+        },
+    },
     watch: {
         // Cuando cambia el activaTab, se ejecuta ⬇️
         activeTab: function () {
@@ -43,6 +143,7 @@ export default {
 
             // Elimina la clase selected de tots els tabs
             tabs.forEach((tab) => {
+                tab.classList.remove("hovered");
                 tab.classList.remove("selected");
             });
 
@@ -101,10 +202,26 @@ export default {
 
     overflow: hidden;
 
+    // Truco para precargar imagenes
+    // Al hacer hover, la primera vez tarda en cargar la imagen y hace un efecto visual extraño
+    // Precargando la imagen, en el pimer hover como ya esta cargada funciona como debe ser
+    &::after {
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        z-index: -1; // hide images
+        content: url("/broggi_112/public/assets/icons/arrowHeadFill.svg")
+            url("/broggi_112/public/assets/icons/arrowHeadHover.svg"); // load images
+    }
+
+    color: $primary;
+
     img {
         height: 100px;
         position: relative;
         justify-self: flex-start;
+        user-select: none;
     }
 
     div {
@@ -117,14 +234,16 @@ export default {
 
         background-color: #fff;
 
+        cursor: pointer;
+        font-size: 1rem;
+
         &:first-child p {
             transform: translateX(7%);
         }
 
         p {
             margin-bottom: 0;
-            font-weight: 400;
-            font-size: 1.1rem;
+            font-weight: 500;
             position: relative;
             line-height: 100%;
 
@@ -160,12 +279,54 @@ export default {
     p {
         color: #fff;
         font-weight: 500 !important;
-        font-size: 1.4rem !important;
+        font-size: 1.25em !important;
 
         &::after {
             right: -15px !important;
             width: 10px !important;
             height: 10px !important;
+        }
+    }
+}
+
+.hovered {
+    background-color: #cee5ed !important;
+
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: -50px;
+        height: 100%;
+        width: 50px;
+
+        background-color: #cee5ed;
+    }
+
+    p {
+        font-weight: 500 !important;
+        font-size: 1.25em !important;
+    }
+}
+
+@media (max-width: 1250px) {
+    #navegacio {
+        div {
+            font-size: 0.8rem !important;
+        }
+    }
+}
+
+@media (max-width: 1050px) {
+    .selected {
+        p {
+            font-size: 1em !important;
+        }
+    }
+    .hovered {
+        p {
+            font-size: 1em !important;
         }
     }
 }

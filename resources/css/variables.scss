@@ -17,10 +17,18 @@ body {
 
 $body-bg: $light-blue;
 
+// #Region CARTA
+
+$components-gap: 10px;
+$components-border-width: 3px;
+$components-border-radius: 10px;
+
+// #Endregion
+
 // buttons
 $btn-border-radius: 6px;
 
-$btn-border-width: 1px;
+$btn-border-width: $components-border-width;
 $btn-font-weight: 600;
 
 $btn-padding-x: 1.5rem;
@@ -47,12 +55,3 @@ $form-select-border-color: $primary;
 
 //disabled
 $input-disabled-color: $secondary;
-
-
-// #Region CARTA
-
-$components-gap: 10px;
-$components-border-width: 3px;
-$components-border-radius: 10px;
-
-// #Endregion
