@@ -59,6 +59,12 @@
         <div class="content" v-if="this.tab == 2">
             <h1 id="title">Localització</h1>
         </div>
+        <div class="content" v-if="this.tab == 3">
+            <h1 id="title">Tipificació</h1>
+        </div>
+        <div class="content" v-if="this.tab == 4">
+            <h1 id="title">Despatx</h1>
+        </div>
         <div id="navigation_buttons">
             <button type="button" class="btn btn-outline-secondary">
                 Descartar carta
@@ -121,13 +127,11 @@ export default {
     border-radius: $components-border-radius;
 
     padding: 1.6rem;
-
     background-color: #fff;
 }
 
 #title {
     color: $primary;
-
     margin-bottom: 3rem;
 
     &::before {
@@ -141,8 +145,6 @@ export default {
     width: 100%;
 
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
 
     button {
         &:first-child {
@@ -154,7 +156,6 @@ export default {
 // #region PAGINA
 .content {
     width: 100%;
-
     color: $dark;
 
     .input_group {
@@ -184,6 +185,7 @@ export default {
             margin-bottom: 2px;
             align-self: flex-end;
             cursor: pointer;
+            user-select: none;
         }
     }
 
@@ -198,13 +200,15 @@ export default {
         }
 
         textarea {
+            width: 100%;
+            height: 120px;
+
+            padding: 1rem;
+
             border: $components-border-width solid $primary;
             border-radius: $components-border-radius;
 
-            width: 100%;
-            min-height: 80px;
-            max-height: 250px;
-
+            font-size: 1rem;
             resize: none;
         }
     }

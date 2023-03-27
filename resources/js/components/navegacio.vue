@@ -180,15 +180,16 @@ export default {
 @import "../../css/variables.scss";
 
 #navegacio {
-    background-color: #fff;
-
-    border: $components-border-width solid $primary;
-    border-radius: $components-border-radius;
-
     display: grid;
     place-items: center;
     grid-template-columns: repeat(3, 1fr 0.12fr) 1fr;
     grid-template-rows: 100%;
+
+    border: $components-border-width solid $primary;
+    border-radius: $components-border-radius;
+
+    color: $primary;
+    background-color: #fff;
 
     overflow: hidden;
 
@@ -204,8 +205,6 @@ export default {
         content: url("/broggi_112/public/assets/icons/arrowHeadFill.svg")
             url("/broggi_112/public/assets/icons/arrowHeadHover.svg"); // load images
     }
-
-    color: $primary;
 
     img {
         height: 100px;
