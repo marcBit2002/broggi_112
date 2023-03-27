@@ -72,11 +72,20 @@
                 Anterior
             </button>
             <button
+                v-if="this.tab < 4"
                 type="button"
                 class="btn btn-danger"
                 v-on:click="$emit('tab', 1)"
             >
                 Següent
+            </button>
+            <button
+                v-else
+                type="button"
+                class="btn btn-danger"
+                v-on:click="this.insertCarta()"
+            >
+                Finalitzar
             </button>
         </div>
     </div>
@@ -88,8 +97,11 @@ export default {
         tab: null,
     },
     watch: {
-        tab: function () {
-            console.log(this.tab);
+        tab() {},
+    },
+    methods: {
+        insertCarta() {
+            alert("CARTA DONE!");
         },
     },
 };

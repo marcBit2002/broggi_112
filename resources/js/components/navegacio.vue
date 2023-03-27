@@ -59,7 +59,7 @@ export default {
         };
     },
     methods: {
-        menuHoverIn: function (tabIndex) {
+        menuHoverIn(tabIndex) {
             const tabs = document.querySelectorAll("#navegacio div");
             const arrows = document.querySelectorAll("#navegacio img");
 
@@ -92,7 +92,7 @@ export default {
                 }
             }
         },
-        menuHoverOut: function (tabIndex) {
+        menuHoverOut(tabIndex) {
             const tabs = document.querySelectorAll("#navegacio div");
             const arrows = document.querySelectorAll("#navegacio img");
 
@@ -127,8 +127,7 @@ export default {
         },
     },
     watch: {
-        tab: function () {
-            console.log(this.tab);
+        tab() {
             const tabs = document.querySelectorAll("#navegacio div");
             const arrows = document.querySelectorAll("#navegacio img");
 

@@ -24,6 +24,16 @@ $side_nav_width: 250px;
             rgba(8, 124, 166, 1) 100%
         )
         1 100%;
+
+    [selected] {
+        background-color: $danger !important;
+        color: #fff !important;
+        margin-left: -40px;
+        font-weight: bold;
+        i {
+            margin-left: 60px;
+        }
+    }
 }
 
 .title_container {
@@ -65,16 +75,6 @@ $side_nav_width: 250px;
             margin-right: 10px;
             font-weight: bold;
         }
-    }
-}
-
-[selected] {
-    background-color: $danger !important;
-    color: #fff !important;
-    margin-left: -40px;
-    font-weight: bold;
-    i {
-        margin-left: 60px;
     }
 }
 
@@ -159,7 +159,8 @@ thead th {
     justify-content: space-between;
 }
 
-.btn-edit, .btn-delete {
+.btn-edit,
+.btn-delete {
     border: 1px solid $danger;
 }
 

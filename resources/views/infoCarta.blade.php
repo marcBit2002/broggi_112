@@ -13,9 +13,11 @@
     @include('layouts.navbar')
 
     <div class='content'>
-        <a href='{{ url('expedients/infoExpedient') }}' id="back_arrow"><img
-                src="{{ Vite::asset('resources/icons/back_arrow.svg') }}"></a>
-        <h1 class="text-primary">Expedient <span class="text-danger">#YN872</span></h1>
+        <div style="display: flex; align-items:center;">
+            <a class="p-2" href='{{ url('expedients/infoExpedient') }}' id="back_arrow"><img
+                    src="{{ Vite::asset('resources/icons/back_arrow.svg') }}"></a>
+            <h1 class="text-primary ms-3 mb-0">Expedient <span class="text-danger">#YN872</span></h1>
+        </div>
         <div class="selection">
             <div class='info-carta'>
                 <form action=''>
