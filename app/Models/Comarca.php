@@ -16,4 +16,9 @@ class Comarca extends Model
     {
         return $this->belongsTo(Provincia::class, 'provincies_id');
     }
+
+    public function municipis()
+    {
+        return $this->hasMany(Municipi::class, 'comarques_id');
+    }
 }

@@ -20,8 +20,8 @@ class Agencia extends Model
     }
 
     //ternaria - carta trucada
-    public function cartesTrucades()
+    public function cartesTrucadesHasAgencies()
     {
-        return $this->hasMany(CartaTrucada::class, 'agencies_id');
+        return $this->hasMany(CartaTrucadaHasAgencia::class, 'agencies_id');
     }
 }

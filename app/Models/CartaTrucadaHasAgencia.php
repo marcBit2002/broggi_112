@@ -16,7 +16,7 @@ class CartaTrucadaHasAgencia extends Model
     //carta trucada
     public function cartesTrucades()
     {
-        return $this->hasMany(CartaTrucada::class, 'cartes_trucades_id');
+        return $this->belongsTo(CartaTrucada::class, 'cartes_trucades_id');
     }
 
     //estat agències

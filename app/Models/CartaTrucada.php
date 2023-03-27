@@ -12,6 +12,10 @@ class CartaTrucada extends Model
     public $timestamps = false;
 
     //interlocutor
+    public function interlocutors()
+    {
+        return $this->belongsTo(Interlocutor::class, 'interlocutors_id');
+    }
 
     //tipus localització
     public function tipusLocalitzacions()
@@ -40,7 +44,7 @@ class CartaTrucada extends Model
     //ternaria
     public function cartesTrucadesHasAgencies()
     {
-        return $this->belongsTo(CartaTrucadaHasAgencia::class, 'cartes_trucades_id');
+        return $this->hasMany(CartaTrucadaHasAgencia::class, 'cartes_trucades_id');
     }
 
     //municipi
@@ -52,6 +56,6 @@ class CartaTrucada extends Model
     //provincies
     public function provincies()
     {
-        return $this->hasMany(Provincia::class, 'provincies_id');
+        return $this->belongsTo(Provincia::class, 'provincies_id');
     }
 }
