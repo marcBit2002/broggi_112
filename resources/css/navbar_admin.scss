@@ -159,6 +159,10 @@ thead th {
     justify-content: space-between;
 }
 
+.btn-edit, .btn-delete {
+    border: 1px solid $danger;
+}
+
 @media (max-width: 1150px) {
     #content {
         width: calc(100% - 50px);
