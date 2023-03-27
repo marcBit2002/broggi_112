@@ -24,6 +24,10 @@ export default {
 <style lang="scss" scoped>
 @import "../../css/variables.scss";
 
+*::-webkit-scrollbar-thumb {
+    background-color: $danger;
+}
+
 #notaComuna {
     grid-area: 2 / 2 / 3 / 3;
 

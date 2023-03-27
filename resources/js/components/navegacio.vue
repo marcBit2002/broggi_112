@@ -1,7 +1,7 @@
 <template>
     <div id="navegacio">
         <div
-            @click="activeTab = 1"
+            v-on:click="$emit('tab', 1)"
             @mouseover="menuHoverIn(1)"
             @mouseleave="menuHoverOut(1)"
             class="selected"
@@ -14,7 +14,7 @@
             style="z-index: 35"
         />
         <div
-            @click="activeTab = 2"
+            v-on:click="$emit('tab', 2)"
             @mouseover="menuHoverIn(2)"
             @mouseleave="menuHoverOut(2)"
             style="z-index: 30"
@@ -26,7 +26,7 @@
             style="z-index: 25"
         />
         <div
-            @click="activeTab = 3"
+            v-on:click="$emit('tab', 3)"
             @mouseover="menuHoverIn(3)"
             @mouseleave="menuHoverOut(3)"
             style="z-index: 20"
@@ -38,7 +38,7 @@
             style="z-index: 15"
         />
         <div
-            @click="activeTab = 4"
+            v-on:click="$emit('tab', 4)"
             @mouseover="menuHoverIn(4)"
             @mouseleave="menuHoverOut(4)"
             style="z-index: 10"
@@ -50,6 +50,9 @@
 <script>
 export default {
     name: "navegacio",
+    props: {
+        tab: null,
+    },
     data: function () {
         return {
             activeTab: 1,
@@ -60,7 +63,7 @@ export default {
             const tabs = document.querySelectorAll("#navegacio div");
             const arrows = document.querySelectorAll("#navegacio img");
 
-            if (tabIndex != this.activeTab) {
+            if (tabIndex != this.tab) {
                 switch (tabIndex) {
                     case 1:
                         arrows[0].setAttribute(
@@ -68,7 +71,6 @@ export default {
                             "/broggi_112/public/assets/icons/arrowHeadHover.svg"
                         );
                         tabs[0].classList.add("hovered");
-
                         break;
                     case 2:
                         arrows[1].setAttribute(
@@ -76,7 +78,6 @@ export default {
                             "/broggi_112/public/assets/icons/arrowHeadHover.svg"
                         );
                         tabs[1].classList.add("hovered");
-
                         break;
                     case 3:
                         arrows[2].setAttribute(
@@ -84,10 +85,6 @@ export default {
                             "/broggi_112/public/assets/icons/arrowHeadHover.svg"
                         );
                         tabs[2].classList.add("hovered");
-                        // arrows[2].setAttribute(
-                        //     "src",
-                        //     "/broggi_112/public/assets/icons/arrowHeadFill.svg"
-                        // );
                         break;
                     case 4:
                         tabs[3].classList.add("hovered");
@@ -99,7 +96,7 @@ export default {
             const tabs = document.querySelectorAll("#navegacio div");
             const arrows = document.querySelectorAll("#navegacio img");
 
-            if (tabIndex != this.activeTab) {
+            if (tabIndex != this.tab) {
                 switch (tabIndex) {
                     case 1:
                         arrows[0].setAttribute(
@@ -107,7 +104,6 @@ export default {
                             "/broggi_112/public/assets/icons/arrowHead.svg"
                         );
                         tabs[0].classList.remove("hovered");
-
                         break;
                     case 2:
                         arrows[1].setAttribute(
@@ -115,7 +111,6 @@ export default {
                             "/broggi_112/public/assets/icons/arrowHead.svg"
                         );
                         tabs[1].classList.remove("hovered");
-
                         break;
                     case 3:
                         arrows[2].setAttribute(
@@ -123,10 +118,6 @@ export default {
                             "/broggi_112/public/assets/icons/arrowHead.svg"
                         );
                         tabs[2].classList.remove("hovered");
-                        // arrows[2].setAttribute(
-                        //     "src",
-                        //     "/broggi_112/public/assets/icons/arrowHeadFill.svg"
-                        // );
                         break;
                     case 4:
                         tabs[3].classList.remove("hovered");
@@ -136,8 +127,8 @@ export default {
         },
     },
     watch: {
-        // Cuando cambia el activaTab, se ejecuta ⬇️
-        activeTab: function () {
+        tab: function () {
+            console.log(this.tab);
             const tabs = document.querySelectorAll("#navegacio div");
             const arrows = document.querySelectorAll("#navegacio img");
 
@@ -156,7 +147,7 @@ export default {
             });
 
             // Seteja la clase activa i cambia la arrow activa
-            switch (this.activeTab) {
+            switch (this.tab) {
                 case 1:
                     tabs[0].classList.add("selected");
                     arrows[0].setAttribute(
@@ -255,7 +246,7 @@ export default {
                 right: -10px;
                 bottom: 0;
                 border-radius: 50%;
-                background-color: red;
+                background-color: $warning;
             }
         }
     }

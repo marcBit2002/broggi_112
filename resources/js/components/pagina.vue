@@ -1,20 +1,97 @@
 <template>
     <div id="pagina">
-        <h1 id="title">Identificació</h1>
+        <div class="content" v-if="this.tab == 1">
+            <h1 id="title">Identificació</h1>
+            <div class="input_group">
+                <label for="telefon">Telèfon:</label>
+                <input type="tel" id="telefon" name="telefon" value="" />
+                <img
+                    src="/broggi_112/public/assets/icons/arki.svg"
+                    class="arki"
+                    data-bs-toggle="popover"
+                    data-bs-title="Help Box"
+                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                />
+            </div>
+            <div class="input_group">
+                <label for="nom">Nom:</label>
+                <input
+                    type="text"
+                    id="nom"
+                    name="nom"
+                    value=""
+                    style="width: 400px"
+                />
+                <img
+                    src="/broggi_112/public/assets/icons/arki.svg"
+                    class="arki"
+                    data-bs-toggle="popover"
+                    data-bs-title="Help Box"
+                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                />
+            </div>
+            <div class="input_group">
+                <label for="cognoms">Cognoms:</label>
+                <input
+                    type="text"
+                    id="cognoms"
+                    name="cognoms"
+                    value=""
+                    style="width: 400px"
+                />
+                <img
+                    src="/broggi_112/public/assets/icons/arki.svg"
+                    class="arki"
+                    data-bs-toggle="popover"
+                    data-bs-title="Help Box"
+                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                />
+            </div>
+            <div class="antecedents">
+                <label for="antecedents">Antecedents</label>
+                <textarea
+                    name="antecedents"
+                    id="antecedents"
+                    rows="5"
+                ></textarea>
+            </div>
+        </div>
+        <div class="content" v-if="this.tab == 2">
+            <h1 id="title">Localització</h1>
+        </div>
         <div id="navigation_buttons">
             <button type="button" class="btn btn-outline-secondary">
                 Descartar carta
             </button>
-            <button type="button" class="btn btn-outline-primary m-3">
+            <button
+                v-if="this.tab != 1"
+                type="button"
+                class="btn btn-outline-primary me-3"
+                v-on:click="$emit('tab', -1)"
+            >
                 Anterior
             </button>
-            <button type="button" class="btn btn-danger m-3">Següent</button>
+            <button
+                type="button"
+                class="btn btn-danger"
+                v-on:click="$emit('tab', 1)"
+            >
+                Següent
+            </button>
         </div>
     </div>
 </template>
 <script>
 export default {
     name: "pagina",
+    props: {
+        tab: null,
+    },
+    watch: {
+        tab: function () {
+            console.log(this.tab);
+        },
+    },
 };
 </script>
 <style lang="scss" scoped>
@@ -31,13 +108,15 @@ export default {
     border: $components-border-width solid $primary;
     border-radius: $components-border-radius;
 
-    padding: 2rem;
+    padding: 1.6rem;
 
     background-color: #fff;
 }
 
 #title {
     color: $primary;
+
+    margin-bottom: 3rem;
 
     &::before {
         content: url("/broggi_112/public/assets/icons/arrowTitle.svg");
@@ -57,6 +136,72 @@ export default {
         &:first-child {
             margin-right: auto;
         }
+    }
+}
+
+// #region PAGINA
+.content {
+    width: 100%;
+
+    color: $dark;
+
+    .input_group {
+        font-size: 1.25rem;
+        font-weight: 500;
+
+        display: flex;
+        align-items: center;
+
+        margin-bottom: 2rem;
+
+        label {
+            margin-right: 2rem;
+            width: 130px;
+            text-align: right;
+        }
+
+        input {
+            border: $components-border-width solid $primary;
+            border-radius: $components-border-radius;
+        }
+
+        img {
+            width: 18px;
+            height: 18px;
+            margin-left: 5px;
+            margin-bottom: 2px;
+            align-self: flex-end;
+            cursor: pointer;
+        }
+    }
+
+    .antecedents {
+        font-size: 1.25rem;
+        font-weight: 500;
+
+        margin-top: 3rem;
+
+        label {
+            display: block;
+        }
+
+        textarea {
+            border: $components-border-width solid $primary;
+            border-radius: $components-border-radius;
+
+            width: 100%;
+            min-height: 80px;
+            max-height: 250px;
+
+            resize: none;
+        }
+    }
+}
+// #endregion
+
+@media (max-width: 1050px) {
+    #pagina {
+        padding: 1rem;
     }
 }
 </style>

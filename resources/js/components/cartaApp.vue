@@ -1,8 +1,14 @@
 <template>
     <div id="container">
-        <navegacio></navegacio>
+        <navegacio
+            @tab="(i) => (this.activeTab = i)"
+            :tab="this.activeTab"
+        ></navegacio>
         <dades></dades>
-        <pagina></pagina>
+        <pagina
+            @tab="(i) => (this.activeTab += i)"
+            :tab="this.activeTab"
+        ></pagina>
         <notaComuna></notaComuna>
         <expedients></expedients>
     </div>
@@ -22,6 +28,11 @@ export default {
         pagina,
         dades,
     },
+    data: function () {
+        return {
+            activeTab: 1,
+        };
+    },
 };
 </script>
 <style lang="scss" scoped>
@@ -37,7 +48,7 @@ body {
 
     display: grid;
     grid-template-columns: 1fr clamp(300px, 40%, 450px);
-    grid-template-rows: clamp(55px, 12.5%, 100px) 1fr 1fr;
+    grid-template-rows: clamp(55px, 12.5%, 100px) 0.9fr 1.1fr;
     grid-column-gap: $components-gap;
     grid-row-gap: $components-gap;
 }

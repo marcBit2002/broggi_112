@@ -4,3 +4,38 @@
 @import "bootstrap";
 
 @import "bootstrap-icons/font/bootstrap-icons.css";
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+    scrollbar-width: auto;
+    scrollbar-color: $primary #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 11px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: $primary;
+    border-radius: 15px;
+    border: 3px solid #ffffff;
+}
+
+//
+.popover-header {
+    position: relative;
+
+    &::after {
+        content: url("/public/assets/icons/arki.svg");
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        transform: translate(6px, 3px);
+    }
+}
