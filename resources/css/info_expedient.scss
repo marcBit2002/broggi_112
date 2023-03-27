@@ -1,5 +1,9 @@
 @import "variables";
 
+h1 span {
+    font-weight: 600;
+}
+
 div.content {
     display: flex;
     flex-direction: column;

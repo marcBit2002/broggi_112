@@ -22,16 +22,18 @@
             <div class='info-carta'>
                 <form action=''>
                     <div class='cartaTrucada'>
-                        <div class='title'>
-                            <p>Carta <span>#</span> 435</p>
-                        </div>
-                        <div class='time'>
-                            <div class='timer'>
-                                <div class='startTime'>9:30</div>
-                                <img src="{{ Vite::asset('resources/icons/time.svg') }}">
-                                <div class='endTime'>9:41</div>
+                        <div class="wrapper">
+                            <div class='title'>
+                                <p>Carta <span>#</span> 435</p>
                             </div>
-                            <div class='totalTime'>120 segons</div>
+                            <div class='time'>
+                                <div class='timer'>
+                                    <div class='startTime'>9:30</div>
+                                    <img src="{{ Vite::asset('resources/icons/time.svg') }}">
+                                    <div class='endTime'>9:41</div>
+                                </div>
+                                <div class='totalTime'>120 segons</div>
+                            </div>
                         </div>
                         <div class="phoneNumber">
                             <label for="phone" class="col-form-label">Telèfon</label>
