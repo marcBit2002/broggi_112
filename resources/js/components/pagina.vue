@@ -97,6 +97,9 @@
     </div>
 </template>
 <script>
+import "../bootstrap";
+import * as bootstrap from "bootstrap";
+
 export default {
     name: "pagina",
     props: {
@@ -109,6 +112,15 @@ export default {
         insertCarta() {
             alert("CARTA DONE!");
         },
+    },
+    updated() {
+        console.log("cambio");
+        const popoverTriggerList = document.querySelectorAll(
+            '[data-bs-toggle="popover"]'
+        );
+        const popoverList = [...popoverTriggerList].map(
+            (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
+        );
     },
 };
 </script>
