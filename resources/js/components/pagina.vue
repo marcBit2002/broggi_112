@@ -9,6 +9,7 @@
                     src="/broggi_112/public/assets/icons/arki.svg"
                     class="arki"
                     data-bs-toggle="popover"
+                    data-bs-trigger="focus"
                     data-bs-title="Help Box"
                     data-bs-content="And here's some amazing content. It's very engaging. Right?"
                 />
@@ -58,6 +59,40 @@
         </div>
         <div class="content" v-if="this.tab == 2">
             <h1 id="title">Localització</h1>
+            <div class="input_group">
+                <label for="estaCatalnya">Està a Catalunya?</label>
+                <input type="checkbox" id="estaCatalnya" value="" />
+                <input type="checkbox" id="noEstaCatalnya" value="" />
+                <img
+                    src="/broggi_112/public/assets/icons/arki.svg"
+                    class="arki"
+                    data-bs-toggle="popover"
+                    data-bs-trigger="focus"
+                    data-bs-title="Help Box"
+                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                />
+            </div>
+            <div class="input_group">
+                <label>Tipus localització:</label>
+                <input type="radio" id="age1" name="age" value="30" />
+                <label for="age1">Carrer</label>
+                <input type="radio" id="age2" name="age" value="60" />
+                <label for="age2">Punt Singular</label>
+                <input type="radio" id="age3" name="age" value="100" />
+                <label for="age3">Carretera</label>
+                <input type="radio" id="age3" name="age" value="100" />
+                <label for="age3">ENTITAT/Població</label>
+                <input type="radio" id="age3" name="age" value="100" />
+                <label for="age3">Comarca</label>
+                <img
+                    src="/broggi_112/public/assets/icons/arki.svg"
+                    class="arki"
+                    data-bs-toggle="popover"
+                    data-bs-trigger="focus"
+                    data-bs-title="Help Box"
+                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                />
+            </div>
         </div>
         <div class="content" v-if="this.tab == 3">
             <h1 id="title">Tipificació</h1>
@@ -112,12 +147,20 @@ export default {
         insertCarta() {
             alert("CARTA DONE!");
         },
+        removePopovers() {
+            const popovers = document.querySelectorAll(".popover");
+            popovers.forEach((popover) => {
+                popover.remove();
+            });
+        },
     },
     updated() {
-        console.log("cambio");
+        this.removePopovers();
+
         const popoverTriggerList = document.querySelectorAll(
             '[data-bs-toggle="popover"]'
         );
+
         const popoverList = [...popoverTriggerList].map(
             (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
         );
@@ -180,9 +223,11 @@ export default {
         margin-bottom: 2rem;
 
         label {
-            margin-right: 2rem;
-            width: 130px;
-            text-align: right;
+            &:first-child {
+                margin-right: 2rem;
+                width: 130px;
+                text-align: right;
+            }
         }
 
         input {
