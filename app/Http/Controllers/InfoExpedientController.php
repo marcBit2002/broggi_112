@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Expedient;
 use Illuminate\Http\Request;
-use App\Models\EstatExpedient;
 use App\Http\Controllers\Controller;
 
 class InfoExpedientController extends Controller
@@ -16,7 +15,7 @@ class InfoExpedientController extends Controller
      */
     public function index()
     {
-        return view('infoExpedient');
+        //
     }
 
     /**
@@ -46,9 +45,23 @@ class InfoExpedientController extends Controller
      * @param  \App\Models\Expedient  $expedient
      * @return \Illuminate\Http\Response
      */
-    public function show(Expedient $expedient)
+    public function show(Expedient $infoExpedient)
     {
-        //
+        $expedient = Expedient::find($infoExpedient->id);
+
+        $tipusIncidents = [];
+        $dates = [];
+        foreach ($expedient->cartesTrucades as $carta){
+            $nomIncident = $carta->incidents->tipus_incidents->nom;
+            array_push($tipusIncidents, $nomIncident);
+            
+            $dataTrucada = substr($carta->data_hora_trucada, 0, 10);
+            array_push($dates, $dataTrucada);
+        }        
+        $tipusIncidentsUq = array_unique($tipusIncidents);
+        $datesUq = array_unique($dates);
+
+        return view('infoExpedient', compact('expedient', 'tipusIncidentsUq', 'datesUq'));
     }
 
     /**
@@ -57,7 +70,7 @@ class InfoExpedientController extends Controller
      * @param  \App\Models\Expedient  $expedient
      * @return \Illuminate\Http\Response
      */
-    public function edit(Expedient $expedient)
+    public function edit(Expedient $infoExpedient)
     {
         //
     }
@@ -69,7 +82,7 @@ class InfoExpedientController extends Controller
      * @param  \App\Models\Expedient  $expedient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Expedient $expedient)
+    public function update(Request $request, Expedient $infoExpedient)
     {
         //
     }
@@ -80,7 +93,7 @@ class InfoExpedientController extends Controller
      * @param  \App\Models\Expedient  $expedient
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Expedient $expedient)
+    public function destroy(Expedient $infoExpedient)
     {
         //
     }

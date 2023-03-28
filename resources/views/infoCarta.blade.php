@@ -14,7 +14,7 @@
 
     <div class='content'>
         <div style="display: flex; align-items:center;">
-            <a class="p-2" href='{{ url('expedients/infoExpedient') }}' id="back_arrow"><img
+            <a class="p-2" href='{{ url('admin/expedients') }}' id="back_arrow"><img
                     src="{{ Vite::asset('resources/icons/back_arrow.svg') }}"></a>
             <h1 class="text-primary ms-3 mb-0">Expedient <span class="text-danger">#YN872</span></h1>
         </div>

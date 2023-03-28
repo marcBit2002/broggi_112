@@ -115,6 +115,10 @@ div.content {
     }
 }
 
+.carta a:hover {
+    background-color: rgba($primary, 0.1);
+}
+
 .dades {
     grid-area: 1 / 5 / 3 / 6;
 
@@ -207,7 +211,7 @@ div.content {
 }
 
 .type-content {
-    margin: 0 0 0 18px;
+    margin: 0 15px 0 18px;
 }
 
 @media screen and (max-width: 858px) {

@@ -16,53 +16,29 @@
         <div style="display: flex; align-items:center;">
             <a class="p-2" href='{{ url('admin/expedients') }}' id="back_arrow"><img
                     src="{{ Vite::asset('resources/icons/back_arrow.svg') }}"></a>
-            <h1 class="text-primary ms-3 mb-0">Expedient <span class="text-danger">#YN872</span></h1>
+            <h1 class="text-primary ms-3 mb-0">Expedient <span class="text-danger">#{{ $expedient->codi }}</span></h1>
         </div>
         <div class="selection">
             <div class='expedient'>
                 <div class='title'>Trucades</div>
                 <div class='cartesTrucada'>
-                    <div class='carta'>
-                        <a class="nav-link" href="{{ url('infoExpedient/infoCarta') }}">
-                            <img src="{{ Vite::asset('resources/icons/carta.svg') }}">
-                            <div class='carta_type'>
-                                <p>INCIDÈNCIA</p>INCENDI
-                            </div>
-                            <div class='carta_place'><i class="bi bi-geo-alt-fill"></i>Santa Perpètua de Mogoda</div>
-                            <div class='carta_agencies'>
-                                <div class='agencia'>Policia<span class="dot"></div>
-                                <div class='agencia'>Bombers<span class="dot"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class='carta'>
-                        <a class="nav-link" href="{{ url('infoExpedient/infoCarta') }}">
-                            <img src="{{ Vite::asset('resources/icons/carta.svg') }}">
-                            <div class='carta_type'>
-                                <p>INCIDÈNCIA</p>ROBATORI
-                            </div>
-                            <div class='carta_place'><i class="bi bi-geo-alt-fill"></i>Santa Perpètua de Mogoda</div>
-                            <div class='carta_agencies'>
-                                <div class='agencia'>Bombers<span class="dot"></div>
-                                <div class='agencia'>Ambulància<span class="dot"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class='carta'>
-                        <a class="nav-link" href="{{ url('infoExpedient/infoCarta') }}">
-                            <img src="{{ Vite::asset('resources/icons/carta.svg') }}">
-                            <div class='carta_type'>
-                                <p>INCIDÈNCIA</p>INCENDI
-                            </div>
-                            <div class='carta_place'><i class="bi bi-geo-alt-fill"></i>Santa Perpètua de Mogoda</div>
-                            <div class='carta_agencies'>
-                                <div class='agencia'>Policia<span class="dot"></div>
-                                <div class='agencia'>Bombers<span class="dot"></div>
-                                <div class='agencia'>Ambulància<span class="dot"></div>
-                                <div class='agencia'>Policia<span class="dot"></div>
-                            </div>
-                        </a>
-                    </div>
+                    @foreach ($expedient->cartesTrucades as $carta)
+                        <div class='carta'>
+                            <a class="nav-link" 
+                                href="{{ action([App\Http\Controllers\Api\CartaController::class, 'show'], ['cartum' => $carta->id]) }}">
+                                <img src="{{ Vite::asset('resources/icons/carta.svg') }}">
+                                <div class='carta_type'>
+                                    <p>INCIDÈNCIA</p>{{ $carta->incidents->tipus_incidents->nom }}
+                                </div>
+                                <div class='carta_place'><i class="bi bi-geo-alt-fill"></i>{{ $carta->municipis->nom }}
+                                </div>
+                                <div class='carta_agencies'>
+                                    <div class='agencia'>Policia<span class="dot"></div>
+                                    <div class='agencia'>Bombers<span class="dot"></div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
             </div>
             <div class='dades'>
@@ -75,7 +51,11 @@
                         <img src="{{ Vite::asset('resources/icons/calendar.svg') }}">
                     </div>
                     <img src="{{ Vite::asset('public/assets/icons/arrowHeadFill.svg') }}">
-                    <div class='date-content'>29/12/27</div>
+                    <div class='date-content'>
+                        @foreach ($datesUq as $date)
+                            {{ $date }}<br>
+                        @endforeach
+                    </div>
                 </div>
                 <div class='type'>
                     <div class='type-title'>
@@ -83,15 +63,11 @@
                         <img src="{{ Vite::asset('resources/icons/type.svg') }}">
                     </div>
                     <img src="{{ Vite::asset('public/assets/icons/arrowHeadFill.svg') }}">
-                    <div class='type-content'>FUITA (AIGUA, GAS, ALTRES)</div>
-                </div>
-                <div class='type'>
-                    <div class='type-title'>
-                        TIPUS
-                        <img src="{{ Vite::asset('resources/icons/type.svg') }}">
+                    <div class='type-content'>
+                        @foreach ($tipusIncidentsUq as $tipusIncident)
+                            {{ $tipusIncident }},<br>
+                        @endforeach
                     </div>
-                    <img src="{{ Vite::asset('public/assets/icons/arrowHeadFill.svg') }}">
-                    <div class='type-content'>ASSISTÈNCIA SANITÀRIA, INCENDI, ROBATORI, SDGADFH</div>
                 </div>
             </div>
             <div class='state'>
@@ -100,7 +76,7 @@
                     <img src="{{ Vite::asset('resources/icons/state.svg') }}">
                 </div>
                 <img src="{{ Vite::asset('public/assets/icons/arrowHeadFill.svg') }}" style="height:inherit;">
-                <div class='state-content'>IMMOBILITZAT</div>
+                <div class='state-content'>{{ $expedient->estatExpedient->estat }}</div>
             </div>
         </div>
     </div>

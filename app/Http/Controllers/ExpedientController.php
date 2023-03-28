@@ -19,10 +19,25 @@ class ExpedientController extends Controller
     {
         $tipusIncidents = TipusIncident::all();
         $estats = EstatExpedient::all();
-        $expedients = Expedient::orderBy('codi', 'ASC')->paginate(3);
+        $expedients = Expedient::orderBy('codi', 'ASC')->paginate(4);
+
+
+        $tipusIncidentsExp = [];
+        $datesExp = [];
+        foreach ($expedients as $expedient) {
+            foreach ($expedient->cartesTrucades as $carta) {
+                $nomIncident = $carta->incidents->tipus_incidents->nom;
+                array_push($tipusIncidentsExp, $nomIncident);
+
+                $dataTrucada = substr($carta->data_hora_trucada, 0, 10);
+                array_push($datesExp, $dataTrucada);
+            }
+        }
+        $tipusIncidentsExpUq = array_unique($tipusIncidentsExp);
+        $datesUq = array_unique($datesExp);
 
         $activeNav = "expedients";
-        return view('expedients', compact('estats', 'expedients', 'tipusIncidents', 'activeNav'));
+        return view('expedients', compact('estats', 'expedients', 'tipusIncidents', 'datesUq', 'tipusIncidentsExpUq', 'activeNav'));
     }
 
     /**
