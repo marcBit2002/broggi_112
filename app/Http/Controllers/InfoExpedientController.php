@@ -48,16 +48,15 @@ class InfoExpedientController extends Controller
     public function show(Expedient $infoExpedient)
     {
         $expedient = Expedient::find($infoExpedient->id);
-
         $tipusIncidents = [];
         $dates = [];
-        foreach ($expedient->cartesTrucades as $carta){
+        foreach ($expedient->cartesTrucades as $carta) {
             $nomIncident = $carta->incidents->tipus_incidents->nom;
             array_push($tipusIncidents, $nomIncident);
-            
+
             $dataTrucada = substr($carta->data_hora_trucada, 0, 10);
             array_push($dates, $dataTrucada);
-        }        
+        }
         $tipusIncidentsUq = array_unique($tipusIncidents);
         $datesUq = array_unique($dates);
 

@@ -39,31 +39,31 @@
     </div>
     <div class='expedients'>
         @foreach ($expedients as $expedient)
-                <div class='expedient'>
-                    <a class="nav-link"
-                        href="{{ action([App\Http\Controllers\InfoExpedientController::class, 'show'], ['infoExpedient' => $expedient->id]) }}">
-                        <div class='top-expedient'>
-                            <div class='data'>
-                                @foreach ($datesUq as $item)
-                                    {{$item}}
-                                @endforeach
-                            </div>
-                            <div class='tipus'>
-                                @foreach ($tipusIncidentsExpUq as $tipusIncidentExp)
-                                    {{ $tipusIncidentExp }},
-                                @endforeach
-                            </div>
+            <div class='expedient'>
+                <a class="nav-link"
+                    href="{{ action([App\Http\Controllers\InfoExpedientController::class, 'show'], ['infoExpedient' => $expedient->id]) }}">
+                    <div class='top-expedient'>
+                        <div class='data'>
+                            @foreach ($datesUq as $item)
+                                {{ $item }}
+                            @endforeach
                         </div>
-                        <div class='bottom-expedient'>
-                            <div class='codi'>Codi: <b>{{ $expedient->codi }}</b></div>
-                            <div class='estat' value="{{ $expedient->estat_expedients_id }}">
-                                {{ $expedient->estatExpedient->estat }}<span class="dot" style="background-color: {{ $expedient->estatExpedient->color }};"></span>
-                            </div>
+                        <div class='tipus'>
+                            @foreach ($tipusIncidentsExpUq as $tipusIncidentExp)
+                                {{ $tipusIncidentExp }},
+                            @endforeach
                         </div>
-                    </a>
-                </div>
+                    </div>
+                    <div class='bottom-expedient'>
+                        <div class='codi'>Codi: <b>{{ $expedient->codi }}</b></div>
+                        <div class='estat' value="{{ $expedient->estat_expedients_id }}">
+                            {{ $expedient->estatExpedient->estat }}<span class="dot"
+                                style="background-color: {{ $expedient->estatExpedient->color }};"></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
         @endforeach
         {{ $expedients->links() }}
     </div>
-    
 @endsection
