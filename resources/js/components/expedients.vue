@@ -23,7 +23,7 @@ export default {
         };
     },
     methods: {
-        getExpedients() {
+        getExpedients: function () {
             const me = this;
             axios
                 .get("expedient")
