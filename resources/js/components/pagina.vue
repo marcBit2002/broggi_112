@@ -2,96 +2,226 @@
     <div id="pagina">
         <div class="content" v-if="this.tab == 1">
             <h1 id="title">Identificació</h1>
-            <div class="input_group">
-                <label for="telefon">Telèfon:</label>
-                <input type="tel" id="telefon" name="telefon" value="" />
-                <img
-                    src="/broggi_112/public/assets/icons/arki.svg"
+
+            <div class="row g-3 align-items-center">
+                <div class="col-sm-2 text-end">
+                    <label for="inputPassword6" class="col-form-label"
+                        >Telèfon:</label
+                    >
+                </div>
+                <div class="col-sm-8">
+                    <input
+                        type="password"
+                        id="inputPassword6"
+                        class="form-control"
+                        aria-describedby="passwordHelpInline"
+                    />
+                </div>
+                <a
+                    tabindex="0"
                     class="arki"
+                    role="button"
                     data-bs-toggle="popover"
                     data-bs-trigger="focus"
                     data-bs-title="Help Box"
                     data-bs-content="And here's some amazing content. It's very engaging. Right?"
-                />
+                >
+                    <img src="/broggi_112/public/assets/icons/arki.svg" />
+                </a>
             </div>
-            <div class="input_group">
-                <label for="nom">Nom:</label>
-                <input
-                    type="text"
-                    id="nom"
-                    name="nom"
-                    value=""
-                    style="width: 400px"
-                />
-                <img
-                    src="/broggi_112/public/assets/icons/arki.svg"
+            <div class="row g-3 align-items-center">
+                <div class="col-sm-2 text-end">
+                    <label for="inputPassword6" class="col-form-label"
+                        >Nom:</label
+                    >
+                </div>
+                <div class="col-sm-8">
+                    <input
+                        type="password"
+                        id="inputPassword6"
+                        class="form-control"
+                        aria-describedby="passwordHelpInline"
+                    />
+                </div>
+                <a
+                    tabindex="0"
                     class="arki"
+                    role="button"
                     data-bs-toggle="popover"
+                    data-bs-trigger="focus"
                     data-bs-title="Help Box"
                     data-bs-content="And here's some amazing content. It's very engaging. Right?"
-                />
+                >
+                    <img src="/broggi_112/public/assets/icons/arki.svg" />
+                </a>
             </div>
-            <div class="input_group">
-                <label for="cognoms">Cognoms:</label>
-                <input
-                    type="text"
-                    id="cognoms"
-                    name="cognoms"
-                    value=""
-                    style="width: 400px"
-                />
-                <img
-                    src="/broggi_112/public/assets/icons/arki.svg"
+            <div class="row g-3 align-items-center">
+                <div class="col-sm-2 text-end">
+                    <label for="inputPassword6" class="col-form-label"
+                        >Cognoms:</label
+                    >
+                </div>
+                <div class="col-sm-8">
+                    <input
+                        type="password"
+                        id="inputPassword6"
+                        class="form-control"
+                        aria-describedby="passwordHelpInline"
+                    />
+                </div>
+                <a
+                    tabindex="0"
                     class="arki"
+                    role="button"
                     data-bs-toggle="popover"
+                    data-bs-trigger="focus"
                     data-bs-title="Help Box"
                     data-bs-content="And here's some amazing content. It's very engaging. Right?"
-                />
+                >
+                    <img src="/broggi_112/public/assets/icons/arki.svg" />
+                </a>
             </div>
-            <div class="antecedents">
-                <label for="antecedents">Antecedents</label>
+
+            <div class="row g-3 align-items-center">
+                <div class="col-sm-4 text-start">
+                    <label for="antecedents" class="col-form-label"
+                        >Antecedents</label
+                    >
+                </div>
+                <a
+                    tabindex="0"
+                    class="arki"
+                    role="button"
+                    data-bs-toggle="popover"
+                    data-bs-trigger="focus"
+                    data-bs-title="Help Box"
+                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                >
+                    <img src="/broggi_112/public/assets/icons/arki.svg" />
+                </a>
                 <textarea
-                    name="antecedents"
-                    id="antecedents"
-                    rows="5"
+                    class="form-control"
+                    id="floatingTextarea"
+                    rows="3"
                 ></textarea>
             </div>
         </div>
         <div class="content" v-if="this.tab == 2">
             <h1 id="title">Localització</h1>
-            <div class="input_group">
-                <label for="estaCatalnya">Està a Catalunya?</label>
-                <input type="checkbox" id="estaCatalnya" value="" />
-                <input type="checkbox" id="noEstaCatalnya" value="" />
-                <img
-                    src="/broggi_112/public/assets/icons/arki.svg"
-                    class="arki"
-                    data-bs-toggle="popover"
-                    data-bs-trigger="focus"
-                    data-bs-title="Help Box"
-                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
-                />
+
+            <div class="mb-3 row">
+                <label for="inputPassword" class="col-sm-4 col-form-label"
+                    >Està a Catalunya?</label
+                >
+                <div class="col-sm-8">
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            name="flexRadioDefault"
+                            id="flexRadioDefault1"
+                            checked
+                        />
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Si
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            name="flexRadioDefault"
+                            id="flexRadioDefault2"
+                        />
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            No
+                        </label>
+                    </div>
+                </div>
             </div>
-            <div class="input_group">
-                <label>Tipus localització:</label>
-                <input type="radio" id="age1" name="age" value="30" />
-                <label for="age1">Carrer</label>
-                <input type="radio" id="age2" name="age" value="60" />
-                <label for="age2">Punt Singular</label>
-                <input type="radio" id="age3" name="age" value="100" />
-                <label for="age3">Carretera</label>
-                <input type="radio" id="age3" name="age" value="100" />
-                <label for="age3">ENTITAT/Població</label>
-                <input type="radio" id="age3" name="age" value="100" />
-                <label for="age3">Comarca</label>
-                <img
-                    src="/broggi_112/public/assets/icons/arki.svg"
-                    class="arki"
-                    data-bs-toggle="popover"
-                    data-bs-trigger="focus"
-                    data-bs-title="Help Box"
-                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
-                />
+
+            <div class="mb-3 row">
+                <label for="inputPassword" class="col-sm-4 col-form-label"
+                    >Tipus localització:</label
+                >
+                <div class="col">
+                    <div class="col row">
+                        <div class="form-check col">
+                            <input
+                                class="form-check-input"
+                                type="radio"
+                                name="flexRadioDefault"
+                                id="flexRadioDefault1"
+                                checked
+                            />
+                            <label
+                                class="form-check-label"
+                                for="flexRadioDefault1"
+                            >
+                                Carrer
+                            </label>
+                        </div>
+                        <div class="form-check col">
+                            <input
+                                class="form-check-input"
+                                type="radio"
+                                name="flexRadioDefault"
+                                id="flexRadioDefault2"
+                            />
+                            <label
+                                class="form-check-label"
+                                for="flexRadioDefault2"
+                            >
+                                Punt Singular
+                            </label>
+                        </div>
+                        <div class="form-check col">
+                            <input
+                                class="form-check-input"
+                                type="radio"
+                                name="flexRadioDefault"
+                                id="flexRadioDefault2"
+                            />
+                            <label
+                                class="form-check-label"
+                                for="flexRadioDefault2"
+                            >
+                                Carretera
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col row">
+                        <div class="form-check col">
+                            <input
+                                class="form-check-input"
+                                type="radio"
+                                name="flexRadioDefault"
+                                id="flexRadioDefault1"
+                                checked
+                            />
+                            <label
+                                class="form-check-label"
+                                for="flexRadioDefault1"
+                            >
+                                ENTITAT/Població
+                            </label>
+                        </div>
+                        <div class="form-check col">
+                            <input
+                                class="form-check-input"
+                                type="radio"
+                                name="flexRadioDefault"
+                                id="flexRadioDefault2"
+                            />
+                            <label
+                                class="form-check-label"
+                                for="flexRadioDefault2"
+                            >
+                                Comarca
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="content" v-if="this.tab == 3">
@@ -208,26 +338,39 @@ export default {
     }
 }
 
+.arki {
+    width: 18px;
+    height: 18px;
+    margin-left: 5px;
+    margin-bottom: 2px;
+    cursor: pointer;
+    user-select: none;
+
+    img {
+        width: 18px;
+        height: 18px;
+    }
+}
+
 // #region PAGINA
 .content {
     width: 100%;
     color: $dark;
 
-    .input_group {
-        font-size: 1.25rem;
-        font-weight: 500;
+    font-size: 1.25rem;
+    font-weight: 500;
 
+    .input_group {
         display: flex;
         align-items: center;
+        justify-content: start;
 
         margin-bottom: 2rem;
 
-        label {
-            &:first-child {
-                margin-right: 2rem;
-                width: 130px;
-                text-align: right;
-            }
+        .nom-input {
+            margin-right: 2rem;
+            width: 125px;
+            text-align: right;
         }
 
         input {
@@ -235,21 +378,20 @@ export default {
             border-radius: $components-border-radius;
         }
 
-        img {
+        a {
             width: 18px;
             height: 18px;
             margin-left: 5px;
             margin-bottom: 2px;
-            align-self: flex-end;
             cursor: pointer;
             user-select: none;
         }
     }
 
+    .radio-group {
+        display: flex;
+    }
     .antecedents {
-        font-size: 1.25rem;
-        font-weight: 500;
-
         margin-top: 3rem;
 
         label {
