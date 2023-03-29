@@ -20,6 +20,11 @@ div.content {
 
     display: flex;
     flex-direction: row;
+
+    select {
+        margin: 0 10px 0 0;
+        width: fit-content;
+    } 
 }
 
 .button {
@@ -44,6 +49,7 @@ div.content {
     height: 20%;
     background-color: white;
 }
+
 .expedient a:hover {
     background-color: rgba($primary, 0.1);
 }
@@ -78,16 +84,4 @@ div.content {
     border-radius: 50%;
 
     display: inline-block;
-}
-
-.arrow {
-    border-bottom: 2px solid $warning;
-    border-right: 2px solid $warning;
-    position: absolute;
-    top: 50%;
-    right: 30px;
-    width: 10px;
-    height: 10px;
-    transform: rotate(45deg) translateY(-50%);
-    transform-origin: right;
 }

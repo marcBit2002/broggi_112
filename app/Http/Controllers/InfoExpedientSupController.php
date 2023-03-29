@@ -6,7 +6,7 @@ use App\Models\Expedient;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class InfoExpedientController extends Controller
+class InfoExpedientSupController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -67,20 +67,11 @@ class InfoExpedientController extends Controller
 
             $dataTrucada = substr($carta->data_hora_trucada, 0, 10);
             array_push($dates, $dataTrucada);
-            foreach ($carta->cartesTrucadesHasAgencies as $cartaHasAgencies){
-                $agenciaId = $cartaHasAgencies->agencies->id;
-                if ($agenciaId <= 8) {
-                    $agenciaNom = 'Trànsit';
-                } else {
-                    $agenciaNom = 'Otro';
-                }
-                
-            }
         }
         $tipusIncidentsUq = array_unique($tipusIncidents);
         $datesUq = array_unique($dates);
 
-        return view('infoExpedient', compact('expedient', 'tipusIncidentsUq', 'datesUq', 'agenciaNom'));
+        return view('infoExpedient', compact('expedient', 'tipusIncidentsUq', 'datesUq'));
     }
 
     /**

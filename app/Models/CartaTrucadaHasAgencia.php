@@ -9,6 +9,7 @@ class CartaTrucadaHasAgencia extends Model
 {
     use HasFactory;
 
+    protected $table =  'cartes_trucades_has_agencies';
     protected $primaryKey = ['cartes_trucades_id', 'agencies_id'];
     public $incrementing = false;
     public $timestamps =  false;
