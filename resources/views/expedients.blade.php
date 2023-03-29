@@ -39,8 +39,8 @@
                 @endif
                 <div class='top-expedient'>
                     <div class='data'>
-                        @foreach ($datesUq as $item)
-                            {{ $item }}
+                        @foreach ($expedient->cartesTrucades as $carta)
+                            {{ substr($carta->data_hora_trucada, 0, 10) }}
                         @endforeach
                     </div>
                     <div class='tipus'>

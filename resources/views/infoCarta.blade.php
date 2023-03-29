@@ -77,7 +77,7 @@
                             <div class="location">
                                 <label for="location" class="col-form-label">Localització</label>
                                 <input type="text" id="location" class="form-control"
-                                    placeholder="{{ $carta->descripcio_localitzacio }}" disabled>
+                                    placeholder="{{ $carta->decripcio_localitzacio }}" disabled>
                             </div>
 
 
@@ -124,7 +124,7 @@
                         <img src="{{ Vite::asset('resources/icons/state.svg') }}">
                     </div>
                     <img src="{{ Vite::asset('public/assets/icons/arrowHeadFill.svg') }}" style="height:inherit;">
-                    <div class='state-content'>{{ $expedientEstat}}</div>
+                    <div class='state-content'>{{ $expedientEstat }}</div>
                 </div>
             </form>
         </div>

@@ -36,11 +36,11 @@
                                 <p>INCIDÈNCIA</p>{{ $carta->incidents->tipus_incidents->nom }}
                             </div>
                             <div class='carta_place'><i class="bi bi-geo-alt-fill"></i>{{ $carta->municipis->nom }}</div>
-                            {{-- <div class='carta_agencies'>
+                            <div class='carta_agencies'>
                                 @foreach ($carta->cartesTrucadesHasAgencies as $cartaHasAgencies)
-                                    <div class='agencia'>{{ $agenciaNom }}<span class="dot" style="background-color: {{ $cartaHasAgencies->estatAgencies->color }}"></div>
+                                    <div class='agencia'>{{ $cartaHasAgencies->agencies->nom }}<span class="dot" style="background-color: {{ $cartaHasAgencies->estatAgencies->color }}"></div>
                                 @endforeach
-                            </div> --}}
+                            </div>
                             </a>
                         </div>
                     @endforeach
