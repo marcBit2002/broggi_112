@@ -21,7 +21,7 @@
 <script>
     setTimeout(function() {
         window.location.href = "{{ route('login') }}";
-    }, 5000); // Redirigir después de 5 segundos
+    }, 2000); // Redirigir después de 5 segundos
 </script>
 
 
