@@ -19,7 +19,8 @@
             <h1 class="text-primary ms-3 mb-0">Expedient <span class="text-danger">#{{ $expedientCodi }}</span></h1>
         </div>
         <div class="selection">
-            <form action='{{ action([App\Http\Controllers\CartaController::class, 'update'], ['infoCartum' => $carta->id ]) }}'>
+            <form
+                action='{{ action([App\Http\Controllers\CartaController::class, 'update'], ['infoCartum' => $carta->id]) }}'>
                 <div class='info-carta'>
                     <form action=''>
                         <div class='cartaTrucada'>
@@ -28,11 +29,11 @@
                                     <p>Carta <span>#</span> {{ $carta->codi_trucada }}</p>
                                 </div>
                                 <div class='time'>
-                                    <div class='timer'>
+                                    {{-- <div class='timer'>
                                         <div class='startTime'>9:30</div>
                                         <img src="{{ Vite::asset('resources/icons/time.svg') }}">
                                         <div class='endTime'>9:41</div>
-                                    </div>
+                                    </div> --}}
                                     <div class='totalTime'>{{ $carta->durada }} segons</div>
                                 </div>
                             </div>
@@ -63,12 +64,21 @@
                                 <label for="agencies" class="col-form-label">Agències</label>
                                 @foreach ($carta->cartesTrucadesHasAgencies as $cartaHasAgencia)
                                     <div class='agencia'>
-                                        <textarea type="text" id="agency" class="form-control"
-                                            disabled>{{ $cartaHasAgencia->agencies->nom }}</textarea>
-                                        <select class="form-select" aria-label="estatAgencies">
-                                            <option value="1" selected>
-                                                {{ $cartaHasAgencia->estatAgencies->estat }}
-                                            </option>
+                                        <textarea type="text" id="agency" class="form-control" disabled>{{ $cartaHasAgencia->agencies->nom }}</textarea>
+                                        <select class="form-select" name="estatAgencies">
+                                            @foreach ($estatAgencies as $estatAgencia)
+                                                @if ($estatAgencia->id == $cartaHasAgencia->estatAgencies->id)
+                                                    <option selected
+                                                        value="{{ $cartaHasAgencia->estatAgencies->id }}">
+                                                        {{ $cartaHasAgencia->estatAgencies->estat }}
+                                                    </option>
+                                                @else
+                                                    <option value="{{ $estatAgencia->id }}">
+                                                        {{ $estatAgencia->estat }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
                                         </select>
                                     </div>
                                 @endforeach

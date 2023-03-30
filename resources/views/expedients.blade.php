@@ -44,8 +44,8 @@
                         @endforeach
                     </div>
                     <div class='tipus'>
-                        @foreach ($tipusIncidentsExpUq as $tipusIncidentExp)
-                            {{ $tipusIncidentExp }},
+                        @foreach ($expedient->cartesTrucades as $carta)
+                            {{ $carta->incidents->tipus_incidents->nom }}
                         @endforeach
                     </div>
                 </div>

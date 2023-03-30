@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\CartaTrucada;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\EstatAgencia;
 
 class CartaController extends Controller
 {
@@ -58,12 +59,14 @@ class CartaController extends Controller
      */
     public function edit(CartaTrucada $infoCartum)
     {
+        $estatAgencies = EstatAgencia::all();
+
         $carta = CartaTrucada::find($infoCartum->id);
         $expedientCodi = $carta->expedients->codi;
         $expedientEstat = $carta->expedients->estatExpedient->estat;
         $expedientEstatColor = $carta->expedients->estatExpedient->color;
 
-        return view('infoCarta', compact('carta', 'expedientCodi', 'expedientEstat', 'expedientEstatColor'));
+        return view('infoCarta', compact('carta', 'expedientCodi', 'expedientEstat', 'expedientEstatColor', 'estatAgencies'));
     }
 
     /**

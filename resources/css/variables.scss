@@ -44,7 +44,7 @@ $table-striped-bg: rgba($primary, 0.15);
 
 $pagination-active-bg: $danger;
 
-//form-select
+//FORM-select
 $form-select-bg: white;
 $form-select-color: rgba($primary, 0.8);
 
@@ -52,6 +52,19 @@ $form-select-indicator: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/20
 
 $form-select-border-width: 2px;
 $form-select-border-color: $primary;
+
+//FORM input & textarea
+$input-border-color: $primary;
+$input-border-width: 2px;
+$input-border-radius: 8px;
+
+$form-check-input-bg: $light-blue;
+$form-check-input-border: 2px solid $primary;
+$form-check-input-focus-box-shadow: 0 0 0 .25rem rgba($primary, .25);
+
+$form-check-input-checked-color: $warning;
+$form-check-input-checked-bg-color: white;
+$form-check-input-checked-border-color: $primary;
 
 //disabled
 $input-disabled-color: $secondary;
