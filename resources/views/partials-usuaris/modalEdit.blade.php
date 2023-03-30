@@ -22,10 +22,10 @@
                         <label for="cognoms">Cognoms:</label>
                         <input type="text" class="form-control" id="cognoms_edit" name="cognoms" required>
                     </div>
-                    <div class="form-group mb-3">
+                    {{-- <div class="form-group mb-3">
                         <label for="contrasenya">Contrasenya:</label>
                         <input type="text" class="form-control" id="contrasenya_edit" name="contrasenya" required>
-                    </div>
+                    </div> --}}
                     <div class="form-group  mb-3">
                         <label for="tipus_usuaris_id">Tipus:</label>
                         <select class="form-select" id="tipus_usuaris_id_edit" name="tipus_usuaris_id">
@@ -56,7 +56,7 @@
             let username = btn.getAttribute("data-bs-username");
             let nom = btn.getAttribute("data-bs-nom");
             let cognoms = btn.getAttribute("data-bs-cognoms");
-            let contrasenya = btn.getAttribute("data-bs-contrasenya");
+            // let contrasenya = btn.getAttribute("data-bs-contrasenya");
             let tipusUsuariId = btn.getAttribute("data-bs-tipus-id");
             let tipusUsuariNom = btn.getAttribute("data-bs-tipus-nom");
             let action = btn.getAttribute("data-bs-action");
@@ -66,7 +66,7 @@
             editarModal.querySelector('#username_edit ').value = username;
             editarModal.querySelector('#nom_edit ').value = nom;
             editarModal.querySelector('#cognoms_edit ').value = cognoms;
-            editarModal.querySelector('#contrasenya_edit ').value = contrasenya;
+            // editarModal.querySelector('#contrasenya_edit ').value = contrasenya;
 
             // Actualizar el valor y etiqueta del input select
             let select = editarModal.querySelector('#tipus_usuaris_id_edit');

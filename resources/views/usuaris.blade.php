@@ -34,6 +34,16 @@
                             <td>{{ $usuari->roles->nom }}</td>
                             <td>
                                 <div class="d-flex justify-content-end">
+
+                                    <button type="button" class="btn btn-outline-danger btn-sm me-2 btn-passwd"
+                                        data-bs-toggle="modal" data-bs-target="#contraModal"
+                                        data-bs-id="{{ $usuari->id }}"
+                                        data-bs-nomCognoms="{{ $usuari->nom }} {{ $usuari->cognoms }}"
+                                        data-bs-action="{{ action([App\Http\Controllers\UsuarioController::class, 'resetPasswd'], ['usuari' => $usuari->id]) }}">
+                                        <i class="bi bi-key"></i>
+                                        {{-- data-bs-contrasenya="{{ $usuari->contrasenya }}" --}}
+                                    </button>
+
                                     {{-- BOTON EDITAR --}}
                                     <button type="button" class="btn btn-outline-danger btn-sm me-2 btn-edit"
                                         data-bs-toggle="modal" data-bs-target="#editarModal"
@@ -65,6 +75,7 @@
         @include('partials-usuaris.modal')
         @include('partials-usuaris.modalAdd')
         @include('partials-usuaris.modalEdit')
+        @include('partials-usuaris.modalPasswd')
 
 
 

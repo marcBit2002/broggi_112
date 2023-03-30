@@ -44,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth', 'authAdmin'])->group(function () {
     Route::resource('admin/usuari', UsuarioController::class);
+    Route::put('/admin/usuari/canviContrasenya/{usuari}', [UsuarioController::class, 'resetPasswd']);
     Route::resource('admin/agencies', AgenciaController::class);
     Route::resource('admin/incidents', IncidentController::class);
     Route::resource('admin/tipusIncidents', TipusIncidentController::class);

@@ -55,8 +55,6 @@ class UsuarioController extends Controller
     {
         $usuaris = Usuario::orderBy('nom', 'ASC')->get();
         return back()->with(['mostrarModalEdit' => true, 'usuaris' => $usuaris]);
-        // return back()->with('mostrarModalEdit', true);
-
     }
 
     public function update(Request $request, Usuario $usuari)
@@ -65,7 +63,14 @@ class UsuarioController extends Controller
         $usuari->username = $request->input('username');
         $usuari->nom = $request->input('nom');
         $usuari->cognoms = $request->input('cognoms');
-        $usuari->contrasenya = ($request->input('contrasenya'));
+        // // $request->input('contrasenya') != $usuari->contrasenya
+        // if (Hash::check($request->input('contrasenya'), $usuari->contrasenya)) {
+        //     $usuari->contrasenya = $request->input('contrasenya');
+        // } else {
+
+        //     $usuari->contrasenya = \bcrypt($request->input('contrasenya'));
+        // }
+
         $usuari->tipus_usuaris_id = $request->input('tipus_usuaris_id');
 
         try {
@@ -78,6 +83,20 @@ class UsuarioController extends Controller
             $response =  redirect()->action([UsuarioController::class, 'edit'], ['usuari' => $usuari->id])->withInput(); //Enlloc de edit(vista) que sigui un modal
         }
         return $response;
+    }
+
+    public function resetPasswd(Request $request, Usuario $usuari)
+    {
+        $usuari->contrasenya = \bcrypt($request->input('contrasenya'));
+        try {
+            $usuari->save();
+            session()->flash('mensaje', 'Contrasenya actualitzada correctament');
+        } catch (QueryException $exception) {
+            $mensaje = Utilitat::errorMessage($exception);
+            session()->flash('error', $mensaje);
+        }
+
+        return redirect()->action([UsuarioController::class, 'index']);;
     }
 
     public function destroy(Usuario $usuari)
