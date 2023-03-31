@@ -118,11 +118,11 @@
                         <input
                             class="form-check-input"
                             type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault1"
+                            name="estaCatalunya"
+                            id="estaCatalunya"
                             checked
                         />
-                        <label class="form-check-label" for="flexRadioDefault1">
+                        <label class="form-check-label" for="estaCatalunya">
                             Si
                         </label>
                     </div>
@@ -130,10 +130,10 @@
                         <input
                             class="form-check-input"
                             type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault2"
+                            name="estaCatalunya"
+                            id="noEstaCatalunya"
                         />
-                        <label class="form-check-label" for="flexRadioDefault2">
+                        <label class="form-check-label" for="noEstaCatalunya">
                             No
                         </label>
                     </div>
@@ -150,13 +150,14 @@
                             <input
                                 class="form-check-input"
                                 type="radio"
-                                name="flexRadioDefault"
-                                id="flexRadioDefault1"
-                                checked
+                                name="localitzacio"
+                                id="carrer"
+                                v-on:click="this.localitzacio = 'DADES Carrer'"
                             />
                             <label
                                 class="form-check-label"
-                                for="flexRadioDefault1"
+                                for="carrer"
+                                v-on:click="this.localitzacio = 'DADES Carrer'"
                             >
                                 Carrer
                             </label>
@@ -165,12 +166,18 @@
                             <input
                                 class="form-check-input"
                                 type="radio"
-                                name="flexRadioDefault"
-                                id="flexRadioDefault2"
+                                name="localitzacio"
+                                id="puntSingular"
+                                v-on:click="
+                                    this.localitzacio = 'DADES Punt Singular'
+                                "
                             />
                             <label
                                 class="form-check-label"
-                                for="flexRadioDefault2"
+                                for="puntSingular"
+                                v-on:click="
+                                    this.localitzacio = 'DADES Punt Singular'
+                                "
                             >
                                 Punt Singular
                             </label>
@@ -179,12 +186,18 @@
                             <input
                                 class="form-check-input"
                                 type="radio"
-                                name="flexRadioDefault"
-                                id="flexRadioDefault2"
+                                name="localitzacio"
+                                id="carretera"
+                                v-on:click="
+                                    this.localitzacio = 'DADES Carretera'
+                                "
                             />
                             <label
                                 class="form-check-label"
-                                for="flexRadioDefault2"
+                                for="carretera"
+                                v-on:click="
+                                    this.localitzacio = 'DADES Carretera'
+                                "
                             >
                                 Carretera
                             </label>
@@ -195,13 +208,20 @@
                             <input
                                 class="form-check-input"
                                 type="radio"
-                                name="flexRadioDefault"
-                                id="flexRadioDefault1"
-                                checked
+                                name="localitzacio"
+                                id="poblacio"
+                                v-on:click="
+                                    this.localitzacio =
+                                        'DADES ENTITAT / Població'
+                                "
                             />
                             <label
                                 class="form-check-label"
-                                for="flexRadioDefault1"
+                                for="poblacio"
+                                v-on:click="
+                                    this.localitzacio =
+                                        'DADES ENTITAT / Població'
+                                "
                             >
                                 ENTITAT/Població
                             </label>
@@ -210,17 +230,35 @@
                             <input
                                 class="form-check-input"
                                 type="radio"
-                                name="flexRadioDefault"
-                                id="flexRadioDefault2"
+                                name="localitzacio"
+                                id="comarca"
+                                v-on:click="this.localitzacio = 'DADES Comarca'"
                             />
                             <label
                                 class="form-check-label"
-                                for="flexRadioDefault2"
+                                for="comarca"
+                                v-on:click="this.localitzacio = 'DADES Comarca'"
                             >
                                 Comarca
                             </label>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <searchInput :name="'Provincia'"></searchInput>
+                </div>
+                <div class="col">
+                    <searchInput :name="'Comarca'"></searchInput>
+                </div>
+                <div class="col">
+                    <searchInput :name="'Municipi'"></searchInput>
+                </div>
+            </div>
+            <div class="row text-center mt-4" v-if="this.localitzacio">
+                <div class="col" style="position: relative">
+                    <h3>{{ this.localitzacio }}</h3>
                 </div>
             </div>
         </div>
@@ -303,9 +341,13 @@
             <h1 id="title">Despatx</h1>
         </div>
         <div id="navigation_buttons">
-            <button type="button" class="btn btn-outline-secondary">
+            <a
+                type="button"
+                href="javascript:history.back()"
+                class="btn btn-outline-secondary"
+            >
                 Descartar carta
-            </button>
+            </a>
             <button
                 v-if="this.tab != 1"
                 type="button"
@@ -336,9 +378,18 @@
 <script>
 import "../bootstrap";
 import * as bootstrap from "bootstrap";
+import searchInput from "./searchInput.vue";
 
 export default {
     name: "pagina",
+    data: function () {
+        return {
+            localitzacio: null,
+        };
+    },
+    components: {
+        searchInput,
+    },
     props: {
         tab: null,
     },
@@ -402,11 +453,8 @@ export default {
     width: 100%;
 
     display: flex;
-
-    button {
-        &:first-child {
-            margin-right: auto;
-        }
+    a {
+        margin-right: auto;
     }
 }
 
@@ -543,6 +591,32 @@ export default {
 }
 
 // #endregion
+
+h3 {
+    color: $primary;
+
+    z-index: 1;
+    background-color: #fff;
+
+    position: relative;
+
+    text-transform: uppercase;
+
+    &::before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 2px;
+
+        position: absolute;
+        bottom: -6px;
+        right: 0;
+
+        border-radius: 10px;
+
+        background-color: rgba($color: $primary, $alpha: 0.5);
+    }
+}
 
 // #endregion
 
