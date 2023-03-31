@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CartaTrucadaHasAgencia;
-use App\Http\Controllers\Controller;
+use App\Models\CartaTrucada;
+use App\Models\EstatAgencia;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\CartaTrucadaHasAgencia;
 
 class CartaTrucadaHasAgenciaController extends Controller
 {
@@ -56,9 +58,17 @@ class CartaTrucadaHasAgenciaController extends Controller
      * @param  \App\Models\CartaTrucadaHasAgencia  $cartaTrucadaHasAgencia
      * @return \Illuminate\Http\Response
      */
-    public function edit(CartaTrucadaHasAgencia $cartaTrucadaHasAgencia)
+    public function edit(CartaTrucada $infoCartum)
     {
-        //
+
+        $estatAgencies = EstatAgencia::all();
+
+        $carta = CartaTrucada::find($infoCartum->id);
+        $expedientCodi = $carta->expedients->codi;
+        $expedientEstat = $carta->expedients->estatExpedient->estat;
+        $expedientEstatColor = $carta->expedients->estatExpedient->color;
+
+        return view('infoCarta', compact('carta', 'expedientCodi', 'expedientEstat', 'expedientEstatColor', 'estatAgencies'));
     }
 
     /**
@@ -68,9 +78,15 @@ class CartaTrucadaHasAgenciaController extends Controller
      * @param  \App\Models\CartaTrucadaHasAgencia  $cartaTrucadaHasAgencia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CartaTrucadaHasAgencia $cartaTrucadaHasAgencia)
+    public function update(Request $request, CartaTrucada $infoCartum)
     {
-        //
+        // dd($infoCartum);
+        foreach ($infoCartum->cartesTrucadesHasAgencies as $cartaHasAgencia) {
+            $estatAgenciaId = $request->input('estatAgencies' . $cartaHasAgencia->agencies_id);
+            $cartaHasAgencia->estat_agencies_id = settype($estatAgenciaId, 'integer');
+            $cartaHasAgencia->save();
+        }
+        return view('infoCarta');
     }
 
     /**

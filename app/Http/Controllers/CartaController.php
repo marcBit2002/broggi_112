@@ -78,7 +78,17 @@ class CartaController extends Controller
      */
     public function update(Request $request, CartaTrucada $infoCartum)
     {
-        //
+        $carta = CartaTrucada::find($infoCartum->id);
+
+        // Actualizar los estados de las agencias
+        foreach ($carta->cartesTrucadesHasAgencies as $index => $cartaHasAgencia) {
+            $estatAgenciaId = $request->input('estatAgencies.' . $index);
+            $cartaHasAgencia->estat_agencies_id = $estatAgenciaId;
+            $cartaHasAgencia->save();
+        }
+        // he utilizado un bucle foreach para recorrer todas las relaciones cartesTrucadesHasAgencies del modelo Carta y actualizar sus estados en la base de datos. Para obtener el valor del estado seleccionado en cada iteración, he utilizado la sintaxis $request->input('estatAgencies.' . $index) donde $index es el índice de la relación actual. Este índice se usa para obtener el valor correcto del array enviado en la petición.
+
+        return view('infoCarta');
     }
 
     /**

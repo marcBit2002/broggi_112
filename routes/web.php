@@ -2,15 +2,16 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartaController;
 use App\Http\Controllers\AgenciaController;
 use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\IncidentController;
-use App\Http\Controllers\CartaController;
 use App\Http\Controllers\CartaSupController;
+use App\Http\Controllers\IncidentController;
 use App\Http\Controllers\ExpedientController;
 use App\Http\Controllers\InfoExpedientController;
-use App\Http\Controllers\InfoExpedientSupController;
 use App\Http\Controllers\TipusIncidentController;
+use App\Http\Controllers\InfoExpedientSupController;
+use App\Http\Controllers\CartaTrucadaHasAgenciaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +51,7 @@ Route::middleware(['auth', 'authAdmin'])->group(function () {
     Route::resource('admin/tipusIncidents', TipusIncidentController::class);
     Route::resource('admin/expedients', ExpedientController::class);
     Route::resource('admin/expedients/infoExpedient', InfoExpedientController::class);
-    Route::resource('admin/expedients/infoExpedient/infoCarta', CartaController::class);
+    Route::resource('admin/expedients/infoExpedient/infoCarta', CartaTrucadaHasAgenciaController::class);
 });
 
 Route::middleware('auth', 'authSupervisor')->group(function () {

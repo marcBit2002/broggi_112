@@ -63,14 +63,6 @@ class UsuarioController extends Controller
         $usuari->username = $request->input('username');
         $usuari->nom = $request->input('nom');
         $usuari->cognoms = $request->input('cognoms');
-        // // $request->input('contrasenya') != $usuari->contrasenya
-        // if (Hash::check($request->input('contrasenya'), $usuari->contrasenya)) {
-        //     $usuari->contrasenya = $request->input('contrasenya');
-        // } else {
-
-        //     $usuari->contrasenya = \bcrypt($request->input('contrasenya'));
-        // }
-
         $usuari->tipus_usuaris_id = $request->input('tipus_usuaris_id');
 
         try {

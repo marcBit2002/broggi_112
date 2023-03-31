@@ -26,19 +26,22 @@
                         <div class='carta'>
                             @if (Auth::check() && Auth::user()->roles->nom === 'Administrador Sistema')
                                 <a class="nav-link"
-                                    href="{{ action([App\Http\Controllers\CartaController::class, 'edit'], ['infoCartum' => $carta->id]) }}">
-                            @else
-                                <a class="nav-link"
-                                    href="{{ action([App\Http\Controllers\CartaSupController::class, 'edit'], ['infoCartum' => $carta->id]) }}">
+                                    href="{{ action([App\Http\Controllers\CartaTrucadaHasAgenciaController::class, 'edit'], ['infoCartum' => $carta->id]) }}">
+                                @else
+                                    <a class="nav-link"
+                                        href="{{ action([App\Http\Controllers\CartaSupController::class, 'edit'], ['infoCartum' => $carta->id]) }}">
                             @endif
-                            <img src="{{ Vite::asset('resources/icons/carta.svg') }}"/>
+                            <img src="{{ Vite::asset('resources/icons/carta.svg') }}" />
                             <div class='carta_type'>
                                 <p>INCIDÈNCIA</p>{{ $carta->incidents->tipus_incidents->nom }}
                             </div>
-                            <div class='carta_place'><i class="bi bi-geo-alt-fill"></i>{{ $carta->municipis->nom }}</div>
+                            <div class='carta_place'><i class="bi bi-geo-alt-fill"></i>{{ $carta->municipis->nom }}
+                            </div>
                             <div class='carta_agencies'>
                                 @foreach ($carta->cartesTrucadesHasAgencies as $cartaHasAgencies)
-                                    <div class='agencia'>{{ $cartaHasAgencies->agencies->nom }}<span class="dot" style="background-color: {{ $cartaHasAgencies->estatAgencies->color }}"></div>
+                                    <div class='agencia'>{{ $cartaHasAgencies->agencies->nom }}<span class="dot"
+                                            style="background-color: {{ $cartaHasAgencies->estatAgencies->color }}">
+                                    </div>
                                 @endforeach
                             </div>
                             </a>
@@ -75,7 +78,8 @@
                     </div>
                 </div>
             </div>
-            <div class='state' style="border: 4px solid {{ $expedient->estatExpedient->color }}; color: {{ $expedient->estatExpedient->color }};">
+            <div class='state'
+                style="border: 4px solid {{ $expedient->estatExpedient->color }}; color: {{ $expedient->estatExpedient->color }};">
                 <div class='state-title' style="background-color: {{ $expedient->estatExpedient->color }}">
                     ESTAT
                     <img src="{{ Vite::asset('resources/icons/state.svg') }}">
