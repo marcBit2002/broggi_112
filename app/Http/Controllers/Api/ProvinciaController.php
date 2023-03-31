@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Provincia;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Resources\ProvinciaResource;
 
 class ProvinciaController extends Controller
 {
@@ -15,7 +16,8 @@ class ProvinciaController extends Controller
      */
     public function index()
     {
-        //
+        $provincies = Provincia::with('comarques')->get();
+        return ProvinciaResource::collection($provincies);
     }
 
     /**

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Incident;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Resources\IncidentResource;
 
 class IncidentController extends Controller
 {
@@ -15,7 +16,8 @@ class IncidentController extends Controller
      */
     public function index()
     {
-        //
+        $incidents = Incident::with('tipus_incidents')->get();
+        return IncidentResource::collection($incidents);
     }
 
     /**

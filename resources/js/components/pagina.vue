@@ -226,6 +226,78 @@
         </div>
         <div class="content" v-if="this.tab == 3">
             <h1 id="title">Tipificació</h1>
+            <div class="tipus-incidents">
+                <table>
+                    <tr>
+                        <td>tipus</td>
+                        <td>tipus</td>
+                        <td>tipus</td>
+                        <td>tipus</td>
+                        <td>tipus</td>
+                    </tr>
+                    <tr>
+                        <td>tipus</td>
+                        <td>tipus</td>
+                        <td class="selected">tipus</td>
+                        <td>tipus</td>
+                        <td>tipus</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="search">
+                <div class="input-group">
+                    <span
+                        class="input-group-text border border-primary border-3 border-end-0 text-warning"
+                    >
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input
+                        type="search"
+                        class="form-control border border-3 border-start-0 border-primary"
+                        placeholder="Buscar"
+                    />
+                </div>
+            </div>
+            <div class="incidents">
+                <table>
+                    <tr>
+                        <td>tipus</td>
+                        <td>tipus</td>
+                    </tr>
+                    <tr>
+                        <td>tipus</td>
+                        <td>tipus</td>
+                    </tr>
+                    <tr>
+                        <td>tipus</td>
+                        <td>tipus</td>
+                    </tr>
+                    <tr>
+                        <td>tipus</td>
+                        <td>tipus</td>
+                    </tr>
+                    <tr>
+                        <td>tipus</td>
+                        <td>tipus</td>
+                    </tr>
+                    <tr>
+                        <td>tipus</td>
+                        <td class="selected">tipus</td>
+                    </tr>
+                    <tr>
+                        <td>tipus</td>
+                        <td>tipus</td>
+                    </tr>
+                    <tr>
+                        <td>tipus</td>
+                        <td>tipus</td>
+                    </tr>
+                    <tr>
+                        <td>tipus</td>
+                        <td>tipus</td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div class="content" v-if="this.tab == 4">
             <h1 id="title">Despatx</h1>
@@ -317,7 +389,7 @@ export default {
 
 #title {
     color: $primary;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 
     &::before {
         content: url("/broggi_112/public/assets/icons/arrowTitle.svg");
@@ -412,6 +484,66 @@ export default {
         }
     }
 }
+// #region TIPIFICACIÓ
+.tipus-incidents {
+    table {
+        width: 100%;
+        height: 30px;
+
+        margin-bottom: 1rem;
+
+        border-radius: 0.5em;
+        border: 2px solid $primary;
+        overflow: hidden;
+
+        text-align: center;
+    }
+
+    th,
+    td {
+        padding: 5px;
+        background: $primary;
+        color: white;
+        border: 2px solid white;
+    }
+
+    .selected {
+        color: $dark;
+        background-color: $warning;
+    }
+}
+
+.search {
+    width: 35%;
+    input {
+        background-color: white;
+    }
+}
+
+.incidents {
+    table {
+        width: 100%;
+
+        margin-top: 1rem;
+
+        border: 2px solid $primary;
+        overflow: hidden;
+
+        text-align: center;
+    }
+
+    td {
+        color: $secondary;
+        border: 2px solid $primary;
+    }
+
+    .selected {
+        background-color: $warning;
+    }
+}
+
+// #endregion
+
 // #endregion
 
 @media (max-width: 1050px) {

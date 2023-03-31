@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ComarcaController;
 use App\Http\Controllers\Api\MunicipiController;
 use App\Http\Controllers\Api\ExpedientController;
 use App\Http\Controllers\Api\ProvinciaController;
+use App\Http\Controllers\Api\IncidentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('expedient', ExpedientController::class);
 Route::apiResource('comarca', ComarcaController::class);
 Route::apiResource('provincia', ProvinciaController::class);
-Route::apiResource('municpi', MunicipiController::class);
+Route::apiResource('municipi', MunicipiController::class);
 Route::apiResource('carta', CartaController::class);
 Route::apiResource('agencia', AgenciaController::class);
+Route::apiResource('incident', IncidentController::class);
