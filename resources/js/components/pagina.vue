@@ -5,16 +5,15 @@
 
             <div class="row g-3 align-items-center">
                 <div class="col-sm-2 text-end">
-                    <label for="inputPassword6" class="col-form-label"
-                        >Telèfon:</label
-                    >
+                    <label for="telefon" class="col-form-label">Telèfon:</label>
                 </div>
                 <div class="col-sm-8">
                     <input
-                        type="password"
-                        id="inputPassword6"
+                        type="tel"
+                        id="telefon"
                         class="form-control"
-                        aria-describedby="passwordHelpInline"
+                        v-model="carta.telefon"
+                        required
                     />
                 </div>
                 <a
@@ -31,16 +30,15 @@
             </div>
             <div class="row g-3 align-items-center">
                 <div class="col-sm-2 text-end">
-                    <label for="inputPassword6" class="col-form-label"
-                        >Nom:</label
-                    >
+                    <label for="nom" class="col-form-label">Nom:</label>
                 </div>
                 <div class="col-sm-8">
                     <input
-                        type="password"
-                        id="inputPassword6"
+                        type="text"
+                        id="nom"
                         class="form-control"
-                        aria-describedby="passwordHelpInline"
+                        v-model="carta.nom"
+                        required
                     />
                 </div>
                 <a
@@ -57,16 +55,15 @@
             </div>
             <div class="row g-3 align-items-center">
                 <div class="col-sm-2 text-end">
-                    <label for="inputPassword6" class="col-form-label"
-                        >Cognoms:</label
-                    >
+                    <label for="cognoms" class="col-form-label">Cognoms:</label>
                 </div>
                 <div class="col-sm-8">
                     <input
-                        type="password"
-                        id="inputPassword6"
+                        type="text"
+                        id="cognoms"
                         class="form-control"
-                        aria-describedby="passwordHelpInline"
+                        v-model="carta.cognoms"
+                        required
                     />
                 </div>
                 <a
@@ -103,6 +100,8 @@
                     class="form-control"
                     id="floatingTextarea"
                     rows="3"
+                    v-model="carta.antecedents"
+                    required
                 ></textarea>
             </div>
         </div>
@@ -247,13 +246,22 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <searchInput :name="'Provincia'"></searchInput>
+                    <searchInput
+                        :name="'Provincia'"
+                        :options="provincies"
+                    ></searchInput>
                 </div>
                 <div class="col">
-                    <searchInput :name="'Comarca'"></searchInput>
+                    <searchInput
+                        :name="'Comarca'"
+                        :options="comarques"
+                    ></searchInput>
                 </div>
                 <div class="col">
-                    <searchInput :name="'Municipi'"></searchInput>
+                    <searchInput
+                        :name="'Municipi'"
+                        :options="municipis"
+                    ></searchInput>
                 </div>
             </div>
             <div class="row text-center mt-4" v-if="this.localitzacio">
@@ -385,6 +393,10 @@ export default {
     data: function () {
         return {
             localitzacio: null,
+            carta: {},
+            provincies: this.getProvincies(),
+            comarques: this.getComarques(),
+            municipis: this.getMunicipis(),
         };
     },
     components: {
@@ -398,13 +410,73 @@ export default {
     },
     methods: {
         insertCarta() {
-            alert("CARTA DONE!");
+            alert(JSON.stringify(this.carta));
         },
         removePopovers() {
             const popovers = document.querySelectorAll(".popover");
             popovers.forEach((popover) => {
                 popover.remove();
             });
+        },
+        getProvincies() {
+            const allProvincies = [];
+
+            axios
+                .get("provincia")
+                .then((response) => {
+                    for (const key in response.data) {
+                        const provincia = response.data[key];
+
+                        const newProvincia = {
+                            value: provincia.id,
+                            text: provincia.nom,
+                        };
+
+                        allProvincies.push(newProvincia);
+                    }
+                })
+                .catch((error) => {});
+            return allProvincies;
+        },
+        getComarques() {
+            const allComarques = [];
+
+            axios
+                .get("comarca")
+                .then((response) => {
+                    for (const key in response.data) {
+                        const comarca = response.data[key];
+
+                        const newComarca = {
+                            value: comarca.id,
+                            text: comarca.nom,
+                        };
+
+                        allComarques.push(newComarca);
+                    }
+                })
+                .catch((error) => {});
+            return allComarques;
+        },
+        getMunicipis() {
+            const allMunicipis = [];
+
+            axios
+                .get("municipi")
+                .then((response) => {
+                    for (const key in response.data) {
+                        const municipi = response.data[key];
+
+                        const newMunicipi = {
+                            value: municipi.id,
+                            text: municipi.nom,
+                        };
+
+                        allMunicipis.push(newMunicipi);
+                    }
+                })
+                .catch((error) => {});
+            return allMunicipis;
         },
     },
     updated() {
@@ -417,6 +489,9 @@ export default {
         const popoverList = [...popoverTriggerList].map(
             (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
         );
+    },
+    mounted() {
+        // this.getProvincies();
     },
 };
 </script>
