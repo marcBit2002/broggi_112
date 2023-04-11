@@ -22,13 +22,18 @@ export default {
     name: "dades",
     data: function () {
         return {
-            codi: "0000",
-            expedient: "0000",
             timer: 1,
             timerFormated: "00:00",
             timestamp: "--:--",
             date: "--/--/--",
         };
+    },
+    props: {
+        codi: null,
+        expedient: null,
+    },
+    watch: {
+        expedient() {},
     },
     methods: {
         getDay: function () {

@@ -4,7 +4,7 @@
             @tab="(i) => (this.activeTab = i)"
             :tab="this.activeTab"
         ></navegacio>
-        <dades></dades>
+        <dades :expedient="expedient" :codi="codi"></dades>
         <pagina
             @tab="(i) => (this.activeTab += i)"
             :tab="this.activeTab"
@@ -31,7 +31,55 @@ export default {
     data: function () {
         return {
             activeTab: 1,
+            codi: "----",
+            expedient: "----",
         };
+    },
+    methods: {
+        lastCartaId() {
+            axios
+                .get("carta")
+                .then((response) => {
+                    // Ultima carta de la BDD
+                    let lastCarta = response.data[response.data.length - 1];
+
+                    // Agafem el codi
+                    let codi = lastCarta.codi_trucada;
+
+                    // Eliminem la 'T' i sumem 1
+                    codi = Number(codi.substring(1)) + 1;
+
+                    //Afegim 'T' i guardem
+                    this.codi = "T" + codi;
+                })
+                .catch((error) => {
+                    this.codi = "NOT FOUND";
+                });
+        },
+        lastExpedientId() {
+            axios
+                .get("expedient")
+                .then((response) => {
+                    // Ultima carta de la BDD
+                    let lastExpedient = response.data[response.data.length - 1];
+
+                    // Agafem el codi
+                    let codi = lastExpedient.codi;
+
+                    // Eliminem la 'E' i sumem 1
+                    codi = Number(codi.substring(1)) + 1;
+
+                    //Afegim 'T' i guardem
+                    this.expedient = "E" + codi;
+                })
+                .catch((error) => {
+                    this.expedient = "NOT FOUND";
+                });
+        },
+    },
+    mounted() {
+        this.lastCartaId();
+        this.lastExpedientId();
     },
 };
 </script>

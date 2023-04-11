@@ -1,7 +1,6 @@
 <template>
     <div id="title">
         <p>Expedients</p>
-        <!-- <img src="/broggi_112/public/assets/icons/arrowDownWhite.svg" /> -->
     </div>
     <div id="expedients">
         <div class="expedient" v-for="expedient in expedients">
@@ -11,6 +10,7 @@
             <p>
                 {{ expedient.estat_expedients_id }}
             </p>
+            <p class="linkBtn" @click="linkExpedient(expedient.codi)"></p>
         </div>
     </div>
 </template>
@@ -38,6 +38,9 @@ export default {
                 .catch((err) => {
                     console.error(err);
                 });
+        },
+        linkExpedient(id) {
+            alert(`Linkem expedient ${id} !`);
         },
     },
     watch: {},
@@ -132,7 +135,7 @@ export default {
     }
 
     .expedient {
-        width: 80%;
+        width: 95%;
 
         border-radius: $components-border-radius;
         background-color: rgba($color: $primary, $alpha: 0.15);
@@ -143,6 +146,40 @@ export default {
         border: 3px solid $primary;
 
         margin-bottom: 10px;
+
+        &:hover {
+            box-shadow: 0px 0px 5px $danger;
+            border: 3px solid $danger;
+
+            .linkBtn {
+                background-color: $danger;
+            }
+        }
+        .linkBtn {
+            display: grid;
+            place-content: center;
+
+            height: 100%;
+            aspect-ratio: 1 / 1;
+            background-color: $primary;
+
+            border-radius: 0 6px 6px 0;
+
+            background-image: url("../../icons/expedientLink.svg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 55%;
+
+            transition: background-size 0.1s ease-in-out;
+
+            &:hover {
+                background-image: url("../../icons/expedientLinkActive.svg");
+
+                background-color: $danger;
+                cursor: pointer;
+                background-size: 60%;
+            }
+        }
     }
 }
 </style>
