@@ -28,19 +28,16 @@ export default {
             axios
                 .get("expedient")
                 .then((response) => {
-                    if (response.status === 500) {
-                        this.expedients =
-                            "Error 500, no es pot accedir a la base de dades.";
-                    } else {
-                        me.expedients = response.data;
-                    }
+                    me.expedients = response.data.filter(
+                        (i) => i.estat_expedients_id !== 4
+                    );
                 })
                 .catch((err) => {
-                    console.error(err);
+                    console.error("Error" + err);
                 });
         },
         linkExpedient(id) {
-            alert(`Linkem expedient ${id} !`);
+            this.$emit("expedient", id);
         },
     },
     watch: {},

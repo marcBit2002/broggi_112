@@ -8,9 +8,12 @@
         <pagina
             @tab="(i) => (this.activeTab += i)"
             :tab="this.activeTab"
+            :notaContent="this.notaContent"
         ></pagina>
-        <notaComuna></notaComuna>
-        <expedients></expedients>
+        <notaComuna
+            @notaContent="(content) => (this.notaContent = content)"
+        ></notaComuna>
+        <expedients @expedient="(num) => (this.expedient = num)"></expedients>
     </div>
 </template>
 <script>
@@ -33,6 +36,7 @@ export default {
             activeTab: 1,
             codi: "----",
             expedient: "----",
+            notaContent: "",
         };
     },
     methods: {

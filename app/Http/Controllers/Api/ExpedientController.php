@@ -16,7 +16,7 @@ class ExpedientController extends Controller
      */
     public function index()
     {
-        $expedients = Expedient::with('estatExpedient')->get();
+        $expedients = Expedient::with('estatExpedient')->with('cartesTrucades')->get();
         return ExpedientResource::collection($expedients);
     }
 

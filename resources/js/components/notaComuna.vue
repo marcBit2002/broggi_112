@@ -2,23 +2,27 @@
     <div id="notaComuna">
         <div>
             <p>Nota comuna</p>
-            <!-- <img src="/broggi_112/public/assets/icons/arrowDownWhite.svg" /> -->
         </div>
-        <!-- <img
-            id="notaArrow"
-            src="/broggi_112/public/assets/icons/notaArrow.svg"
-        /> -->
-        <textarea placeholder="Introduïr text..."></textarea>
+        <textarea
+            placeholder="Introduïr text..."
+            v-model="notaContent"
+            @input="sendContent(notaContent)"
+        ></textarea>
     </div>
 </template>
 <script>
 export default {
     name: "notaComuna",
     data: function () {
-        return {};
+        return {
+            notaContent: "",
+        };
     },
-    methods: {},
-    watch: {},
+    methods: {
+        sendContent(content) {
+            this.$emit("notaContent", content);
+        },
+    },
 };
 </script>
 <style lang="scss" scoped>

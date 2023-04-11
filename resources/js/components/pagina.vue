@@ -413,9 +413,12 @@ export default {
     },
     props: {
         tab: null,
+        notaContent: null,
     },
     watch: {
-        tab() {},
+        notaContent() {
+            this.carta.nota = this.notaContent;
+        },
     },
     methods: {
         insertCarta() {
