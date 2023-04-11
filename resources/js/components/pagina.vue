@@ -1,5 +1,6 @@
 <template>
     <div id="pagina">
+        <!-- -------------- IDENTIFICACIÓ -------------- -->
         <div class="content" v-if="this.tab == 1">
             <h1 id="title">Identificació</h1>
 
@@ -105,6 +106,8 @@
                 ></textarea>
             </div>
         </div>
+        <!-- -------------- LOCALITZACIÓ -------------- -->
+
         <div class="content" v-if="this.tab == 2">
             <h1 id="title">Localització</h1>
 
@@ -140,7 +143,7 @@
             </div>
 
             <div class="mb-3 row">
-                <label for="inputPassword" class="col-sm-4 col-form-label"
+                <label for="inputLocalitzacio" class="col-sm-4 col-form-label"
                     >Tipus localització:</label
                 >
                 <div class="col">
@@ -270,6 +273,8 @@
                 </div>
             </div>
         </div>
+        <!-- -------------- TIPIFICACIÓ -------------- -->
+
         <div class="content" v-if="this.tab == 3">
             <h1 id="title">Tipificació</h1>
             <div class="tipus-incidents">
@@ -345,9 +350,13 @@
                 </table>
             </div>
         </div>
+        <!-- -------------- DESPATX -------------- -->
+
         <div class="content" v-if="this.tab == 4">
             <h1 id="title">Despatx</h1>
         </div>
+        <!-- -------------- BUTTONS DESCARTAR/SEGüENT/FINALITZAR -------------- -->
+
         <div id="navigation_buttons">
             <a
                 type="button"

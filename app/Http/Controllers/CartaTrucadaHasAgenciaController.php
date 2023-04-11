@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CartaTrucada;
 use App\Models\EstatAgencia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\CartaTrucadaHasAgencia;
 
@@ -81,11 +82,20 @@ class CartaTrucadaHasAgenciaController extends Controller
     public function update(Request $request, CartaTrucada $infoCartum)
     {
         // dd($infoCartum);
-        foreach ($infoCartum->cartesTrucadesHasAgencies as $cartaHasAgencia) {
-            $estatAgenciaId = $request->input('estatAgencies' . $cartaHasAgencia->agencies_id);
-            $cartaHasAgencia->estat_agencies_id = settype($estatAgenciaId, 'integer');
-            $cartaHasAgencia->save();
+        $agenciesAntigues = $infoCartum->cartesTrucadesHasAgencies;
+        DB::beginTransaction();
+        foreach ($infoCartum->cartesTrucadesHasAgencies as $c) {
+            $c->delete();
         }
+
+        foreach ($agenciesAntigues as $cartaHasAgencia) {
+            $cha = new CartaTrucadaHasAgencia();
+            $cha->agencies_id = $cartaHasAgencia->agencies_id;
+            $estatAgenciaId = $request->input('estatAgencies' . $cartaHasAgencia->agencies_id);
+            $cha->estat_agencies_id = intval($estatAgenciaId);
+            $infoCartum->cartesTrucadesHasAgencies()->save($cha);
+        }
+        DB::commit();
         return view('infoCarta');
     }
 
