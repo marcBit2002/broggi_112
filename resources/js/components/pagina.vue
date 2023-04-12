@@ -888,61 +888,52 @@ export default {
         getProvincies() {
             const allProvincies = [];
 
-            axios
-                .get("provincia")
-                .then((response) => {
-                    for (const key in response.data) {
-                        const provincia = response.data[key];
+            axios.get("provincia").then((response) => {
+                for (const key in response.data) {
+                    const provincia = response.data[key];
 
-                        const newProvincia = {
-                            value: provincia.id,
-                            text: provincia.nom,
-                        };
+                    const newProvincia = {
+                        value: provincia.id,
+                        text: provincia.nom,
+                    };
 
-                        allProvincies.push(newProvincia);
-                    }
-                })
-                .catch((error) => {});
+                    allProvincies.push(newProvincia);
+                }
+            });
             return allProvincies;
         },
         getComarques() {
             const allComarques = [];
 
-            axios
-                .get("comarca")
-                .then((response) => {
-                    for (const key in response.data) {
-                        const comarca = response.data[key];
+            axios.get("comarca").then((response) => {
+                for (const key in response.data) {
+                    const comarca = response.data[key];
 
-                        const newComarca = {
-                            value: comarca.id,
-                            text: comarca.nom,
-                        };
+                    const newComarca = {
+                        value: comarca.id,
+                        text: comarca.nom,
+                    };
 
-                        allComarques.push(newComarca);
-                    }
-                })
-                .catch((error) => {});
+                    allComarques.push(newComarca);
+                }
+            });
             return allComarques;
         },
         getMunicipis() {
             const allMunicipis = [];
 
-            axios
-                .get("municipi")
-                .then((response) => {
-                    for (const key in response.data) {
-                        const municipi = response.data[key];
+            axios.get("municipi").then((response) => {
+                for (const key in response.data) {
+                    const municipi = response.data[key];
 
-                        const newMunicipi = {
-                            value: municipi.id,
-                            text: municipi.nom,
-                        };
+                    const newMunicipi = {
+                        value: municipi.id,
+                        text: municipi.nom,
+                    };
 
-                        allMunicipis.push(newMunicipi);
-                    }
-                })
-                .catch((error) => {});
+                    allMunicipis.push(newMunicipi);
+                }
+            });
             return allMunicipis;
         },
         getTipusVia() {

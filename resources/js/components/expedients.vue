@@ -2,14 +2,29 @@
     <div id="title">
         <p>Expedients</p>
     </div>
+
     <div id="expedients">
+        <div
+            v-if="expedients.length == 0"
+            class="spinner-border text-primary m-3"
+            role="status"
+        >
+            <span class="visually-hidden">Loading...</span>
+        </div>
         <div class="expedient" v-for="expedient in expedients">
-            <p>
-                {{ expedient.codi }}
-            </p>
-            <p>
-                {{ expedient.estat_expedients_id }}
-            </p>
+            <div class="info">
+                <p class="incident">
+                    {{ expedient.incident }}
+                </p>
+                <div>
+                    <p>
+                        {{ expedient.localitat }}
+                    </p>
+                    <p class="date">
+                        {{ this.formatearFecha(expedient.date) }}
+                    </p>
+                </div>
+            </div>
             <p class="linkBtn" @click="linkExpedient(expedient.codi)"></p>
         </div>
     </div>
@@ -22,6 +37,20 @@ export default {
             expedients: [],
         };
     },
+    props: {
+        allIncidents: null,
+        allMunicipis: null,
+    },
+    computed: {
+        dataIN() {
+            return this.allIncidents && this.allMunicipis;
+        },
+    },
+    watch: {
+        dataIN() {
+            this.getExpedients();
+        },
+    },
     methods: {
         getExpedients() {
             const me = this;
@@ -31,24 +60,73 @@ export default {
                     me.expedients = response.data.filter(
                         (i) => i.estat_expedients_id !== 4
                     );
+
+                    me.expedients.forEach((expedient) => {
+                        const tipos = [];
+                        const localitat = [];
+                        const dates = [];
+
+                        expedient.cartes_trucades.forEach((carta) => {
+                            tipos.push(carta.incidents_id);
+                            localitat.push(carta.municipis_id);
+
+                            var date = new Date(carta.data_hora_trucada);
+                            dates.push(date.getTime());
+                        });
+
+                        expedient.incident =
+                            this.allIncidents[
+                                this.findMostRepeated(tipos)
+                            ].tipus_incidents.nom;
+                        expedient.localitat =
+                            this.allMunicipis[
+                                this.findMostRepeated(localitat)
+                            ].nom;
+
+                        expedient.date = new Date(
+                            dates.reduce((a, b) => Math.min(a, b))
+                        );
+                    });
                 })
+                .then()
                 .catch((err) => {
                     console.error("Error" + err);
                 });
         },
+        formatearFecha(fecha) {
+            const opciones = {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+            };
+            return fecha.toLocaleDateString("es-ES", opciones);
+        },
         linkExpedient(id) {
             this.$emit("expedient", id);
         },
-    },
-    watch: {},
-    beforeMount() {
-        this.getExpedients();
-    },
-    mounted() {
-        window.addEventListener("resize", this.getDimensions);
-    },
-    unmounted() {
-        window.removeEventListener("resize", this.getDimensions);
+        findMostRepeated(array) {
+            let mostRepeated = null;
+            let count = 0;
+            let obj = array.reduce((acc, curr) => {
+                if (curr in acc) {
+                    acc[curr]++;
+                } else {
+                    acc[curr] = 1;
+                }
+                if (acc[curr] > count) {
+                    mostRepeated = curr;
+                    count = acc[curr];
+                }
+                return acc;
+            }, {});
+            return mostRepeated;
+        },
+        incidentIDtoNAME(id) {
+            return axios
+                .get("expedient", id)
+                .then((res) => res.data)
+                .catch((err) => console.error(err));
+        },
     },
 };
 </script>
@@ -98,15 +176,43 @@ export default {
 
     overflow-y: auto;
 
-    div {
+    .expedient {
         width: 100%;
         min-height: calc(45px + $components-border-width);
 
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
 
         scrollbar-width: 1px;
+
+        .info {
+            width: 100%;
+            text-align: left;
+            margin-left: 10px;
+
+            .incident {
+                font-style: italic;
+                font-weight: 700;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 29ch;
+            }
+
+            div {
+                display: flex;
+                justify-content: flex-start;
+
+                p:first-child {
+                    margin-right: 10px;
+                }
+
+                .date {
+                    color: $primary;
+                }
+            }
+        }
 
         &:first-child {
             margin-top: 10px;
@@ -116,7 +222,6 @@ export default {
         font-weight: 500;
 
         p {
-            margin-left: 25px;
             margin-bottom: 0;
         }
 

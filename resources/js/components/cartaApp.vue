@@ -14,7 +14,11 @@
         <notaComuna
             @notaContent="(content) => (this.notaContent = content)"
         ></notaComuna>
-        <expedients @expedient="(num) => (this.expedient = num)"></expedients>
+        <expedients
+            @expedient="(num) => (this.expedient = num)"
+            :allIncidents="this.allIncidents"
+            :allMunicipis="this.allMunicipis"
+        ></expedients>
     </div>
 </template>
 <script>
@@ -37,6 +41,9 @@ export default {
             activeTab: 1,
             codi: "----",
             expedient: "----",
+            notaContent: "",
+            allIncidents: null,
+            allMunicipis: null,
         };
     },
     methods: {
@@ -90,14 +97,35 @@ export default {
                     this.tipusIncidents = "NOT FOUND";
                 });
         },
-        
-        
+
+        getIncidents() {
+            axios
+                .get("incident")
+                .then((response) => {
+                    this.allIncidents = response.data;
+                })
+                .catch((err) => {
+                    console.error("Error" + err);
+                });
+        },
+        getMunicipis() {
+            axios
+                .get("municipi")
+                .then((response) => {
+                    this.allMunicipis = response.data;
+                })
+                .catch((err) => {
+                    console.error("Error" + err);
+                });
+        },
     },
 
     mounted() {
         this.newCartaId();
         this.newExpedientId();
         this.loadTipusIncidents();
+        this.getIncidents();
+        this.getMunicipis();
     },
 };
 </script>

@@ -56,7 +56,8 @@ class IncidentController extends Controller
      */
     public function show(Incident $incident)
     {
-        //
+        $incidents = Incident::with('tipus_incidents')->where('id', '=', $incident->id)->get();
+        return IncidentResource::collection($incidents);
     }
 
     /**
