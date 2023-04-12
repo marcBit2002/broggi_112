@@ -9,6 +9,7 @@
             @tab="(i) => (this.activeTab += i)"
             :tab="this.activeTab"
             :notaContent="this.notaContent"
+            :tipusIncidents="this.tipusIncidents"
         ></pagina>
         <notaComuna
             @notaContent="(content) => (this.notaContent = content)"
@@ -36,11 +37,10 @@ export default {
             activeTab: 1,
             codi: "----",
             expedient: "----",
-            notaContent: "",
         };
     },
     methods: {
-        lastCartaId() {
+        newCartaId() {
             axios
                 .get("carta")
                 .then((response) => {
@@ -60,7 +60,7 @@ export default {
                     this.codi = "NOT FOUND";
                 });
         },
-        lastExpedientId() {
+        newExpedientId() {
             axios
                 .get("expedient")
                 .then((response) => {
@@ -80,10 +80,24 @@ export default {
                     this.expedient = "NOT FOUND";
                 });
         },
+        loadTipusIncidents() {
+            axios
+                .get("tipusincident")
+                .then((response) => {
+                    this.tipusIncidents = response.data;
+                })
+                .catch((error) => {
+                    this.tipusIncidents = "NOT FOUND";
+                });
+        },
+        
+        
     },
+
     mounted() {
-        this.lastCartaId();
-        this.lastExpedientId();
+        this.newCartaId();
+        this.newExpedientId();
+        this.loadTipusIncidents();
     },
 };
 </script>

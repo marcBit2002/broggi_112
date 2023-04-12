@@ -651,22 +651,19 @@
             <h1 id="title">Tipificació</h1>
             <div class="tipus-incidents">
                 <table>
-                    <tr>
-                        <td>tipus</td>
-                        <td>tipus</td>
-                        <td>tipus</td>
-                        <td>tipus</td>
-                        <td>tipus</td>
-                    </tr>
-                    <tr>
-                        <td>tipus</td>
-                        <td>tipus</td>
-                        <td class="selected">tipus</td>
-                        <td>tipus</td>
-                        <td>tipus</td>
+                    <tr class="fila">
+                        <td
+                            v-for="(tipus, index) in tipusIncidents"
+                            :key="tipus.id"
+                            :class="{ selected: selectedId == tipus.id }"
+                            @click="loadIncident(tipus.id)"
+                        >
+                            {{ tipus.nom }}
+                        </td>
                     </tr>
                 </table>
             </div>
+            <!-- 
             <div class="search">
                 <div class="input-group">
                     <span
@@ -680,46 +677,104 @@
                         placeholder="Buscar"
                     />
                 </div>
+            </div> -->
+            <div v-if="selectedIncident">
+                <div class="incidents">
+                    <table>
+                        <tr class="fila">
+                            <td
+                                v-for="(incident, index) in incidents"
+                                :key="incident.id"
+                                @click="this.selectedIncident = false"
+                            >
+                                {{ incident.nom }}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div class="incidents">
-                <table>
-                    <tr>
-                        <td>tipus</td>
-                        <td>tipus</td>
-                    </tr>
-                    <tr>
-                        <td>tipus</td>
-                        <td>tipus</td>
-                    </tr>
-                    <tr>
-                        <td>tipus</td>
-                        <td>tipus</td>
-                    </tr>
-                    <tr>
-                        <td>tipus</td>
-                        <td>tipus</td>
-                    </tr>
-                    <tr>
-                        <td>tipus</td>
-                        <td>tipus</td>
-                    </tr>
-                    <tr>
-                        <td>tipus</td>
-                        <td class="selected">tipus</td>
-                    </tr>
-                    <tr>
-                        <td>tipus</td>
-                        <td>tipus</td>
-                    </tr>
-                    <tr>
-                        <td>tipus</td>
-                        <td>tipus</td>
-                    </tr>
-                    <tr>
-                        <td>tipus</td>
-                        <td>tipus</td>
-                    </tr>
-                </table>
+            <div v-else>
+                <div class="row g-3 align-items-center mb-2">
+                    <div class="col-sm-2 text-end ">
+                        <label for="codi" class="col-form-label"
+                            >Codi:</label
+                        >
+                    </div>
+                    <div class="col-sm-8">
+                        <input
+                            type="text"
+                            id="codi"
+                            class="form-control"
+                            v-model="carta.codi"
+                            disabled
+                        />
+                    </div>
+                </div>
+                <div class="row g-3 align-items-center mb-2">
+                    <div class="col-sm-2 text-end ">
+                        <label for="nom" class="col-form-label"
+                            >Nom:</label
+                        >
+                    </div>
+                    <div class="col-sm-8">
+                        <input
+                            type="text"
+                            id="nom"
+                            class="form-control"
+                            v-model="carta.nom"
+                            disabled
+                        />
+                    </div>
+                </div>
+                <div class="row g-3 align-items-center mb-2">
+                    <div class="col-sm-2 text-end">
+                        <label for="tipus" class="col-form-label">Tipus:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input
+                            type="text"
+                            id="tipus"
+                            class="form-control"
+                            v-model="carta.tipus"
+                            disabled
+                        />
+                    </div>
+                </div>
+                <div class="row g-3 align-items-center mb-3">
+                    <div class="col-sm-2 text-end">
+                        <label for="definicio" class="col-form-label"
+                            >Definició:</label
+                        >
+                    </div>
+                    <div class="col-sm-8">
+                        <textarea
+                            type="text"
+                            id="definicio"
+                            class="form-control"
+                            v-model="carta.definicio"
+                            disabled
+                            rows="3"
+                    
+                        />
+                    </div>
+                </div>
+                <div class="row g-3 align-items-center mb-4">
+                    <div class="col-sm-2 text-end">
+                        <label for="instruccions" class="col-form-label"
+                            >Instruccions:</label
+                        >
+                    </div>
+                    <div class="col-sm-8">
+                        <textarea
+                            type="text"
+                            id="instruccions"
+                            class="form-control"
+                            v-model="carta.instruccions"
+                            disabled
+                            rows="5"
+                        />
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -768,6 +823,7 @@
 import "../bootstrap";
 import * as bootstrap from "bootstrap";
 import searchInput from "./searchInput.vue";
+import axios from "axios";
 
 export default {
     name: "pagina",
@@ -780,6 +836,9 @@ export default {
             provincies: this.getProvincies(),
             comarques: this.getComarques(),
             municipis: this.getMunicipis(),
+            incidents: null,
+            selectedId: null,
+            selectedIncident: -1,
             tipusVia: this.getTipusVia(),
         };
     },
@@ -789,6 +848,7 @@ export default {
     props: {
         tab: null,
         notaContent: null,
+        tipusIncidents: null,
     },
     watch: {
         notaContent() {
@@ -905,7 +965,20 @@ export default {
                 .catch((error) => {});
             return allTipusVia;
         },
+        loadIncident(id) {
+            axios
+                .get(`incident?tipus_incidents_id=${id}`)
+                .then((response) => {
+                    this.incidents = response.data;
+                    this.selectedId = id;
+                    this.selectedIncident = true;
+                })
+                .catch((error) => {
+                    this.incidents = "NOT FOUND";
+                });
+        },
     },
+
     updated() {
         this.removePopovers();
 
@@ -938,7 +1011,6 @@ export default {
 
     padding: 1.6rem;
     background-color: #fff;
-
     overflow: auto;
 }
 
@@ -1041,28 +1113,35 @@ export default {
     table {
         width: 100%;
         height: 30px;
-
         margin-bottom: 1rem;
-
         border-radius: 0.5em;
         border: 2px solid $primary;
         overflow: hidden;
-
         text-align: center;
     }
-
-    th,
-    td {
+    .fila {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .fila td {
+        width: calc(20%); /* 20% para 5 iteraciones por fila*/
         padding: 5px;
         background: $primary;
         color: white;
         border: 2px solid white;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+        .selected {
+            color: $dark;
+            background-color: $warning;
+        }
     }
+}
 
-    .selected {
-        color: $dark;
-        background-color: $warning;
-    }
+.tipus-incidents td:hover {
+    background-color: $warning;
+    color: $dark;
 }
 
 .search {
@@ -1073,24 +1152,40 @@ export default {
 }
 
 .incidents {
+    overflow: auto;
+    max-height: 300px;
+    margin-bottom: 30px;
+
     table {
         width: 100%;
-
-        margin-top: 1rem;
-
-        border: 2px solid $primary;
-        overflow: hidden;
-
-        text-align: center;
     }
 
-    td {
+    .fila {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .fila td {
+        width: calc(33.33% - 4px);
+        height: auto;
+        padding: 10px;
+        margin-bottom: 5px;
+        border: 2px solid $primary;
+        background-color: white;
         color: $secondary;
-        border: 2px solid $primary;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
     }
 
-    .selected {
+    .fila td:hover {
         background-color: $warning;
+        color: $dark;
+    }
+
+    /* Espaciado entre filas */
+    .fila + .fila {
+        margin-top: 10px;
     }
 }
 

@@ -8,9 +8,10 @@ use App\Http\Controllers\Api\ComarcaController;
 use App\Http\Controllers\Api\IncidentController;
 use App\Http\Controllers\Api\MunicipiController;
 use App\Http\Controllers\Api\TipusViaController;
-use App\Http\Controllers\Api\TipusLocalitzacioController;
 use App\Http\Controllers\Api\ExpedientController;
 use App\Http\Controllers\Api\ProvinciaController;
+use App\Http\Controllers\Api\TipusIncidentController;
+use App\Http\Controllers\Api\TipusLocalitzacioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +37,4 @@ Route::apiResource('agencia', AgenciaController::class);
 Route::apiResource('incident', IncidentController::class);
 Route::apiResource('tipusVies', TipusViaController::class);
 Route::apiResource('tipusLocalitzacions', TipusLocalitzacioController::class);
+Route::apiResource('tipusincident', TipusIncidentController::class);

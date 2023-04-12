@@ -14,11 +14,28 @@ class IncidentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    // public function index()
+    // {
+    //     $incidents = Incident::with('tipus_incidents')->get();
+    //     return IncidentResource::collection($incidents);
+    // }
+    public function index(Request $request)
     {
-        $incidents = Incident::with('tipus_incidents')->get();
+        $tipus_incidents_id = $request->input('tipus_incidents_id');
+        if ($tipus_incidents_id) {
+            $incidents = Incident::with('tipus_incidents')->orderBy('nom', 'ASC')
+                ->where('tipus_incidents_id', $tipus_incidents_id)
+                ->get();
+        } else {
+            $incidents = Incident::with('tipus_incidents')->orderBy('nom', 'ASC')->get();
+        }
         return IncidentResource::collection($incidents);
     }
+
+    // http://localhost/broggi_112/public/api/incident?tipus_incidents_id=2
+
+
+
 
     /**
      * Store a newly created resource in storage.
