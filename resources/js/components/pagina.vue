@@ -695,10 +695,8 @@
             </div>
             <div v-else>
                 <div class="row g-3 align-items-center mb-2">
-                    <div class="col-sm-2 text-end ">
-                        <label for="codi" class="col-form-label"
-                            >Codi:</label
-                        >
+                    <div class="col-sm-2 text-end">
+                        <label for="codi" class="col-form-label">Codi:</label>
                     </div>
                     <div class="col-sm-8">
                         <input
@@ -711,10 +709,8 @@
                     </div>
                 </div>
                 <div class="row g-3 align-items-center mb-2">
-                    <div class="col-sm-2 text-end ">
-                        <label for="nom" class="col-form-label"
-                            >Nom:</label
-                        >
+                    <div class="col-sm-2 text-end">
+                        <label for="nom" class="col-form-label">Nom:</label>
                     </div>
                     <div class="col-sm-8">
                         <input
@@ -754,7 +750,6 @@
                             v-model="carta.definicio"
                             disabled
                             rows="3"
-                    
                         />
                     </div>
                 </div>
@@ -1116,6 +1111,21 @@ export default {
         justify-content: space-between;
     }
     .fila td {
+        &:nth-child(1) {
+            border-radius: $components-border-radius 0 0 0;
+        }
+        &:nth-child(5) {
+            border-radius: 0 $components-border-radius 0 0;
+        }
+        &:nth-child(6) {
+            border-radius: 0 0 0 $components-border-radius;
+        }
+        &:nth-child(10) {
+            border-radius: 0 0 $components-border-radius 0;
+        }
+        display: grid;
+        place-content: center;
+
         width: calc(20%); /* 20% para 5 iteraciones por fila*/
         padding: 5px;
         background: $primary;
