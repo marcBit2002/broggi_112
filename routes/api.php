@@ -5,10 +5,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CartaController;
 use App\Http\Controllers\Api\AgenciaController;
 use App\Http\Controllers\Api\ComarcaController;
+use App\Http\Controllers\Api\IncidentController;
 use App\Http\Controllers\Api\MunicipiController;
+use App\Http\Controllers\Api\TipusViaController;
+use App\Http\Controllers\Api\TipusLocalitzacioController;
 use App\Http\Controllers\Api\ExpedientController;
 use App\Http\Controllers\Api\ProvinciaController;
-use App\Http\Controllers\Api\IncidentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +34,5 @@ Route::apiResource('municipi', MunicipiController::class);
 Route::apiResource('carta', CartaController::class);
 Route::apiResource('agencia', AgenciaController::class);
 Route::apiResource('incident', IncidentController::class);
+Route::apiResource('tipusVies', TipusViaController::class);
+Route::apiResource('tipusLocalitzacions', TipusLocalitzacioController::class);

@@ -106,15 +106,15 @@
                 ></textarea>
             </div>
         </div>
-        <!-- -------------- LOCALITZACIÓ -------------- -->
 
+        <!-- -------------- LOCALITZACIÓ -------------- -->
         <div class="content" v-if="this.tab == 2">
             <h1 id="title">Localització</h1>
 
             <div class="mb-3 row">
-                <label for="inputPassword" class="col-sm-4 col-form-label"
-                    >Està a Catalunya?</label
-                >
+                <label for="inputPassword" class="col-sm-4 col-form-label">
+                    Està a Catalunya?
+                </label>
                 <div class="col-sm-8">
                     <div class="form-check">
                         <input
@@ -123,8 +123,13 @@
                             name="estaCatalunya"
                             id="estaCatalunya"
                             checked
+                            v-on:click="this.catalunya = true"
                         />
-                        <label class="form-check-label" for="estaCatalunya">
+                        <label
+                            class="form-check-label"
+                            for="estaCatalunya"
+                            v-on:click="this.catalunya = true"
+                        >
                             Si
                         </label>
                     </div>
@@ -134,8 +139,13 @@
                             type="radio"
                             name="estaCatalunya"
                             id="noEstaCatalunya"
+                            v-on:click="this.catalunya = false"
                         />
-                        <label class="form-check-label" for="noEstaCatalunya">
+                        <label
+                            class="form-check-label"
+                            for="noEstaCatalunya"
+                            v-on:click="this.catalunya = false"
+                        >
                             No
                         </label>
                     </div>
@@ -143,107 +153,69 @@
             </div>
 
             <div class="mb-3 row">
-                <label for="inputLocalitzacio" class="col-sm-4 col-form-label"
-                    >Tipus localització:</label
-                >
+                <label for="inputLocalitzacio" class="col-sm-4 col-form-label">
+                    Tipus localització:
+                </label>
                 <div class="col">
                     <div class="col row">
-                        <div class="form-check col">
-                            <input
-                                class="form-check-input"
-                                type="radio"
-                                name="localitzacio"
-                                id="carrer"
-                                v-on:click="this.localitzacio = 'DADES Carrer'"
-                            />
-                            <label
-                                class="form-check-label"
-                                for="carrer"
-                                v-on:click="this.localitzacio = 'DADES Carrer'"
-                            >
-                                Carrer
-                            </label>
-                        </div>
-                        <div class="form-check col">
-                            <input
-                                class="form-check-input"
-                                type="radio"
-                                name="localitzacio"
-                                id="puntSingular"
-                                v-on:click="
-                                    this.localitzacio = 'DADES Punt Singular'
-                                "
-                            />
-                            <label
-                                class="form-check-label"
-                                for="puntSingular"
-                                v-on:click="
-                                    this.localitzacio = 'DADES Punt Singular'
-                                "
-                            >
-                                Punt Singular
-                            </label>
-                        </div>
-                        <div class="form-check col">
-                            <input
-                                class="form-check-input"
-                                type="radio"
-                                name="localitzacio"
-                                id="carretera"
-                                v-on:click="
-                                    this.localitzacio = 'DADES Carretera'
-                                "
-                            />
-                            <label
-                                class="form-check-label"
-                                for="carretera"
-                                v-on:click="
-                                    this.localitzacio = 'DADES Carretera'
-                                "
-                            >
-                                Carretera
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col row">
-                        <div class="form-check col">
-                            <input
-                                class="form-check-input"
-                                type="radio"
-                                name="localitzacio"
-                                id="poblacio"
-                                v-on:click="
-                                    this.localitzacio =
-                                        'DADES ENTITAT / Població'
-                                "
-                            />
-                            <label
-                                class="form-check-label"
-                                for="poblacio"
-                                v-on:click="
-                                    this.localitzacio =
-                                        'DADES ENTITAT / Població'
-                                "
-                            >
-                                ENTITAT/Població
-                            </label>
-                        </div>
-                        <div class="form-check col">
-                            <input
-                                class="form-check-input"
-                                type="radio"
-                                name="localitzacio"
-                                id="comarca"
-                                v-on:click="this.localitzacio = 'DADES Comarca'"
-                            />
-                            <label
-                                class="form-check-label"
-                                for="comarca"
-                                v-on:click="this.localitzacio = 'DADES Comarca'"
-                            >
-                                Comarca
-                            </label>
-                        </div>
+                        <template v-for="item in tipusLocalitzacions">
+                            <div class="form-check col" v-if="this.catalunya">
+                                <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="localitzacio"
+                                    :id="item.id"
+                                    v-on:click="this.localitzacio = item.nom"
+                                />
+                                <label
+                                    class="form-check-label"
+                                    :for="item.id"
+                                    v-on:click="this.localitzacio = item.nom"
+                                >
+                                    {{ item.nom }}
+                                </label>
+                            </div>
+                            <div class="form-check col" v-else>
+                                <template v-if="item.nom == 'Comarca'">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="localitzacio"
+                                        :id="item.id"
+                                        :checked="
+                                            (this.localitzacio = item.nom)
+                                        "
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        :for="item.id"
+                                        v-on:click="
+                                            this.localitzacio = item.nom
+                                        "
+                                    >
+                                        {{ item.nom }}
+                                    </label>
+                                </template>
+                                <template v-else>
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="localitzacio"
+                                        :id="item.id"
+                                        disabled="true"
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        :for="item.id"
+                                        v-on:click="
+                                            this.localitzacio = item.nom
+                                        "
+                                    >
+                                        {{ item.nom }}
+                                    </label>
+                                </template>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -269,12 +241,412 @@
             </div>
             <div class="row text-center mt-4" v-if="this.localitzacio">
                 <div class="col" style="position: relative">
-                    <h3>{{ this.localitzacio }}</h3>
+                    <h3>DADES {{ this.localitzacio }}</h3>
+                    <div v-if="this.localitzacio === 'Carrer'">
+                        <div class="row g-3 align-items-center mt-2">
+                            <div class="col-sm-2 text-end">
+                                <label for="tipusVia" class="col-form-label"
+                                    >Tipus de via:</label
+                                >
+                            </div>
+                            <div class="col-sm-8">
+                                <searchInput
+                                    :name="'Tipus de Via'"
+                                    :options="tipusVia"
+                                ></searchInput>
+                            </div>
+                            <a
+                                tabindex="0"
+                                class="arki"
+                                role="button"
+                                data-bs-toggle="popover"
+                                data-bs-trigger="focus"
+                                data-bs-title="Help Box"
+                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                            >
+                                <img
+                                    src="/broggi_112/public/assets/icons/arki.svg"
+                                />
+                            </a>
+                        </div>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-sm-2 text-end">
+                                <label for="nomCarrer" class="col-form-label"
+                                    >Nom:</label
+                                >
+                            </div>
+                            <div class="col-sm-8">
+                                <input
+                                    type="text"
+                                    id="nomCarrer"
+                                    class="form-control"
+                                    v-model="carta.nomLocalitzacio"
+                                    required
+                                />
+                            </div>
+                            <a
+                                tabindex="0"
+                                class="arki"
+                                role="button"
+                                data-bs-toggle="popover"
+                                data-bs-trigger="focus"
+                                data-bs-title="Help Box"
+                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                            >
+                                <img
+                                    src="/broggi_112/public/assets/icons/arki.svg"
+                                />
+                            </a>
+                        </div>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-sm-2 text-end">
+                                <label for="numero" class="col-form-label"
+                                    >Número:</label
+                                >
+                            </div>
+                            <div class="col-sm-1">
+                                <input
+                                    type="text"
+                                    id="numero"
+                                    class="form-control"
+                                    v-model="carta.numero"
+                                    required
+                                />
+                            </div>
+                            <a
+                                tabindex="0"
+                                class="arki"
+                                role="button"
+                                data-bs-toggle="popover"
+                                data-bs-trigger="focus"
+                                data-bs-title="Help Box"
+                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                            >
+                                <img
+                                    src="/broggi_112/public/assets/icons/arki.svg"
+                                />
+                            </a>
+                            <div class="col-sm-1 text-end ms-2">
+                                <label for="escala" class="col-form-label"
+                                    >Escala:</label
+                                >
+                            </div>
+                            <div class="col-sm-1">
+                                <input
+                                    type="text"
+                                    id="escala"
+                                    class="form-control"
+                                    v-model="carta.escala"
+                                    required
+                                />
+                            </div>
+                            <a
+                                tabindex="0"
+                                class="arki"
+                                role="button"
+                                data-bs-toggle="popover"
+                                data-bs-trigger="focus"
+                                data-bs-title="Help Box"
+                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                            >
+                                <img
+                                    src="/broggi_112/public/assets/icons/arki.svg"
+                                />
+                            </a>
+                            <div class="col-sm-1 text-end ms-1">
+                                <label for="pis" class="col-form-label"
+                                    >Pis:</label
+                                >
+                            </div>
+                            <div class="col-sm-1">
+                                <input
+                                    type="text"
+                                    id="pis"
+                                    class="form-control"
+                                    v-model="carta.pis"
+                                    required
+                                />
+                            </div>
+                            <a
+                                tabindex="0"
+                                class="arki"
+                                role="button"
+                                data-bs-toggle="popover"
+                                data-bs-trigger="focus"
+                                data-bs-title="Help Box"
+                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                            >
+                                <img
+                                    src="/broggi_112/public/assets/icons/arki.svg"
+                                />
+                            </a>
+                            <div class="col-sm-1 text-end ms-2">
+                                <label for="porta" class="col-form-label"
+                                    >Porta:</label
+                                >
+                            </div>
+                            <div class="col-sm-1">
+                                <input
+                                    type="text"
+                                    id="porta"
+                                    class="form-control"
+                                    v-model="carta.porta"
+                                    required
+                                />
+                            </div>
+                            <a
+                                tabindex="0"
+                                class="arki"
+                                role="button"
+                                data-bs-toggle="popover"
+                                data-bs-trigger="focus"
+                                data-bs-title="Help Box"
+                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                            >
+                                <img
+                                    src="/broggi_112/public/assets/icons/arki.svg"
+                                />
+                            </a>
+                        </div>
+                        <div class="row g-3 align-items-center mt-2">
+                            <div class="col-sm-4 text-start">
+                                <label for="altresRef" class="col-form-label"
+                                    >Altres referències:</label
+                                >
+                            </div>
+                            <a
+                                tabindex="0"
+                                class="arki"
+                                role="button"
+                                data-bs-toggle="popover"
+                                data-bs-trigger="focus"
+                                data-bs-title="Help Box"
+                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                            >
+                                <img
+                                    src="/broggi_112/public/assets/icons/arki.svg"
+                                />
+                            </a>
+                            <textarea
+                                class="form-control"
+                                id="floatingTextarea"
+                                rows="2"
+                                v-model="carta.altresRef"
+                                required
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div v-if="this.localitzacio === 'Carretera'">
+                        <div class="row g-3 align-items-center mt-2">
+                            <div class="col-sm-2 text-end">
+                                <label for="nom" class="col-form-label"
+                                    >Nom:</label
+                                >
+                            </div>
+                            <div class="col-sm-8">
+                                <input
+                                    type="text"
+                                    id="nom"
+                                    class="form-control"
+                                    v-model="carta.nomLocalitzacio"
+                                    required
+                                />
+                            </div>
+                            <a
+                                tabindex="0"
+                                class="arki"
+                                role="button"
+                                data-bs-toggle="popover"
+                                data-bs-trigger="focus"
+                                data-bs-title="Help Box"
+                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                            >
+                                <img
+                                    src="/broggi_112/public/assets/icons/arki.svg"
+                                />
+                            </a>
+                        </div>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-sm-2 text-end">
+                                <label for="km" class="col-form-label"
+                                    >KM:</label
+                                >
+                            </div>
+                            <div class="col-sm-2">
+                                <input
+                                    type="text"
+                                    id="km"
+                                    class="form-control"
+                                    v-model="carta.km"
+                                    required
+                                />
+                            </div>
+                            <a
+                                tabindex="0"
+                                class="arki"
+                                role="button"
+                                data-bs-toggle="popover"
+                                data-bs-trigger="focus"
+                                data-bs-title="Help Box"
+                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                            >
+                                <img
+                                    src="/broggi_112/public/assets/icons/arki.svg"
+                                />
+                            </a>
+                            <div class="col-sm-1 text-end ms-5">
+                                <label for="sentit" class="col-form-label"
+                                    >Sentit:</label
+                                >
+                            </div>
+                            <div class="col-sm-2">
+                                <input
+                                    type="text"
+                                    id="sentit"
+                                    class="form-control"
+                                    v-model="carta.sentit"
+                                    required
+                                />
+                            </div>
+                            <a
+                                tabindex="0"
+                                class="arki"
+                                role="button"
+                                data-bs-toggle="popover"
+                                data-bs-trigger="focus"
+                                data-bs-title="Help Box"
+                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                            >
+                                <img
+                                    src="/broggi_112/public/assets/icons/arki.svg"
+                                />
+                            </a>
+                        </div>
+                        <div class="row g-3 align-items-center mt-2">
+                            <div class="col-sm-4 text-start">
+                                <label for="altresRef" class="col-form-label"
+                                    >Altres referències:</label
+                                >
+                            </div>
+                            <a
+                                tabindex="0"
+                                class="arki"
+                                role="button"
+                                data-bs-toggle="popover"
+                                data-bs-trigger="focus"
+                                data-bs-title="Help Box"
+                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                            >
+                                <img
+                                    src="/broggi_112/public/assets/icons/arki.svg"
+                                />
+                            </a>
+                            <textarea
+                                class="form-control"
+                                id="floatingTextarea"
+                                rows="2"
+                                v-model="carta.altresRef"
+                                required
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div v-if="this.localitzacio === 'Punt Singular'">
+                        <div class="row g-3 align-items-center mt-2">
+                            <div class="col-sm-2 text-end">
+                                <label for="nom" class="col-form-label"
+                                    >Nom:</label
+                                >
+                            </div>
+                            <div class="col-sm-8">
+                                <input
+                                    type="text"
+                                    id="nom"
+                                    class="form-control"
+                                    v-model="carta.nomLocalitzacio"
+                                    required
+                                />
+                            </div>
+                            <a
+                                tabindex="0"
+                                class="arki"
+                                role="button"
+                                data-bs-toggle="popover"
+                                data-bs-trigger="focus"
+                                data-bs-title="Help Box"
+                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                            >
+                                <img
+                                    src="/broggi_112/public/assets/icons/arki.svg"
+                                />
+                            </a>
+                        </div>
+                        <div class="row g-3 align-items-center mt-2">
+                            <div class="col-sm-4 text-start">
+                                <label for="altresRef" class="col-form-label"
+                                    >Altres referències:</label
+                                >
+                            </div>
+                            <a
+                                tabindex="0"
+                                class="arki"
+                                role="button"
+                                data-bs-toggle="popover"
+                                data-bs-trigger="focus"
+                                data-bs-title="Help Box"
+                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                            >
+                                <img
+                                    src="/broggi_112/public/assets/icons/arki.svg"
+                                />
+                            </a>
+                            <textarea
+                                class="form-control"
+                                id="floatingTextarea"
+                                rows="2"
+                                v-model="carta.altresRef"
+                                required
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div
+                        v-if="
+                            this.localitzacio === 'ENTITAT/Població' ||
+                            this.localitzacio == 'Comarca'
+                        "
+                    >
+                        <div class="row g-3 align-items-center mt-2">
+                            <div class="col-sm-4 text-start">
+                                <label for="altresRef" class="col-form-label"
+                                    >Altres referències:</label
+                                >
+                            </div>
+                            <a
+                                tabindex="0"
+                                class="arki"
+                                role="button"
+                                data-bs-toggle="popover"
+                                data-bs-trigger="focus"
+                                data-bs-title="Help Box"
+                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                            >
+                                <img
+                                    src="/broggi_112/public/assets/icons/arki.svg"
+                                />
+                            </a>
+                            <textarea
+                                class="form-control"
+                                id="floatingTextarea"
+                                rows="3"
+                                v-model="carta.altresRef"
+                                required
+                            ></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- -------------- TIPIFICACIÓ -------------- -->
 
+        <!-- -------------- TIPIFICACIÓ -------------- -->
         <div class="content" v-if="this.tab == 3">
             <h1 id="title">Tipificació</h1>
             <div class="tipus-incidents">
@@ -350,13 +722,13 @@
                 </table>
             </div>
         </div>
-        <!-- -------------- DESPATX -------------- -->
 
+        <!-- -------------- DESPATX -------------- -->
         <div class="content" v-if="this.tab == 4">
             <h1 id="title">Despatx</h1>
         </div>
-        <!-- -------------- BUTTONS DESCARTAR/SEGüENT/FINALITZAR -------------- -->
 
+        <!-- -------------- BOTONS DESCARTAR/SEGüENT/FINALITZAR -------------- -->
         <div id="navigation_buttons">
             <a
                 type="button"
@@ -401,11 +773,14 @@ export default {
     name: "pagina",
     data: function () {
         return {
+            catalunya: true,
+            tipusLocalitzacions: this.getTipusLocalitzacions(),
             localitzacio: null,
             carta: {},
             provincies: this.getProvincies(),
             comarques: this.getComarques(),
             municipis: this.getMunicipis(),
+            tipusVia: this.getTipusVia(),
         };
     },
     components: {
@@ -429,6 +804,26 @@ export default {
             popovers.forEach((popover) => {
                 popover.remove();
             });
+        },
+        getTipusLocalitzacions() {
+            const allLocalitzacions = [];
+
+            axios
+                .get("tipusLocalitzacions")
+                .then((response) => {
+                    for (const key in response.data) {
+                        const localitzacio = response.data[key];
+
+                        const newLocalitzacio = {
+                            id: localitzacio.id,
+                            nom: localitzacio.nom,
+                        };
+
+                        allLocalitzacions.push(newLocalitzacio);
+                    }
+                })
+                .catch((error) => {});
+            return allLocalitzacions;
         },
         getProvincies() {
             const allProvincies = [];
@@ -490,6 +885,26 @@ export default {
                 .catch((error) => {});
             return allMunicipis;
         },
+        getTipusVia() {
+            const allTipusVia = [];
+
+            axios
+                .get("tipusVies")
+                .then((response) => {
+                    for (const key in response.data) {
+                        const tipusVia = response.data[key];
+
+                        const newTipus = {
+                            value: tipusVia.id,
+                            text: tipusVia.nom,
+                        };
+
+                        allTipusVia.push(newTipus);
+                    }
+                })
+                .catch((error) => {});
+            return allTipusVia;
+        },
     },
     updated() {
         this.removePopovers();
@@ -523,6 +938,8 @@ export default {
 
     padding: 1.6rem;
     background-color: #fff;
+
+    overflow: auto;
 }
 
 #title {

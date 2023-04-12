@@ -64,9 +64,9 @@
             </table>
         </div>
 
-        @include('partials-incidents.modalDelete')
-        @include('partials-incidents.modalAdd')
-        @include('partials-incidents.modalEdit')
+        @include('partials-tipusIncidents.modalDelete')
+        @include('partials-tipusIncidents.modalAdd')
+        @include('partials-tipusIncidents.modalEdit')
 
 
 
