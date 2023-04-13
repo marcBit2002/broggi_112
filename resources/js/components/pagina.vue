@@ -685,7 +685,7 @@
                             <td
                                 v-for="(incident, index) in incidents"
                                 :key="incident.id"
-                                @click="this.selectedIncident = false"
+                                @click="loadIncidentInfo(incident.id)"
                             >
                                 {{ incident.nom }}
                             </td>
@@ -703,7 +703,7 @@
                             type="text"
                             id="codi"
                             class="form-control"
-                            v-model="carta.codi"
+                            :value="incidentInfo.codi"
                             disabled
                         />
                     </div>
@@ -714,11 +714,10 @@
                     </div>
                     <div class="col-sm-8">
                         <input
-                            type="text"
-                            id="nom"
-                            class="form-control"
-                            v-model="carta.nom"
                             disabled
+                            class="form-control"
+                            type="text"
+                            :value="incidentInfo.nom"
                         />
                     </div>
                 </div>
@@ -731,7 +730,7 @@
                             type="text"
                             id="tipus"
                             class="form-control"
-                            v-model="carta.tipus"
+                            :value="incidentInfo.tipus_incidents.nom"
                             disabled
                         />
                     </div>
@@ -747,7 +746,7 @@
                             type="text"
                             id="definicio"
                             class="form-control"
-                            v-model="carta.definicio"
+                            :value="incidentInfo.definicio"
                             disabled
                             rows="3"
                         />
@@ -764,7 +763,7 @@
                             type="text"
                             id="instruccions"
                             class="form-control"
-                            v-model="carta.instruccions"
+                            :value="incidentInfo.instruccions"
                             disabled
                             rows="5"
                         />
@@ -835,6 +834,7 @@ export default {
             selectedId: null,
             selectedIncident: -1,
             tipusVia: this.getTipusVia(),
+            incidentInfo: null,
         };
     },
     components: {
@@ -844,6 +844,7 @@ export default {
         tab: null,
         notaContent: null,
         tipusIncidents: null,
+        allIncidents: null,
     },
     watch: {
         notaContent() {
@@ -962,6 +963,12 @@ export default {
                 .catch((error) => {
                     this.incidents = "NOT FOUND";
                 });
+        },
+        loadIncidentInfo(id) {
+            this.incidentInfo = this.allIncidents.find(
+                (incident) => incident.id === id
+            );
+            this.selectedIncident = false;
         },
     },
 

@@ -1,3 +1,4 @@
+@import "variables";
  /* Estilos para el formulario de inicio de sesión */
  .container {
     width: 100vw;
@@ -6,15 +7,25 @@
     justify-content: center;
     align-items: center;
 }
+body{
+    background-image: url('/resources/img/background.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    backdrop-filter: blur(5px);
+}
 
 .login-form {
-    background-color: #ffffff;
+    background-color: white;
     border-radius: 8px;
-    border: solid #087CA7;
+    border: solid $primary;
     padding: 30px;
     max-width: 400px;
     margin-left: auto;
     margin-right: auto;
+    transform: translateX(-10vw);
+    box-shadow: 0 0 10px rgba($color: $primary, $alpha: 0.25);
 
 }
 
@@ -22,12 +33,12 @@
     font-size: 28px;
     font-weight: 600;
     margin-bottom: 30px;
-    color: #087CA7;
+    color: $primary;
 }
 
 .login-form p {
     text-align: center;
-    color: #767676;
+    color: $secondary;
     font-size: 14px;
     margin-bottom: 50px;
 }
@@ -41,12 +52,12 @@ label {
     font-weight: 600;
     margin-bottom: 10px;
     display: block;
-    color: #087CA7;
+    color: $primary;
 }
 
 .form-control {
     border: none;
-    border-bottom: 1px solid #087CA7;
+    border-bottom: 1px solid $primary;
     padding: 10px 15px;
     font-size: 16px;
     background: none;
@@ -56,7 +67,7 @@ label {
 }
 
 .form-control:focus {
-    border-color: #FFB300;
+    border-color: $warning;
 }
 
 .login-form button[type="submit"] {
@@ -85,5 +96,5 @@ label {
 }
 
 .input-group-addon i {
-    color: #FFB300;
+    color: $warning;
 }

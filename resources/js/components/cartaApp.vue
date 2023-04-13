@@ -10,6 +10,7 @@
             :tab="this.activeTab"
             :notaContent="this.notaContent"
             :tipusIncidents="this.tipusIncidents"
+            :allIncidents="this.allIncidents"
         ></pagina>
         <notaComuna
             @notaContent="(content) => (this.notaContent = content)"
