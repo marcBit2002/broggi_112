@@ -16,7 +16,7 @@ class TipusViaController extends Controller
      */
     public function index()
     {
-        $tipusVia = TipusVia::get();
+        $tipusVia = TipusVia::orderBy('id', 'ASC')->get();
         return TipusViaResource::collection($tipusVia);
     }
 

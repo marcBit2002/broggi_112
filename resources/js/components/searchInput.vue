@@ -30,6 +30,12 @@ export default {
             item: ".",
         };
     },
+    watch: {
+        item() {
+            this.$emit("searchValue", this.item);
+            console.log(this.item);
+        },
+    },
     components: {
         ModelSelect,
     },

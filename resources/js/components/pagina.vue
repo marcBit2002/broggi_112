@@ -222,20 +222,35 @@
             <div class="row">
                 <div class="col">
                     <searchInput
-                        :name="'Provincia'"
+                        :name="
+                            carta.provincia == null
+                                ? 'Provincia'
+                                : provincies[carta.provincia - 1].text
+                        "
                         :options="provincies"
+                        @searchValue="(id) => (carta.provincia = id)"
                     ></searchInput>
                 </div>
                 <div class="col">
                     <searchInput
-                        :name="'Comarca'"
+                        :name="
+                            carta.comarca == null
+                                ? 'Comarca'
+                                : comarques[carta.comarca - 1].text
+                        "
                         :options="comarques"
+                        @searchValue="(id) => (carta.comarca = id)"
                     ></searchInput>
                 </div>
                 <div class="col">
                     <searchInput
-                        :name="'Municipi'"
+                        :name="
+                            carta.municipi == null
+                                ? 'Municipi'
+                                : municipis[carta.municipi - 1].text
+                        "
                         :options="municipis"
+                        @searchValue="(id) => (carta.municipi = id)"
                     ></searchInput>
                 </div>
             </div>
@@ -251,8 +266,13 @@
                             </div>
                             <div class="col-sm-8">
                                 <searchInput
-                                    :name="'Tipus de Via'"
+                                    :name="
+                                        carta.tipusVia == null
+                                            ? 'Tipus de Via'
+                                            : tipusVia[carta.tipusVia - 1].text
+                                    "
                                     :options="tipusVia"
+                                    @searchValue="(id) => (carta.tipusVia = id)"
                                 ></searchInput>
                             </div>
                             <a
