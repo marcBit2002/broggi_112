@@ -775,6 +775,7 @@
         <!-- -------------- DESPATX -------------- -->
         <div class="content" v-if="this.tab == 4">
             <h1 id="title">Despatx</h1>
+            <mapa></mapa>
         </div>
 
         <!-- -------------- BOTONS DESCARTAR/SEGüENT/FINALITZAR -------------- -->
@@ -818,6 +819,7 @@ import "../bootstrap";
 import * as bootstrap from "bootstrap";
 import searchInput from "./searchInput.vue";
 import axios from "axios";
+import mapa from "./mapa.vue";
 
 export default {
     name: "pagina",
@@ -839,6 +841,7 @@ export default {
     },
     components: {
         searchInput,
+        mapa,
     },
     props: {
         tab: null,
@@ -1022,6 +1025,10 @@ export default {
     width: 100%;
 
     display: flex;
+    &>*{
+        margin-top: 30px;
+    }
+
     a {
         margin-right: auto;
     }
