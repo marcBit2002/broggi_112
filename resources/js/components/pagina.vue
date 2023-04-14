@@ -1025,7 +1025,7 @@ export default {
     width: 100%;
 
     display: flex;
-    &>*{
+    & > * {
         margin-top: 30px;
     }
 
