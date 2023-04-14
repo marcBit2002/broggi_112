@@ -11,6 +11,7 @@
             :notaContent="this.notaContent"
             :tipusIncidents="this.tipusIncidents"
             :allIncidents="this.allIncidents"
+            
         ></pagina>
         <notaComuna
             @notaContent="(content) => (this.notaContent = content)"
@@ -29,6 +30,7 @@ import expedients from "./expedients.vue";
 import navegacio from "./navegacio.vue";
 import pagina from "./pagina.vue";
 import dades from "./dades.vue";
+
 export default {
     name: "cartaApp",
     components: {
