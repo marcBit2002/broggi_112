@@ -23,8 +23,8 @@
                 <div class="form-group">
                     <label for="username">usuari</label>
                     <div class="input-group">
-                        <input type="text" maxlength="37" class="form-control" id="username" name="username"
-                            value="{{ old('username') }}" autofocus>
+                        <input type="text" maxlength="37" required class="form-control" id="username"
+                            name="username" value="{{ old('username') }}" autofocus>
                         <span class="input-group-addon"><i class="bi bi-person"></i></span>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                     <label for="contrasenya">constrasenya</label>
                     <div class="input-group">
                         <input type="password" maxlength="37" class="form-control" id="contrasenya" name="contrasenya"
-                            value="{{ old('contrasenya') }}">
+                            required value="{{ old('contrasenya') }}">
                         <span class="input-group-addon"><i class="bi bi-lock"></i></span>
                     </div>
                 </div>

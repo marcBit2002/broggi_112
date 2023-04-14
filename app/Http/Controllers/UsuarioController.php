@@ -15,14 +15,14 @@ class UsuarioController extends Controller
     /* ---------- Methods CRUD ---------- */
     public function index()
     {
-
-        $usuaris = Usuario::orderBy('nom', 'ASC')->paginate(6);
+        $loggedInUser = Auth::user();
+        $usuaris = Usuario::where('id', '<>', $loggedInUser->id)->orderBy('nom', 'ASC')->paginate(6);
         $roles = TiposUsuario::orderBy('id', 'ASC')->get();
-
         $activeNav = "usuaris";
 
         return view('usuaris', compact('usuaris', 'roles', 'activeNav'));
     }
+
 
     public function create()
     {

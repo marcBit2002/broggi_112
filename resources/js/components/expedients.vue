@@ -11,7 +11,7 @@
         >
             <span class="visually-hidden">Loading...</span>
         </div>
-        <div class="expedient" v-for="expedient in expedients">
+        <div class="expedient" v-for="(expedient, index) in expedients">
             <div class="info">
                 <p class="incident">
                     {{ expedient.incident }}
@@ -25,16 +25,18 @@
                     </p>
                 </div>
             </div>
-            <p class="linkBtn" @click="linkExpedient(expedient.codi)"></p>
+            <p class="linkBtn" v-bind:class="{ 'selected': isSelected === index }" @click="linkExpedient(expedient.codi,index)"></p>
         </div>
     </div>
 </template>
 <script>
 export default {
     name: "expedients",
-    data: function () {
+    data () {
         return {
             expedients: [],
+            isSelected: -1,
+            
         };
     },
     props: {
@@ -101,9 +103,13 @@ export default {
             };
             return fecha.toLocaleDateString("es-ES", opciones);
         },
-        linkExpedient(id) {
+        linkExpedient(id,index) {
             this.$emit("expedient", id);
+            console.log(id, this.isSelected);
+            this.isSelected = index;
+ 
         },
+        
         findMostRepeated(array) {
             let mostRepeated = null;
             let count = 0;
@@ -176,6 +182,10 @@ export default {
 
     overflow-y: auto;
 
+    .selected {
+        color: green ;
+        background-color: red !important;
+    }
     .expedient {
         width: 100%;
         min-height: calc(45px + $components-border-width);
