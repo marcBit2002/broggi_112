@@ -9,6 +9,14 @@ $side_nav_width: 250px;
     align-items: start;
 }
 
+#nav-logo {
+    padding: 0;
+
+    img {
+        width: 115px;
+    }
+}
+
 #nav_container {
     width: $side_nav_width;
 

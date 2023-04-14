@@ -19,6 +19,7 @@
             @expedient="(num) => (this.expedient = num)"
             :allIncidents="this.allIncidents"
             :allMunicipis="this.allMunicipis"
+            :expedientId="expedient"
         ></expedients>
     </div>
 </template>

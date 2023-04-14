@@ -11,7 +11,12 @@
         >
             <span class="visually-hidden">Loading...</span>
         </div>
-        <div class="expedient" v-for="(expedient, index) in expedients">
+        <div
+            class="expedient"
+            v-for="expedient in expedients"
+            :class="{ selected: expedient.codi == expedientId }"
+            @click="linkExpedient(expedient.codi)"
+        >
             <div class="info">
                 <p class="incident">
                     {{ expedient.incident }}
@@ -25,23 +30,23 @@
                     </p>
                 </div>
             </div>
-            <p class="linkBtn" v-bind:class="{ 'selected': isSelected === index }" @click="linkExpedient(expedient.codi,index)"></p>
+            <p class="linkBtn"></p>
         </div>
     </div>
 </template>
 <script>
 export default {
     name: "expedients",
-    data () {
+    data() {
         return {
             expedients: [],
-            isSelected: -1,
-            
+            originalExpedientId: null,
         };
     },
     props: {
         allIncidents: null,
         allMunicipis: null,
+        expedientId: null,
     },
     computed: {
         dataIN() {
@@ -51,6 +56,13 @@ export default {
     watch: {
         dataIN() {
             this.getExpedients();
+        },
+        expedientId() {
+            // Guardardamos el numero la primera vez que el watch de un cambio (id pasa de '----' a codigo)
+            // El resto de veces que watch ve un cambio, no queremos actualizar el id original
+            if (this.originalExpedientId === null) {
+                this.originalExpedientId = this.expedientId;
+            }
         },
     },
     methods: {
@@ -103,13 +115,15 @@ export default {
             };
             return fecha.toLocaleDateString("es-ES", opciones);
         },
-        linkExpedient(id,index) {
-            this.$emit("expedient", id);
-            console.log(id, this.isSelected);
-            this.isSelected = index;
- 
+        linkExpedient(id) {
+            if (this.expedientId != id) {
+                this.$emit("expedient", id);
+            } else {
+                this.$emit("expedient", this.originalExpedientId);
+            }
+            console.log(id);
         },
-        
+
         findMostRepeated(array) {
             let mostRepeated = null;
             let count = 0;
@@ -183,8 +197,22 @@ export default {
     overflow-y: auto;
 
     .selected {
-        color: green ;
-        background-color: red !important;
+        box-shadow: 0px 0px 5px $danger !important;
+        border: 3px solid $danger !important;
+
+        background-color: rgba($color: $danger, $alpha: 0.05) !important;
+
+        .linkBtn {
+            background-color: $danger !important;
+
+            background-image: url("../../icons/expedientLinkActive.svg") !important;
+
+            background-size: 60% !important;
+        }
+
+        .info div p:last-child {
+            color: $danger !important;
+        }
     }
     .expedient {
         width: 100%;
@@ -259,6 +287,8 @@ export default {
 
         margin-bottom: 10px;
 
+        cursor: pointer;
+
         &:hover {
             box-shadow: 0px 0px 5px $danger;
             border: 3px solid $danger;
@@ -288,7 +318,6 @@ export default {
                 background-image: url("../../icons/expedientLinkActive.svg");
 
                 background-color: $danger;
-                cursor: pointer;
                 background-size: 60%;
             }
         }

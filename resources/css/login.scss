@@ -1,14 +1,14 @@
 @import "variables";
- /* Estilos para el formulario de inicio de sesión */
- .container {
+/* Estilos para el formulario de inicio de sesión */
+.container {
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-body{
-    background-image: url('/resources/img/background.svg');
+body {
+    background-image: url("/resources/img/background.svg");
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
@@ -21,26 +21,29 @@ body{
     border-radius: 8px;
     border: solid $primary;
     padding: 30px;
-    max-width: 400px;
+    max-width: 410px;
     margin-left: auto;
     margin-right: auto;
     transform: translateX(-10vw);
     box-shadow: 0 0 10px rgba($color: $primary, $alpha: 0.25);
 
-}
+    p {
+        text-align: center;
+        color: $secondary;
+        font-size: 14px;
+        margin-bottom: 50px;
+    }
 
-.login-form h4 {
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 30px;
-    color: $primary;
-}
+    h4 {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 30px;
+        color: $primary;
 
-.login-form p {
-    text-align: center;
-    color: $secondary;
-    font-size: 14px;
-    margin-bottom: 50px;
+        img {
+            height: 50px;
+        }
+    }
 }
 
 .form-group {
@@ -77,7 +80,7 @@ label {
     font-size: 12px;
     font-weight: 400;
     margin-top: 30px;
-    width: 100%
+    width: 100%;
 }
 
 .login-form button[type="submit"]:hover {

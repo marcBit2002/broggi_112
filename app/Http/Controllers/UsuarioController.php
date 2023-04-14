@@ -106,7 +106,12 @@ class UsuarioController extends Controller
     /* ---------- Methods LOGIN ---------- */
     public function showLogin()
     {
-        return view('login');
+        if (Auth::check()) {
+            return redirect('menu');
+            // return view('menu');
+        } else {
+            return view('login');
+        }
     }
 
     public function login(Request $request)

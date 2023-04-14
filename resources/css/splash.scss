@@ -5,6 +5,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    img {
+        height: 175px;
+        transform: translate(-20px, -10px);
+    }
 }
 
 .spinner-border {

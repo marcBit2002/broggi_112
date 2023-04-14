@@ -12,16 +12,14 @@
 
 <body>
     <div class="splash">
-        <div class="spinner-border text-primary" role="status">
-            {{-- <span class="sr-only"></span> --}}
-        </div>
+        <img src="{{ Vite::asset('resources/img/loadingBroggi112.gif') }}">
     </div>
 
 </body>
 <script>
     setTimeout(function() {
         window.location.href = "{{ route('login') }}";
-    }, 2000); // Redirigir después de 5 segundos
+    }, 3000); // Redirigir después de 5 segundos
 </script>
 
 

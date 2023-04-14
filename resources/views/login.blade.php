@@ -12,12 +12,13 @@
 <body>
 
     <div class="container">
-        <div class="col-md-6 col-sm-10">
+        <div class="col-sm-10">
             @include('layouts.mensajes')
             <form class="login-form " action="{{ action([App\Http\Controllers\UsuarioController::class, 'login']) }}"
                 method="post">
                 @csrf
-                <h4 class="text-center mb-4">Benvingut a <strong>BROGGI-112</strong></h4>
+                <h4 class="text-center mb-4">Benvingut a <img src="{{ Vite::asset('resources/img/LogoBroggi.svg') }}">
+                </h4>
                 <p>Introdueix les dades per accedir</p>
 
                 <div class="form-group">
