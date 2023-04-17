@@ -32,9 +32,8 @@ Route::get('/login', [UsuarioController::class, 'showLogin'])->name('login');
 Route::post('/login', [UsuarioController::class, 'login']);
 Route::get('/logout', [UsuarioController::class, 'logout']);
 
-
-Route::get('carta', function () {
-    return view('carta');
+Route::get('stats', function () {
+    return view('stats');
 });
 
 Route::middleware(['auth'])->group(function () {

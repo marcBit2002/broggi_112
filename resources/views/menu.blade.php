@@ -42,7 +42,7 @@
                 </a>
             @endif
 
-            <a href="">
+            <a href="{{ url('stats') }}">
                 <img src="{{ Vite::asset('resources/icons/stats.svg') }}">
                 <p>estadístiques</p>
             </a>

@@ -17,6 +17,7 @@
         "@vitejs/plugin-vue": "^4.0.0",
         "bootstrap": "^5.2.3",
         "bootstrap-icons": "^1.10.3",
+        "chart.js": "^4.2.1",
         "vue": "^3.2.47",
         "vue-loader": "^17.0.1",
         "vue-search-select": "^3.1.0"

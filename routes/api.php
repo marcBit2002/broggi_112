@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\UsuarioController;
 use App\Http\Controllers\Api\CartaController;
 use App\Http\Controllers\Api\AgenciaController;
 use App\Http\Controllers\Api\ComarcaController;
@@ -38,3 +39,4 @@ Route::apiResource('incident', IncidentController::class);
 Route::apiResource('tipusVies', TipusViaController::class);
 Route::apiResource('tipusLocalitzacions', TipusLocalitzacioController::class);
 Route::apiResource('tipusincident', TipusIncidentController::class);
+Route::apiResource('usuario', UsuarioController::class);

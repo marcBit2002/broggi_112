@@ -140,6 +140,7 @@
                             name="estaCatalunya"
                             id="noEstaCatalunya"
                             v-on:click="this.catalunya = false"
+                            :checked="!this.catalunya"
                         />
                         <label
                             class="form-check-label"
@@ -160,20 +161,42 @@
                     <div class="col row">
                         <template v-for="item in tipusLocalitzacions">
                             <div class="form-check col" v-if="this.catalunya">
-                                <input
-                                    class="form-check-input"
-                                    type="radio"
-                                    name="localitzacio"
-                                    :id="item.id"
-                                    v-on:click="this.localitzacio = item.nom"
-                                />
-                                <label
-                                    class="form-check-label"
-                                    :for="item.id"
-                                    v-on:click="this.localitzacio = item.nom"
-                                >
-                                    {{ item.nom }}
-                                </label>
+                                <template v-if="item.nom == 'Provincia'">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="localitzacio"
+                                        :id="item.id"
+                                        disabled="true"
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        :for="item.id"
+                                        v-on:click="
+                                            this.localitzacio = item.nom
+                                        "
+                                    >
+                                        {{ item.nom }}
+                                    </label>
+                                </template>
+                                <template v-else>
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="localitzacio"
+                                        :id="item.id"
+                                        
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        :for="item.id"
+                                        v-on:click="
+                                            this.localitzacio = item.nom
+                                        "
+                                    >
+                                        {{ item.nom }}
+                                    </label>
+                                </template>
                             </div>
                             <div class="form-check col" v-else>
                                 <template v-if="item.nom == 'Provincia'">
@@ -184,6 +207,9 @@
                                         :id="item.id"
                                         :checked="
                                             (this.localitzacio = item.nom)
+                                        "
+                                        v-on:click="
+                                            this.localitzacio = item.nom
                                         "
                                     />
                                     <label
@@ -861,6 +887,7 @@ export default {
             selectedIncident: -1,
             tipusVia: this.getTipusVia(),
             incidentInfo: null,
+            
         };
     },
     components: {
