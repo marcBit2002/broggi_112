@@ -980,16 +980,12 @@ export default {
             return allTipusVia;
         },
         loadIncident(id) {
-            axios
-                .get(`incident?tipus_incidents_id=${id}`)
-                .then((response) => {
-                    this.incidents = response.data;
-                    this.selectedId = id;
-                    this.selectedIncident = true;
-                })
-                .catch((error) => {
-                    this.incidents = "NOT FOUND";
-                });
+            this.incidents = this.allIncidents.filter(
+                (i) => i["tipus_incidents"].id == id
+            );
+
+            this.selectedId = id;
+            this.selectedIncident = true;
         },
         loadIncidentInfo(id) {
             this.incidentInfo = this.allIncidents.find(
@@ -1192,7 +1188,8 @@ export default {
 }
 
 .incidents {
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     max-height: 300px;
     margin-bottom: 30px;
 
