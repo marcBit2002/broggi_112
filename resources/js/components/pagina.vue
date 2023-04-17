@@ -176,7 +176,7 @@
                                 </label>
                             </div>
                             <div class="form-check col" v-else>
-                                <template v-if="item.nom == 'Comarca'">
+                                <template v-if="item.nom == 'Provincia'">
                                     <input
                                         class="form-check-input"
                                         type="radio"
@@ -231,7 +231,7 @@
                         @searchValue="(id) => (carta.provincia = id)"
                     ></searchInput>
                 </div>
-                <div class="col">
+                <div class="col" v-if="catalunya">
                     <searchInput
                         :name="
                             carta.comarca == null
@@ -631,7 +631,7 @@
                     <div
                         v-if="
                             this.localitzacio === 'ENTITAT/Població' ||
-                            this.localitzacio == 'Comarca'
+                            this.localitzacio == 'Provincia'
                         "
                     >
                         <div class="row g-3 align-items-center mt-2">
