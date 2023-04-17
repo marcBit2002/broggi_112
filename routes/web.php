@@ -41,6 +41,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('menu', function () {
         return view('menu');
     });
+    Route::get('carta', function () {
+        return view('carta');
+    });
 });
 
 Route::middleware(['auth', 'authAdmin'])->group(function () {

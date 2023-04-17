@@ -992,6 +992,7 @@ export default {
                 (incident) => incident.id === id
             );
             this.selectedIncident = false;
+            this.carta.incidentId = id;
         },
     },
 
