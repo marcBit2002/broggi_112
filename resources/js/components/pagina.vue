@@ -168,6 +168,9 @@
                                         name="localitzacio"
                                         :id="item.id"
                                         disabled="true"
+                                        v-on:click="
+                                            this.localitzacio = item.nom
+                                        "
                                     />
                                     <label
                                         class="form-check-label"
@@ -185,7 +188,9 @@
                                         type="radio"
                                         name="localitzacio"
                                         :id="item.id"
-                                        
+                                        v-on:click="
+                                            this.localitzacio = item.nom
+                                        "
                                     />
                                     <label
                                         class="form-check-label"
@@ -229,6 +234,9 @@
                                         name="localitzacio"
                                         :id="item.id"
                                         disabled="true"
+                                        v-on:click="
+                                            this.localitzacio = item.nom
+                                        "
                                     />
                                     <label
                                         class="form-check-label"
@@ -887,7 +895,6 @@ export default {
             selectedIncident: -1,
             tipusVia: this.getTipusVia(),
             incidentInfo: null,
-            
         };
     },
     components: {
