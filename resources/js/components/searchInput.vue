@@ -8,6 +8,11 @@
                         :options="this.options"
                         v-model="item"
                         :placeholder="name"
+                        v-bind:class="
+                            name == defaultPlaceholder
+                                ? 'defaultPlaceholder'
+                                : ''
+                        "
                     >
                     </model-select>
                 </div>
@@ -24,6 +29,7 @@ export default {
     props: {
         name: null,
         options: Array,
+        defaultPlaceholder: String,
     },
     data() {
         return {
@@ -654,10 +660,7 @@ select.ui.dropdown {
         transform: rotate(360deg);
     }
 }
-.ui.dropdown:not(.button) > .default.text,
-.ui.default.dropdown:not(.button) > .text {
-    color: rgba($color: $dark, $alpha: 0.5);
-}
+
 .ui.dropdown:not(.button) > input:focus ~ .default.text,
 .ui.default.dropdown:not(.button) > input:focus ~ .text {
     color: rgba($color: $primary, $alpha: 1);
@@ -1271,5 +1274,11 @@ a.ui.label {
 }
 .ui.multiple.dropdown > .label i.icon.delete:after {
     transform: rotate(-45deg);
+}
+
+.defaultPlaceholder .text {
+    color: rgba($color: $dark, $alpha: 0.75) !important;
+    font-weight: 500 !important;
+    font-style: italic;
 }
 </style>

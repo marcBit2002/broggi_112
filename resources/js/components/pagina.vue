@@ -228,6 +228,7 @@
                                 : provincies[carta.provincia - 1].text
                         "
                         :options="provincies"
+                        :defaultPlaceholder="'Provincia'"
                         @searchValue="(id) => (carta.provincia = id)"
                     ></searchInput>
                 </div>
@@ -239,6 +240,7 @@
                                 : comarques[carta.comarca - 1].text
                         "
                         :options="comarques"
+                        :defaultPlaceholder="'Comarca'"
                         @searchValue="(id) => (carta.comarca = id)"
                     ></searchInput>
                 </div>
@@ -250,6 +252,7 @@
                                 : municipis[carta.municipi - 1].text
                         "
                         :options="municipis"
+                        :defaultPlaceholder="'Municipi'"
                         @searchValue="(id) => (carta.municipi = id)"
                     ></searchInput>
                 </div>
@@ -272,6 +275,7 @@
                                             : tipusVia[carta.tipusVia - 1].text
                                     "
                                     :options="tipusVia"
+                                    :defaultPlaceholder="'Tipus de Via'"
                                     @searchValue="(id) => (carta.tipusVia = id)"
                                 ></searchInput>
                             </div>
