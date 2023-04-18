@@ -18,7 +18,7 @@
                     />
                 </div>
                 <a
-                    tabindex="0"
+                    tabindex="-1"
                     class="arki"
                     role="button"
                     data-bs-toggle="popover"
@@ -43,7 +43,7 @@
                     />
                 </div>
                 <a
-                    tabindex="0"
+                    tabindex="-1"
                     class="arki"
                     role="button"
                     data-bs-toggle="popover"
@@ -68,7 +68,7 @@
                     />
                 </div>
                 <a
-                    tabindex="0"
+                    tabindex="-1"
                     class="arki"
                     role="button"
                     data-bs-toggle="popover"
@@ -87,7 +87,7 @@
                     >
                 </div>
                 <a
-                    tabindex="0"
+                    tabindex="-1"
                     class="arki"
                     role="button"
                     data-bs-toggle="popover"
@@ -160,95 +160,55 @@
                 <div class="col">
                     <div class="col row">
                         <template v-for="item in tipusLocalitzacions">
-                            <div class="form-check col" v-if="this.catalunya">
-                                <template v-if="item.nom == 'Provincia'">
+                            <template v-if="item.nom !== 'Provincia'">
+                                <div class="form-check col">
                                     <input
                                         class="form-check-input"
                                         type="radio"
                                         name="localitzacio"
                                         :id="item.id"
-                                        disabled="true"
-                                        v-on:click="
-                                            this.localitzacio = item.nom
-                                        "
+                                        :disabled="!this.catalunya"
+                                        v-on:click="carta.localitzacio = item"
                                     />
                                     <label
                                         class="form-check-label"
                                         :for="item.id"
+                                        :disabled="!this.catalunya"
                                         v-on:click="
-                                            this.localitzacio = item.nom
+                                            this.catalunya
+                                                ? (carta.localitzacio = item)
+                                                : ''
                                         "
                                     >
                                         {{ item.nom }}
                                     </label>
-                                </template>
-                                <template v-else>
+                                </div>
+                            </template>
+                            <template v-else>
+                                <div class="form-check col">
                                     <input
                                         class="form-check-input"
                                         type="radio"
                                         name="localitzacio"
                                         :id="item.id"
-                                        v-on:click="
-                                            this.localitzacio = item.nom
-                                        "
+                                        :disabled="this.catalunya"
+                                        :checked="!this.catalunya"
+                                        v-on:click="carta.localitzacio = item"
                                     />
                                     <label
                                         class="form-check-label"
                                         :for="item.id"
+                                        :disabled="this.catalunya"
                                         v-on:click="
-                                            this.localitzacio = item.nom
+                                            !this.catalunya
+                                                ? (carta.localitzacio = item)
+                                                : ''
                                         "
                                     >
                                         {{ item.nom }}
                                     </label>
-                                </template>
-                            </div>
-                            <div class="form-check col" v-else>
-                                <template v-if="item.nom == 'Provincia'">
-                                    <input
-                                        class="form-check-input"
-                                        type="radio"
-                                        name="localitzacio"
-                                        :id="item.id"
-                                        :checked="
-                                            (this.localitzacio = item.nom)
-                                        "
-                                        v-on:click="
-                                            this.localitzacio = item.nom
-                                        "
-                                    />
-                                    <label
-                                        class="form-check-label"
-                                        :for="item.id"
-                                        v-on:click="
-                                            this.localitzacio = item.nom
-                                        "
-                                    >
-                                        {{ item.nom }}
-                                    </label>
-                                </template>
-                                <template v-else>
-                                    <input
-                                        class="form-check-input"
-                                        type="radio"
-                                        name="localitzacio"
-                                        :id="item.id"
-                                        disabled="true"
-                                        v-on:click="
-                                            this.localitzacio = item.nom
-                                        "
-                                    />
-                                    <label
-                                        class="form-check-label"
-                                        :for="item.id"
-                                        v-on:click="
-                                            this.localitzacio = item.nom
-                                        "
-                                    >
-                                        {{ item.nom }}
-                                    </label>
-                                </template>
-                            </div>
+                                </div>
+                            </template>
                         </template>
                     </div>
                 </div>
@@ -291,10 +251,10 @@
                     ></searchInput>
                 </div>
             </div>
-            <div class="row text-center mt-4" v-if="this.localitzacio">
+            <div class="row text-center mt-4" v-if="carta.localitzacio">
                 <div class="col" style="position: relative">
-                    <h3>DADES {{ this.localitzacio }}</h3>
-                    <div v-if="this.localitzacio === 'Carrer'">
+                    <h3>DADES {{ carta.localitzacio["nom"] }}</h3>
+                    <div v-if="carta.localitzacio['nom'] === 'Carrer'">
                         <div class="row g-3 align-items-center mt-2">
                             <div class="col-sm-2 text-end">
                                 <label for="tipusVia" class="col-form-label"
@@ -311,10 +271,13 @@
                                     :options="tipusVia"
                                     :defaultPlaceholder="'Tipus de Via'"
                                     @searchValue="(id) => (carta.tipusVia = id)"
+                                    @searchName="
+                                        (id) => (carta.tipusViaNom = id)
+                                    "
                                 ></searchInput>
                             </div>
                             <a
-                                tabindex="0"
+                                tabindex="-1"
                                 class="arki"
                                 role="button"
                                 data-bs-toggle="popover"
@@ -343,7 +306,7 @@
                                 />
                             </div>
                             <a
-                                tabindex="0"
+                                tabindex="-1"
                                 class="arki"
                                 role="button"
                                 data-bs-toggle="popover"
@@ -372,7 +335,7 @@
                                 />
                             </div>
                             <a
-                                tabindex="0"
+                                tabindex="-1"
                                 class="arki"
                                 role="button"
                                 data-bs-toggle="popover"
@@ -399,7 +362,7 @@
                                 />
                             </div>
                             <a
-                                tabindex="0"
+                                tabindex="-1"
                                 class="arki"
                                 role="button"
                                 data-bs-toggle="popover"
@@ -426,7 +389,7 @@
                                 />
                             </div>
                             <a
-                                tabindex="0"
+                                tabindex="-1"
                                 class="arki"
                                 role="button"
                                 data-bs-toggle="popover"
@@ -453,7 +416,7 @@
                                 />
                             </div>
                             <a
-                                tabindex="0"
+                                tabindex="-1"
                                 class="arki"
                                 role="button"
                                 data-bs-toggle="popover"
@@ -473,7 +436,7 @@
                                 >
                             </div>
                             <a
-                                tabindex="0"
+                                tabindex="-1"
                                 class="arki"
                                 role="button"
                                 data-bs-toggle="popover"
@@ -494,7 +457,7 @@
                             ></textarea>
                         </div>
                     </div>
-                    <div v-if="this.localitzacio === 'Carretera'">
+                    <div v-if="carta.localitzacio['nom'] === 'Carretera'">
                         <div class="row g-3 align-items-center mt-2">
                             <div class="col-sm-2 text-end">
                                 <label for="nom" class="col-form-label"
@@ -511,7 +474,7 @@
                                 />
                             </div>
                             <a
-                                tabindex="0"
+                                tabindex="-1"
                                 class="arki"
                                 role="button"
                                 data-bs-toggle="popover"
@@ -540,7 +503,7 @@
                                 />
                             </div>
                             <a
-                                tabindex="0"
+                                tabindex="-1"
                                 class="arki"
                                 role="button"
                                 data-bs-toggle="popover"
@@ -567,7 +530,7 @@
                                 />
                             </div>
                             <a
-                                tabindex="0"
+                                tabindex="-1"
                                 class="arki"
                                 role="button"
                                 data-bs-toggle="popover"
@@ -587,7 +550,7 @@
                                 >
                             </div>
                             <a
-                                tabindex="0"
+                                tabindex="-1"
                                 class="arki"
                                 role="button"
                                 data-bs-toggle="popover"
@@ -608,7 +571,7 @@
                             ></textarea>
                         </div>
                     </div>
-                    <div v-if="this.localitzacio === 'Punt Singular'">
+                    <div v-if="carta.localitzacio['nom'] === 'Punt Singular'">
                         <div class="row g-3 align-items-center mt-2">
                             <div class="col-sm-2 text-end">
                                 <label for="nom" class="col-form-label"
@@ -625,7 +588,7 @@
                                 />
                             </div>
                             <a
-                                tabindex="0"
+                                tabindex="-1"
                                 class="arki"
                                 role="button"
                                 data-bs-toggle="popover"
@@ -645,7 +608,7 @@
                                 >
                             </div>
                             <a
-                                tabindex="0"
+                                tabindex="-1"
                                 class="arki"
                                 role="button"
                                 data-bs-toggle="popover"
@@ -668,8 +631,8 @@
                     </div>
                     <div
                         v-if="
-                            this.localitzacio === 'ENTITAT/Població' ||
-                            this.localitzacio == 'Provincia'
+                            carta.localitzacio['nom'] === 'ENTITAT/Població' ||
+                            carta.localitzacio['nom'] === 'Provincia'
                         "
                     >
                         <div class="row g-3 align-items-center mt-2">
@@ -679,7 +642,7 @@
                                 >
                             </div>
                             <a
-                                tabindex="0"
+                                tabindex="-1"
                                 class="arki"
                                 role="button"
                                 data-bs-toggle="popover"
@@ -911,6 +874,36 @@ export default {
         notaContent() {
             this.carta.nota = this.notaContent;
         },
+        catalunya() {
+            if (this.catalunya) {
+                this.carta.localitzacio = undefined;
+            } else {
+                // Seteamos todos los radios en unchecked
+                let radios = document.querySelectorAll(
+                    `input[name="localitzacio`
+                );
+
+                radios.forEach((radio) => {
+                    radio.checked = false;
+                });
+
+                // Selecionamos todos los labels de los radios
+                let labels = document.querySelectorAll(
+                    `input[name="localitzacio"] + label`
+                );
+
+                // Si el label es 'Provincia', guardamos el id i nombre
+                labels.forEach((label) => {
+                    if (label.textContent === "Provincia") {
+                        // console.log(label.getAttribute("for"), label.innerHTML);
+                        this.carta.localitzacio = {
+                            id: label.getAttribute("for"),
+                            nom: label.innerHTML,
+                        };
+                    }
+                });
+            }
+        },
     },
     methods: {
         insertCarta() {
@@ -1027,6 +1020,9 @@ export default {
             );
             this.selectedIncident = false;
             this.carta.incidentId = id;
+        },
+        textt(val) {
+            console.log(val);
         },
     },
 

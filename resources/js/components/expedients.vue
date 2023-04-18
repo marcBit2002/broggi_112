@@ -19,14 +19,19 @@
         >
             <div class="info">
                 <p class="incident">
+                    <i class="bi bi-fire"></i>
                     {{ expedient.incident }}
                 </p>
                 <div>
                     <p>
+                        <i class="bi bi-geo-alt-fill"></i>
                         {{ expedient.localitat }}
                     </p>
                     <p class="date">
-                        {{ this.formatearFecha(expedient.date) }}
+                        {{ this.fechaDiaMes(expedient.date) }}
+                        <strong>
+                            {{ this.fechaAño(expedient.date) }}
+                        </strong>
                     </p>
                 </div>
             </div>
@@ -107,13 +112,30 @@ export default {
                     console.error("Error" + err);
                 });
         },
-        formatearFecha(fecha) {
+        fechaDiaMes(fecha) {
             const opciones = {
                 day: "2-digit",
                 month: "2-digit",
+            };
+
+            let date = fecha.toLocaleDateString("es-ES", opciones);
+
+            let parts = date.split("/");
+            parts[2] = "<span>" + parts[2] + "</span>";
+            let result = parts.join("/");
+
+            return fecha.toLocaleDateString("es-ES", opciones);
+        },
+        fechaAño(fecha) {
+            const opciones = {
                 year: "numeric",
             };
-            return fecha.toLocaleDateString("es-ES", opciones);
+
+            let date = fecha.toLocaleDateString("es-ES", opciones);
+
+            let parts = date.split("/");
+
+            return `/` + parts[0];
         },
         linkExpedient(id) {
             if (this.expedientId != id) {
@@ -236,6 +258,10 @@ export default {
                 overflow: hidden;
                 text-overflow: ellipsis;
                 max-width: 29ch;
+
+                i {
+                    color: $primary;
+                }
             }
 
             div {
@@ -244,6 +270,14 @@ export default {
 
                 p:first-child {
                     margin-right: 10px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: 20ch;
+
+                    i {
+                        color: $danger;
+                    }
                 }
 
                 .date {
