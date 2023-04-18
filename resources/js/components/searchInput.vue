@@ -39,6 +39,8 @@ export default {
     watch: {
         item() {
             this.$emit("searchValue", this.item);
+        },
+        name() {
             this.$emit("searchName", this.name);
         },
     },
