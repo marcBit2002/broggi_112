@@ -43,7 +43,9 @@ export default {
         });
     },
     mounted() {
+     
         this.cargarAgencias();
+        this.cargarMapa();
     },
     watch: {
         direccion() {
@@ -117,15 +119,15 @@ export default {
 
                         let iconClass;
                         if (agencia.nom.toLowerCase().includes("bombers")) {
-                            iconClass = "bi bi-fire";
+                            iconClass = "bi bi-fire bombers";
                         } else if (
                             agencia.nom.toLowerCase().includes("policia")
                         ) {
-                            iconClass = "bi bi-shield-fill";
+                            iconClass = "bi bi-shield-fill policia";
                         } else if (
                             agencia.nom.toLowerCase().includes("hospital")
                         ) {
-                            iconClass = "bi bi-heart-fill";
+                            iconClass = "bi bi-heart-fill hospital";
                         }
 
                         const markerElement = document.createElement("div");
@@ -143,12 +145,12 @@ export default {
                                 ? "Deseleccionar"
                                 : "Seleccionar";
                             const buttonColor = estaSeleccionada
-                                ? "red"
-                                : "green";
+                                ? "#087ca6"
+                                : "#de1278"
                             const popup = new mapboxgl.Popup({
                                 offset: 25,
                             }).setHTML(
-                                `<h3>${agencia.nom}</h3><p>${agencia.carrer}</p><button style="background-color: ${buttonColor}">${buttonText}</button>`
+                                `<h5 class="popup">${agencia.nom}</h5><p class="popup">${agencia.carrer}</p><button style="background-color: ${buttonColor}">${buttonText}</button>`
                             );
                             popup.addTo(map);
                             marker.setPopup(popup);
@@ -250,6 +252,25 @@ export default {
     line-height: 1;
     margin-left: 10px;
 }
+
+.bombers {
+  background-color: red;
+}
+.policia {
+    background-color: blue;
+}
+.hospital {
+    background-color: yellow;
+}
+
+.Popup{
+    border-radius: 6px;
+}
+.popup {
+    font-family: "Figtree", sans-serif !important;
+}
+
+
 
 @media only screen and (max-width: 980px) {
     .container {

@@ -20,6 +20,15 @@ class ExpedientController extends Controller
         return ExpedientResource::collection($expedients);
     }
 
+    public function expedientsActius()
+    {
+        $expedients = Expedient::with('estatExpedient')
+            ->with('cartesTrucades')
+            ->where('estat_expedients_id', '<>', 4)
+            ->get();
+        return ExpedientResource::collection($expedients);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

@@ -20,6 +20,7 @@ export default {
                 .get("usuario")
                 .then((response) => {
                     this.data = response.data;
+                    console.log(response.data);
                     this.mountMap();
                 })
                 .catch((error) => console.log(error));

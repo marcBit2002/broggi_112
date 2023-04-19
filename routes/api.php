@@ -43,3 +43,4 @@ Route::apiResource('tipusincident', TipusIncidentController::class);
 Route::apiResource('usuario', UsuarioController::class);
 Route::apiResource('estatExpedient', EstatExpedientController::class);
 Route::get('incident_type', [IncidentController::class, 'tipusIncidents']);
+Route::get('expedientsActius', [ExpedientController::class, 'expedientsActius']);
