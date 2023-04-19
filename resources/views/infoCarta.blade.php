@@ -130,14 +130,14 @@
                     <div class='type-content'>{{ $carta->incidents->tipus_incidents->nom }}</div>
                 </div>
             </div>
-            <div class='state' style="border: 4px solid {{ $expedientEstatColor }};">
+            {{-- <div class='state' style="border: 4px solid {{ $expedientEstatColor }};">
                 <div class='state-title' style="background-color: {{ $expedientEstatColor }}">
                     ESTAT
                     <img src="{{ Vite::asset('resources/icons/state.svg') }}">
                 </div>
                 <img src="{{ Vite::asset('public/assets/icons/arrowHeadFill.svg') }}" style="height:inherit;">
                 <div class='state-content'>{{ $expedientEstat }}</div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </body>

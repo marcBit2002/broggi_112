@@ -1,20 +1,18 @@
 <template>
     <div id="container">
         <div class='users'><usersChart/></div>
-        <div class='incidents'></div>
+        <div class='incidents'><incidentsChart/></div>
     </div>
 </template>
 <script>
 import usersChart from "./charts/usersTypeUsers.vue";
+import incidentsChart from "./charts/incidentsTypeChart.vue";
+
 export default {
     name: "charts",
     components: {
         usersChart,
-    },
-    data: function () {
-        return {
-            message: 'hola',
-        };
+        incidentsChart
     },
 };
 </script>
@@ -28,15 +26,17 @@ body {
 #container {
     height: 90vh;
     width: 90vw;
-}
 
+    display: flex;
+}
 .users, .incidents {
-    width: 500px;
+    width: 700px;
     height: 500px;
 
     border: 2px solid $primary;
     border-radius: 15px;
 
     padding: 1rem;
+    margin: 10px;
 }
 </style>

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Expedient;
 use Illuminate\Http\Request;
+use App\Models\EstatExpedient;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Resources\ExpedientResource;
+use App\Http\Resources\Resources\EstatExpedientResource;
 
-class ExpedientController extends Controller
+class EstatExpedientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class ExpedientController extends Controller
      */
     public function index()
     {
-        $expedients = Expedient::with('estatExpedient')->with('cartesTrucades')->get();
-        return ExpedientResource::collection($expedients);
+        $expedients = EstatExpedient::all();
+        return EstatExpedientResource::collection($expedients);
     }
 
     /**
@@ -34,36 +34,33 @@ class ExpedientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Expedient  $expedient
+     * @param  \App\Models\EstatExpedient  $estatExpedient
      * @return \Illuminate\Http\Response
      */
-    public function show(Expedient $expedient)
+    public function show(EstatExpedient $estatExpedient)
     {
-        $expedient = Expedient::with('estatExpedient')->where('id', '=', $expedient->id)->get();
-        return ExpedientResource::collection($expedient);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Expedient  $expedient
+     * @param  \App\Models\EstatExpedient  $estatExpedient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Expedient $expedient)
+    public function update(Request $request, EstatExpedient $estatExpedient)
     {
-        $expedient->estat_expedients_id = $request->input('estat_id');
-        $expedient->save();
-        return response()->json($expedient);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Expedient  $expedient
+     * @param  \App\Models\EstatExpedient  $estatExpedient
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Expedient $expedient)
+    public function destroy(EstatExpedient $estatExpedient)
     {
         //
     }

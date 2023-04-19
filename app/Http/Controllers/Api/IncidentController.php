@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Incident;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Resources\IncidentResource;
 
@@ -34,7 +35,16 @@ class IncidentController extends Controller
 
     // http://localhost/broggi_112/public/api/incident?tipus_incidents_id=2
 
-
+    public function tipusIncidents()
+    {
+        $results = Incident::select('tipus_incidents.nom', DB::raw('COUNT(tipus_incidents_id) AS total_usuarios'))
+        ->join('tipus_incidents', 'incidents.tipus_incidents_id', '=', 'tipus_incidents.id')
+        ->groupBy('tipus_incidents_id')
+        ->groupBy('tipus_incidents.nom')
+        ->get();
+    
+        return $results;
+    }
 
 
     /**

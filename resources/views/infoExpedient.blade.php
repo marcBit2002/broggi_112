@@ -78,15 +78,7 @@
                     </div>
                 </div>
             </div>
-            <div class='state'
-                style="border: 4px solid {{ $expedient->estatExpedient->color }}; color: {{ $expedient->estatExpedient->color }};">
-                <div class='state-title' style="background-color: {{ $expedient->estatExpedient->color }}">
-                    ESTAT
-                    <img src="{{ Vite::asset('resources/icons/state.svg') }}">
-                </div>
-                <img src="{{ Vite::asset('public/assets/icons/arrowHeadFill.svg') }}" style="height:inherit;">
-                <div class='state-content'>{{ $expedient->estatExpedient->estat }}</div>
-            </div>
+            <div id="estatExpedient" data-id-expedient={{ $expedient->id }}></div>
         </div>
     </div>
 </body>

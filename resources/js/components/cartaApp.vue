@@ -101,7 +101,6 @@ export default {
                     this.tipusIncidents = "NOT FOUND";
                 });
         },
-
         getIncidents() {
             axios
                 .get("incident")
@@ -123,7 +122,6 @@ export default {
                 });
         },
     },
-
     mounted() {
         this.newCartaId();
         this.newExpedientId();
