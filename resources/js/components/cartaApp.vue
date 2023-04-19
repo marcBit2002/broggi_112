@@ -11,7 +11,9 @@
             :notaContent="this.notaContent"
             :tipusIncidents="this.tipusIncidents"
             :allIncidents="this.allIncidents"
-            
+            @telefon="(tel) => (this.telefon = tel)"
+            @municipi="(name) => (this.municipi = name)"
+            @incidentTipos="(incident) => (this.incidentTipos = incident)"
         ></pagina>
         <notaComuna
             @notaContent="(content) => (this.notaContent = content)"
@@ -21,6 +23,9 @@
             :allIncidents="this.allIncidents"
             :allMunicipis="this.allMunicipis"
             :expedientId="expedient"
+            :telefon="this.telefon"
+            :municipi="this.municipi"
+            :incidentTipos="this.incidentTipos"
         ></expedients>
     </div>
 </template>
@@ -48,6 +53,9 @@ export default {
             notaContent: "",
             allIncidents: null,
             allMunicipis: null,
+            telefon: null,
+            municipi: null,
+            incidentTipos: null,
         };
     },
     methods: {

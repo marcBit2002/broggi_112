@@ -10,10 +10,12 @@
                 </div>
                 <div class="col-sm-8">
                     <input
-                        type="tel"
+                        type="text"
+                        pattern="[0-9]*"
                         id="telefon"
                         class="form-control"
                         v-model="carta.telefon"
+                        @input="$emit('telefon', carta.telefon)"
                         required
                     />
                 </div>
@@ -248,6 +250,7 @@
                         :options="municipis"
                         :defaultPlaceholder="'Municipi'"
                         @searchValue="(id) => (carta.municipi = id)"
+                        @searchName="(name) => this.$emit('municipi', name)"
                     ></searchInput>
                 </div>
             </div>
@@ -674,9 +677,14 @@
                 <table>
                     <tr class="fila">
                         <td
-                            v-for="(tipus, index) in tipusIncidents"
+                            v-for="tipus in tipusIncidents"
+                            :id="tipus.id"
                             :key="tipus.id"
-                            :class="{ selected: selectedId == tipus.id }"
+                            v-bind:class="
+                                tipus.nom == selectedIncidentNom
+                                    ? 'tipusSelected'
+                                    : ''
+                            "
                             @click="loadIncident(tipus.id)"
                         >
                             {{ tipus.nom }}
@@ -684,34 +692,21 @@
                     </tr>
                 </table>
             </div>
-            <!-- 
-            <div class="search">
-                <div class="input-group">
-                    <span
-                        class="input-group-text border border-primary border-3 border-end-0 text-warning"
-                    >
-                        <i class="bi bi-search"></i>
-                    </span>
-                    <input
-                        type="search"
-                        class="form-control border border-3 border-start-0 border-primary"
-                        placeholder="Buscar"
-                    />
-                </div>
-            </div> -->
             <div v-if="selectedIncident">
-                <div class="incidents">
-                    <table>
-                        <tr class="fila">
-                            <td
-                                v-for="(incident, index) in incidents"
-                                :key="incident.id"
-                                @click="loadIncidentInfo(incident.id)"
-                            >
-                                {{ incident.nom }}
-                            </td>
-                        </tr>
-                    </table>
+                <div style="height: 100%">
+                    <div class="incidents">
+                        <table>
+                            <tr class="fila">
+                                <td
+                                    v-for="incident in incidents"
+                                    :key="incident.id"
+                                    @click="loadIncidentInfo(incident.id)"
+                                >
+                                    {{ incident.nom }}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div v-else>
@@ -856,6 +851,7 @@ export default {
             incidents: null,
             selectedId: null,
             selectedIncident: -1,
+            selectedIncidentNom: null,
             tipusVia: this.getTipusVia(),
             incidentInfo: null,
         };
@@ -1007,6 +1003,13 @@ export default {
             return allTipusVia;
         },
         loadIncident(id) {
+            this.tipusIncidents.filter((incident) => {
+                if (incident["id"] == id) {
+                    this.selectedIncidentNom = incident["nom"];
+                    this.$emit("incidentTipos", incident["nom"]);
+                }
+            });
+
             this.incidents = this.allIncidents.filter(
                 (i) => i["tipus_incidents"].id == id
             );
@@ -1174,6 +1177,11 @@ export default {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
+
+        .tipusSelected {
+            background-color: $warning;
+            color: black;
+        }
     }
     .fila td {
         &:nth-child(1) {

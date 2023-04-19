@@ -5,7 +5,7 @@
 
     <div id="expedients">
         <div
-            v-if="expedients.length == 0"
+            v-if="expedients.length == 0 && !isLoaded"
             class="spinner-border text-primary m-3"
             role="status"
         >
@@ -18,11 +18,16 @@
             @click="linkExpedient(expedient.codi)"
         >
             <div class="info">
-                <p class="incident">
-                    <i class="bi bi-fire"></i>
-                    {{ expedient.incident }}
-                </p>
-                <div>
+                <div class="incident">
+                    <p>
+                        {{ expedient.codi }}
+                    </p>
+                    <p>
+                        <i class="bi bi-fire"></i>
+                        {{ expedient.incident }}
+                    </p>
+                </div>
+                <div class="location">
                     <p>
                         <i class="bi bi-geo-alt-fill"></i>
                         {{ expedient.localitat }}
@@ -42,20 +47,29 @@
 <script>
 export default {
     name: "expedients",
+    emits: ["expedient"],
     data() {
         return {
             expedients: [],
+            originalExpedients: [],
             originalExpedientId: null,
+            isLoaded: false,
         };
     },
     props: {
         allIncidents: null,
         allMunicipis: null,
         expedientId: null,
+        telefon: null,
+        municipi: null,
+        incidentTipos: null,
     },
     computed: {
         dataIN() {
             return this.allIncidents && this.allMunicipis;
+        },
+        expedientMatchValues() {
+            return this.telefon && this.municipi && this.incidentTipos;
         },
     },
     watch: {
@@ -69,16 +83,26 @@ export default {
                 this.originalExpedientId = this.expedientId;
             }
         },
+        telefon() {
+            console.log("Telefon: " + this.telefon);
+            this.matchExpedients();
+        },
+        municipi() {
+            console.log("Municipi: " + this.municipi);
+            this.matchExpedients();
+        },
+        incidentTipos() {
+            console.log("Incident: " + this.incidentTipos);
+            this.matchExpedients();
+        },
     },
     methods: {
         getExpedients() {
             const me = this;
             axios
-                .get("expedient")
+                .get("expedientsActius")
                 .then((response) => {
-                    me.expedients = response.data.filter(
-                        (i) => i.estat_expedients_id !== 4
-                    );
+                    me.expedients = response.data;
 
                     me.expedients.forEach((expedient) => {
                         const tipos = [];
@@ -106,8 +130,10 @@ export default {
                             dates.reduce((a, b) => Math.min(a, b))
                         );
                     });
+
+                    this.originalExpedients = this.expedients;
+                    this.isLoaded = true;
                 })
-                .then()
                 .catch((err) => {
                     console.error("Error" + err);
                 });
@@ -168,6 +194,18 @@ export default {
                 .get("expedient", id)
                 .then((res) => res.data)
                 .catch((err) => console.error(err));
+        },
+        matchExpedients() {
+            let result = [];
+
+            this.expedients = result = this.originalExpedients.filter(
+                (expedient) =>
+                    expedient.cartes_trucades.some((carta) =>
+                        carta.telefon.toString().startsWith(this.telefon)
+                    ) ||
+                    expedient.localitat === this.municipi ||
+                    expedient.incident === this.incidentTipos
+            );
         },
     },
 };
@@ -232,7 +270,7 @@ export default {
             background-size: 60% !important;
         }
 
-        .info div p:last-child {
+        i {
             color: $danger !important;
         }
     }
@@ -248,40 +286,62 @@ export default {
 
         .info {
             width: 100%;
-            text-align: left;
+            text-align: right;
             margin-left: 10px;
 
             .incident {
-                font-style: italic;
-                font-weight: 700;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                max-width: 29ch;
+                display: flex;
+                justify-content: flex-end;
+
+                p {
+                    &:first-child {
+                        margin-right: auto;
+                    }
+
+                    &:last-child {
+                        font-style: italic;
+                        font-weight: 700;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        max-width: clamp(140px, -3.7rem + 26.5vw, 280px);
+                        margin-right: 20px;
+                    }
+                }
 
                 i {
-                    color: $primary;
+                    color: $danger;
                 }
             }
 
-            div {
+            .location {
                 display: flex;
-                justify-content: flex-start;
+                justify-content: flex-end;
+                align-items: center;
 
-                p:first-child {
-                    margin-right: 10px;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    max-width: 20ch;
+                p {
+                    &:first-child {
+                        font-weight: 500;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        max-width: clamp(70px, -7rem + 22.5vw, 215px);
+                        margin-right: auto;
+                    }
 
                     i {
-                        color: $danger;
+                        color: $primary;
                     }
                 }
 
                 .date {
+                    font-size: clamp(0.75rem, 1.6vw, 1rem);
+
                     color: $primary;
+                    margin-right: 20px;
+                    strong {
+                        margin-left: -0.25rem;
+                    }
                 }
             }
         }
@@ -347,8 +407,10 @@ export default {
             background-size: 55%;
 
             transition: background-size 0.1s ease-in-out;
+        }
 
-            &:hover {
+        &:hover {
+            .linkBtn {
                 background-image: url("../../icons/expedientLinkActive.svg");
 
                 background-color: $danger;
