@@ -425,6 +425,6 @@ export default {
 .expedientInfoMsg {
     color: rgba($color: $dark, $alpha: 0.6);
     margin: 1.5rem 0 0 0;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
 }
 </style>

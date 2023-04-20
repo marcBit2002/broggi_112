@@ -88,6 +88,21 @@ export default {
         box-shadow: none;
 
         resize: none; /*remove the resize handle on the bottom right*/
+
+        &::placeholder {
+            /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: rgba($color: $dark, $alpha: 0.6);
+        }
+
+        &:-ms-input-placeholder {
+            /* Internet Explorer 10-11 */
+            color: rgba($color: $dark, $alpha: 0.6);
+        }
+
+        &::-ms-input-placeholder {
+            /* Microsoft Edge */
+            color: rgba($color: $dark, $alpha: 0.6);
+        }
     }
 }
 

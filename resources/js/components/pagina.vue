@@ -13,9 +13,12 @@
                         type="text"
                         pattern="[0-9]*"
                         id="telefon"
-                        class="form-control"
                         v-model="carta.telefon"
-                        @input="$emit('telefon', carta.telefon)"
+                        @input="
+                            $emit('telefon', carta.telefon), checkInput($event)
+                        "
+                        @blur="checkInput($event)"
+                        class="form-control"
                         required
                     />
                 </div>
@@ -904,6 +907,7 @@ export default {
     methods: {
         insertCarta() {
             alert(JSON.stringify(this.carta));
+            console.log(JSON.stringify(this.carta));
         },
         removePopovers() {
             const popovers = document.querySelectorAll(".popover");
@@ -1026,6 +1030,13 @@ export default {
         },
         textt(val) {
             console.log(val);
+        },
+        checkInput(event) {
+            if (event.target.value == "") {
+                event.target.classList.add("invalid-input");
+            } else {
+                event.target.classList.remove("invalid-input");
+            }
         },
     },
 
@@ -1290,6 +1301,10 @@ h3 {
 
         background-color: rgba($color: $primary, $alpha: 0.5);
     }
+}
+
+.invalid-input {
+    border: $components-border-width solid $danger;
 }
 
 // #endregion
