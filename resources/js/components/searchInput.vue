@@ -456,7 +456,7 @@ select.ui.dropdown {
     position: relative;
     left: 1px;
     z-index: 3;
-    color: rgba($color: $primary, $alpha: 1);
+    color: rgba($color: $primary, $alpha: 1) !important;
     font-weight: 700;
 }
 .ui.search.selection.dropdown > input.search {

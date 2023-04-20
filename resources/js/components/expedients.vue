@@ -4,13 +4,15 @@
     </div>
 
     <div id="expedients">
-        <div
-            v-if="expedients.length == 0 && !isLoaded"
-            class="spinner-border text-primary m-3"
-            role="status"
-        >
-            <span class="visually-hidden">Loading...</span>
+        <div v-if="expedients.length == 0 && !isLoaded" role="status">
+            <div class="spinner-border text-primary m-3"></div>
         </div>
+        <p
+            class="expedientInfoMsg"
+            v-if="!telefon && !municipi && !incidentTipos && isLoaded"
+        >
+            Cap expedient coincideix.
+        </p>
         <div
             class="expedient"
             v-for="expedient in expedients"
@@ -60,9 +62,9 @@ export default {
         allIncidents: null,
         allMunicipis: null,
         expedientId: null,
-        telefon: null,
-        municipi: null,
-        incidentTipos: null,
+        telefon: "",
+        municipi: "",
+        incidentTipos: "",
     },
     computed: {
         dataIN() {
@@ -131,8 +133,9 @@ export default {
                         );
                     });
 
-                    this.originalExpedients = this.expedients;
-                    this.isLoaded = true;
+                    me.originalExpedients = this.expedients;
+                    me.matchExpedients();
+                    me.isLoaded = true;
                 })
                 .catch((err) => {
                     console.error("Error" + err);
@@ -196,13 +199,12 @@ export default {
                 .catch((err) => console.error(err));
         },
         matchExpedients() {
-            let result = [];
-
-            this.expedients = result = this.originalExpedients.filter(
+            this.expedients = this.originalExpedients.filter(
                 (expedient) =>
-                    expedient.cartes_trucades.some((carta) =>
-                        carta.telefon.toString().startsWith(this.telefon)
-                    ) ||
+                    (this.telefon !== "" &&
+                        expedient.cartes_trucades.some((carta) =>
+                            carta.telefon.toString().startsWith(this.telefon)
+                        )) ||
                     expedient.localitat === this.municipi ||
                     expedient.incident === this.incidentTipos
             );
@@ -418,5 +420,11 @@ export default {
             }
         }
     }
+}
+
+.expedientInfoMsg {
+    color: rgba($color: $dark, $alpha: 0.6);
+    margin: 1.5rem 0 0 0;
+    font-size: 1.25rem;
 }
 </style>
