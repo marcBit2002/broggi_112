@@ -5,6 +5,8 @@
             class="buscador form-control"
             placeholder="Introduce la dirección"
             v-model="direccion"
+            @input="debounce(cargarLocalitzacio, 2000)"
+            @keyup.enter="cargarLocalitzacio()"
             @blur="cargarLocalitzacio()"
         />
         <div id="map"></div>
@@ -35,6 +37,7 @@ export default {
             agenciasSeleccionadas: [],
             map: {},
             marker: null,
+            debounceTimeout: null,
         };
     },
 
@@ -72,8 +75,7 @@ export default {
 
                     this.map = new mapboxgl.Map({
                         container: "map",
-                        style: "mapbox://styles/mapbox/light-v9",
-                        // style: "mapbox://styles/mapbox/streets-v9",
+                        style: "mapbox://styles/mapbox/streets-v9",
                         center: feature.center,
                         zoom: 15,
                         interactive: true,
@@ -85,7 +87,6 @@ export default {
                 });
         },
         cargarLocalitzacio() {
-            debugger;
             this.mapboxClient.geocoding
                 .forwardGeocode({
                     query: this.direccion,
@@ -115,7 +116,11 @@ export default {
                     this.marker = new mapboxgl.Marker()
                         .setLngLat(feature.center)
                         .addTo(this.map);
-                    this.map.flyTo({ center: feature.center });
+                    this.map.flyTo({
+                        center: feature.center,
+                        zoom: 15,
+                        interactive: true,
+                    });
                 });
         },
         cargarAgencias() {
@@ -149,21 +154,30 @@ export default {
                         const feature = response.body.features[0];
 
                         let iconClass;
+                        let iconColor;
+
                         if (agencia.nom.toLowerCase().includes("bombers")) {
-                            iconClass = "bi bi-fire bombers";
+                            iconClass = "bi bi-fire fs-4";
+                            iconColor = "red";
                         } else if (
-                            agencia.nom.toLowerCase().includes("policia")
+                            agencia.nom.toLowerCase().includes("policia") ||
+                            agencia.nom.toLowerCase().includes("urbana")
                         ) {
-                            iconClass = "bi bi-shield-fill policia";
+                            iconClass = "bi bi-shield-fill fs-4";
+                            iconColor = "blue";
                         } else if (
                             agencia.nom.toLowerCase().includes("hospital")
                         ) {
-                            iconClass = "bi bi-heart-fill hospital";
+                            iconClass = "bi bi-heart-fill fs-4 ";
+                            iconColor = "green";
+                        } else {
+                            iconClass = "bi-person-fill fs-4 ";
+                            iconColor = "purple";
                         }
 
                         const markerElement = document.createElement("div");
                         markerElement.className = "marker";
-                        markerElement.innerHTML = `<i class="${iconClass}"></i>`;
+                        markerElement.innerHTML = `<i class="${iconClass}" style="color:${iconColor}"></i>`;
 
                         const marker = new mapboxgl.Marker(markerElement)
                             .setLngLat(feature.center)
@@ -201,6 +215,11 @@ export default {
                         });
                     });
             });
+        },
+
+        debounce(func, delay) {
+            clearTimeout(this.debounceTimeout);
+            this.debounceTimeout = setTimeout(() => func.call(this), delay);
         },
 
         seleccionarAgencia(agencia) {
