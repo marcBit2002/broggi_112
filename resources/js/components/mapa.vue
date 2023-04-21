@@ -5,7 +5,7 @@
             class="buscador form-control"
             placeholder="Introduce la dirección"
             v-model="direccion"
-            @input="debounce(cargarLocalitzacio, 2000)"
+            @input="debounce(cargarLocalitzacio, 800)"
             @keyup.enter="cargarLocalitzacio()"
             @blur="cargarLocalitzacio()"
         />

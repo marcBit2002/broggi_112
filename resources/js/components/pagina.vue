@@ -90,18 +90,19 @@
                     <label for="antecedents" class="col-form-label"
                         >Antecedents</label
                     >
+                    <a
+                        tabindex="-1"
+                        class="arki"
+                        role="button"
+                        data-bs-toggle="popover"
+                        data-bs-trigger="focus"
+                        data-bs-title="Help Box"
+                        data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                    >
+                        <img src="/broggi_112/public/assets/icons/arki.svg" />
+                    </a>
                 </div>
-                <a
-                    tabindex="-1"
-                    class="arki"
-                    role="button"
-                    data-bs-toggle="popover"
-                    data-bs-trigger="focus"
-                    data-bs-title="Help Box"
-                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
-                >
-                    <img src="/broggi_112/public/assets/icons/arki.svg" />
-                </a>
+
                 <textarea
                     class="form-control"
                     id="floatingTextarea"
@@ -225,7 +226,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col d-flex">
                     <searchInput
                         :name="
                             carta.provincia == null
@@ -241,8 +242,20 @@
                             }
                         "
                     ></searchInput>
+                    <a
+                        tabindex="-1"
+                        class="arki"
+                        role="button"
+                        data-bs-toggle="popover"
+                        data-bs-trigger="focus"
+                        data-bs-title="Help Box"
+                        data-bs-placement="bottom"
+                        data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                    >
+                        <img src="/broggi_112/public/assets/icons/arki.svg" />
+                    </a>
                 </div>
-                <div class="col" v-if="catalunya">
+                <div class="col d-flex" v-if="catalunya">
                     <searchInput
                         :name="
                             carta.comarca == null
@@ -258,8 +271,20 @@
                             }
                         "
                     ></searchInput>
+                    <a
+                        tabindex="-1"
+                        class="arki"
+                        role="button"
+                        data-bs-toggle="popover"
+                        data-bs-trigger="focus"
+                        data-bs-title="Help Box"
+                        data-bs-placement="bottom"
+                        data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                    >
+                        <img src="/broggi_112/public/assets/icons/arki.svg" />
+                    </a>
                 </div>
-                <div class="col">
+                <div class="col d-flex">
                     <searchInput
                         :name="
                             carta.municipi == null
@@ -276,48 +301,25 @@
                             }
                         "
                     ></searchInput>
+                    <a
+                        tabindex="-1"
+                        class="arki"
+                        role="button"
+                        data-bs-toggle="popover"
+                        data-bs-trigger="focus"
+                        data-bs-title="Help Box"
+                        data-bs-placement="bottom"
+                        data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                    >
+                        <img src="/broggi_112/public/assets/icons/arki.svg" />
+                    </a>
                 </div>
             </div>
             <div class="row text-center mt-4" v-if="carta.localitzacio">
                 <div class="col" style="position: relative">
                     <h3>DADES {{ carta.localitzacio["nom"] }}</h3>
                     <div v-if="carta.localitzacio['nom'] === 'Carrer'">
-                        <div class="row g-3 align-items-center mt-2">
-                            <div class="col-sm-2 text-end">
-                                <label for="tipusVia" class="col-form-label"
-                                    >Tipus de via:</label
-                                >
-                            </div>
-                            <div class="col-sm-8">
-                                <searchInput
-                                    :name="
-                                        carta.tipusVia == null
-                                            ? 'Tipus de Via'
-                                            : tipusVia[carta.tipusVia - 1].text
-                                    "
-                                    :options="tipusVia"
-                                    :defaultPlaceholder="'Tipus de Via'"
-                                    @searchValue="(id) => (carta.tipusVia = id)"
-                                    @searchName="
-                                        (id) => (carta.tipusViaNom = id)
-                                    "
-                                ></searchInput>
-                            </div>
-                            <a
-                                tabindex="-1"
-                                class="arki"
-                                role="button"
-                                data-bs-toggle="popover"
-                                data-bs-trigger="focus"
-                                data-bs-title="Help Box"
-                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
-                            >
-                                <img
-                                    src="/broggi_112/public/assets/icons/arki.svg"
-                                />
-                            </a>
-                        </div>
-                        <div class="row g-3 align-items-center">
+                        <div class="row g-3 align-items-center mt-2 mb-1">
                             <div class="col-sm-2 text-end">
                                 <label for="nomCarrer" class="col-form-label"
                                     >Nom:</label
@@ -329,6 +331,8 @@
                                     id="nomCarrer"
                                     class="form-control"
                                     v-model="carta.nomLocalitzacio"
+                                    @input="checkInput($event)"
+                                    @blur="checkInput($event)"
                                     required
                                 />
                             </div>
@@ -461,20 +465,21 @@
                                 <label for="altresRef" class="col-form-label"
                                     >Altres referències:</label
                                 >
+                                <a
+                                    tabindex="-1"
+                                    class="arki"
+                                    role="button"
+                                    data-bs-toggle="popover"
+                                    data-bs-trigger="focus"
+                                    data-bs-title="Help Box"
+                                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                                >
+                                    <img
+                                        src="/broggi_112/public/assets/icons/arki.svg"
+                                    />
+                                </a>
                             </div>
-                            <a
-                                tabindex="-1"
-                                class="arki"
-                                role="button"
-                                data-bs-toggle="popover"
-                                data-bs-trigger="focus"
-                                data-bs-title="Help Box"
-                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
-                            >
-                                <img
-                                    src="/broggi_112/public/assets/icons/arki.svg"
-                                />
-                            </a>
+
                             <textarea
                                 class="form-control"
                                 id="floatingTextarea"
@@ -497,6 +502,8 @@
                                     id="nom"
                                     class="form-control"
                                     v-model="carta.nomLocalitzacio"
+                                    @input="checkInput($event)"
+                                    @blur="checkInput($event)"
                                     required
                                 />
                             </div>
@@ -574,21 +581,21 @@
                             <div class="col-sm-4 text-start">
                                 <label for="altresRef" class="col-form-label"
                                     >Altres referències:</label
+                                ><a
+                                    tabindex="-1"
+                                    class="arki"
+                                    role="button"
+                                    data-bs-toggle="popover"
+                                    data-bs-trigger="focus"
+                                    data-bs-title="Help Box"
+                                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
                                 >
+                                    <img
+                                        src="/broggi_112/public/assets/icons/arki.svg"
+                                    />
+                                </a>
                             </div>
-                            <a
-                                tabindex="-1"
-                                class="arki"
-                                role="button"
-                                data-bs-toggle="popover"
-                                data-bs-trigger="focus"
-                                data-bs-title="Help Box"
-                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
-                            >
-                                <img
-                                    src="/broggi_112/public/assets/icons/arki.svg"
-                                />
-                            </a>
+
                             <textarea
                                 class="form-control"
                                 id="floatingTextarea"
@@ -632,21 +639,21 @@
                             <div class="col-sm-4 text-start">
                                 <label for="altresRef" class="col-form-label"
                                     >Altres referències:</label
+                                ><a
+                                    tabindex="-1"
+                                    class="arki"
+                                    role="button"
+                                    data-bs-toggle="popover"
+                                    data-bs-trigger="focus"
+                                    data-bs-title="Help Box"
+                                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
                                 >
+                                    <img
+                                        src="/broggi_112/public/assets/icons/arki.svg"
+                                    />
+                                </a>
                             </div>
-                            <a
-                                tabindex="-1"
-                                class="arki"
-                                role="button"
-                                data-bs-toggle="popover"
-                                data-bs-trigger="focus"
-                                data-bs-title="Help Box"
-                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
-                            >
-                                <img
-                                    src="/broggi_112/public/assets/icons/arki.svg"
-                                />
-                            </a>
+
                             <textarea
                                 class="form-control"
                                 id="floatingTextarea"
@@ -667,20 +674,21 @@
                                 <label for="altresRef" class="col-form-label"
                                     >Altres referències:</label
                                 >
+                                <a
+                                    tabindex="-1"
+                                    class="arki"
+                                    role="button"
+                                    data-bs-toggle="popover"
+                                    data-bs-trigger="focus"
+                                    data-bs-title="Help Box"
+                                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                                >
+                                    <img
+                                        src="/broggi_112/public/assets/icons/arki.svg"
+                                    />
+                                </a>
                             </div>
-                            <a
-                                tabindex="-1"
-                                class="arki"
-                                role="button"
-                                data-bs-toggle="popover"
-                                data-bs-trigger="focus"
-                                data-bs-title="Help Box"
-                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
-                            >
-                                <img
-                                    src="/broggi_112/public/assets/icons/arki.svg"
-                                />
-                            </a>
+
                             <textarea
                                 class="form-control"
                                 id="floatingTextarea"
@@ -696,7 +704,21 @@
 
         <!-- -------------- TIPIFICACIÓ -------------- -->
         <div class="content" v-if="this.tab == 3">
-            <h1 id="title">Tipificació</h1>
+            <div class="d-flex align-items-center mb-5">
+                <h1 id="title" class="m-0">Tipificació</h1>
+                <a
+                    tabindex="-1"
+                    class="arki ms-3"
+                    role="button"
+                    data-bs-toggle="popover"
+                    data-bs-trigger="focus"
+                    data-bs-title="Help Box"
+                    data-bs-placement="right"
+                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                >
+                    <img src="/broggi_112/public/assets/icons/arki.svg" />
+                </a>
+            </div>
             <div class="tipus-incidents">
                 <table>
                     <tr class="fila">
@@ -933,14 +955,27 @@ export default {
                 switch (c.localitzacio.nom) {
                     case "Carrer":
                         if (
-                            c.tipusViaNom &&
                             c.nomLocalitzacio &&
                             c.numero &&
                             this.carta.municipiNom &&
                             this.carta.provinciaNom
                         ) {
-                            result = `${c.tipusViaNom} ${c.nomLocalitzacio} ${c.numero},${this.carta.municipiNom}, ${this.carta.provinciaNom}`;
+                            result = `${c.nomLocalitzacio} ${c.numero},${this.carta.municipiNom}, ${this.carta.provinciaNom}, Espanya`;
+                        } else if (
+                            c.nomLocalitzacio &&
+                            this.carta.municipiNom &&
+                            this.carta.provinciaNom
+                        ) {
+                            result = `${c.nomLocalitzacio},${this.carta.municipiNom}, ${this.carta.provinciaNom}, Espanya`;
+                        } else if (
+                            c.nomLocalitzacio &&
+                            this.carta.municipiNom
+                        ) {
+                            result = `${c.nomLocalitzacio},${this.carta.municipiNom}, Espanya`;
+                        } else if (c.nomLocalitzacio) {
+                            result = `${c.nomLocalitzacio}, Espanya`;
                         }
+
                         break;
                     case "Carretera":
                     case "Punt Singular":
@@ -949,7 +984,14 @@ export default {
                             this.carta.municipiNom &&
                             this.carta.provinciaNom
                         ) {
-                            result = `${c.nomLocalitzacio}, ${this.carta.municipiNom}, ${this.carta.provinciaNom}`;
+                            result = `${c.nomLocalitzacio}, ${this.carta.municipiNom}, ${this.carta.provinciaNom}, Espanya`;
+                        } else if (
+                            c.nomLocalitzacio &&
+                            this.carta.municipiNom
+                        ) {
+                            result = `${c.nomLocalitzacio}, ${this.carta.municipiNom}, Espanya`;
+                        } else if (c.nomLocalitzacio) {
+                            result = `${c.nomLocalitzacio}, Espanya`;
                         }
                         break;
                 }

@@ -56,6 +56,10 @@ export default {
 
 @import "../../css/variables.scss";
 
+.ui {
+    width: 100%;
+}
+
 .ui.dropdown {
     cursor: pointer;
     position: relative;
