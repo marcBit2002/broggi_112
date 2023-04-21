@@ -5,6 +5,7 @@
             class="buscador form-control"
             placeholder="Introduce la dirección"
             v-model="direccion"
+            @blur="cargarLocalitzacio()"
         />
         <div id="map"></div>
         <div class="agencies">
@@ -32,6 +33,8 @@ export default {
             agencias: [],
             mapboxClient: null,
             agenciasSeleccionadas: [],
+            map: {},
+            marker: null,
         };
     },
 
@@ -43,14 +46,7 @@ export default {
         });
     },
     mounted() {
-     
         this.cargarAgencias();
-        this.cargarMapa();
-    },
-    watch: {
-        direccion() {
-            this.cargarAgencias();
-        },
     },
     methods: {
         cargarMapa() {
@@ -74,7 +70,7 @@ export default {
                     }
                     const feature = response.body.features[0];
 
-                    const map = new mapboxgl.Map({
+                    this.map = new mapboxgl.Map({
                         container: "map",
                         style: "mapbox://styles/mapbox/light-v9",
                         // style: "mapbox://styles/mapbox/streets-v9",
@@ -83,20 +79,55 @@ export default {
                         interactive: true,
                     });
 
-                    new mapboxgl.Marker().setLngLat(feature.center).addTo(map);
+                    this.marker = new mapboxgl.Marker()
+                        .setLngLat(feature.center)
+                        .addTo(this.map);
+                });
+        },
+        cargarLocalitzacio() {
+            debugger;
+            this.mapboxClient.geocoding
+                .forwardGeocode({
+                    query: this.direccion,
+                    autocomplete: false,
+                    limit: 1,
+                })
+                .send()
+                .then((response) => {
+                    console.log(this.direccion);
+                    if (
+                        !response ||
+                        !response.body ||
+                        !response.body.features ||
+                        !response.body.features.length
+                    ) {
+                        console.error("Invalid response:");
+                        console.error(response);
+                        return;
+                    }
+                    const feature = response.body.features[0];
 
-                    this.agregarMarcadoresAgencias(map);
+                    if (this.marker) {
+                        // Si existe, eliminarlo
+                        this.marker.remove();
+                    }
+
+                    this.marker = new mapboxgl.Marker()
+                        .setLngLat(feature.center)
+                        .addTo(this.map);
+                    this.map.flyTo({ center: feature.center });
                 });
         },
         cargarAgencias() {
             axios.get("agencia").then((response) => {
                 this.agencias = response.data;
                 this.cargarMapa();
+                this.agregarMarcadoresAgencias();
             });
         },
-        agregarMarcadoresAgencias(map) {
+        agregarMarcadoresAgencias() {
             this.agencias.forEach((agencia) => {
-                const direccion = agencia.carrer;
+                const direccion = agencia.carrer + "," + agencia.municipis.nom;
                 this.mapboxClient.geocoding
                     .forwardGeocode({
                         query: direccion,
@@ -136,7 +167,7 @@ export default {
 
                         const marker = new mapboxgl.Marker(markerElement)
                             .setLngLat(feature.center)
-                            .addTo(map);
+                            .addTo(this.map);
 
                         marker.getElement().addEventListener("click", () => {
                             const estaSeleccionada =
@@ -146,13 +177,13 @@ export default {
                                 : "Seleccionar";
                             const buttonColor = estaSeleccionada
                                 ? "#087ca6"
-                                : "#de1278"
+                                : "#de1278";
                             const popup = new mapboxgl.Popup({
                                 offset: 25,
                             }).setHTML(
                                 `<h5 class="popup">${agencia.nom}</h5><p class="popup">${agencia.carrer}</p><button style="background-color: ${buttonColor}">${buttonText}</button>`
                             );
-                            popup.addTo(map);
+                            popup.addTo(this.map);
                             marker.setPopup(popup);
 
                             popup.on("open", () => {
@@ -254,7 +285,7 @@ export default {
 }
 
 .bombers {
-  background-color: red;
+    background-color: red;
 }
 .policia {
     background-color: blue;
@@ -263,14 +294,12 @@ export default {
     background-color: yellow;
 }
 
-.Popup{
+.Popup {
     border-radius: 6px;
 }
 .popup {
     font-family: "Figtree", sans-serif !important;
 }
-
-
 
 @media only screen and (max-width: 980px) {
     .container {
