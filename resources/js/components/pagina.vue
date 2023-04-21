@@ -173,6 +173,12 @@
                                         name="localitzacio"
                                         :id="item.id"
                                         :disabled="!this.catalunya"
+                                        :checked="
+                                            carta.localitzacio &&
+                                            item.id &&
+                                            catalunya &&
+                                            carta.localitzacio.nom == item.nom
+                                        "
                                         v-on:click="carta.localitzacio = item"
                                     />
                                     <label
@@ -229,6 +235,11 @@
                         :options="provincies"
                         :defaultPlaceholder="'Provincia'"
                         @searchValue="(id) => (carta.provincia = id)"
+                        @searchName="
+                            (name) => {
+                                this.carta.provinciaNom = name;
+                            }
+                        "
                     ></searchInput>
                 </div>
                 <div class="col" v-if="catalunya">
@@ -241,6 +252,11 @@
                         :options="comarques"
                         :defaultPlaceholder="'Comarca'"
                         @searchValue="(id) => (carta.comarca = id)"
+                        @searchName="
+                            (name) => {
+                                this.carta.comarcaNom = name;
+                            }
+                        "
                     ></searchInput>
                 </div>
                 <div class="col">
@@ -253,7 +269,12 @@
                         :options="municipis"
                         :defaultPlaceholder="'Municipi'"
                         @searchValue="(id) => (carta.municipi = id)"
-                        @searchName="(name) => this.$emit('municipi', name)"
+                        @searchName="
+                            (name) => {
+                                this.$emit('municipi', name);
+                                this.carta.municipiNom = name;
+                            }
+                        "
                     ></searchInput>
                 </div>
             </div>
@@ -794,7 +815,7 @@
         <!-- -------------- DESPATX -------------- -->
         <div class="content" v-if="this.tab == 4">
             <h1 id="title">Despatx</h1>
-            <mapa></mapa>
+            <mapa :buscarString="this.carta.localitzacioConcatenada"></mapa>
         </div>
 
         <!-- -------------- BOTONS DESCARTAR/SEGüENT/FINALITZAR -------------- -->
@@ -847,7 +868,7 @@ export default {
             catalunya: true,
             tipusLocalitzacions: this.getTipusLocalitzacions(),
             localitzacio: null,
-            carta: {},
+            carta: { localitzacio: { nom: "" }, localitzacioConcatenada: "" },
             provincies: this.getProvincies(),
             comarques: this.getComarques(),
             municipis: this.getMunicipis(),
@@ -901,6 +922,39 @@ export default {
                         };
                     }
                 });
+            }
+        },
+        tab() {
+            if (this.tab == 4) {
+                let result = "";
+
+                let c = this.carta;
+
+                switch (c.localitzacio.nom) {
+                    case "Carrer":
+                        if (
+                            c.tipusViaNom &&
+                            c.nomLocalitzacio &&
+                            c.numero &&
+                            this.carta.municipiNom &&
+                            this.carta.provinciaNom
+                        ) {
+                            result = `${c.tipusViaNom} ${c.nomLocalitzacio} ${c.numero},${this.carta.municipiNom}, ${this.carta.provinciaNom}`;
+                        }
+                        break;
+                    case "Carretera":
+                    case "Punt Singular":
+                        if (
+                            c.nomLocalitzacio &&
+                            this.carta.municipiNom &&
+                            this.carta.provinciaNom
+                        ) {
+                            result = `${c.nomLocalitzacio}, ${this.carta.municipiNom}, ${this.carta.provinciaNom}`;
+                        }
+                        break;
+                }
+
+                this.carta.localitzacioConcatenada = result;
             }
         },
     },
@@ -1027,9 +1081,6 @@ export default {
             );
             this.selectedIncident = false;
             this.carta.incidentId = id;
-        },
-        textt(val) {
-            console.log(val);
         },
         checkInput(event) {
             if (event.target.value == "") {
@@ -1305,6 +1356,12 @@ h3 {
 
 .invalid-input {
     border: $components-border-width solid $danger;
+    animation-name: shake;
+    animation-duration: 0.2s;
+
+    &:focus {
+        box-shadow: 0 0 0 0.25rem rgba($color: $danger, $alpha: 0.25);
+    }
 }
 
 // #endregion
@@ -1312,6 +1369,43 @@ h3 {
 @media (max-width: 1050px) {
     #pagina {
         padding: 1rem;
+    }
+}
+
+// ANIMATIONS
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+    10% {
+        transform: translate(-1px, -2px) rotate(-0.05deg);
+    }
+    20% {
+        transform: translate(-3px, 0px) rotate(0.05deg);
+    }
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+    40% {
+        transform: translate(1px, -1px) rotate(0.05deg);
+    }
+    50% {
+        transform: translate(-1px, 2px) rotate(-0.05deg);
+    }
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+    70% {
+        transform: translate(3px, 1px) rotate(-0.05deg);
+    }
+    80% {
+        transform: translate(-1px, -1px) rotate(0.05deg);
+    }
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+    100% {
+        transform: translate(1px, -2px) rotate(-0.05deg);
     }
 }
 </style>

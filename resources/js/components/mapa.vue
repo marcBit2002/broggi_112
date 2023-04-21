@@ -29,9 +29,12 @@
 import axios from "axios";
 
 export default {
+    props: {
+        buscarString: "",
+    },
     data() {
         return {
-            direccion: "Plaça Urquinaona",
+            direccion: this.buscarString,
             agencias: [],
             mapboxClient: null,
             agenciasSeleccionadas: [],

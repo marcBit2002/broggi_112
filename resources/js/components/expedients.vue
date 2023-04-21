@@ -86,15 +86,12 @@ export default {
             }
         },
         telefon() {
-            console.log("Telefon: " + this.telefon);
             this.matchExpedients();
         },
         municipi() {
-            console.log("Municipi: " + this.municipi);
             this.matchExpedients();
         },
         incidentTipos() {
-            console.log("Incident: " + this.incidentTipos);
             this.matchExpedients();
         },
     },
