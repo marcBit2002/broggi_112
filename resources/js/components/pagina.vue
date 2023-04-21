@@ -162,6 +162,18 @@
             <div class="mb-3 row">
                 <label for="inputLocalitzacio" class="col-sm-4 col-form-label">
                     Tipus localització:
+                    <a
+                        tabindex="-1"
+                        class="arki ms-3"
+                        role="button"
+                        data-bs-toggle="popover"
+                        data-bs-trigger="focus"
+                        data-bs-title="Help Box"
+                        data-bs-placement="bottom"
+                        data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                    >
+                        <img src="/broggi_112/public/assets/icons/arki.svg" />
+                    </a>
                 </label>
                 <div class="col">
                     <div class="col row">
@@ -242,18 +254,6 @@
                             }
                         "
                     ></searchInput>
-                    <a
-                        tabindex="-1"
-                        class="arki"
-                        role="button"
-                        data-bs-toggle="popover"
-                        data-bs-trigger="focus"
-                        data-bs-title="Help Box"
-                        data-bs-placement="bottom"
-                        data-bs-content="And here's some amazing content. It's very engaging. Right?"
-                    >
-                        <img src="/broggi_112/public/assets/icons/arki.svg" />
-                    </a>
                 </div>
                 <div class="col d-flex" v-if="catalunya">
                     <searchInput
@@ -271,18 +271,6 @@
                             }
                         "
                     ></searchInput>
-                    <a
-                        tabindex="-1"
-                        class="arki"
-                        role="button"
-                        data-bs-toggle="popover"
-                        data-bs-trigger="focus"
-                        data-bs-title="Help Box"
-                        data-bs-placement="bottom"
-                        data-bs-content="And here's some amazing content. It's very engaging. Right?"
-                    >
-                        <img src="/broggi_112/public/assets/icons/arki.svg" />
-                    </a>
                 </div>
                 <div class="col d-flex">
                     <searchInput
@@ -890,7 +878,10 @@ export default {
             catalunya: true,
             tipusLocalitzacions: this.getTipusLocalitzacions(),
             localitzacio: null,
-            carta: { localitzacio: { nom: "" }, localitzacioConcatenada: "" },
+            carta: {
+                localitzacio: { nom: "" },
+                localitzacioConcatenada: "Plaça Urquinaona",
+            },
             provincies: this.getProvincies(),
             comarques: this.getComarques(),
             municipis: this.getMunicipis(),
@@ -948,7 +939,7 @@ export default {
         },
         tab() {
             if (this.tab == 4) {
-                let result = "";
+                let result = this.carta.localitzacioConcatenada;
 
                 let c = this.carta;
 

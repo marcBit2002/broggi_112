@@ -30,7 +30,7 @@ import axios from "axios";
 
 export default {
     props: {
-        buscarString: "",
+        buscarString: String,
     },
     data() {
         return {
