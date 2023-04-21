@@ -3,7 +3,7 @@
         <input
             type="text"
             class="buscador form-control"
-            placeholder="Introduce la dirección"
+            placeholder="Introdueix la direcció"
             v-model="direccion"
             @input="debounce(cargarLocalitzacio, 800)"
             @keyup.enter="cargarLocalitzacio()"
@@ -11,7 +11,7 @@
         />
         <div id="map"></div>
         <div class="agencies">
-            <h2>Agencias seleccionadas:</h2>
+            <h2>Agències seleccionades:</h2>
             <div class="agencies-list">
                 <div
                     v-for="agencia in agenciasSeleccionadas"
@@ -304,16 +304,6 @@ export default {
     font-size: 20px;
     line-height: 1;
     margin-left: 10px;
-}
-
-.bombers {
-    background-color: red;
-}
-.policia {
-    background-color: blue;
-}
-.hospital {
-    background-color: yellow;
 }
 
 .Popup {
