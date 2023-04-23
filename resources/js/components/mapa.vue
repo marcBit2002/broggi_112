@@ -6,9 +6,8 @@
             class="form-control"
             placeholder="Introdueix la direcció"
             v-model="direccion"
-            @input="debounce(cargarLocalitzacio, 800)"
-            @keyup.enter="cargarLocalitzacio()"
-            @blur="cargarLocalitzacio()"
+            @input="debounce(busquedaDesdelInput, 800)"
+            @keyup.enter="busquedaDesdelInput()"
         />
         <div id="map"></div>
         <h2 id="agenciesTitle">Agències seleccionades:</h2>
@@ -55,7 +54,43 @@ export default {
             map: {},
             marker: null,
             debounceTimeout: null,
+            search: false,
         };
+    },
+    watch: {
+        // Esta mirando la variable tab del padre
+        "$parent.tab"(tab) {
+            if (tab === 4) {
+                // Si aplicamos resize intantaneo, no encuentra al mapa. hay que espera un poco
+                // Este for lo intenta 25 veces para garantizar que se aplica el resize.
+                setTimeout(() => {
+                    this.map.resize();
+                }, 10);
+
+                for (let i = 1; i <= 25; i++) {
+                    setTimeout(() => {
+                        this.map.resize();
+                    }, 100 * i);
+                }
+
+                // Aqui decidimos si hay que buscar la direccion de localitzacio o no
+                setTimeout(() => {
+                    // Necessitem el this.search per buscar només si s'ha cambiat la direció de 'localitzacio'
+                    if (
+                        this.buscarString != "Plaça Urquinaona" &&
+                        this.buscarString != this.direccion &&
+                        this.search
+                    ) {
+                        this.direccion = this.buscarString;
+                        this.cargarLocalitzacio();
+                    }
+                }, 250);
+            }
+        },
+        buscarString() {
+            // Activa que se ha cambiado la direccion d localitzacio
+            this.search = true;
+        },
     },
 
     created() {
@@ -66,6 +101,7 @@ export default {
         });
     },
     mounted() {
+        this.cargarMapa();
         this.cargarAgencias();
     },
     methods: {
@@ -112,7 +148,6 @@ export default {
                 })
                 .send()
                 .then((response) => {
-                    console.log(this.direccion);
                     if (
                         !response ||
                         !response.body ||
@@ -143,7 +178,6 @@ export default {
         cargarAgencias() {
             axios.get("agencia").then((response) => {
                 this.agencias = response.data;
-                this.cargarMapa();
                 this.agregarMarcadoresAgencias();
             });
         },
@@ -249,6 +283,10 @@ export default {
             if (index !== -1) {
                 this.agenciasSeleccionadas.splice(index, 1);
             }
+        },
+        busquedaDesdelInput() {
+            this.search = false;
+            this.cargarLocalitzacio();
         },
     },
 };

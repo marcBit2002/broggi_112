@@ -823,7 +823,7 @@
         </div>
 
         <!-- -------------- DESPATX -------------- -->
-        <div class="content" v-if="this.tab == 4">
+        <div class="content" v-show="this.tab == 4">
             <h1 id="title">Despatx</h1>
             <mapa :buscarString="this.carta.localitzacioConcatenada"></mapa>
         </div>
@@ -942,49 +942,38 @@ export default {
                 let result = this.carta.localitzacioConcatenada;
 
                 let c = this.carta;
+                let address = [];
 
+                // Mira si hay valor y añade al array, luego pasa a string
                 switch (c.localitzacio.nom) {
                     case "Carrer":
-                        if (
-                            c.nomLocalitzacio &&
-                            c.numero &&
-                            this.carta.municipiNom &&
-                            this.carta.provinciaNom
-                        ) {
-                            result = `${c.nomLocalitzacio} ${c.numero},${this.carta.municipiNom}, ${this.carta.provinciaNom}, Espanya`;
-                        } else if (
-                            c.nomLocalitzacio &&
-                            this.carta.municipiNom &&
-                            this.carta.provinciaNom
-                        ) {
-                            result = `${c.nomLocalitzacio},${this.carta.municipiNom}, ${this.carta.provinciaNom}, Espanya`;
-                        } else if (
-                            c.nomLocalitzacio &&
-                            this.carta.municipiNom
-                        ) {
-                            result = `${c.nomLocalitzacio},${this.carta.municipiNom}, Espanya`;
-                        } else if (c.nomLocalitzacio) {
-                            result = `${c.nomLocalitzacio}, Espanya`;
-                        }
-
+                        if (c.nomLocalitzacio) address.push(c.nomLocalitzacio);
+                        if (c.numero) address.push(c.numero);
+                        if (this.carta.municipiNom)
+                            address.push(this.carta.municipiNom);
+                        if (this.carta.provinciaNom)
+                            address.push(this.carta.provinciaNom);
+                        address.push("Espanya");
+                        result = address.join(", ");
                         break;
                     case "Carretera":
                     case "Punt Singular":
-                        if (
-                            c.nomLocalitzacio &&
-                            this.carta.municipiNom &&
-                            this.carta.provinciaNom
-                        ) {
-                            result = `${c.nomLocalitzacio}, ${this.carta.municipiNom}, ${this.carta.provinciaNom}, Espanya`;
-                        } else if (
-                            c.nomLocalitzacio &&
-                            this.carta.municipiNom
-                        ) {
-                            result = `${c.nomLocalitzacio}, ${this.carta.municipiNom}, Espanya`;
-                        } else if (c.nomLocalitzacio) {
-                            result = `${c.nomLocalitzacio}, Espanya`;
-                        }
+                        if (c.nomLocalitzacio) address.push(c.nomLocalitzacio);
+                        if (this.carta.municipiNom)
+                            address.push(this.carta.municipiNom);
+                        if (this.carta.provinciaNom)
+                            address.push(this.carta.provinciaNom);
+                        address.push("Espanya");
+                        result = address.join(", ");
                         break;
+                    case "":
+                        break;
+                    default:
+                    // if (this.carta.municipiNom)
+                    //     address.push(this.carta.municipiNom);
+                    // address.push("Espanya");
+                    // result = address.join(", ");
+                    // break;
                 }
 
                 this.carta.localitzacioConcatenada = result;
