@@ -2,7 +2,8 @@
     <div class="container">
         <input
             type="text"
-            class="buscador form-control"
+            id="buscador"
+            class="form-control"
             placeholder="Introdueix la direcció"
             v-model="direccion"
             @input="debounce(cargarLocalitzacio, 800)"
@@ -10,16 +11,29 @@
             @blur="cargarLocalitzacio()"
         />
         <div id="map"></div>
-        <div class="agencies">
-            <h2>Agències seleccionades:</h2>
-            <div class="agencies-list">
-                <div
-                    v-for="agencia in agenciasSeleccionadas"
-                    :key="agencia.id"
-                    class="agency-pill"
-                >
-                    <span>{{ agencia.nom }} - {{ agencia.carrer }}</span>
-                    <button @click="deseleccionarAgencia(agencia)">×</button>
+        <h2 id="agenciesTitle">Agències seleccionades:</h2>
+        <div id="containerAgencies">
+            <div
+                v-for="agencia in agenciasSeleccionadas"
+                :key="agencia.id"
+                class="card m-2"
+                style="width: 18rem"
+            >
+                <div class="card-body">
+                    <h5 class="card-title">{{ agencia.nom }}</h5>
+                    <p class="card-text">
+                        {{ agencia.carrer }}
+                    </p>
+                    <button
+                        class="btn btn-danger"
+                        @click="deseleccionarAgencia(agencia)"
+                    >
+                        ELIMINAR
+                    </button>
+                    <div
+                        class="hover-bg"
+                        @click="deseleccionarAgencia(agencia)"
+                    ></div>
                 </div>
             </div>
         </div>
@@ -239,42 +253,111 @@ export default {
     },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../../css/variables.scss";
 
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    border-radius: 10px;
-    overflow: hidden;
-    padding: 0;
-}
-
-.buscador {
+#buscador {
     margin-bottom: 10px;
+    border-radius: $components-border-radius;
+
+    &:focus {
+        box-shadow: none;
+    }
 }
 #map {
-    width: 70%;
+    width: 100%;
     height: 400px;
-    border-radius: 10px;
     border: 2px solid $primary;
     box-sizing: border-box;
     padding: 10px;
-}
-
-.agencies {
-    width: 28%;
-    height: 400px;
+    margin-top: 10px;
     border-radius: 10px;
-    border: 2px solid $primary;
-    box-sizing: border-box;
-    padding: 10px;
-    overflow: auto;
+    margin-left: 0;
 }
 
-.agencies h2 {
-    margin-bottom: 10px;
+#agenciesTitle {
+    margin: 20px 0;
+    font-size: 1.75rem;
+    color: $primary;
+}
+
+#containerAgencies {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+
+    width: 100%;
+    height: auto;
+
+    border-radius: $components-border-radius;
+    border: 2px solid $primary;
+
+    padding: 10px;
+    min-height: 100px;
+
+    justify-content: flex-start;
+
+    position: relative;
+
+    .card {
+        flex: 1 !important;
+        min-width: 30%;
+        border: 2px solid $primary;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:hover .btn {
+            opacity: 1;
+        }
+
+        &:hover .hover-bg {
+            opacity: 1;
+        }
+    }
+
+    .hover-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+        background-color: rgba($color: $dark, $alpha: 0.5);
+        backdrop-filter: blur(2px);
+
+        opacity: 0;
+
+        transition: opacity 0.3s ease-in-out;
+
+        z-index: 1;
+    }
+
+    .card-title {
+        color: $primary;
+        font-size: 1.25rem;
+    }
+
+    .card-text {
+        color: $danger;
+        font-size: 1rem;
+        margin-bottom: 0;
+    }
+
+    .btn {
+        position: absolute;
+
+        top: 50%;
+        left: 50%;
+        opacity: 0;
+        transform: translate(-50%, -50%);
+
+        transition: opacity 0.2s linear;
+        transition-delay: 0.2s;
+
+        z-index: 2;
+    }
 }
 
 .agencies-list {
@@ -283,53 +366,56 @@ export default {
 }
 
 .agency-pill {
+    width: 32.5%;
+
     background-color: #eee;
-    padding: 10px;
+    padding: 1rem;
     border-radius: 20px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+
+    margin-bottom: 0.5rem;
+
     display: flex;
     align-items: center;
+
+    button {
+        background-color: transparent;
+        border: none;
+        font-size: 20px;
+        line-height: 1;
+        margin-left: 10px;
+    }
 }
 
-.agency-pill span {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.agency-pill button {
-    background-color: transparent;
-    border: none;
-    font-size: 20px;
-    line-height: 1;
-    margin-left: 10px;
-}
-
-.Popup {
+.mapboxgl-popup-content {
     border-radius: 6px;
-}
-.popup {
-    font-family: "Figtree", sans-serif !important;
+    font-family: "Figtree", sans-serif;
+    box-shadow: 0px 0px 10px rgba($color: $dark, $alpha: 0.75);
+
+    display: flex;
+    flex-direction: column;
+
+    h5 {
+        color: $primary;
+        font-size: 1.15rem;
+    }
+
+    p {
+        color: $danger;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+
+    button:not(.mapboxgl-popup-close-button) {
+        border-radius: $components-border-radius;
+        background-color: $danger;
+
+        color: white;
+        font-size: 1rem;
+    }
 }
 
-@media only screen and (max-width: 980px) {
-    .container {
-        flex-direction: column;
-    }
-    .agencies {
-        width: 100%;
-        height: auto;
-        min-height: 100px;
-        margin-top: 10px;
-        border-radius: 10px;
-        margin-left: 0;
-    }
-    #map {
-        width: 100%;
-        margin-top: 10px;
-        border-radius: 10px;
-        margin-left: 0;
-    }
+.mapboxgl-popup-close-button {
+    color: $primary;
+    font-size: 26px;
 }
 </style>
