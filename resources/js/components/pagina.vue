@@ -29,7 +29,7 @@
                     data-bs-toggle="popover"
                     data-bs-trigger="focus"
                     data-bs-title="Help Box"
-                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                    data-bs-content="Please tell me your phone number so we can contact you if needed."
                 >
                     <img src="/broggi_112/public/assets/icons/arki.svg" />
                 </a>
@@ -54,7 +54,7 @@
                     data-bs-toggle="popover"
                     data-bs-trigger="focus"
                     data-bs-title="Help Box"
-                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                    data-bs-content="Can you tell me your name?"
                 >
                     <img src="/broggi_112/public/assets/icons/arki.svg" />
                 </a>
@@ -79,7 +79,7 @@
                     data-bs-toggle="popover"
                     data-bs-trigger="focus"
                     data-bs-title="Help Box"
-                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                    data-bs-content="Can you tell me your surname?"
                 >
                     <img src="/broggi_112/public/assets/icons/arki.svg" />
                 </a>
@@ -97,7 +97,7 @@
                         data-bs-toggle="popover"
                         data-bs-trigger="focus"
                         data-bs-title="Help Box"
-                        data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                        data-bs-content="Have you called us before or have you had any previous interactions with us?"
                     >
                         <img src="/broggi_112/public/assets/icons/arki.svg" />
                     </a>
@@ -170,7 +170,7 @@
                         data-bs-trigger="focus"
                         data-bs-title="Help Box"
                         data-bs-placement="bottom"
-                        data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                        data-bs-content="Please tell me where you are (Street, Road, Landmark, Town/city, Province)"
                     >
                         <img src="/broggi_112/public/assets/icons/arki.svg" />
                     </a>
@@ -297,7 +297,7 @@
                         data-bs-trigger="focus"
                         data-bs-title="Help Box"
                         data-bs-placement="bottom"
-                        data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                        data-bs-content="Where are you(city)?"
                     >
                         <img src="/broggi_112/public/assets/icons/arki.svg" />
                     </a>
@@ -331,7 +331,7 @@
                                 data-bs-toggle="popover"
                                 data-bs-trigger="focus"
                                 data-bs-title="Help Box"
-                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                                data-bs-content="Please tell me the name of the street."
                             >
                                 <img
                                     src="/broggi_112/public/assets/icons/arki.svg"
@@ -360,7 +360,7 @@
                                 data-bs-toggle="popover"
                                 data-bs-trigger="focus"
                                 data-bs-title="Help Box"
-                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                                data-bs-content="Building number"
                             >
                                 <img
                                     src="/broggi_112/public/assets/icons/arki.svg"
@@ -387,7 +387,7 @@
                                 data-bs-toggle="popover"
                                 data-bs-trigger="focus"
                                 data-bs-title="Help Box"
-                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                                data-bs-content="Staircase"
                             >
                                 <img
                                     src="/broggi_112/public/assets/icons/arki.svg"
@@ -414,7 +414,7 @@
                                 data-bs-toggle="popover"
                                 data-bs-trigger="focus"
                                 data-bs-title="Help Box"
-                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                                data-bs-content="Floor"
                             >
                                 <img
                                     src="/broggi_112/public/assets/icons/arki.svg"
@@ -441,7 +441,7 @@
                                 data-bs-toggle="popover"
                                 data-bs-trigger="focus"
                                 data-bs-title="Help Box"
-                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                                data-bs-content="Door number"
                             >
                                 <img
                                     src="/broggi_112/public/assets/icons/arki.svg"
@@ -460,7 +460,7 @@
                                     data-bs-toggle="popover"
                                     data-bs-trigger="focus"
                                     data-bs-title="Help Box"
-                                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                                    data-bs-content="Please provide any other relevant location information."
                                 >
                                     <img
                                         src="/broggi_112/public/assets/icons/arki.svg"
@@ -502,7 +502,7 @@
                                 data-bs-toggle="popover"
                                 data-bs-trigger="focus"
                                 data-bs-title="Help Box"
-                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                                data-bs-content="Please tell me the name of the road."
                             >
                                 <img
                                     src="/broggi_112/public/assets/icons/arki.svg"
@@ -531,7 +531,7 @@
                                 data-bs-toggle="popover"
                                 data-bs-trigger="focus"
                                 data-bs-title="Help Box"
-                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                                data-bs-content="Kilometer marker."
                             >
                                 <img
                                     src="/broggi_112/public/assets/icons/arki.svg"
@@ -558,7 +558,7 @@
                                 data-bs-toggle="popover"
                                 data-bs-trigger="focus"
                                 data-bs-title="Help Box"
-                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                                data-bs-content="Direction of travel."
                             >
                                 <img
                                     src="/broggi_112/public/assets/icons/arki.svg"
@@ -576,7 +576,7 @@
                                     data-bs-toggle="popover"
                                     data-bs-trigger="focus"
                                     data-bs-title="Help Box"
-                                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                                    data-bs-content="Please provide any other relevant location information."
                                 >
                                     <img
                                         src="/broggi_112/public/assets/icons/arki.svg"
@@ -616,7 +616,7 @@
                                 data-bs-toggle="popover"
                                 data-bs-trigger="focus"
                                 data-bs-title="Help Box"
-                                data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                                data-bs-content="Please tell me the name of the landmark."
                             >
                                 <img
                                     src="/broggi_112/public/assets/icons/arki.svg"
@@ -634,7 +634,7 @@
                                     data-bs-toggle="popover"
                                     data-bs-trigger="focus"
                                     data-bs-title="Help Box"
-                                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                                    data-bs-content="Please provide any other relevant location information."
                                 >
                                     <img
                                         src="/broggi_112/public/assets/icons/arki.svg"
@@ -669,7 +669,7 @@
                                     data-bs-toggle="popover"
                                     data-bs-trigger="focus"
                                     data-bs-title="Help Box"
-                                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                                    data-bs-content="Please provide any other relevant location information."
                                 >
                                     <img
                                         src="/broggi_112/public/assets/icons/arki.svg"
@@ -702,7 +702,34 @@
                     data-bs-trigger="focus"
                     data-bs-title="Help Box"
                     data-bs-placement="right"
-                    data-bs-content="And here's some amazing content. It's very engaging. Right?"
+                    data-bs-content="• Accident = Accident • Assitència sanitària = Health assistance • Incendi = Fire • Fuita(Aigua,Gas, Altres) = Leak (water, gas, other) • Altres incidències = Other incidents • Seguretat = Security • Trànsit =  Traffic • Civisme = Citizenship • Mediambient = Environment • Meteorologia = Weather"
+                >
+                    <img src="/broggi_112/public/assets/icons/arki.svg" />
+                </a>
+                <a
+                    tabindex="-1"
+                    class="arki ms-3"
+                    role="button"
+                    data-bs-toggle="popover"
+                    data-bs-trigger="focus"
+                    data-bs-title="Help Box"
+                    data-bs-placement="right"
+                    data-bs-content="
+                    • A man in the street suddenly collapses
+                    • Someone in my family has cut their finger deeply
+                    • Someone is having difficulty breathing
+                    • There has been a car accident in my street and one of the drivers is bleeding uncontrollably
+                    • A boy has fallen out of a tree and has broken his leg
+                    • Somebody has been shot
+                    • My heart is racing
+                    • A man has fallen from a boat and is drowning
+                    • I feel dizzy
+                    • A woman was bitten by a snake
+                    • I'm in labour
+                    • A person was beaten up
+                    • My house is full of smoke. I can't hardly breathe
+                    • My grandmother lives alone and  she does not answer my calls nor opens her house door. I think something is wrong
+                    • There is a pub nearby and it is 4 a.m and it is still open and people are shouting in the street"
                 >
                     <img src="/broggi_112/public/assets/icons/arki.svg" />
                 </a>
@@ -824,7 +851,21 @@
 
         <!-- -------------- DESPATX -------------- -->
         <div class="content" v-show="this.tab == 4">
-            <h1 id="title">Despatx</h1>
+            <div class="d-flex align-items-center mb-5">
+                <h1 id="title" class="m-0">Despatx</h1>
+                <a
+                    tabindex="-1"
+                    class="arki ms-3"
+                    role="button"
+                    data-bs-toggle="popover"
+                    data-bs-trigger="focus"
+                    data-bs-title="Help Box"
+                    data-bs-placement="right"
+                    data-bs-content="I'm sending you (Fireman, Police, Ambulance)"
+                >
+                    <img src="/broggi_112/public/assets/icons/arki.svg" />
+                </a>
+            </div>
             <mapa :buscarString="this.carta.localitzacioConcatenada"></mapa>
         </div>
 
