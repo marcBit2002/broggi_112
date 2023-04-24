@@ -61,17 +61,26 @@ export default {
         // Esta mirando la variable tab del padre
         "$parent.tab"(tab) {
             if (tab === 4) {
-                // Si aplicamos resize intantaneo, no encuentra al mapa. hay que espera un poco
-                // Este for lo intenta 25 veces para garantizar que se aplica el resize.
-                setTimeout(() => {
-                    this.map.resize();
-                }, 10);
+                const mapContainer = document.querySelector("#map");
+                const map = document.querySelector("#map canvas");
 
-                for (let i = 1; i <= 25; i++) {
-                    setTimeout(() => {
+                setTimeout(() => {
+                    if (
+                        map.clientHeight < mapContainer.clientHeight - 10 ||
+                        map.clientWidth < mapContainer.clientWidth - 10
+                    ) {
                         this.map.resize();
-                    }, 100 * i);
-                }
+                    }
+                }, 15);
+
+                setInterval(() => {
+                    if (
+                        map.clientHeight < mapContainer.clientHeight - 10 ||
+                        map.clientWidth < mapContainer.clientWidth - 10
+                    ) {
+                        this.map.resize();
+                    }
+                }, 100);
 
                 // Aqui decidimos si hay que buscar la direccion de localitzacio o no
                 setTimeout(() => {
