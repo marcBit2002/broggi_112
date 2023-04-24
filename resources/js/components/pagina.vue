@@ -986,35 +986,41 @@ export default {
                 let address = [];
 
                 // Mira si hay valor y añade al array, luego pasa a string
-                switch (c.localitzacio.nom) {
-                    case "Carrer":
-                        if (c.nomLocalitzacio) address.push(c.nomLocalitzacio);
-                        if (c.numero) address.push(c.numero);
-                        if (this.carta.municipiNom)
-                            address.push(this.carta.municipiNom);
-                        if (this.carta.provinciaNom)
-                            address.push(this.carta.provinciaNom);
-                        address.push("Espanya");
-                        result = address.join(", ");
-                        break;
-                    case "Carretera":
-                    case "Punt Singular":
-                        if (c.nomLocalitzacio) address.push(c.nomLocalitzacio);
-                        if (this.carta.municipiNom)
-                            address.push(this.carta.municipiNom);
-                        if (this.carta.provinciaNom)
-                            address.push(this.carta.provinciaNom);
-                        address.push("Espanya");
-                        result = address.join(", ");
-                        break;
-                    case "":
-                        break;
-                    default:
-                    // if (this.carta.municipiNom)
-                    //     address.push(this.carta.municipiNom);
-                    // address.push("Espanya");
-                    // result = address.join(", ");
-                    // break;
+                try {
+                    switch (c.localitzacio.nom) {
+                        case "Carrer":
+                            if (c.nomLocalitzacio)
+                                address.push(c.nomLocalitzacio);
+                            if (c.numero) address.push(c.numero);
+                            if (this.carta.municipiNom)
+                                address.push(this.carta.municipiNom);
+                            if (this.carta.provinciaNom)
+                                address.push(this.carta.provinciaNom);
+                            address.push("Espanya");
+                            result = address.join(", ");
+                            break;
+                        case "Carretera":
+                        case "Punt Singular":
+                            if (c.nomLocalitzacio)
+                                address.push(c.nomLocalitzacio);
+                            if (this.carta.municipiNom)
+                                address.push(this.carta.municipiNom);
+                            if (this.carta.provinciaNom)
+                                address.push(this.carta.provinciaNom);
+                            address.push("Espanya");
+                            result = address.join(", ");
+                            break;
+                        case "":
+                            break;
+                        default:
+                        // if (this.carta.municipiNom)
+                        //     address.push(this.carta.municipiNom);
+                        // address.push("Espanya");
+                        // result = address.join(", ");
+                        // break;
+                    }
+                } catch (error) {
+                    result = "";
                 }
 
                 this.carta.localitzacioConcatenada = result;
