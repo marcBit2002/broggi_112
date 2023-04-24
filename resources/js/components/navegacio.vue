@@ -239,8 +239,10 @@ export default {
             &::after {
                 content: "";
                 position: absolute;
-                width: 6px;
-                height: 6px;
+                // width: 6px;
+                // height: 6px;
+                width: 0px;
+                height: 0px;
                 right: -10px;
                 bottom: 0;
                 border-radius: 50%;
@@ -270,11 +272,11 @@ export default {
         font-weight: 500 !important;
         font-size: 1.25em !important;
 
-        &::after {
-            right: -15px !important;
-            width: 10px !important;
-            height: 10px !important;
-        }
+        // &::after {
+        //     right: -15px !important;
+        //     width: 10px !important;
+        //     height: 10px !important;
+        // }
     }
 }
 

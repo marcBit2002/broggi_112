@@ -4,13 +4,22 @@
             @tab="(i) => (this.activeTab = i)"
             :tab="this.activeTab"
         ></navegacio>
-        <dades :expedient="expedient" :codi="codi"></dades>
+        <dades
+            @timer="(time) => (this.timer = time)"
+            @date="(date) => (this.date = date)"
+            :expedient="expedient"
+            :codi="codi"
+        ></dades>
         <pagina
             @tab="(i) => (this.activeTab += i)"
             :tab="this.activeTab"
             :notaContent="this.notaContent"
             :tipusIncidents="this.tipusIncidents"
             :allIncidents="this.allIncidents"
+            :codi="this.codi"
+            :expedient="this.expedient"
+            :duration="this.timer"
+            :date="this.date"
             @telefon="(tel) => (this.telefon = tel)"
             @municipi="(name) => (this.municipi = name)"
             @incidentTipos="(incident) => (this.incidentTipos = incident)"
@@ -56,6 +65,8 @@ export default {
             telefon: null,
             municipi: null,
             incidentTipos: null,
+            timer: null,
+            date: null,
         };
     },
     methods: {

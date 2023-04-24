@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CartaController;
+use App\Http\Controllers\Api\CartaController;
 use App\Http\Controllers\AgenciaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\CartaSupController;
@@ -33,6 +33,8 @@ Route::post('/login', [UsuarioController::class, 'login']);
 Route::get('/logout', [UsuarioController::class, 'logout']);
 
 Route::middleware(['auth'])->group(function () {
+    Route::apiResource('api/carta', CartaController::class);
+
     Route::get('menu', function () {
         return view('menu');
     });

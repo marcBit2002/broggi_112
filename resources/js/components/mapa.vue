@@ -285,12 +285,16 @@ export default {
         seleccionarAgencia(agencia) {
             if (!this.agenciasSeleccionadas.includes(agencia)) {
                 this.agenciasSeleccionadas.push(agencia);
+
+                this.$parent.carta.agencies = this.agenciasSeleccionadas;
             }
         },
         deseleccionarAgencia(agencia) {
             const index = this.agenciasSeleccionadas.indexOf(agencia);
             if (index !== -1) {
                 this.agenciasSeleccionadas.splice(index, 1);
+
+                this.$parent.carta.agencies = this.agenciasSeleccionadas;
             }
         },
         busquedaDesdelInput() {

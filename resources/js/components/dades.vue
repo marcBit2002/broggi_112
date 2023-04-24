@@ -33,7 +33,24 @@ export default {
         expedient: null,
     },
     watch: {
-        expedient() {},
+        timer() {
+            this.$emit("timer", this.timer);
+        },
+        timestamp() {
+            var partesFecha = this.date.split("/");
+            var partesHora = this.timestamp.split(":");
+
+            let anio = partesFecha[2];
+            let mes = partesFecha[1].padStart(2, "0");
+            let dia = partesFecha[0].padStart(2, "0");
+            let horas = partesHora[0].padStart(2, "0");
+            let minutos = partesHora[1].padStart(2, "0");
+            let segundos = partesHora[2].padStart(2, "0");
+
+            let date = `${anio}-${mes}-${dia} ${horas}:${minutos}:${segundos}`;
+
+            this.$emit("date", date);
+        },
     },
     methods: {
         getDay: function () {
@@ -48,7 +65,11 @@ export default {
         getTime: function () {
             const today = new Date();
             this.timestamp =
-                today.getHours() + ":" + ("0" + today.getMinutes()).slice(-2);
+                today.getHours() +
+                ":" +
+                ("0" + today.getMinutes()).slice(-2) +
+                ":" +
+                ("0" + today.getSeconds()).slice(-2);
         },
         calcTimer: function () {
             this.timerFormated = new Date(this.timer++ * 1000)
@@ -109,6 +130,7 @@ export default {
             p {
                 width: 100px;
                 text-align: right;
+                font-variant-numeric: tabular-nums lining-nums;
             }
         }
     }

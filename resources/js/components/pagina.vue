@@ -943,6 +943,10 @@ export default {
         notaContent: null,
         tipusIncidents: null,
         allIncidents: null,
+        codi: null,
+        expedient: null,
+        duration: null,
+        date: null,
     },
     watch: {
         notaContent() {
@@ -992,23 +996,29 @@ export default {
                             if (c.nomLocalitzacio)
                                 address.push(c.nomLocalitzacio);
                             if (c.numero) address.push(c.numero);
-                            if (this.carta.municipiNom)
+                            if (
+                                this.carta.municipiNom &&
+                                this.carta.municipiNom != "Municipi"
+                            )
                                 address.push(this.carta.municipiNom);
                             if (this.carta.provinciaNom)
                                 address.push(this.carta.provinciaNom);
-                            address.push("Espanya");
+                            if (address.length != 0) address.push("Espanya");
                             result = address.join(", ");
                             break;
                         case "Carretera":
                         case "Punt Singular":
                             if (c.nomLocalitzacio)
                                 address.push(c.nomLocalitzacio);
-                            if (this.carta.municipiNom)
+                            if (
+                                this.carta.municipiNom &&
+                                this.carta.municipiNom != "Municipi"
+                            )
                                 address.push(this.carta.municipiNom);
                             if (this.carta.provinciaNom)
                                 address.push(this.carta.provinciaNom);
-                            address.push("Espanya");
-                            result = address.join(", ");
+                            if (address.length != 0)
+                                result = address.join(", ");
                             break;
                         case "":
                             break;
@@ -1020,7 +1030,11 @@ export default {
                         // break;
                     }
                 } catch (error) {
-                    result = "";
+                    result = "Plaça Urquinaona";
+                }
+
+                if (result == "") {
+                    result = this.carta.localitzacioConcatenada;
                 }
 
                 this.carta.localitzacioConcatenada = result;
@@ -1029,8 +1043,22 @@ export default {
     },
     methods: {
         insertCarta() {
-            alert(JSON.stringify(this.carta));
+            this.carta.codi = this.codi;
+            this.carta.expedient = this.expedient;
+            this.carta.duration = this.duration - 1;
+            this.carta.date = this.date;
+            this.carta.notaComuna = this.notaContent;
+
             console.log(JSON.stringify(this.carta));
+
+            const me = this;
+
+            axios
+                .post("carta", JSON.stringify(me.carta))
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((error) => {});
         },
         removePopovers() {
             const popovers = document.querySelectorAll(".popover");
