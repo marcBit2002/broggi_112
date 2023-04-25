@@ -108,26 +108,31 @@ export default {
                         const localitat = [];
                         const dates = [];
 
-                        expedient.cartes_trucades.forEach((carta) => {
-                            tipos.push(carta.incidents_id);
-                            localitat.push(carta.municipis_id);
+                        if (
+                            expedient.cartes_trucades &&
+                            expedient.cartes_trucades.length > 0
+                        ) {
+                            expedient.cartes_trucades.forEach((carta) => {
+                                tipos.push(carta.incidents_id);
+                                localitat.push(carta.municipis_id);
 
-                            var date = new Date(carta.data_hora_trucada);
-                            dates.push(date.getTime());
-                        });
+                                var date = new Date(carta.data_hora_trucada);
+                                dates.push(date.getTime());
+                            });
 
-                        expedient.incident =
-                            this.allIncidents[
-                                this.findMostRepeated(tipos)
-                            ].tipus_incidents.nom;
-                        expedient.localitat =
-                            this.allMunicipis[
-                                this.findMostRepeated(localitat)
-                            ].nom;
+                            expedient.incident =
+                                this.allIncidents[
+                                    this.findMostRepeated(tipos)
+                                ].tipus_incidents.nom;
+                            expedient.localitat =
+                                this.allMunicipis[
+                                    this.findMostRepeated(localitat)
+                                ].nom;
 
-                        expedient.date = new Date(
-                            dates.reduce((a, b) => Math.min(a, b))
-                        );
+                            expedient.date = new Date(
+                                dates.reduce((a, b) => Math.min(a, b))
+                            );
+                        }
                     });
 
                     me.originalExpedients = this.expedients;
