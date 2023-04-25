@@ -20,6 +20,7 @@
             :expedient="this.expedient"
             :duration="this.timer"
             :date="this.date"
+            :isAssociated="this.isAssociated"
             @telefon="(tel) => (this.telefon = tel)"
             @municipi="(name) => (this.municipi = name)"
             @incidentTipos="(incident) => (this.incidentTipos = incident)"
@@ -29,6 +30,7 @@
         ></notaComuna>
         <expedients
             @expedient="(num) => (this.expedient = num)"
+            @isAssociated="(value) => (this.isAssociated = value)"
             :allIncidents="this.allIncidents"
             :allMunicipis="this.allMunicipis"
             :expedientId="expedient"
@@ -67,6 +69,7 @@ export default {
             incidentTipos: null,
             timer: null,
             date: null,
+            isAssociated: false,
         };
     },
     methods: {
@@ -95,16 +98,11 @@ export default {
                 .get("expedient")
                 .then((response) => {
                     // Ultima carta de la BDD
-                    let lastExpedient = response.data[response.data.length - 1];
-
-                    // Agafem el codi
-                    let codi = lastExpedient.codi;
-
-                    // Eliminem la 'E' i sumem 1
-                    codi = Number(codi.substring(1)) + 1;
+                    let lastExpedientId =
+                        response.data[response.data.length - 1]["id"];
 
                     //Afegim 'T' i guardem
-                    this.expedient = "E" + codi;
+                    this.expedient = "E" + Number(lastExpedientId + 1);
                 })
                 .catch((error) => {
                     this.expedient = "NOT FOUND";

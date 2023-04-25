@@ -875,8 +875,8 @@
         <div id="navigation_buttons">
             <a
                 type="button"
-                href="javascript:history.back()"
                 class="btn btn-outline-secondary"
+                @click="anularWarning('open')"
             >
                 Descartar carta
             </a>
@@ -900,10 +900,109 @@
                 v-else
                 type="button"
                 class="btn btn-danger"
-                v-on:click="this.insertCarta()"
+                v-on:click="finalitzarWarning('open')"
             >
                 Finalitzar
             </button>
+        </div>
+    </div>
+    <!-- Modals -->
+    <!-- Finalitzar -->
+    <div
+        class="modal fade show"
+        id="modal-finalitzar"
+        tabindex="-1"
+        style="display: none"
+    >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1
+                        class="modal-title fs-5"
+                        style="color: rgb(8, 124, 167)"
+                    >
+                        Anem a tancar la carta
+                    </h1>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        @click="finalitzarWarning('close')"
+                    ></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0" style="color: rgb(118, 118, 118)">
+                        Eliminar a l'usuari
+                        <span
+                            id="estil"
+                            style="font-style: italic; font-weight: bold"
+                            >Operador BROGGI</span
+                        >
+                        comporta que no podràs recuperar-ho un cop eliminat
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-secondary me-2"
+                        @click="finalitzarWarning('close')"
+                    >
+                        Cancel·lar
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger delete"
+                        @click="insertCarta()"
+                    >
+                        Finalitzar<i class="bi bi-check-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Descartar carta -->
+    <div
+        class="modal fade show"
+        id="modal-anular"
+        tabindex="-1"
+        style="display: none"
+    >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1
+                        class="modal-title fs-5"
+                        style="color: rgb(8, 124, 167)"
+                    >
+                        Segur que vols descartar la carta?
+                    </h1>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        @click="anularWarning('close')"
+                    ></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0" style="color: rgb(118, 118, 118)">
+                        Perdras totes les dades de la carta actual.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-secondary me-2"
+                        @click="anularWarning('close')"
+                    >
+                        Cancel·lar
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger delete"
+                        @click="redirigirMenu()"
+                    >
+                        Anul·lar<i class="bi bi-check-lg"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -924,6 +1023,8 @@ export default {
             carta: {
                 localitzacio: { nom: "" },
                 localitzacioConcatenada: "Plaça Urquinaona",
+                provincia: null,
+                altresRef: "",
             },
             provincies: this.getProvincies(),
             comarques: this.getComarques(),
@@ -949,6 +1050,7 @@ export default {
         expedient: null,
         duration: null,
         date: null,
+        isAssociated: Boolean,
     },
     watch: {
         notaContent() {
@@ -1044,6 +1146,56 @@ export default {
         },
     },
     methods: {
+        redirigirMenu() {
+            // let currentUrl = window.location.href;
+            // let newUrl = currentUrl.replace(/carta$/, "menu");
+            // window.location.href = newUrl;
+        },
+        anularWarning(action) {
+            const modal = document.getElementById("modal-anular");
+
+            switch (action) {
+                case "open":
+                    modal.style.display = "flex";
+                    break;
+                case "close":
+                    modal.style.display = "none";
+                    break;
+            }
+        },
+        finalitzarWarning(action) {
+            const modal = document.getElementById("modal-finalitzar");
+            const modal_title = document.querySelector(
+                "#modal-finalitzar .modal-title"
+            );
+            const modal_body = document.querySelector(
+                "#modal-finalitzar .modal-body p"
+            );
+            const modal_btn = document.querySelector(
+                "#modal-finalitzar .modal-footer .delete"
+            );
+
+            switch (action) {
+                case "open":
+                    console.log(this.expedient);
+                    if (this.isAssociated) {
+                        modal_title.innerText =
+                            "No tens cap expedient associat";
+                        modal_body.innerText = `S'associara la carta a l'expedient: ${this.expedient}?`;
+                        modal_btn.innerText = "Finalitzar";
+                    } else {
+                        modal_title.innerText = "Finalitzem amb l’expedient:";
+                        modal_body.innerText = `No hi ha expedient associat.\nVols crear l’expedient: ${this.expedient}?`;
+                        modal_btn.innerText = "Finalitzar";
+                    }
+
+                    modal.style.display = "flex";
+                    break;
+                case "close":
+                    modal.style.display = "none";
+                    break;
+            }
+        },
         insertCarta() {
             this.carta.codi = this.codi;
             this.carta.expedient = this.expedient;
@@ -1061,6 +1213,8 @@ export default {
                     console.log(response);
                 })
                 .catch((error) => {});
+
+            this.redirigirMenu();
         },
         removePopovers() {
             const popovers = document.querySelectorAll(".popover");
@@ -1506,5 +1660,10 @@ h3 {
     100% {
         transform: translate(1px, -2px) rotate(-0.05deg);
     }
+}
+
+.modal {
+    background-color: rgba($color: $dark, $alpha: 0.5);
+    backdrop-filter: blur(2px);
 }
 </style>

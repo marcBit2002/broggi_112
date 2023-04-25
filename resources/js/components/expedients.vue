@@ -49,7 +49,7 @@
 <script>
 export default {
     name: "expedients",
-    emits: ["expedient"],
+    emits: ["expedient", "associated"],
     data() {
         return {
             expedients: [],
@@ -171,8 +171,10 @@ export default {
         linkExpedient(id) {
             if (this.expedientId != id) {
                 this.$emit("expedient", id);
+                this.$emit("isAssociated", true);
             } else {
                 this.$emit("expedient", this.originalExpedientId);
+                this.$emit("isAssociated", false);
             }
             console.log(id);
         },

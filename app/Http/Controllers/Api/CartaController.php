@@ -32,10 +32,10 @@ class CartaController extends Controller
     public function cartesTipus()
     {
         $cartesTipus = TipusIncident::select('tipus_incidents.nom', DB::raw('COUNT(cartes_trucades.id) as num_cartes'))
-        ->join('incidents', 'tipus_incidents.id', '=', 'incidents.tipus_incidents_id')
-        ->join('cartes_trucades', 'incidents.id', '=', 'cartes_trucades.incidents_id')
-        ->groupBy('tipus_incidents.nom')
-        ->get();
+            ->join('incidents', 'tipus_incidents.id', '=', 'incidents.tipus_incidents_id')
+            ->join('cartes_trucades', 'incidents.id', '=', 'cartes_trucades.incidents_id')
+            ->groupBy('tipus_incidents.nom')
+            ->get();
 
         return CartaResource::collection($cartesTipus);
     }
@@ -52,6 +52,8 @@ class CartaController extends Controller
 
         $carta = new CartaTrucada;
         $data = $request->json()->all();
+
+        DB::beginTransaction();
 
         try {
 
@@ -116,7 +118,6 @@ class CartaController extends Controller
                 $cartaTrucadaHasAgencia->estat_agencies_id = 1;
                 $carta->cartesTrucadesHasAgencies()->save($cartaTrucadaHasAgencia);
             }
-
 
             DB::commit();
 
