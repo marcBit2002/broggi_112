@@ -50,13 +50,15 @@ div.content {
     grid-column-gap: 10px;
     grid-row-gap: 1px;
 
-    height: 20vh;
+    height: 30vh;
     margin: 15px;
 
     border: 3px solid $primary;
     border-radius: 8px;
 
     background-color: white;
+
+    overflow: auto;
 
     img {
         grid-area: 2 / 2 / 5 / 3;
@@ -98,6 +100,10 @@ div.content {
         .agencia {
             display: flex;
             justify-content: end;
+
+            p {
+                margin: 0;
+            }
         }
 
         .dot {
@@ -125,8 +131,14 @@ div.content {
     height: 70px;
 }
 
+.state {
+    grid-area: 5 / 5 / 6 / 6;
+
+    height: 70px;
+}
+
 .date,
-.type{
+.type {
     display: flex;
     align-items: center;
 

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Clases\Utilitat;
 use App\Models\CartaTrucada;
 use App\Models\EstatAgencia;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\CartaTrucadaHasAgencia;
+use Illuminate\Database\QueryException;
 
 class CartaTrucadaHasAgenciaController extends Controller
 {
@@ -61,15 +62,15 @@ class CartaTrucadaHasAgenciaController extends Controller
      */
     public function edit(CartaTrucada $infoCartum)
     {
-
         $estatAgencies = EstatAgencia::all();
 
         $carta = CartaTrucada::find($infoCartum->id);
+        $expedientId = $carta->expedients_id;
         $expedientCodi = $carta->expedients->codi;
         $expedientEstat = $carta->expedients->estatExpedient->estat;
         $expedientEstatColor = $carta->expedients->estatExpedient->color;
 
-        return view('infoCarta', compact('carta', 'expedientCodi', 'expedientEstat', 'expedientEstatColor', 'estatAgencies'));
+        return view('infoCarta', compact('carta', 'expedientCodi', 'expedientEstat', 'expedientEstatColor', 'estatAgencies', 'expedientId'));
     }
 
     /**
@@ -81,22 +82,29 @@ class CartaTrucadaHasAgenciaController extends Controller
      */
     public function update(Request $request, CartaTrucada $infoCartum)
     {
-        // dd($infoCartum);
-        $agenciesAntigues = $infoCartum->cartesTrucadesHasAgencies;
-        DB::beginTransaction();
-        foreach ($infoCartum->cartesTrucadesHasAgencies as $c) {
-            $c->delete();
-        }
+        $estatAgencies = EstatAgencia::all();
 
-        foreach ($agenciesAntigues as $cartaHasAgencia) {
-            $cha = new CartaTrucadaHasAgencia();
-            $cha->agencies_id = $cartaHasAgencia->agencies_id;
-            $estatAgenciaId = $request->input('estatAgencies' . $cartaHasAgencia->agencies_id);
-            $cha->estat_agencies_id = intval($estatAgenciaId);
-            $infoCartum->cartesTrucadesHasAgencies()->save($cha);
+        $carta = CartaTrucada::find($infoCartum->id);
+        $expedientId = $carta->expedients_id;
+        $expedientCodi = $carta->expedients->codi;
+        $expedientEstat = $carta->expedients->estatExpedient->estat;
+        $expedientEstatColor = $carta->expedients->estatExpedient->color;
+
+        try {
+            foreach ($infoCartum->cartesTrucadesHasAgencies as $c) {
+                CartaTrucadaHasAgencia::where('cartes_trucades_id', $infoCartum->id)
+                    ->where('agencies_id', $c->agencies_id)
+                    ->update(['estat_agencies_id' => $request->input('estatAgencies' . $c->agencies_id)]);
+            };
+            $response = redirect()->action([CartaTrucadaHasAgenciaController::class, 'update'], ['infoCartum' => $infoCartum->id]);
+            session()->flash('mensaje', 'Modificat correctament');
+        } catch(QueryException $ex) {
+            $mensaje = Utilitat::errorMessage($ex);
+            session()->flash('error', $mensaje); 
+            $response = redirect()->action([CartaTrucadaHasAgenciaController::class, 'update'], ['infoCartum' => $infoCartum->id])->withInput();
         }
-        DB::commit();
-        return view('infoCarta');
+        
+        return view('infoCarta', compact('carta', 'expedientCodi', 'expedientEstat', 'expedientEstatColor', 'estatAgencies', 'expedientId'));
     }
 
     /**

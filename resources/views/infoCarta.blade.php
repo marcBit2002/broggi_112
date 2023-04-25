@@ -14,10 +14,12 @@
 
     <div class='content'>
         <div style="display: flex; align-items:center;">
-            <a class="p-2" href='javascript:history.back(-1)' id="back_arrow"><img
+            <a class="p-2" href='{{ url('admin/expedients/infoExpedient/'.$expedientId.'/edit') }}'
+                id="back_arrow"><img
                     src="{{ Vite::asset('resources/icons/back_arrow.svg') }}"></a>
             <h1 class="text-primary ms-3 mb-0">Expedient <span class="text-danger">#{{ $expedientCodi }}</span></h1>
         </div>
+        @include('layouts.mensajes')
         <div class="selection">
             <div class='info-carta'>
                 <form

@@ -6,6 +6,7 @@ use App\Clases\Utilitat;
 use App\Models\Expedient;
 use App\Models\CartaTrucada;
 use Illuminate\Http\Request;
+use App\Models\TipusIncident;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,17 @@ class CartaController extends Controller
         $carta = CartaTrucada::all();
 
         return CartaResource::collection($carta);
+    }
+
+    public function cartesTipus()
+    {
+        $cartesTipus = TipusIncident::select('tipus_incidents.nom', DB::raw('COUNT(cartes_trucades.id) as num_cartes'))
+        ->join('incidents', 'tipus_incidents.id', '=', 'incidents.tipus_incidents_id')
+        ->join('cartes_trucades', 'incidents.id', '=', 'cartes_trucades.incidents_id')
+        ->groupBy('tipus_incidents.nom')
+        ->get();
+
+        return CartaResource::collection($cartesTipus);
     }
 
     /**

@@ -1,0 +1,10 @@
+@import "variables";
+
+body {
+    background-image: url("/resources/img/background-no-photo.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    backdrop-filter: blur(5px);
+}

@@ -68,13 +68,15 @@ export default {
                 });
                 this.$el
                     .querySelector(".select")
-                    .addEventListener("change", (event) => {
-                        let color =
-                            event.target.options[event.target.selectedIndex]
-                                .dataset.color;
-                        event.target.style.color = color;
-                    });
+                    .addEventListener("change", this.handleEstatsChange);
             });
+        },
+        handleEstatsChange(event) {
+            let color =
+                event.target.options[event.target.selectedIndex].dataset.color;
+                event.target.style.backgroundColor = color;
+                event.target.style.color = "white";
+                event.target.style.textShadow = '2px 2px 4px #000000';
         },
         getEstatExpedient(dada) {
             this.estat = dada[0].estat_expedient.estat;
@@ -88,11 +90,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../css/variables.scss";
-.state {
-    margin-top: 100px;
-    height: 70px;
-}
-
 .state {
     display: flex;
     align-items: center;

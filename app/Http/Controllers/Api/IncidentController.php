@@ -35,7 +35,7 @@ class IncidentController extends Controller
 
     // http://localhost/broggi_112/public/api/incident?tipus_incidents_id=2
 
-    public function tipusIncidents()
+    public function incidentType()
     {
         $results = Incident::select('tipus_incidents.nom', DB::raw('COUNT(tipus_incidents_id) AS total_usuarios'))
         ->join('tipus_incidents', 'incidents.tipus_incidents_id', '=', 'tipus_incidents.id')

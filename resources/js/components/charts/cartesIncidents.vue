@@ -1,13 +1,13 @@
 <template>
     <div>
-        <canvas ref="incidents"></canvas>
+        <canvas ref="cartes"></canvas>
     </div>
 </template>
 <script>
 export default {
     data() {
         return {
-            incidents: null,
+            cartes: null,
             data: {}
         };
     },
@@ -17,7 +17,7 @@ export default {
     methods: {
         fetchData() {
             axios
-                .get("incidentType")
+                .get("cartesTipus")
                 .then((response) => {
                     this.data = response.data
                     this.mountMap()
@@ -26,20 +26,20 @@ export default {
         },
         carregarDades() {
             this.data.forEach((element) => {
-                this.incidents.data["labels"].push(element.nom);
-                this.incidents.data["datasets"][0].data.push(
-                    element.total_usuarios
+                this.cartes.data["labels"].push(element.nom);
+                this.cartes.data["datasets"][0].data.push(
+                    element.num_cartes
                 );
             });
         },
         mountMap () {
-            this.incidents = new Chart(this.$refs.incidents, {
-            type: "bar",
+            this.cartes = new Chart(this.$refs.cartes, {
+            type: 'pie',
             data: {
                 datasets: [
                     {
-                        label: "# incidents",
-                        backgroundColor: ["#0080c4", "#ccb200", "#cc4c81", "#00bf5a", "#cc4433", "#1677b3", "#666666", "#cc00cc", "#cc117a", "#00a7a3"],
+                        label: "# cartes",
+                        backgroundColor: ["#0080c4", "#ccb200", "#cc4c81", "#00bf5a", "#cc4433", "#666666"],
                     },
                 ],
             },

@@ -39,7 +39,9 @@
                             </div>
                             <div class='carta_agencies'>
                                 @foreach ($carta->cartesTrucadesHasAgencies as $cartaHasAgencies)
-                                    <div class='agencia'>{{ $cartaHasAgencies->agencies->nom }}<span class="dot"
+                                    <div class='agencia'>
+                                        <p>{{ substr($cartaHasAgencies->agencies->nom, strpos($cartaHasAgencies->agencies->nom, '-')) }}</p>
+                                        <span class="dot"
                                             style="background-color: {{ $cartaHasAgencies->estatAgencies->color }}">
                                     </div>
                                 @endforeach
@@ -78,7 +80,9 @@
                     </div>
                 </div>
             </div>
-            <div id="estatExpedient" data-id-expedient={{ $expedient->id }}></div>
+            <div class='state'>
+                <div id="estatExpedient" data-id-expedient={{ $expedient->id }}></div>
+            </div>
         </div>
     </div>
 </body>

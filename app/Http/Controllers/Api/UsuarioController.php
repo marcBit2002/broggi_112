@@ -17,14 +17,12 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-
         $totalUsuariosPorTipo = Usuario::select('tipus_usuaris.nom', DB::raw('COUNT(*) AS total_usuarios'))
             ->join('tipus_usuaris', 'usuaris.tipus_usuaris_id', '=', 'tipus_usuaris.id')
             ->groupBy('tipus_usuaris_id')
             ->groupBy('tipus_usuaris.nom')
             ->get();
 
-        // $usuarios = Usuario::get();
         return UsuarioResource::collection($totalUsuariosPorTipo);
     }
 
