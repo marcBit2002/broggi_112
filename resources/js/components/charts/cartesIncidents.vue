@@ -38,7 +38,7 @@ export default {
             data: {
                 datasets: [
                     {
-                        label: "# cartes",
+                        label: "Número de cartes",
                         backgroundColor: ["#0080c4", "#ccb200", "#cc4c81", "#00bf5a", "#cc4433", "#666666"],
                     },
                 ],

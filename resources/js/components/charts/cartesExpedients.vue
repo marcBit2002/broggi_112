@@ -26,7 +26,7 @@ export default {
         },
         carregarDades() {
             this.data.forEach((element) => {
-                this.cartes.data["labels"].push(element.nom);
+                this.cartes.data["labels"].push(element.codi);
                 this.cartes.data["datasets"][0].data.push(
                     element.num_cartes
                 );
@@ -34,12 +34,12 @@ export default {
         },
         mountMap () {
             this.cartes = new Chart(this.$refs.cartesExp, {
-            type: 'pie',
+            type: 'bar',
             data: {
                 datasets: [
                     {
-                        label: "# cartes",
-                        backgroundColor: ["#0080c4", "#ccb200", "#cc4c81", "#00bf5a", "#cc4433", "#666666"],
+                        label: "Número de cartes",
+                        backgroundColor: ["#FFB300", "#0080c4", "#cc4c81", "#00bf5a", "#cc4433", "#666666", "#6934B2", "#34B29B", "#B27F34"],
                     },
                 ],
             },

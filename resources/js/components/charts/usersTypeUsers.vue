@@ -39,7 +39,7 @@ export default {
                 data: {
                     datasets: [
                         {
-                            label: "# usuaris",
+                            label: "número d'usuaris",
                             backgroundColor: ["#087ca6", "#ffb300", "#de1278"],
                         },
                     ],

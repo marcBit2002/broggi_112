@@ -1,7 +1,7 @@
 <template>
     <div id="container">
-        <div class='cartes'><cartesIncidentsChart/></div>
-        <!-- <div class='cartesExp'><cartesExpedients/></div> -->
+        <div class='cartesIncidents'><cartesIncidentsChart/></div>
+        <div class='cartesExp'><cartesExpedients/></div>
     </div>
 </template>
 <script>
@@ -20,14 +20,13 @@ export default {
 @import "../../css/variables.scss";
 
 #container {
-    height: 90vh;
-    width: 90vw;
+    height: 92vh;
 
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.cartes, .cartesExp {
+.cartesIncidents, .cartesExp {
     width: 700px;
     height: 500px;
 

@@ -8,7 +8,7 @@ export default {
     data() {
         return {
             incidents: null,
-            data: {}
+            data: {},
         };
     },
     mounted() {
@@ -19,8 +19,8 @@ export default {
             axios
                 .get("incidentType")
                 .then((response) => {
-                    this.data = response.data
-                    this.mountMap()
+                    this.data = response.data;
+                    this.mountMap();
                 })
                 .catch((error) => console.log(error));
         },
@@ -32,23 +32,41 @@ export default {
                 );
             });
         },
-        mountMap () {
+        mountMap() {
             this.incidents = new Chart(this.$refs.incidents, {
-            type: "bar",
-            data: {
-                datasets: [
-                    {
-                        label: "# incidents",
-                        backgroundColor: ["#0080c4", "#ccb200", "#cc4c81", "#00bf5a", "#cc4433", "#1677b3", "#666666", "#cc00cc", "#cc117a", "#00a7a3"],
-                    },
-                ],
-            },
-            options: {
-                aspectRatio: 1.5
-            }
+                type: "bar",
+                data: {
+                    datasets: [
+                        {
+                            label: "Número d'incidents",
+                            backgroundColor: [
+                                "rgba(255, 99, 132, 0.6)",
+                                "rgba(255, 159, 64, 0.6)",
+                                "rgba(255, 205, 86, 0.6)",
+                                "rgba(75, 192, 192, 0.6)",
+                                "rgba(54, 162, 235, 0.6)",
+                                "rgba(153, 102, 255, 0.6)",
+                                "rgba(201, 203, 207, 0.6)",
+                            ],
+                            borderColor: [
+                                "rgb(255, 99, 132)",
+                                "rgb(255, 159, 64)",
+                                "rgb(255, 205, 86)",
+                                "rgb(75, 192, 192)",
+                                "rgb(54, 162, 235)",
+                                "rgb(153, 102, 255)",
+                                "rgb(201, 203, 207)",
+                            ],
+                            borderWidth: 1,
+                        },
+                    ],
+                },
+                options: {
+                    aspectRatio: 1.5,
+                },
             });
             this.carregarDades();
-        }
+        },
     },
 };
 </script>

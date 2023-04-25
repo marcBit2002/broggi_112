@@ -31,7 +31,7 @@ class CartaController extends Controller
 
     public function cartesTipus()
     {
-        $cartesTipus = TipusIncident::select('tipus_incidents.nom', DB::raw('COUNT(cartes_trucades.id) as num_cartes'))
+        $cartesTipus = TipusIncident::select('tipus_incidents.nom', DB::raw('COUNT(cartes_trucades.id) AS num_cartes'))
             ->join('incidents', 'tipus_incidents.id', '=', 'incidents.tipus_incidents_id')
             ->join('cartes_trucades', 'incidents.id', '=', 'cartes_trucades.incidents_id')
             ->groupBy('tipus_incidents.nom')
@@ -42,9 +42,10 @@ class CartaController extends Controller
 
     public function cartesExpedients()
     {
-        $cartesExpedients = CartaTrucada::select('expedients.codi', DB::raw('COUNT(cartes_trucades.expedients_id)'))
+        $cartesExpedients = CartaTrucada::select('expedients.codi', DB::raw('COUNT(cartes_trucades.expedients_id) AS num_cartes'))
             ->join('expedients', 'cartes_trucades.expedients_id', '=', 'expedients.id')
             ->groupBy('expedients_id')
+            ->groupBy('expedients.codi')
             ->get();
 
             return CartaResource::collection($cartesExpedients);

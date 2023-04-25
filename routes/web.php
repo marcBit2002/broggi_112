@@ -67,7 +67,6 @@ Route::middleware('auth', 'authSupervisor')->group(function () {
     Route::resource('expedients/infoExpedient/infoCarta', CartaTrucadaHasAgenciaSupController::class);
 });
 
-
 Route::fallback(function () {
     return redirect('menu');
 });
