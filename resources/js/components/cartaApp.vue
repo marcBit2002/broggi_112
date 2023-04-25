@@ -98,11 +98,16 @@ export default {
                 .get("expedient")
                 .then((response) => {
                     // Ultima carta de la BDD
-                    let lastExpedientId =
-                        response.data[response.data.length - 1]["id"];
+                    let lastExpedient = response.data[response.data.length - 1];
+
+                    // Agafem el codi
+                    let codi = lastExpedient.codi;
+
+                    // Eliminem la 'E' i sumem 1
+                    codi = Number(codi.substring(1)) + 1;
 
                     //Afegim 'T' i guardem
-                    this.expedient = "E" + Number(lastExpedientId + 1);
+                    this.expedient = "E" + codi;
                 })
                 .catch((error) => {
                     this.expedient = "NOT FOUND";

@@ -49,7 +49,7 @@
 <script>
 export default {
     name: "expedients",
-    emits: ["expedient", "associated"],
+    emits: ["expedient", "associated", "isAssociated"],
     data() {
         return {
             expedients: [],

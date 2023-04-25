@@ -292,8 +292,6 @@
                     <a
                         tabindex="-1"
                         class="arki"
-
-                        
                         role="button"
                         data-bs-toggle="popover"
                         data-bs-trigger="focus"
@@ -1015,6 +1013,7 @@ import mapa from "./mapa.vue";
 
 export default {
     name: "pagina",
+    emits: ["tab", "telefon", "municipi", "incidentTipos"],
     data: function () {
         return {
             catalunya: true,
@@ -1025,6 +1024,9 @@ export default {
                 localitzacioConcatenada: "Plaça Urquinaona",
                 provincia: null,
                 altresRef: "",
+                nom: "",
+                cognoms: "",
+                antecedents: "",
             },
             provincies: this.getProvincies(),
             comarques: this.getComarques(),
@@ -1171,22 +1173,62 @@ export default {
             const modal_body = document.querySelector(
                 "#modal-finalitzar .modal-body p"
             );
+            const modal_footer = document.querySelector(
+                "#modal-finalitzar .modal-footer"
+            );
             const modal_btn = document.querySelector(
                 "#modal-finalitzar .modal-footer .delete"
             );
 
             switch (action) {
                 case "open":
-                    console.log(this.expedient);
-                    if (this.isAssociated) {
-                        modal_title.innerText =
-                            "No tens cap expedient associat";
-                        modal_body.innerText = `S'associara la carta a l'expedient: ${this.expedient}?`;
-                        modal_btn.innerText = "Finalitzar";
+                    if (
+                        this.carta.telefon &&
+                        this.carta.localitzacio.id &&
+                        this.carta.incidentId &&
+                        this.carta.municipi &&
+                        this.carta.agencies
+                    ) {
+                        if (this.isAssociated) {
+                            modal_title.innerText =
+                                "No tens cap expedient associat";
+                            modal_body.innerText = `S'associara la carta a l'expedient: ${this.expedient}?`;
+                            modal_footer.style.display = "inherit";
+                            modal_btn.innerText = "Finalitzar";
+                        } else {
+                            modal_title.innerText =
+                                "Finalitzem amb l’expedient:";
+                            modal_body.innerText = `No hi ha expedient associat.\nVols crear l’expedient: ${this.expedient}?`;
+                            modal_footer.style.display = "inherit";
+                            modal_btn.innerText = "Finalitzar";
+                        }
                     } else {
-                        modal_title.innerText = "Finalitzem amb l’expedient:";
-                        modal_body.innerText = `No hi ha expedient associat.\nVols crear l’expedient: ${this.expedient}?`;
-                        modal_btn.innerText = "Finalitzar";
+                        modal_title.innerText =
+                            "Error al finalitzar l’expedient:";
+
+                        let body_text = "Falten els camps minims:\n";
+
+                        if (!this.carta.telefon) {
+                            body_text += "- Telefon\n";
+                        }
+                        if (
+                            this.carta.localitzacio == null ||
+                            this.carta.localitzacio == undefined
+                        ) {
+                            body_text += "- Localització tipos\n";
+                        }
+                        if (!this.carta.incidentId) {
+                            body_text += "- Incident\n";
+                        }
+                        if (!this.carta.municipi) {
+                            body_text += "- Municipi\n";
+                        }
+                        if (!this.carta.agencies) {
+                            body_text += "- Contactar agència\n";
+                        }
+
+                        modal_body.innerText = body_text;
+                        modal_footer.style.display = "none";
                     }
 
                     modal.style.display = "flex";
