@@ -40,6 +40,16 @@ class CartaController extends Controller
         return CartaResource::collection($cartesTipus);
     }
 
+    public function cartesExpedients()
+    {
+        $cartesExpedients = CartaTrucada::select('expedients.codi', DB::raw('COUNT(cartes_trucades.expedients_id)'))
+            ->join('expedients', 'cartes_trucades.expedients_id', '=', 'expedients.id')
+            ->groupBy('expedients_id')
+            ->get();
+
+            return CartaResource::collection($cartesExpedients);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

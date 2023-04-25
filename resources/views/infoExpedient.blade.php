@@ -14,8 +14,13 @@
 
     <div class='content'>
         <div style="display: flex; align-items:center;">
-            <a class="p-2" href='{{ url('admin/expedients') }}' id="back_arrow"><img
-                    src="{{ Vite::asset('resources/icons/back_arrow.svg') }}"></a>
+            @if (Auth::check() && Auth::user()->roles->nom === 'Administrador Sistema')
+                <a class="p-2" href='{{ url('admin/expedients') }}' id="back_arrow"><img
+                        src="{{ Vite::asset('resources/icons/back_arrow.svg') }}"></a>
+            @else
+                <a class="p-2" href='{{ url('expedients') }}' id="back_arrow"><img
+                        src="{{ Vite::asset('resources/icons/back_arrow.svg') }}"></a>
+            @endif
             <h1 class="text-primary ms-3 mb-0">Expedient <span class="text-danger">#{{ $expedient->codi }}</span></h1>
         </div>
         <div class="selection">
@@ -29,7 +34,7 @@
                                     href="{{ action([App\Http\Controllers\CartaTrucadaHasAgenciaController::class, 'edit'], ['infoCartum' => $carta->id]) }}">
                                 @else
                                     <a class="nav-link"
-                                        href="{{ action([App\Http\Controllers\CartaSupController::class, 'edit'], ['infoCartum' => $carta->id]) }}">
+                                        href="{{ action([App\Http\Controllers\CartaTrucadaHasAgenciaSupController::class, 'edit'], ['infoCartum' => $carta->id]) }}">
                             @endif
                             <img src="{{ Vite::asset('resources/icons/carta.svg') }}" />
                             <div class='carta_type'>
@@ -40,7 +45,8 @@
                             <div class='carta_agencies'>
                                 @foreach ($carta->cartesTrucadesHasAgencies as $cartaHasAgencies)
                                     <div class='agencia'>
-                                        <p>{{ substr($cartaHasAgencies->agencies->nom, strpos($cartaHasAgencies->agencies->nom, '-')) }}</p>
+                                        <p>{{ substr($cartaHasAgencies->agencies->nom, strpos($cartaHasAgencies->agencies->nom, '-')) }}
+                                        </p>
                                         <span class="dot"
                                             style="background-color: {{ $cartaHasAgencies->estatAgencies->color }}">
                                     </div>

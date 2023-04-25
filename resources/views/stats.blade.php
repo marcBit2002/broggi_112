@@ -9,6 +9,8 @@
 </head>
 
 <body>
+    @include('layouts.navbar')
+    
     <div id="charts"></div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -21,7 +21,7 @@
                     <p>crear carta</p>
                 </a>
 
-                <a id="administrar" href="{{ url('admin/usuari') }}">
+                <a id="administrar" href="{{ url('admin/stats') }}">
                     <img src="{{ Vite::asset('resources/icons/gears.svg') }}">
                     <p>administrar</p>
                 </a>

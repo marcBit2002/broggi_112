@@ -8,3 +8,11 @@ body {
     background-size: cover;
     backdrop-filter: blur(5px);
 }
+
+#nav-logo {
+    padding: 0;
+
+    img {
+        width: 115px;
+    }
+}
