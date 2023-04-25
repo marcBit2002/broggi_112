@@ -5,13 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CartaController;
 use App\Http\Controllers\AgenciaController;
 use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\CartaSupController;
 use App\Http\Controllers\IncidentController;
 use App\Http\Controllers\ExpedientController;
 use App\Http\Controllers\InfoExpedientController;
 use App\Http\Controllers\TipusIncidentController;
 use App\Http\Controllers\InfoExpedientSupController;
 use App\Http\Controllers\CartaTrucadaHasAgenciaController;
+use App\Http\Controllers\CartaTrucadaHasAgenciaSupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,12 +55,16 @@ Route::middleware(['auth', 'authAdmin'])->group(function () {
     Route::resource('admin/expedients', ExpedientController::class);
     Route::resource('admin/expedients/infoExpedient', InfoExpedientController::class);
     Route::resource('admin/expedients/infoExpedient/infoCarta', CartaTrucadaHasAgenciaController::class);
+    Route::get('admin/stats', function () {
+        $activeNav = 'stats';
+        return view('adminStats', compact('activeNav'));
+    });
 });
 
 Route::middleware('auth', 'authSupervisor')->group(function () {
     Route::resource('expedients', ExpedientController::class);
     Route::resource('expedients/infoExpedient', InfoExpedientSupController::class);
-    Route::resource('expedients/infoExpedient/infoCarta', CartaSupController::class);
+    Route::resource('expedients/infoExpedient/infoCarta', CartaTrucadaHasAgenciaSupController::class);
 });
 
 

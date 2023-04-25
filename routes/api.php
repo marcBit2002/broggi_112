@@ -43,5 +43,6 @@ Route::apiResource('tipusincident', TipusIncidentController::class);
 Route::apiResource('usuario', UsuarioController::class);
 Route::apiResource('estatExpedient', EstatExpedientController::class);
 Route::get('incidentType', [IncidentController::class, 'incidentType']);
-Route::get('cartesTipus', [CartaController::class, 'cartesTipus']);
 Route::get('expedientsActius', [ExpedientController::class, 'expedientsActius']);
+Route::get('cartesTipus', [CartaController::class, 'cartesTipus']);
+Route::get('cartesExpedients', [CartaController::class, 'cartesExpedients']);

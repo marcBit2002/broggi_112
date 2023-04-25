@@ -1343,7 +1343,6 @@ export default {
             }
         },
     },
-
     updated() {
         this.removePopovers();
 

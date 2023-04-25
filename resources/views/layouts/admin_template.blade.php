@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Laravel</title>
-    @vite(['resources/css/app.scss', 'resources/js/app.js', 'resources/css/navbar_admin.scss', 'resources/css/modal.scss', 'resources/css/expedients.scss'])
-
+    @vite(['resources/css/app.scss', 'resources/js/app.js', 'resources/css/navbar_admin.scss', 'resources/css/modal.scss', 'resources/css/expedients.scss', 'resources/css/adminGraphs.scss'])
 </head>
 
 <body>
@@ -25,7 +24,7 @@
                     <p>ADMINISTRACIÓ</p>
                 </div>
                 <div id="items_contaienr">
-                    <a class="nav-link my-3" href="#" @selected($activeNav === 'stats')>
+                    <a class="nav-link my-3" href="{{ url('admin/stats') }}" @selected($activeNav === 'stats')>
                         <i class="bi bi-bar-chart-fill me-2"></i>Estadístiques</a>
                     <a class="nav-link my-3" href='{{ url('admin/usuari') }}'@selected($activeNav === 'usuaris')>
                         <i class="bi bi-people-fill me-2"></i>Usuaris</a>

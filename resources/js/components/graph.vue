@@ -1,21 +1,18 @@
 <template>
     <div id="container">
-        <!-- <div class='users'><usersChart/></div>
-        <div class='incidents'><incidentsChart/></div> -->
         <div class='cartes'><cartesIncidentsChart/></div>
+        <!-- <div class='cartesExp'><cartesExpedients/></div> -->
     </div>
 </template>
 <script>
-import usersChart from "./charts/usersTypeUsers.vue";
-import incidentsChart from "./charts/incidentsTypeChart.vue";
 import cartesIncidentsChart from "./charts/cartesIncidents.vue";
+import cartesExpedients from "./charts/cartesExpedients.vue"
 
 export default {
     name: "charts",
     components: {
-        usersChart,
-        incidentsChart,
-        cartesIncidentsChart
+        cartesIncidentsChart,
+        cartesExpedients
     },
 };
 </script>
@@ -30,7 +27,7 @@ export default {
     justify-content: center;
     align-items: center;
 }
-.users, .incidents, .cartes {
+.cartes, .cartesExp {
     width: 700px;
     height: 500px;
 
