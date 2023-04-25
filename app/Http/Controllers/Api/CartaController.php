@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Clases\Utilitat;
 use App\Models\Expedient;
 use App\Models\CartaTrucada;
+use App\Models\Interlocutor;
 use Illuminate\Http\Request;
 use App\Models\TipusIncident;
 use Illuminate\Support\Facades\DB;
@@ -54,6 +55,7 @@ class CartaController extends Controller
 
         try {
 
+            //expedients
             $expedient = Expedient::where('codi', $data['expedient'])->first();
 
             if (!$expedient) {
@@ -64,10 +66,6 @@ class CartaController extends Controller
             }
 
             $carta->expedients_id = $expedient->id;
-
-
-
-
 
             // dades
             $carta->usuaris_id = Auth::id();
@@ -80,7 +78,20 @@ class CartaController extends Controller
             $carta->telefon = $data['telefon'];
             $carta->nom = $data['nom'];
             $carta->cognoms = $data['cognoms'];
-            // $carta->antecedents = $data['antecedents'];
+
+            //interlocutors
+            $interlocutor = Interlocutor::where('telefon', $data['telefon'])->first();
+
+            if (!$interlocutor) {
+                $interlocutor = new Interlocutor;
+                $interlocutor->cognoms = $data['cognoms'];
+                $interlocutor->nom = $data['nom'];
+                $interlocutor->antecedents = $data['antecedents'];
+                $interlocutor->telefon = $data['telefon'];
+                $interlocutor->save();
+            }
+
+            $carta->interlocutors_id = $interlocutor->id;
 
             // localització
             $carta->tipus_localitzacions_id = $data['localitzacio']['id'];
