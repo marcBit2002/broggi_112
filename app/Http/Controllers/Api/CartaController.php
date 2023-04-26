@@ -48,7 +48,7 @@ class CartaController extends Controller
             ->groupBy('expedients.codi')
             ->get();
 
-            return CartaResource::collection($cartesExpedients);
+        return CartaResource::collection($cartesExpedients);
     }
 
     /**
@@ -67,6 +67,8 @@ class CartaController extends Controller
         DB::beginTransaction();
 
         try {
+            //agencies
+            $agencies = $data['agencies'];
 
             //expedients
             $expedient = Expedient::where('codi', $data['expedient'])->first();
@@ -74,7 +76,11 @@ class CartaController extends Controller
             if (!$expedient) {
                 $expedient = new Expedient;
                 $expedient->codi = $data['expedient'];
-                $expedient->estat_expedients_id = 1;
+                if ($agencies) {
+                    $expedient->estat_expedients_id = 2;
+                } else {
+                    $expedient->estat_expedients_id = 1;
+                }
                 $expedient->save();
             }
 
@@ -93,18 +99,20 @@ class CartaController extends Controller
             $carta->cognoms = $data['cognoms'];
 
             //interlocutors
-            $interlocutor = Interlocutor::where('telefon', $data['telefon'])->first();
+            if ($data['guardarTelefono']) {
+                $interlocutor = Interlocutor::where('telefon', $data['telefon'])->first();
 
-            if (!$interlocutor) {
-                $interlocutor = new Interlocutor;
-                $interlocutor->cognoms = $data['cognoms'];
-                $interlocutor->nom = $data['nom'];
-                $interlocutor->antecedents = $data['antecedents'];
-                $interlocutor->telefon = $data['telefon'];
-                $interlocutor->save();
+                if (!$interlocutor) {
+                    $interlocutor = new Interlocutor;
+                    $interlocutor->cognoms = $data['cognoms'];
+                    $interlocutor->nom = $data['nom'];
+                    $interlocutor->antecedents = $data['antecedents'];
+                    $interlocutor->telefon = $data['telefon'];
+                    $interlocutor->save();
+                }
+
+                $carta->interlocutors_id = $interlocutor->id;
             }
-
-            $carta->interlocutors_id = $interlocutor->id;
 
             // localització
             $carta->tipus_localitzacions_id = $data['localitzacio']['id'];
@@ -122,13 +130,15 @@ class CartaController extends Controller
 
             // despatx
             // Asociar las agencias con la carta trucada a través de la relación cartesTrucadesHasAgencies
-            $agencies = $data['agencies'];
-            foreach ($agencies as $agency) {
-                $cartaTrucadaHasAgencia = new CartaTrucadaHasAgencia();
-                $cartaTrucadaHasAgencia->agencies_id = $agency['id'];
-                $cartaTrucadaHasAgencia->estat_agencies_id = 1;
-                $carta->cartesTrucadesHasAgencies()->save($cartaTrucadaHasAgencia);
+            if ($agencies) {
+                foreach ($agencies as $agency) {
+                    $cartaTrucadaHasAgencia = new CartaTrucadaHasAgencia();
+                    $cartaTrucadaHasAgencia->agencies_id = $agency['id'];
+                    $cartaTrucadaHasAgencia->estat_agencies_id = 1;
+                    $carta->cartesTrucadesHasAgencies()->save($cartaTrucadaHasAgencia);
+                }
             }
+
 
             DB::commit();
 

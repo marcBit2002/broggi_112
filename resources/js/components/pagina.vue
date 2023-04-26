@@ -3,10 +3,11 @@
         <!-- -------------- IDENTIFICACIÓ -------------- -->
         <div class="content" v-if="this.tab == 1">
             <h1 id="title">Identificació</h1>
-
             <div class="row g-3 align-items-center">
-                <div class="col-sm-2 text-end">
-                    <label for="telefon" class="col-form-label">Telèfon:</label>
+                <div class="col-sm-3 text-end">
+                    <label for="telefon" class="col-form-label"
+                        > <span>*</span> Telèfon:</label
+                    >
                 </div>
                 <div class="col-sm-8">
                     <input
@@ -35,17 +36,33 @@
                 </a>
             </div>
             <div class="row g-3 align-items-center">
-                <div class="col-sm-2 text-end">
-                    <label for="nom" class="col-form-label">Nom:</label>
+                <div class="col-sm-3 text-end">
+                    <label for="nom" class="col-form-label">
+                        <template v-if="carta.guardarTelefono">
+                            <span>*</span> Nom:
+                        </template>
+                        <template v-else> Nom: </template>
+                    </label>
                 </div>
                 <div class="col-sm-8">
-                    <input
-                        type="text"
-                        id="nom"
-                        class="form-control"
-                        v-model="carta.nom"
-                        required
-                    />
+                    <template v-if="carta.guardarTelefono">
+                        <input
+                            type="text"
+                            id="nom"
+                            class="form-control"
+                            v-model="carta.nom"
+                            @input="checkInput($event)"
+                            @blur="checkInput($event)"
+                        />
+                    </template>
+                    <template v-else>
+                        <input
+                            type="text"
+                            id="nom"
+                            class="form-control"
+                            v-model="carta.nom"
+                        />
+                    </template>
                 </div>
                 <a
                     tabindex="-1"
@@ -60,17 +77,33 @@
                 </a>
             </div>
             <div class="row g-3 align-items-center">
-                <div class="col-sm-2 text-end">
-                    <label for="cognoms" class="col-form-label">Cognoms:</label>
+                <div class="col-sm-3 text-end">
+                    <label for="cognoms" class="col-form-label">
+                        <template v-if="carta.guardarTelefono">
+                            <span>*</span> Cognoms:
+                        </template>
+                        <template v-else> Cognoms: </template>
+                    </label>
                 </div>
                 <div class="col-sm-8">
-                    <input
-                        type="text"
-                        id="cognoms"
-                        class="form-control"
-                        v-model="carta.cognoms"
-                        required
-                    />
+                    <template v-if="carta.guardarTelefono">
+                        <input
+                            type="text"
+                            id="cognoms"
+                            class="form-control"
+                            v-model="carta.cognoms"
+                            @input="checkInput($event)"
+                            @blur="checkInput($event)"
+                        />
+                    </template>
+                    <template v-else>
+                        <input
+                            type="text"
+                            id="cognoms"
+                            class="form-control"
+                            v-model="carta.cognoms"
+                        />
+                    </template>
                 </div>
                 <a
                     tabindex="-1"
@@ -110,6 +143,17 @@
                     v-model="carta.antecedents"
                     required
                 ></textarea>
+            </div>
+            <div class="col-sm-5 mt-5">
+                <input
+                    type="checkbox"
+                    class="form-check-input me-3"
+                    id="guardarTelefono"
+                    v-model="carta.guardarTelefono"
+                />
+                <label for="guardarTelefono" class="form-check-label"
+                    >Guardar interlocutor</label
+                >
             </div>
         </div>
 
@@ -161,7 +205,7 @@
 
             <div class="mb-3 row">
                 <label for="inputLocalitzacio" class="col-sm-4 col-form-label">
-                    Tipus localització:
+                    <span>*</span> Tipus localització:
                     <a
                         tabindex="-1"
                         class="arki ms-3"
@@ -273,7 +317,7 @@
                     ></searchInput>
                 </div>
                 <div class="col d-flex">
-                    <searchInput
+                    <span>*</span><searchInput
                         :name="
                             carta.municipi == null
                                 ? 'Municipi'
@@ -971,7 +1015,7 @@
                         class="modal-title fs-5"
                         style="color: rgb(8, 124, 167)"
                     >
-                        Segur que vols descartar la carta?
+                        Anem a descartar la carta
                     </h1>
                     <button
                         type="button"
@@ -981,7 +1025,7 @@
                 </div>
                 <div class="modal-body">
                     <p class="mb-0" style="color: rgb(118, 118, 118)">
-                        Perdras totes les dades de la carta actual.
+                        Perdràs totes les dades de la carta actual.
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -1027,6 +1071,7 @@ export default {
                 nom: "",
                 cognoms: "",
                 antecedents: "",
+                guardarTelefono: false,
             },
             provincies: this.getProvincies(),
             comarques: this.getComarques(),
@@ -1179,43 +1224,49 @@ export default {
             const modal_btn = document.querySelector(
                 "#modal-finalitzar .modal-footer .delete"
             );
-
+            let body_text = "Falten els camps mínims:\n";
             switch (action) {
                 case "open":
                     if (
                         this.carta.telefon &&
                         this.carta.localitzacio.id &&
                         this.carta.incidentId &&
-                        this.carta.municipi &&
-                        this.carta.agencies
+                        (this.carta.municipi || this.carta.provincia)
                     ) {
                         if (this.isAssociated) {
                             modal_title.innerText =
-                                "No tens cap expedient associat";
-                            modal_body.innerText = `S'associara la carta a l'expedient: ${this.expedient}?`;
+                                "Finalitzem la carta de trucada";
+                            modal_body.innerText = `S'associarà la carta a l'expedient: ${this.expedient}`;
                             modal_footer.style.display = "inherit";
                             modal_btn.innerText = "Finalitzar";
                         } else {
                             modal_title.innerText =
-                                "Finalitzem amb l’expedient:";
-                            modal_body.innerText = `No hi ha expedient associat.\nVols crear l’expedient: ${this.expedient}?`;
+                                "Finalitzem la carta de trucada:";
+                            modal_body.innerText = `No hi ha cap expedient associat.\nCrearem l'expedient: ${this.expedient}`;
                             modal_footer.style.display = "inherit";
                             modal_btn.innerText = "Finalitzar";
                         }
-                    } else {
+                    }else {
+                       
+                    if(this.carta.guardarTelefono){
+                       if (!this.carta.nom) {
+                           body_text += "- Nom\n";
+                       }
+                       if (!this.carta.cognoms) {
+                           body_text += "- Cognoms\n";
+                       }
+                    }
                         modal_title.innerText =
-                            "Error al finalitzar l’expedient:";
-
-                        let body_text = "Falten els camps minims:\n";
+                            "Error al finalitzar l'expedient:";
 
                         if (!this.carta.telefon) {
-                            body_text += "- Telefon\n";
+                            body_text += "- Telèfon\n";
                         }
                         if (
                             this.carta.localitzacio == null ||
                             this.carta.localitzacio == undefined
                         ) {
-                            body_text += "- Localització tipos\n";
+                            body_text += "- Tipus de localització\n";
                         }
                         if (!this.carta.incidentId) {
                             body_text += "- Incident\n";
@@ -1223,8 +1274,8 @@ export default {
                         if (!this.carta.municipi) {
                             body_text += "- Municipi\n";
                         }
-                        if (!this.carta.agencies) {
-                            body_text += "- Contactar agència\n";
+                        if (!this.carta.provincia) {
+                            body_text += "- Provinica\n";
                         }
 
                         modal_body.innerText = body_text;
