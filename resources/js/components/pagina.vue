@@ -1047,7 +1047,7 @@
                     <button
                         type="button"
                         class="btn btn-danger delete"
-                        @click="redirigirMenu()"
+                        @click="this.redirigirMenu()"
                     >
                         Anul·lar<i class="bi bi-check-lg"></i>
                     </button>
@@ -1247,9 +1247,9 @@ export default {
     },
     methods: {
         redirigirMenu() {
-            // let currentUrl = window.location.href;
-            // let newUrl = currentUrl.replace(/carta$/, "menu");
-            // window.location.href = newUrl;
+            let currentUrl = window.location.href;
+            let newUrl = currentUrl.replace(/carta$/, "menu");
+            window.location.href = newUrl;
         },
         anularWarning(action) {
             const modal = document.getElementById("modal-anular");
