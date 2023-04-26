@@ -42,14 +42,14 @@
                 </a>
             @endif
 
-            <a href="{{ url('stats') }}">
+            <a href="{{ url('stats') }}" style="grid-area: 2 / 1 / 2 / 3;">
                 <img src="{{ Vite::asset('resources/icons/stats.svg') }}">
                 <p>estadístiques</p>
             </a>
-            <a href="">
+            {{-- <a href="">
                 <img src="{{ Vite::asset('resources/icons/videos.svg') }}">
                 <p>tutorials</p>
-            </a>
+            </a> --}}
         </div>
     </div>
     <script type="module">

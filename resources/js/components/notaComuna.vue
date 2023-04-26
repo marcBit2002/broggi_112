@@ -4,7 +4,7 @@
             <p>Nota comuna</p>
         </div>
         <textarea
-            placeholder="Introduïr text..."
+            placeholder="Nom, cognom de l'interlocutor, relació amb l'incident, descripció dels fets..."
             v-model="notaContent"
             @input="sendContent(notaContent)"
         ></textarea>
