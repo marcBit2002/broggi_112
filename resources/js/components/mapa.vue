@@ -188,6 +188,8 @@ export default {
             axios.get("agencia").then((response) => {
                 this.agencias = response.data;
                 this.agregarMarcadoresAgencias();
+                console.log("mapa agencies loaded");
+                this.$emit("map-api-loaded");
             });
         },
         agregarMarcadoresAgencias() {

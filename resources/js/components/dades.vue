@@ -31,8 +31,12 @@ export default {
     props: {
         codi: null,
         expedient: null,
+        resetTimer: Number,
     },
     watch: {
+        resetTimer() {
+            this.timer = 0;
+        },
         timer() {
             this.$emit("timer", this.timer);
         },

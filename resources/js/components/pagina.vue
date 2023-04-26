@@ -1,4 +1,8 @@
 <template>
+    <div id="loading-screen">
+        <img src="../../img/loadingBroggi112_LOOP.gif" />
+        <p>Carregant les dades</p>
+    </div>
     <div id="pagina">
         <!-- -------------- IDENTIFICACIÓ -------------- -->
         <div class="content" v-if="this.tab == 1">
@@ -911,7 +915,10 @@
                     <img src="/broggi_112/public/assets/icons/arki.svg" />
                 </a>
             </div>
-            <mapa :buscarString="this.carta.localitzacioConcatenada"></mapa>
+            <mapa
+                :buscarString="this.carta.localitzacioConcatenada"
+                @map-api-loaded="() => this.$parent.apiLoading++"
+            ></mapa>
         </div>
 
         <!-- -------------- BOTONS DESCARTAR/SEGüENT/FINALITZAR -------------- -->
@@ -1058,7 +1065,7 @@ import mapa from "./mapa.vue";
 
 export default {
     name: "pagina",
-    emits: ["tab", "telefon", "municipi", "incidentTipos"],
+    emits: ["tab", "telefon", "municipi", "incidentTipos", "reset-timer"],
     data: function () {
         return {
             catalunya: true,
@@ -1099,8 +1106,43 @@ export default {
         duration: null,
         date: null,
         isAssociated: Boolean,
+        apiLoading: Number,
     },
     watch: {
+        apiLoading() {
+            if (this.apiLoading >= 500) {
+                const loading_screen =
+                    document.querySelector("#loading-screen");
+
+                loading_screen.style.filter = "saturate(0)";
+
+                const loading_text =
+                    document.querySelector("#loading-screen p");
+
+                const loading_img = document.querySelector(
+                    "#loading-screen img"
+                );
+
+                loading_img.setAttribute(
+                    "src",
+                    "/broggi_112/public/assets/img/Broggi112Static.jpg"
+                );
+
+                loading_text.innerHTML =
+                    "Error al carregar les dades, si us plau <strong><em>recarrega</em></strong>.";
+            } else if (this.apiLoading >= 12) {
+                const loading_screen =
+                    document.getElementById("loading-screen");
+
+                loading_screen.style.opacity = "0";
+
+                this.$emit("reset-timer");
+
+                setTimeout(() => {
+                    loading_screen.style.display = "none";
+                }, 700);
+            }
+        },
         notaContent() {
             this.carta.nota = this.notaContent;
         },
@@ -1135,6 +1177,16 @@ export default {
             }
         },
         tab() {
+            setTimeout(() => {
+                const popoverTriggerList = document.querySelectorAll(
+                    '[data-bs-toggle="popover"]'
+                );
+
+                const popoverList = [...popoverTriggerList].map(
+                    (popoverTriggerEl) =>
+                        new bootstrap.Popover(popoverTriggerEl)
+                );
+            }, 100);
             if (this.tab == 4) {
                 let result = this.carta.localitzacioConcatenada;
 
@@ -1309,12 +1361,6 @@ export default {
 
             this.redirigirMenu();
         },
-        removePopovers() {
-            const popovers = document.querySelectorAll(".popover");
-            popovers.forEach((popover) => {
-                popover.remove();
-            });
-        },
         getTipusLocalitzacions() {
             const allLocalitzacions = [];
 
@@ -1331,59 +1377,85 @@ export default {
 
                         allLocalitzacions.push(newLocalitzacio);
                     }
+
+                    console.log("tipos localitzacions loaded");
+                    this.$parent.apiLoading++;
                 })
-                .catch((error) => {});
+                .catch((error) => {
+                    this.$parent.apiLoading = 500;
+                });
             return allLocalitzacions;
         },
         getProvincies() {
             const allProvincies = [];
 
-            axios.get("provincia").then((response) => {
-                for (const key in response.data) {
-                    const provincia = response.data[key];
+            axios
+                .get("provincia")
+                .then((response) => {
+                    for (const key in response.data) {
+                        const provincia = response.data[key];
 
-                    const newProvincia = {
-                        value: provincia.id,
-                        text: provincia.nom,
-                    };
+                        const newProvincia = {
+                            value: provincia.id,
+                            text: provincia.nom,
+                        };
 
-                    allProvincies.push(newProvincia);
-                }
-            });
+                        allProvincies.push(newProvincia);
+                    }
+                    console.log("provincies loaded");
+                    this.$parent.apiLoading++;
+                })
+                .catch(() => {
+                    this.$parent.apiLoading = 500;
+                });
             return allProvincies;
         },
         getComarques() {
             const allComarques = [];
 
-            axios.get("comarca").then((response) => {
-                for (const key in response.data) {
-                    const comarca = response.data[key];
+            axios
+                .get("comarca")
+                .then((response) => {
+                    for (const key in response.data) {
+                        const comarca = response.data[key];
 
-                    const newComarca = {
-                        value: comarca.id,
-                        text: comarca.nom,
-                    };
+                        const newComarca = {
+                            value: comarca.id,
+                            text: comarca.nom,
+                        };
 
-                    allComarques.push(newComarca);
-                }
-            });
+                        allComarques.push(newComarca);
+                    }
+                    console.log("comarques loaded");
+                    this.$parent.apiLoading++;
+                })
+                .catch(() => {
+                    this.$parent.apiLoading = 500;
+                });
             return allComarques;
         },
         getMunicipis() {
             const allMunicipis = [];
 
-            axios.get("municipi").then((response) => {
-                for (const key in response.data) {
-                    const municipi = response.data[key];
+            axios
+                .get("municipi")
+                .then((response) => {
+                    for (const key in response.data) {
+                        const municipi = response.data[key];
 
-                    const newMunicipi = {
-                        value: municipi.id,
-                        text: municipi.nom,
-                    };
+                        const newMunicipi = {
+                            value: municipi.id,
+                            text: municipi.nom,
+                        };
 
-                    allMunicipis.push(newMunicipi);
-                }
-            });
+                        allMunicipis.push(newMunicipi);
+                    }
+                    console.log("municipi loaded");
+                    this.$parent.apiLoading++;
+                })
+                .catch(() => {
+                    this.$parent.apiLoading = 500;
+                });
             return allMunicipis;
         },
         getTipusVia() {
@@ -1402,8 +1474,12 @@ export default {
 
                         allTipusVia.push(newTipus);
                     }
+                    console.log("tipos de via loaded");
+                    this.$parent.apiLoading++;
                 })
-                .catch((error) => {});
+                .catch((error) => {
+                    this.$parent.apiLoading = 500;
+                });
             return allTipusVia;
         },
         loadIncident(id) {
@@ -1436,16 +1512,21 @@ export default {
             }
         },
     },
-    updated() {
-        this.removePopovers();
+    updated() {},
+    mounted() {
+        const loading_text = document.querySelector("#loading-screen p");
+        const baseText = loading_text.innerText;
+        let dots = "";
 
-        const popoverTriggerList = document.querySelectorAll(
-            '[data-bs-toggle="popover"]'
-        );
-
-        const popoverList = [...popoverTriggerList].map(
-            (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
-        );
+        setInterval(() => {
+            if (
+                this.$parent.apiLoading != 500 &&
+                loading_text.style.opacity != "0"
+            ) {
+                dots = dots.length < 3 ? dots + "." : "";
+                loading_text.innerText = baseText + dots;
+            }
+        }, 350);
     },
 };
 </script>
@@ -1709,6 +1790,35 @@ h3 {
 
     &:focus {
         box-shadow: 0 0 0 0.25rem rgba($color: $danger, $alpha: 0.25);
+    }
+}
+
+#loading-screen {
+    position: fixed;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    z-index: 100;
+
+    background-color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    transition: opacity 0.7s linear;
+
+    img {
+        width: 40vw;
+    }
+
+    p {
+        color: $primary;
+        margin: 0;
+        font-size: 1.25rem;
     }
 }
 

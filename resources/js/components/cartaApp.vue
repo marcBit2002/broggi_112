@@ -9,6 +9,7 @@
             @date="(date) => (this.date = date)"
             :expedient="expedient"
             :codi="codi"
+            :resetTimer="resetTimer"
         ></dades>
         <pagina
             @tab="(i) => (this.activeTab += i)"
@@ -21,9 +22,11 @@
             :duration="this.timer"
             :date="this.date"
             :isAssociated="this.isAssociated"
+            :apiLoading="this.apiLoading"
             @telefon="(tel) => (this.telefon = tel)"
             @municipi="(name) => (this.municipi = name)"
             @incidentTipos="(incident) => (this.incidentTipos = incident)"
+            @reset-timer="() => (this.resetTimer = 0)"
         ></pagina>
         <notaComuna
             @notaContent="(content) => (this.notaContent = content)"
@@ -70,7 +73,14 @@ export default {
             timer: null,
             date: null,
             isAssociated: false,
+            apiLoading: 0,
+            resetTimer: Number,
         };
+    },
+    watch: {
+        apiLoading() {
+            console.log(this.apiLoading);
+        },
     },
     methods: {
         newCartaId() {
@@ -88,9 +98,13 @@ export default {
 
                     //Afegim 'T' i guardem
                     this.codi = "T" + codi;
+
+                    console.log("cartes loaded");
+                    this.apiLoading++;
                 })
                 .catch((error) => {
                     this.codi = "NOT FOUND";
+                    this.apiLoading = 500;
                 });
         },
         newExpedientId() {
@@ -108,9 +122,13 @@ export default {
 
                     //Afegim 'T' i guardem
                     this.expedient = "E" + codi;
+
+                    console.log("expedients loaded");
+                    this.apiLoading++;
                 })
                 .catch((error) => {
                     this.expedient = "NOT FOUND";
+                    this.apiLoading = 500;
                 });
         },
         loadTipusIncidents() {
@@ -118,9 +136,13 @@ export default {
                 .get("tipusincident")
                 .then((response) => {
                     this.tipusIncidents = response.data;
+
+                    console.log("tipos incident loaded");
+                    this.apiLoading++;
                 })
                 .catch((error) => {
                     this.tipusIncidents = "NOT FOUND";
+                    this.apiLoading = 500;
                 });
         },
         getIncidents() {
@@ -128,9 +150,13 @@ export default {
                 .get("incident")
                 .then((response) => {
                     this.allIncidents = response.data;
+
+                    console.log("incidents loaded");
+                    this.apiLoading++;
                 })
                 .catch((err) => {
                     console.error("Error" + err);
+                    this.apiLoading = 500;
                 });
         },
         getMunicipis() {
@@ -138,9 +164,13 @@ export default {
                 .get("municipi")
                 .then((response) => {
                     this.allMunicipis = response.data;
+
+                    console.log("municipis loaded");
+                    this.apiLoading++;
                 })
                 .catch((err) => {
                     console.error("Error" + err);
+                    this.apiLoading = 500;
                 });
         },
     },

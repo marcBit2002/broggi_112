@@ -138,9 +138,13 @@ export default {
                     me.originalExpedients = this.expedients;
                     me.matchExpedients();
                     me.isLoaded = true;
+
+                    console.log("expedients loaded");
+                    this.$parent.apiLoading++;
                 })
                 .catch((err) => {
                     console.error("Error" + err);
+                    this.$parent.apiLoading = 500;
                 });
         },
         fechaDiaMes(fecha) {
@@ -195,12 +199,6 @@ export default {
                 return acc;
             }, {});
             return mostRepeated;
-        },
-        incidentIDtoNAME(id) {
-            return axios
-                .get("expedient", id)
-                .then((res) => res.data)
-                .catch((err) => console.error(err));
         },
         matchExpedients() {
             this.expedients = this.originalExpedients.filter(
