@@ -5,8 +5,8 @@
             <h1 id="title">Identificació</h1>
             <div class="row g-3 align-items-center">
                 <div class="col-sm-3 text-end">
-                    <label for="telefon" class="col-form-label"
-                        > <span>*</span> Telèfon:</label
+                    <label for="telefon" class="col-form-label">
+                        <span class="reqInput">*</span> Telèfon:</label
                     >
                 </div>
                 <div class="col-sm-8">
@@ -39,7 +39,7 @@
                 <div class="col-sm-3 text-end">
                     <label for="nom" class="col-form-label">
                         <template v-if="carta.guardarTelefono">
-                            <span>*</span> Nom:
+                            <span class="reqInput">*</span> Nom:
                         </template>
                         <template v-else> Nom: </template>
                     </label>
@@ -80,7 +80,7 @@
                 <div class="col-sm-3 text-end">
                     <label for="cognoms" class="col-form-label">
                         <template v-if="carta.guardarTelefono">
-                            <span>*</span> Cognoms:
+                            <span class="reqInput">*</span> Cognoms:
                         </template>
                         <template v-else> Cognoms: </template>
                     </label>
@@ -205,7 +205,7 @@
 
             <div class="mb-3 row">
                 <label for="inputLocalitzacio" class="col-sm-4 col-form-label">
-                    <span>*</span> Tipus localització:
+                    <span class="reqInput">*</span> Tipus localització:
                     <a
                         tabindex="-1"
                         class="arki ms-3"
@@ -317,7 +317,8 @@
                     ></searchInput>
                 </div>
                 <div class="col d-flex">
-                    <span>*</span><searchInput
+                    <span class="reqInput me-1">* </span
+                    ><searchInput
                         :name="
                             carta.municipi == null
                                 ? 'Municipi'
@@ -1246,16 +1247,15 @@ export default {
                             modal_footer.style.display = "inherit";
                             modal_btn.innerText = "Finalitzar";
                         }
-                    }else {
-                       
-                    if(this.carta.guardarTelefono){
-                       if (!this.carta.nom) {
-                           body_text += "- Nom\n";
-                       }
-                       if (!this.carta.cognoms) {
-                           body_text += "- Cognoms\n";
-                       }
-                    }
+                    } else {
+                        if (this.carta.guardarTelefono) {
+                            if (!this.carta.nom) {
+                                body_text += "- Nom\n";
+                            }
+                            if (!this.carta.cognoms) {
+                                body_text += "- Cognoms\n";
+                            }
+                        }
                         modal_title.innerText =
                             "Error al finalitzar l'expedient:";
 
@@ -1446,9 +1446,6 @@ export default {
         const popoverList = [...popoverTriggerList].map(
             (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
         );
-    },
-    mounted() {
-        // this.getProvincies();
     },
 };
 </script>
@@ -1672,6 +1669,12 @@ export default {
 }
 
 // #endregion
+
+.reqInput {
+    color: $danger;
+    font-weight: bolder;
+    font-size: 1.5rem;
+}
 
 h3 {
     color: $primary;
