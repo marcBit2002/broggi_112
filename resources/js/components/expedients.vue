@@ -103,6 +103,8 @@ export default {
                 .then((response) => {
                     me.expedients = response.data;
 
+                    console.log(me.expedients);
+
                     me.expedients.forEach((expedient) => {
                         const tipos = [];
                         const localitat = [];
@@ -201,6 +203,7 @@ export default {
             return mostRepeated;
         },
         matchExpedients() {
+            console.log(this.originalExpedients);
             this.expedients = this.originalExpedients.filter(
                 (expedient) =>
                     (this.telefon !== "" &&

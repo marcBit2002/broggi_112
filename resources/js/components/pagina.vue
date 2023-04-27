@@ -1088,7 +1088,6 @@ export default {
             selectedId: null,
             selectedIncident: -1,
             selectedIncidentNom: null,
-            tipusVia: this.getTipusVia(),
             incidentInfo: null,
         };
     },
@@ -1130,7 +1129,7 @@ export default {
 
                 loading_text.innerHTML =
                     "Error al carregar les dades, si us plau <strong><em>recarrega</em></strong>.";
-            } else if (this.apiLoading >= 12) {
+            } else if (this.apiLoading >= 11) {
                 const loading_screen =
                     document.getElementById("loading-screen");
 
@@ -1457,30 +1456,6 @@ export default {
                     this.$parent.apiLoading = 500;
                 });
             return allMunicipis;
-        },
-        getTipusVia() {
-            const allTipusVia = [];
-
-            axios
-                .get("tipusVies")
-                .then((response) => {
-                    for (const key in response.data) {
-                        const tipusVia = response.data[key];
-
-                        const newTipus = {
-                            value: tipusVia.id,
-                            text: tipusVia.nom,
-                        };
-
-                        allTipusVia.push(newTipus);
-                    }
-                    console.log("tipos de via loaded");
-                    this.$parent.apiLoading++;
-                })
-                .catch((error) => {
-                    this.$parent.apiLoading = 500;
-                });
-            return allTipusVia;
         },
         loadIncident(id) {
             this.tipusIncidents.filter((incident) => {
