@@ -37,7 +37,7 @@ export default {
             .addEventListener("change", (event) => {
                 let newEstatId = event.target.value;
                 axios
-                    .put(`expedient/${this.expedient}`, {
+                    .post(`expedient/put/${this.expedient}`, {
                         estat_id: newEstatId,
                     })
                     .then((response) => {
@@ -74,9 +74,9 @@ export default {
         handleEstatsChange(event) {
             let color =
                 event.target.options[event.target.selectedIndex].dataset.color;
-                event.target.style.backgroundColor = color;
-                event.target.style.color = "white";
-                event.target.style.textShadow = '1px 1px 4px #767676';
+            event.target.style.backgroundColor = color;
+            event.target.style.color = "white";
+            event.target.style.textShadow = "1px 1px 4px #767676";
         },
         getEstatExpedient(dada) {
             this.estat = dada[0].estat_expedient.estat;

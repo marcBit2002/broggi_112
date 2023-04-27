@@ -31,6 +31,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('expedient', ExpedientController::class);
+Route::post('expedient/put/{expedient}', [ExpedientController::class, 'update']);
 Route::apiResource('comarca', ComarcaController::class);
 Route::apiResource('provincia', ProvinciaController::class);
 Route::apiResource('municipi', MunicipiController::class);
