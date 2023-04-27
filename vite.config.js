@@ -14,4 +14,15 @@ export default defineConfig({
         }),
         vue(),
     ],
+    build: {
+        rollupOptions: {
+            external: [
+                "/broggi_112/public/assets/icons/arrowHeadFill.svg",
+                "/broggi_112/public/assets/icons/arrowHead.svg",
+                "/broggi_112/public/assets/icons/arrowHead.svg",
+                "/broggi_112/public/assets/icons/state.svg",
+                "/broggi_112/public/assets/icons/arki.svg",
+            ],
+        },
+    },
 });
