@@ -2,7 +2,7 @@
     <div class="state" style="border-color: {{this.color}}">
         <div class="state-title">
             ESTAT
-            <img src="/broggi_112/resources/icons/state.svg" />
+            <img src="/broggi_112/public/assets/icons/state.svg" />
         </div>
         <img
             src="/broggi_112/public/assets/icons/arrowHeadFill.svg"
