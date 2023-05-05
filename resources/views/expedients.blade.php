@@ -4,7 +4,7 @@
 @endsection
 
 @section('contenido')
-    <div class="selection">
+    {{-- <div class="selection">
         <select class="form-select">
             <option selected>Estat</option>
             @foreach ($estats as $estat)
@@ -26,8 +26,8 @@
                     placeholder="Buscar" />
             </div>
         </div>
-    </div>
-    <div class='expedients'>
+    </div> --}}
+    <div class='expedients mt-4'>
         @foreach ($expedients as $expedient)
             <div class='expedient'>
                 @if (Auth::check() && Auth::user()->roles->nom === 'Administrador Sistema')

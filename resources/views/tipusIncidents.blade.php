@@ -6,7 +6,7 @@
 
 @section('contenido')
     <div class='crud-content'>
-        <div class='search'>
+        {{-- <div class='search'>
             <div class="input-group">
                 <span class="input-group-text border border-primary border-3 border-end-0 text-warning">
                     <i class="bi bi-search"></i>
@@ -14,7 +14,7 @@
                 <input type="search" class="form-control border border-3 border-start-0 border-primary"
                     placeholder="Buscar" />
             </div>
-        </div>
+        </div> --}}
         <div class='table-content'>
             <table class="table table-striped bdr mt-4 align-middle">
                 <thead class="text-white">

@@ -6,7 +6,7 @@
 
 @section('contenido')
     <div class='crud-content'>
-        <div class='search'>
+        {{-- <div class='search'>
             <div class="input-group">
                 <span class="input-group-text border border-primary border-3 border-end-0 text-warning">
                     <i class="bi bi-search"></i>
@@ -14,7 +14,7 @@
                 <input type="search" class="form-control border border-3 border-start-0 border-primary"
                     placeholder="Buscar" />
             </div>
-        </div>
+        </div> --}}
         @include('layouts.mensajes')
         <div class='table-content'>
             <table class="table table-striped bdr mt-4 align-middle">
@@ -38,9 +38,9 @@
                                 <div class="d-flex justify-content-end">
                                     {{-- BOTON EDITAR --}}
                                     <button type="button" class="btn btn-outline-danger btn-sm me-2 btn-edit"
-                                        data-bs-toggle="modal" data-bs-target="#editarModal"
-                                        data-bs-id="{{ $incident->id }}" data-bs-codi="{{ $incident->codi }}"
-                                        data-bs-nom="{{ $incident->nom }}" data-bs-definicio="{{ $incident->definicio }}"
+                                        data-bs-toggle="modal" data-bs-target="#editarModal" data-bs-id="{{ $incident->id }}"
+                                        data-bs-codi="{{ $incident->codi }}" data-bs-nom="{{ $incident->nom }}"
+                                        data-bs-definicio="{{ $incident->definicio }}"
                                         data-bs-instruccio="{{ $incident->instruccions }}"
                                         data-bs-tipus-id="{{ $incident->tipus_incidents_id }}"
                                         data-bs-tipus-nom="{{ $incident->tipus_incidents->nom }}"

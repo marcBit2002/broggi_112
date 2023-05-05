@@ -1,7 +1,13 @@
 <template>
     <div id="container">
-        <div class='cartesIncidents'><cartesIncidentsChart/></div>
-        <div class='cartesExp'><cartesExpedients/></div>
+        <div class='cartesIncidents'>
+            <h2>Número de cartes per tipus d'incidents</h2>
+            <cartesIncidentsChart/>
+        </div>
+        <div class='cartesExp'>
+            <h2>Número de cartes per expedients</h2>
+            <cartesExpedients/>
+        </div>
     </div>
 </template>
 <script>
@@ -28,7 +34,7 @@ export default {
 }
 .cartesIncidents, .cartesExp {
     width: 700px;
-    height: 500px;
+    height: 520px;
 
     border: 2px solid $primary;
     border-radius: 15px;
@@ -37,5 +43,8 @@ export default {
     margin: 10px;
 
     background-color: $light-blue;
+}
+h2{
+color: $primary;
 }
 </style>

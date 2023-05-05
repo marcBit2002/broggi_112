@@ -6,7 +6,7 @@
 
 @section('contenido')
     <div class='crud-content'>
-        <div class='search'>
+        {{-- <div class='search'>
             <div class="input-group">
                 <span class="input-group-text border border-primary border-3 border-end-0 text-warning">
                     <i class="bi bi-search"></i>
@@ -14,7 +14,7 @@
                 <input type="search" class="form-control border border-3 border-start-0 border-primary"
                     placeholder="Buscar" />
             </div>
-        </div>
+        </div> --}}
         @include('layouts.mensajes')
         <div class='table-content'>
             <table class="table table-striped bdr mt-4 align-middle">
@@ -36,8 +36,7 @@
                                 <div class="d-flex justify-content-end">
 
                                     <button type="button" class="btn btn-outline-danger btn-sm me-2 btn-passwd"
-                                        data-bs-toggle="modal" data-bs-target="#contraModal"
-                                        data-bs-id="{{ $usuari->id }}"
+                                        data-bs-toggle="modal" data-bs-target="#contraModal" data-bs-id="{{ $usuari->id }}"
                                         data-bs-nomCognoms="{{ $usuari->nom }} {{ $usuari->cognoms }}"
                                         data-bs-action="{{ action([App\Http\Controllers\UsuarioController::class, 'resetPasswd'], ['usuari' => $usuari->id]) }}">
                                         <i class="bi bi-key"></i>

@@ -1,7 +1,13 @@
 <template>
     <div id="container">
-        <div class='users'><usersChart/></div>
-        <div class='incidents'><incidentsChart/></div>
+        <div class='users'>
+            <h2>Número d'usuaris per tipus</h2>
+            <usersChart/>
+        </div>
+        <div class='incidents'>
+            <h2>Número d'incidents per tipus</h2>
+            <incidentsChart/>
+        </div>
     </div>
 </template>
 <script>
@@ -20,7 +26,7 @@ export default {
 @import "../../css/variables.scss";
 .users, .incidents {
     width: 600px;
-    height: 400px;
+    height: 450px;
 
     border: 2px solid $primary;
     border-radius: 15px;
@@ -29,5 +35,8 @@ export default {
     margin: 10px;
 
     background-color: white;
+}
+h2{
+    color: $primary;
 }
 </style>
